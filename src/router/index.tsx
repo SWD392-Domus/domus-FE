@@ -1,14 +1,14 @@
 import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import Login from "./Login";
+import Demo from "./demo";
 import PublicRoute from "./PublicRoute";
 
 const RouterComponent: React.FC = () => {
     const publicRoute = [
         {
             index: true,
-            path: "login",
-            component: <Login />,
+            path: "demo",
+            component: <Demo />,
             exact: true,
             restrict: true,
         },
