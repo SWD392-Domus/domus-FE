@@ -1,0 +1,66 @@
+import React from "react";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import Login from "./Login";
+import PublicRoute from "./PublicRoute";
+
+const RouterComponent: React.FC = () => {
+    const publicRoute = [
+        {
+            index: true,
+            path: "login",
+            component: <Login />,
+            exact: true,
+            restrict: true,
+        },
+    ];
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Navigate to="home" />} />
+                <Route path="/" element={<PublicRoute />}>
+                    <Route>
+                        {publicRoute.map((route) => (
+                            <Route
+                                index={route.index}
+                                key={route.path}
+                                path={route.path}
+                                element={route.component}
+                            />
+                        ))}
+                    </Route>
+                </Route>
+                {/* <Route element={<EmployeeRoute />}>
+                    <Route element={<LayoutComponent />}>
+                        {employeeRoute.map((route) => (
+                            <Route
+                                index={route.index}
+                                key={route.path}
+                                path={route.path}
+                                element={route.component}
+                            />
+                        ))}
+                    </Route>
+                </Route>
+                <Route element={<AdminRoute />}>
+                    <Route element={<LayoutComponent />}>
+                        {adminRoute.map((route) => (
+                            <Route
+                                index={route.index}
+                                key={route.path}
+                                path={route.path}
+                                element={route.component}
+                            />
+                        ))}
+                    </Route>
+                </Route> */}
+                {/* <Route path="/payment/result" element={<Payment />} />
+
+                <Route path="/404" element={<ErrorPage />} />
+                <Route path="/403" element={<Error403Page />} />
+                <Route path="*" element={<ErrorPage />} /> */}
+            </Routes>
+        </BrowserRouter>
+    );
+};
+
+export default RouterComponent;
