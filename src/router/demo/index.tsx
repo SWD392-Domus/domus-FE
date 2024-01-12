@@ -10,7 +10,8 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/Accordion"
-
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { RocketIcon } from "@radix-ui/react-icons"
 
 
 interface Props {
@@ -66,33 +67,42 @@ const Demo: React.FC<Props> = (props) => {
                     </div>
                 </div>
             </header>
-            <div className="flex justify-center p-20">
+            <div className="flex flex-col items-center justify-center p-20">
                 <div className="w-56">
 
-                <Accordion type="single" collapsible className="w-full">
-                    <AccordionItem value="item-1">
-                        <AccordionTrigger>A tâm đẹp trai ko?</AccordionTrigger>
-                        <AccordionContent>
-                            Yes.
-                        </AccordionContent>
-                    </AccordionItem>
-                    <AccordionItem value="item-2">
-                        <AccordionTrigger>fuck?</AccordionTrigger>
-                        <AccordionContent>
-                            Yes. It comes with default styles that matches the other
-                            components&apos; aesthetic.
-                        </AccordionContent>
-                    </AccordionItem>
-                    <AccordionItem value="item-3">
-                        <AccordionTrigger>hihihih?</AccordionTrigger>
-                        <AccordionContent>
-                            Yes. It's animated by default, but you can disable it if you prefer.
-                        </AccordionContent>
-                    </AccordionItem>
-                </Accordion>
+                    <Accordion type="single" collapsible className="w-full">
+                        <AccordionItem value="item-1">
+                            <AccordionTrigger>A tâm đẹp trai ko?</AccordionTrigger>
+                            <AccordionContent>
+                                Yes.
+                            </AccordionContent>
+                        </AccordionItem>
+                        <AccordionItem value="item-2">
+                            <AccordionTrigger>fuck?</AccordionTrigger>
+                            <AccordionContent>
+                                Yes. It comes with default styles that matches the other
+                                components&apos; aesthetic.
+                            </AccordionContent>
+                        </AccordionItem>
+                        <AccordionItem value="item-3">
+                            <AccordionTrigger>hihihih?</AccordionTrigger>
+                            <AccordionContent>
+                                Yes. It's animated by default, but you can disable it if you prefer.
+                            </AccordionContent>
+                        </AccordionItem>
+                    </Accordion>
+                </div>
+                <div className="w-[900px] p-10">
+                    <Alert variant="destructive">
+                        <RocketIcon className="h-4 w-4" />
+                        <AlertTitle>Heads up!</AlertTitle>
+                        <AlertDescription>
+                            You can add components to your app using the cli.
+                        </AlertDescription>
+                    </Alert>
+                    </div>
             </div>
-            </div>
-            
+
             <Button variant="destructive">Button</Button>
 
 
