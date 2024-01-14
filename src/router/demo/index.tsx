@@ -10,7 +10,7 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/Accordion"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { Alert, AlertDescription, AlertTitle } from "@/components/Alert"
 import { RocketIcon } from "@radix-ui/react-icons"
 
 
@@ -93,17 +93,18 @@ const Demo: React.FC<Props> = (props) => {
                     </Accordion>
                 </div>
                 <div className="w-[900px] p-10">
-                    <Alert variant="destructive">
+                    <Alert variant="customize">
                         <RocketIcon className="h-4 w-4" />
-                        <AlertTitle>Heads up!</AlertTitle>
-                        <AlertDescription>
+                        <AlertTitle className="text-red-500">Heads up!</AlertTitle>
+                        <AlertDescription className="text-blue-200">
                             You can add components to your app using the cli.
                         </AlertDescription>
                     </Alert>
                     </div>
             </div>
 
-            <Button variant="destructive">Button</Button>
+            <Button variant="custom">Button</Button>
+            <Button >Button</Button>
 
 
 
