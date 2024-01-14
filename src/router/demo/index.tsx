@@ -3,15 +3,8 @@ import styles from "./Counter.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { counterSelector } from "./slice/selector";
 import { addAmount, decrease, increase } from "./slice";
-import { Button, buttonVariants } from "@/components/Button";
-import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from "@/components/Accordion"
-import { Alert, AlertDescription, AlertTitle } from "@/components/Alert"
-import { RocketIcon } from "@radix-ui/react-icons"
+import { columns, data } from '../../components/ui/Table/column'
+import { DataTable } from "@/components/ui/Table";
 
 
 interface Props {
@@ -67,47 +60,10 @@ const Demo: React.FC<Props> = (props) => {
                     </div>
                 </div>
             </header>
-            <div className="flex flex-col items-center justify-center p-20">
-                <div className="w-56">
 
-                    <Accordion type="single" collapsible className="w-full">
-                        <AccordionItem value="item-1">
-                            <AccordionTrigger>A tâm đẹp trai ko?</AccordionTrigger>
-                            <AccordionContent>
-                                Yes.
-                            </AccordionContent>
-                        </AccordionItem>
-                        <AccordionItem value="item-2">
-                            <AccordionTrigger>fuck?</AccordionTrigger>
-                            <AccordionContent>
-                                Yes. It comes with default styles that matches the other
-                                components&apos; aesthetic.
-                            </AccordionContent>
-                        </AccordionItem>
-                        <AccordionItem value="item-3">
-                            <AccordionTrigger>hihihih?</AccordionTrigger>
-                            <AccordionContent>
-                                Yes. It's animated by default, but you can disable it if you prefer.
-                            </AccordionContent>
-                        </AccordionItem>
-                    </Accordion>
-                </div>
-                <div className="w-[900px] p-10">
-                    <Alert variant="customize">
-                        <RocketIcon className="h-4 w-4" />
-                        <AlertTitle className="text-red-500">Heads up!</AlertTitle>
-                        <AlertDescription className="text-blue-200">
-                            You can add components to your app using the cli.
-                        </AlertDescription>
-                    </Alert>
-                    </div>
+            <div className="container mx-auto py-10">
+                <DataTable columns={columns} data={data} />
             </div>
-
-            <Button variant="custom">Button</Button>
-            <Button >Button</Button>
-
-
-
         </div>
     );
 };

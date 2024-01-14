@@ -31,6 +31,12 @@
     --custom: 114, 60%, 44%;
     --custom-foreground: 137, 37%, 62%;
 
+    --darkPrimary: 180,31.7%,8%;
+    --darkPrimary-foreground: 210,40%,98%;
+
+    --yellowPrimary: 42,100%,64.7%;
+    --yellowPrimary-foreground: 210,40%,98%;
+
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;

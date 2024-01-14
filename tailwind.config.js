@@ -55,6 +55,14 @@ module.exports = {
           DEFAULT: "hsl(var(--custom))",
           foreground: "hsl(var(--custom-foreground))",
         },
+        darkCustom: {
+          DEFAULT: "hsl(var(--darkPrimary))",
+          foreground: "hsl(var(--darkPrimary-foreground))",
+        },
+        yellowCustom: {
+          DEFAULT: "hsl(var(--yellowPrimary))",
+          foreground: "hsl(var(--yellowPrimary-foreground))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
