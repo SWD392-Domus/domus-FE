@@ -16,7 +16,7 @@ const RouterComponent: React.FC = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Navigate to="home" />} />
+                <Route path="/" element={<Navigate to="demo" />} />
                 <Route path="/" element={<PublicRoute />}>
                     <Route>
                         {publicRoute.map((route) => (
