@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 interface Props {
     // define your props here
 }
 
-const QuotationDetail: React.FC<Props> = (props) => {
+const QuotationDetail: React.FC<Props> = () => {
     return (
         <div className="flex flex-col min-h-screen">
             <header className="bg-black bg-cover h-10 text-white pt-2">
