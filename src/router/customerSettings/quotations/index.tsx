@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { HomeIcon } from "@radix-ui/react-icons"
 import { DataTable } from "@/components/ui/Table";
 import { columns, data } from '@/components/ui/Table/column'
@@ -7,7 +7,7 @@ interface Props {
     // define your props here
 }
 
-const CustomerQuotations: React.FC<Props> = (props) => {
+const CustomerQuotations: React.FC<Props> = () => {
     return (
         <div className="flex flex-col min-h-screen">
             <header className="bg-black bg-cover h-10 text-white pt-2">

@@ -6,7 +6,7 @@ import CustomerQuotations from "./customerSettings/quotations";
 import CustomerQuotationDetail from "./customerSettings/quotations/Detail";
 import PublicRoute from "./PublicRoute";
 import CustomerRoute from "./CustomerRoute";
-import CustomerLayout from "../components/CustomerLayout";
+// import CustomerLayout from "../components/CustomerLayout";
 
 const RouterComponent: React.FC = () => {
   const publicRoute = [

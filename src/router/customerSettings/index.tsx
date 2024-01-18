@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { EnvelopeClosedIcon, Pencil2Icon } from "@radix-ui/react-icons"
 import { areaInfo } from "./constants"
 import { Link } from 'react-router-dom';
@@ -14,7 +14,7 @@ const userInfo =
     email: "nguyenvana@fpt.edu.vn"
 }
 
-const customerSettings: React.FC<Props> = (props) => {
+const customerSettings: React.FC<Props> = () => {
     return (
         <div className="flex flex-col min-h-screen">
             <header className="bg-black bg-cover h-10 text-white pt-2">
