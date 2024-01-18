@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Bag from "../../assets/image/bag.svg fill.png"
-import Bill from "../../assets/image/Bill.svg fill.png"
-import Address from "../../assets/image/portal-addresses.svg.png"
 import { EnvelopeClosedIcon, Pencil2Icon } from "@radix-ui/react-icons"
-
+import { areaInfo } from "./constants"
+import { Link } from 'react-router-dom';
 interface Props {
     // define your props here
 }
@@ -15,27 +13,6 @@ const userInfo =
     name: "Nguyen Van A",
     email: "nguyenvana@fpt.edu.vn"
 }
-
-const areaInfo = [
-    {
-        src: Bag,
-        alt: "Bag",
-        name: "Đơn bán hàng",
-        description: "Theo dõi, xem hoặc thanh toán đơn hàng của bạn",
-    },
-    {
-        src: Bill,
-        alt: "Bill",
-        name: "Hóa đơn của bạn",
-        description: "Theo dõi, tải xuống hoặc thanh toán hóa đơn của bạn",
-    },
-    {
-        src: Address,
-        alt: "Address",
-        name: "Địa chỉ",
-        description: "Thêm, xóa, sửa địa chỉ của bạn",
-    },
-];
 
 const customerSettings: React.FC<Props> = (props) => {
     return (
@@ -61,15 +38,17 @@ const customerSettings: React.FC<Props> = (props) => {
                         </div>
                         <div className="flex flex-wrap justify-between rounded">
                             {areaInfo.map((area) => (
-                                <div className="bg-zinc-100 mb-10 flex flex-row">
-                                    <img className="m-4" src={area.src} alt={area.alt} />
-                                    <div className="my-auto mr-5 w-80">
-                                        <div className="text-lg">
-                                            {area.name}
+                                <Link to={`/customer/settings/${area.link}`}>
+                                    <div className="bg-zinc-100 mb-10 flex flex-row hover:bg-zinc-300">
+                                        <img className="m-4" src={area.src} alt={area.alt} />
+                                        <div className="my-auto mr-5 w-80">
+                                            <div className="text-lg">
+                                                {area.name}
+                                            </div>
+                                            <span className="font-light text-gray-500 text-sm"><p>{area.description}</p></span>
                                         </div>
-                                        <span className="font-light text-gray-500 text-sm"><p>{area.description}</p></span>
                                     </div>
-                                </div>
+                                </Link>
                             ))}
                         </div>
                     </div>

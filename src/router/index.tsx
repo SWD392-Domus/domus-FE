@@ -2,6 +2,8 @@ import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Demo from "./demo";
 import CustomerSettings from "./customerSettings";
+import CustomerQuotations from "./customerSettings/quotations";
+import CustomerQuotationDetail from "./customerSettings/quotations/Detail";
 import PublicRoute from "./PublicRoute";
 import CustomerRoute from "./CustomerRoute";
 import CustomerLayout from "../components/CustomerLayout";
@@ -22,6 +24,20 @@ const RouterComponent: React.FC = () => {
       index: true,
       path: "customer/settings",
       component: <CustomerSettings />,
+      exact: true,
+      restrict: true,
+    },
+    {
+      index: true,
+      path: "customer/settings/quotations",
+      component: <CustomerQuotations />,
+      exact: true,
+      restrict: true,
+    },
+    {
+      index: true,
+      path: "customer/settings/quotations/:id",
+      component: <CustomerQuotationDetail />,
       exact: true,
       restrict: true,
     },
