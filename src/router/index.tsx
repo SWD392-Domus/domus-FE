@@ -6,7 +6,7 @@ import CustomerQuotations from "./customerSettings/quotations";
 import CustomerQuotationDetail from "./customerSettings/quotations/Detail";
 import PublicRoute from "./PublicRoute";
 import CustomerRoute from "./CustomerRoute";
-// import CustomerLayout from "../components/CustomerLayout";
+import CustomerLayout from "../components/CustomerLayout";
 
 const RouterComponent: React.FC = () => {
   const publicRoute = [
@@ -36,7 +36,7 @@ const RouterComponent: React.FC = () => {
     },
     {
       index: true,
-      path: "customer/settings/quotations/:id",
+      path: "customer/settings/quotations/:quotationId",
       component: <CustomerQuotationDetail />,
       exact: true,
       restrict: true,
@@ -59,16 +59,16 @@ const RouterComponent: React.FC = () => {
           </Route>
         </Route>
         <Route element={<CustomerRoute />}>
-          {/* <Route element={<CustomerLayout />}> */}
-          {customerRoute.map((route) => (
-            <Route
-              index={route.index}
-              key={route.path}
-              path={route.path}
-              element={route.component}
-            />
-          ))}
-          {/* </Route> */}
+          <Route element={<CustomerLayout />}>
+            {customerRoute.map((route) => (
+              <Route
+                index={route.index}
+                key={route.path}
+                path={route.path}
+                element={route.component}
+              />
+            ))}
+          </Route>
         </Route>
         {/* <Route element={<EmployeeRoute />}>
                     <Route element={<LayoutComponent />}>
