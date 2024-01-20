@@ -1,9 +1,14 @@
 import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Demo from "./demo";
+import CustomerSettings from "./customerSettings";
+import CustomerQuotations from "./customerSettings/quotations";
+import CustomerQuotationDetail from "./customerSettings/quotations/Detail";
 import PublicRoute from "./PublicRoute";
 import Home from "./home";
 import PublicLayout from "@/components/PublicComponents/PublicLayout";
+import CustomerRoute from "./CustomerRoute";
+// import CustomerLayout from "../components/CustomerLayout";
 
 const RouterComponent: React.FC = () => {
   const publicRoute = [
@@ -16,8 +21,31 @@ const RouterComponent: React.FC = () => {
     },
     {
       index: true,
-      path: "/home",
+      path: "home",
       component: <Home />,
+      exact: true,
+      restrict: true,
+    },
+  ];
+  const customerRoute = [
+    {
+      index: true,
+      path: "customer/settings",
+      component: <CustomerSettings />,
+      exact: true,
+      restrict: true,
+    },
+    {
+      index: true,
+      path: "customer/settings/quotations",
+      component: <CustomerQuotations />,
+      exact: true,
+      restrict: true,
+    },
+    {
+      index: true,
+      path: "customer/settings/quotations/:id",
+      component: <CustomerQuotationDetail />,
       exact: true,
       restrict: true,
     },
@@ -39,6 +67,18 @@ const RouterComponent: React.FC = () => {
               ))}
             </Route>
           </Route>
+        </Route>
+        <Route element={<CustomerRoute />}>
+          {/* <Route element={<CustomerLayout />}> */}
+          {customerRoute.map((route) => (
+            <Route
+              index={route.index}
+              key={route.path}
+              path={route.path}
+              element={route.component}
+            />
+          ))}
+          {/* </Route> */}
         </Route>
         {/* <Route element={<EmployeeRoute />}>
                     <Route element={<LayoutComponent />}>

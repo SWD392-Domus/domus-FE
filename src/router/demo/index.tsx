@@ -3,9 +3,8 @@ import styles from "./Counter.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { counterSelector } from "./slice/selector";
 import { addAmount, decrease, increase } from "./slice";
-import { columns, data } from '../../components/ui/Table/column'
+import { columns, data } from "../../components/ui/Table/column";
 import { DataTable } from "@/components/ui/Table";
-
 
 interface Props {
     // define your props here
