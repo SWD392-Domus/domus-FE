@@ -5,7 +5,7 @@ import { columns, data } from '@/components/ui/Table/column'
 import { userInfo, quotationInfo, negoNum, staffInfo, negoList } from "../constants"
 import { EnvelopeClosedIcon, HomeIcon, PersonIcon, ChatBubbleIcon } from "@radix-ui/react-icons"
 import { Textarea } from "@/components/ui/Textarea"
-import { Button } from "@/components/ui/Button/Button"
+import { AcceptButton, DeclineButton, NegotiateButton, SendButton } from "./Button";
 
 interface Props {
     // define your props here
@@ -89,6 +89,12 @@ const QuotationDetail: React.FC<Props> = () => {
                                 <DataTable columns={columns} data={data} />
                             </div>
                         </div>
+                        <div className="action-buttons mb-2 flex flex-row justify-center space-x-2">
+                            <AcceptButton></AcceptButton>
+                            <NegotiateButton></NegotiateButton>
+                            <DeclineButton></DeclineButton>
+                        </div>
+
                     </div>
                     <div className="nego-info">
                         <div className="my-3 text-2xl font-semibold">
@@ -102,12 +108,12 @@ const QuotationDetail: React.FC<Props> = () => {
                         </div>
                         <div className="my-5">
                             <div className="flex flex-row mb-2">
-                                <img src={staffInfo.avaLink} alt="" className="h-10 w-10 bg-gray-300 mr-2" />
+                                <img src={userInfo.avaLink} alt="" className="h-10 w-10 bg-gray-300 mr-2" />
                                 <Textarea>
                                 </Textarea>
                             </div>
                             <div className="flex justify-end">
-                                <Button className="bg-green-500">Send</Button>
+                                <SendButton></SendButton>
                             </div>
                         </div>
 
