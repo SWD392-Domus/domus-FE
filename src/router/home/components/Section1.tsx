@@ -9,7 +9,7 @@ const Section1: React.FC = () => {
     <motion.div
       initial="hidden"
       animate="visible"
-      className="bg-darkCustom w-screen flex items-center gap-2  h-[500px] relative z-0"
+      className="bg-darkCustom w-screen max-w-[1440px] flex items-center gap-2  h-[500px] relative z-0"
     >
       <motion.div
         variants={slideInFromLeft(0.2)}
@@ -20,7 +20,7 @@ const Section1: React.FC = () => {
 
       <motion.div
         variants={slideInFromRight(0.4)}
-        className="min-[762px]:w-[65%] w-screen absolute max-[762px]:right-[50px] right-[200px] z-20"
+        className="min-[762px]:w-[65%] max-w-[1440px] w-screen absolute max-[762px]:right-[50px] right-[200px] z-20"
       >
         <Photo src={picture1} ratio={16/9} />
       </motion.div>

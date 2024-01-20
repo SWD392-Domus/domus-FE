@@ -34,7 +34,7 @@ const Section3: React.FC = () => {
       initial="hidden"
       animate="visible"
       ref={ref}
-      className="lg:h-[1000px] md:h-[950px] w-screen mt-20"
+      className="lg:h-[1000px] md:h-[950px] max-w-[1440px] w-screen mt-20"
     >
       <motion.div
         className="flex items-center gap-4 my-20"

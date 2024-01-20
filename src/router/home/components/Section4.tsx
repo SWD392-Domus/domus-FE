@@ -40,7 +40,7 @@ const Section4: React.FC = () => {
       initial="hidden"
       animate="visible"
       ref={ref}
-      className="h-[800px] max-md:h-[500px] flex justify-end mt-20 w-screen shrink"
+      className="h-[800px] max-md:h-[500px] max-w-[1440px] flex justify-end mt-20 w-screen shrink"
     >
         <motion.div
          animate={inView ? "visible" : "hidden"}

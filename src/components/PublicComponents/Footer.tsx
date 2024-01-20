@@ -84,7 +84,7 @@ const info = [
 const Footer: React.FC = () => {
   return (
     
-      <div className="w-full py-10 bg-darkCustom flex  max-[726px]:flex-col gap-12">
+      <div className="w-full max-w-[1440px] py-10 bg-darkCustom flex  max-[726px]:flex-col gap-12">
         <div className="h-[80px] flex justify-center items-center min-[726px]:border-r-2 shrink">
           <WebsiteName />
         </div>

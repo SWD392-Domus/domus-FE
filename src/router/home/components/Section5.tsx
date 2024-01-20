@@ -38,7 +38,7 @@ const Section5: React.FC = () => {
       initial="hidden"
       animate="visible"
       ref={ref}
-      className="lg:h-[800px] h-[1800px]"
+      className="lg:h-[800px] h-[1800px] max-w-[1440px]"
     >
       <motion.div
         className="bg-darkCustom w-[85%] h-[400px] 

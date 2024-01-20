@@ -23,7 +23,7 @@ const Section2: React.FC = () => {
     <motion.div
       initial="hidden"
       animate="visible"
-      className="bg-white w-[100%] h-[700px] max-[785px]:h-[auto] z-0 "
+      className="bg-white max-w-[1440px] w-[100%] h-[700px] max-[785px]:h-[auto] z-0 "
     >
       <motion.div className="bg-black max-[940px]:w-screen max-[785px]:h-[1300px] relative w-[80%] h-[600px] shrink z-10 ">
         <motion.div

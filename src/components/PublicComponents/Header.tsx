@@ -35,13 +35,13 @@ const Header: React.FC = () => {
 
   return (
     <header>
-      <div className="p-[40px] w-full bg-darkCustom">
+      <div className="p-[40px] w-full max-w-[1440px] bg-darkCustom">
         <div
-          className="flex items-center lg:mx-16 md:mx-12
+          className="flex items-center lg:mx-16 md:mx-12 max-w-[1440px]
        min-[1078px]:justify-between justify-between
        "
         >
-          <div className="flex gap-8">
+          <div className="flex gap-8 max-w-[1440px]">
             <AiOutlineFacebook className={iconClassname} />
             <FaInstagram className={iconClassname} />
           </div>
