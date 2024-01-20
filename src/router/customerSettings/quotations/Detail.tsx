@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom"
 import { DataTable } from "@/components/ui/Table";
-import { columns, data } from '@/components/ui/Table/column'
+import { columns, data } from './Table/quotationDetail/column'
 import { userInfo, quotationInfo, negoNum, staffInfo, negoList } from "../constants"
 import { EnvelopeClosedIcon, HomeIcon, PersonIcon, ChatBubbleIcon } from "@radix-ui/react-icons"
 import { Textarea } from "@/components/ui/Textarea"
@@ -18,9 +18,13 @@ const QuotationDetail: React.FC<Props> = () => {
             <div className="flex flex-row flex-wrap">
                 <div className="left-side-2 basis-1/3">
                     <div className="my-7 text-2xl font-semibold">
-                        {quotationInfo.totalPrice} VND
+                        {new Intl.NumberFormat("en-US", {
+                            style: "currency",
+                            currency: "VND",
+                        }).format(quotationInfo.totalPrice)}
                     </div>
-                    <div className="staff-assigned-info">
+                    <AcceptButton></AcceptButton>
+                    <div className="staff-assigned-info my-7">
                         <div className="mb-2">Your assigned staff</div>
                         <div className="flex flex-row mb-2">
                             <img src={staffInfo.avaLink} alt="" className="h-10 w-10 bg-gray-300 mr-2" />
@@ -87,6 +91,15 @@ const QuotationDetail: React.FC<Props> = () => {
                             </div>
                             <div className="mx-auto py-5">
                                 <DataTable columns={columns} data={data} />
+                                <div className="p-2 flex flex-row justify-between font-semibold border-b-2 border-zinc-100">
+                                    <div className="total-price-title mx-11">Total Price</div>
+                                    <div className="total-price-amount">
+                                        {new Intl.NumberFormat("en-US", {
+                                            style: "currency",
+                                            currency: "VND",
+                                        }).format(quotationInfo.totalPrice)}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div className="action-buttons mb-2 flex flex-row justify-center space-x-2">

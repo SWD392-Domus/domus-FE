@@ -1,6 +1,6 @@
 import React from "react";
 import { DataTable } from "@/components/ui/Table";
-import { columns, data } from '@/components/ui/Table/column'
+import { columns, data } from './Table/quotationList/column.tsx'
 
 interface Props {
     // define your props here

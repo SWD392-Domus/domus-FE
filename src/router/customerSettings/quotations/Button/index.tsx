@@ -27,7 +27,7 @@ function onSend() {
 
 export const AcceptButton = () => {
     return (
-        <Button onClick={onAccept} className="bg-green-500" >Accept & Sign</Button>
+        <Button onClick={onAccept} className="bg-green-600 min-w-1" >Accept & Sign</Button>
     )
 }
 export const NegotiateButton = () => {
@@ -39,7 +39,7 @@ export const DeclineButton = () => {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button className="bg-red-500" >Decline</Button>
+                <Button className="bg-red-600" >Decline</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
@@ -50,7 +50,7 @@ export const DeclineButton = () => {
                 </DialogHeader>
                 <DialogFooter>
                     <Button onClick={onCancle} className="bg-zinc-500" >Cancle</Button>
-                    <Button onClick={onDecline} className="bg-red-500" >Decline</Button>
+                    <Button onClick={onDecline} className="bg-red-600" >Decline</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
