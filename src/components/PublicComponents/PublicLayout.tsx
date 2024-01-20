@@ -2,19 +2,17 @@ import React from "react";
 
 import Header from "./Header";
 import Footer from "./Footer";
-import PublicRoute from "@/router/PublicRoute";
+import { Outlet } from "react-router-dom";
 
-interface Props {}
 
-const PublicLayout: React.FC<Props> = () => {
+
+const PublicLayout: React.FC = () => {
   return (
-    <>
+    <div className="flex flex-col w-full h-screen">
       <Header />
-      <div className="h-screen">
-        <PublicRoute />
-      </div>
+      <Outlet/>
       <Footer />
-    </>
+    </div>
   );
 };
 
