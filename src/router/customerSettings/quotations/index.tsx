@@ -1,5 +1,5 @@
 import React from "react";
-import { DataTable } from "@/components/ui/Table";
+import { DataTable } from "./Table/quotationList";
 import { columns, data } from './Table/quotationList/column.tsx'
 
 interface Props {

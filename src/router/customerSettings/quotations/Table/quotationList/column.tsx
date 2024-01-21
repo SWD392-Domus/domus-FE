@@ -17,7 +17,7 @@ export type QuotationInfo = {
 }
 export const data: QuotationInfo[] = Array.from({ length: 5 }, (_, i) => ({
 
-    id: `${i + 1}`,
+    id: `Q${i + 1}`,
     expiredAt: `2022-01-0${(i % 9) + 1}`,
     createdAt: `2022-01-0${(i % 9) + 1}`,
     lastUpdatedAt: `2022-01-0${(i % 9) + 1}`,
