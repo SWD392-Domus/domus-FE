@@ -36,11 +36,12 @@ const Section4: React.FC = () => {
   });
 
   return (
-    <motion.div
+    <div className="flex justify-center">
+      <motion.div
       initial="hidden"
       animate="visible"
       ref={ref}
-      className="h-[800px] max-md:h-[500px] max-w-[1440px] flex justify-end mt-20 w-screen shrink"
+      className="h-[800px] max-w-[1440px] max-md:h-[500px] flex justify-end mt-20 w-screen shrink"
     >
         <motion.div
          animate={inView ? "visible" : "hidden"}
@@ -68,7 +69,7 @@ const Section4: React.FC = () => {
         </div>
         <div className="lg:w-[600px] w-full flex justify-center font-openSans 
         text-md text-white lg:col-start-3 lg:col-end-4
-        max-[990px]:px-10 min-[900px]:ml-8 mt-6
+        max-[990px]:px-10 mt-6
         "> 
             {data.description}
         </div>
@@ -84,6 +85,8 @@ const Section4: React.FC = () => {
         </div>
       </motion.div>
     </motion.div>
+    </div>
+    
   );
 };
 

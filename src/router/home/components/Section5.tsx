@@ -34,11 +34,12 @@ const Section5: React.FC = () => {
     threshold: 0.3, // Trigger animation when 50% of the element is in view
   });
   return (
-    <motion.div
+    <div className="flex justify-center bg-white">
+      <motion.div
       initial="hidden"
       animate="visible"
       ref={ref}
-      className="lg:h-[800px] h-[1800px] max-w-[1440px]"
+      className="lg:h-[800px] w-full max-w-[1440px] max-[456px]:h-[1500px] h-[1800px]"
     >
       <motion.div
         className="bg-darkCustom w-[85%] h-[400px] 
@@ -57,8 +58,8 @@ const Section5: React.FC = () => {
         className="lg:flex lg:gap-8 grid grid-rows-3 gap-60">
           {blogs.map((blog, index) => (
             <div
-              className="w-[370px] -bottom-16 max-lg:left-[30%] left-[120px] h-auto flex-col gap-0 mt-[10px]  rounded-md bg-white
-              items-center relative justify-center"
+              className="w-[370px] max-[456px]:w-[250px] -bottom-16 max-lg:left-[30%] left-[120px] max-[530px]:left-[40px] h-auto flex-col 
+              gap-0 mt-[10px] rounded-md bg-white items-center relative justify-center"
               key={index}
             >
               <Badge className="absolute z-50 left-5 top-5" variant={"yellow"}>
@@ -80,6 +81,8 @@ const Section5: React.FC = () => {
         </motion.div>
       </motion.div>
     </motion.div>
+    </div>
+    
   );
 };
 

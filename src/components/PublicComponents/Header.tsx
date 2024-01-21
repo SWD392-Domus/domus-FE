@@ -4,8 +4,6 @@ import { FaInstagram } from "react-icons/fa";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoCloseSharp } from "react-icons/io5";
 
-
-
 import WebsiteName from "./WebsiteName";
 import NavigationTab from "./NavigationTab";
 import { AnimatePresence, motion } from "framer-motion";
@@ -35,25 +33,24 @@ const Header: React.FC = () => {
 
   return (
     <header>
-      <div className="p-[40px] w-full max-w-[1440px] bg-darkCustom">
+      <div className="p-[40px] w-full bg-darkCustom">
         <div
-          className="flex items-center lg:mx-16 md:mx-12 max-w-[1440px]
-       min-[1078px]:justify-between justify-between
+          className="flex w-auto items-center lg:mx-16 md:mx-12  justify-between shrink
        "
         >
-          <div className="flex gap-8 max-w-[1440px]">
+          <div className="flex max-[528px]:hidden gap-8 ">
             <AiOutlineFacebook className={iconClassname} />
             <FaInstagram className={iconClassname} />
           </div>
-          <div className=" grid-start-2 grid-span-3">
+          <div>
             <WebsiteName />
           </div>
-          <div className="grid-start-6 grid-span-1">
+          <div className="">
             <div
-            className="w-10 h-10 bg-yellowCustom flex justify-center items-center cursor-pointer "
-            onClick={toggleMenu}
-          >
-            <AnimatePresence>
+              className="w-10 h-10 bg-yellowCustom flex justify-center items-center cursor-pointer "
+              onClick={toggleMenu}
+            >
+              <AnimatePresence>
                 {open ? (
                   <motion.div
                     key="closeIcon"
@@ -74,14 +71,10 @@ const Header: React.FC = () => {
                   </motion.div>
                 )}
               </AnimatePresence>
+            </div>
           </div>
-          </div>
-          
         </div>
-        <AnimatePresence>
-          {open && <NavigationTab />}
-        </AnimatePresence>
-        
+        <AnimatePresence>{open && <NavigationTab />}</AnimatePresence>
       </div>
     </header>
   );

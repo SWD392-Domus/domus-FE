@@ -31,7 +31,7 @@ const NavigationTab: React.FC = () => {
         initial="initial"
         animate="animate"
         exit="exit"
-        className="bg-darkCustom z-50 w-screen h-full max-w-[1440px] origin-top fixed left-0"
+        className="bg-darkCustom z-50 w-screen h-full origin-top fixed left-0"
       >
         <motion.div 
         variants={containerVars}

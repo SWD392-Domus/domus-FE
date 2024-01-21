@@ -30,11 +30,12 @@ const Section3: React.FC = () => {
   });
 
   return (
-    <motion.div
+    <div className="flex justify-center">
+      <motion.div
       initial="hidden"
       animate="visible"
       ref={ref}
-      className="lg:h-[1000px] md:h-[950px] max-w-[1440px] w-screen mt-20"
+      className="lg:h-[1000px] max-w-[1440px] md:h-[950px] h-[1200px]  w-screen mt-20"
     >
       <motion.div
         className="flex items-center gap-4 my-20"
@@ -47,7 +48,7 @@ const Section3: React.FC = () => {
         </div>
       </motion.div>
       <motion.div
-        className="flex items-center gap-4 mx-20 w-[80%] justify-center"
+        className="flex items-center gap-4 mx-20 max-[456px]:mx-10 w-[80%] justify-center"
         variants={slideInFromTop}
         animate={inView ? "visible" : "hidden"}
       >
@@ -59,7 +60,7 @@ const Section3: React.FC = () => {
       <motion.div
         initial="hidden"
         animate="visible"
-        className="relative max-md:h-[500px] gap-2 mt-28 grid grid-rows-2"
+        className="relative max-md:h-[500px] h-auto gap-2 mt-28 grid grid-rows-2"
       >
         <div className="col-span-1 flex gap-1 ">
           <motion.div
@@ -90,6 +91,8 @@ const Section3: React.FC = () => {
         </motion.div>
       </motion.div>
     </motion.div>
+    </div>
+    
   );
 };
 
