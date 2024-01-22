@@ -6,7 +6,7 @@ import Photo from "../photos";
 
 const Section1: React.FC = () => {
   return (
-    <div className="bg-white flex justify-center">
+    <div className= "flex justify-center bg-darkCustom">
       <motion.div
       initial="hidden"
       animate="visible"
@@ -21,7 +21,7 @@ const Section1: React.FC = () => {
 
       <motion.div
         variants={slideInFromRight(0.4)}
-        className="min-[762px]:w-[65%] min-[1500px]:w-[30%] w-screen absolute max-[762px]:right-[50px] right-[200px] z-20"
+        className="min-[762px]:w-[65%] w-screen absolute max-[762px]:right-[50px] right-[200px] z-20"
       >
         <Photo src={picture1} ratio={16/9} />
       </motion.div>

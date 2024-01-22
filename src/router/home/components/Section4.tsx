@@ -69,7 +69,7 @@ const Section4: React.FC = () => {
         </div>
         <div className="lg:w-[600px] w-full flex justify-center font-openSans 
         text-md text-white lg:col-start-3 lg:col-end-4
-        max-[990px]:px-10 mt-6
+        max-[990px]:px-10 mt-6 lg:pl-4
         "> 
             {data.description}
         </div>
