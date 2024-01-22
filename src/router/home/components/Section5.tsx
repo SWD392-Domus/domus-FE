@@ -34,7 +34,7 @@ const Section5: React.FC = () => {
     threshold: 0.3, // Trigger animation when 50% of the element is in view
   });
   return (
-    <div className="flex justify-center bg-white">
+    <div className="flex justify-center  bg-white">
       <motion.div
       initial="hidden"
       animate="visible"

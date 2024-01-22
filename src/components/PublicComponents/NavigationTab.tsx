@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 const navLinks = [
   { title: "Home", href: "/" },
   { title: "Blog", href: "/" },
+  { title: "Products", href: "/" },
   { title: "Past Projects", href: "/" },
   { title: "Our Current Packages", href: "/" },
   { title: "Settings", href: "/" },
@@ -47,7 +48,7 @@ const NavigationTab: React.FC = () => {
               >
                 <li
                   key={index}
-                  className="text-white inline-block max-sm:text-4xl text-6xl 
+                  className="text-white inline-block max-md:text-4xl text-6xl 
                             cursor-pointer font-playfair hover:text-yellowCustom"
                 >
                   <a href={link.href}>{link.title}</a>

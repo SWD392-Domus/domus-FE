@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import {
   slideInFromLeft,
   slideInFromRight,
+  slideInFromTop,
 } from "@/utils/motion";
 import { useInView } from "react-intersection-observer";
 import { leaf, tools, icon24h } from "@/assets/image/home";
@@ -58,7 +59,7 @@ const Section4: React.FC = () => {
       </motion.div>
       <motion.div 
        animate={inView ? "visible" : "hidden"}
-       variants={slideInFromRight(0.4)}
+       variants={slideInFromTop}
       className="w-[65%] h-[450px] max-md:w-[100%] lg:h-[300px] relative  bg-darkCustom 
       shrink flex-col z-20
       
