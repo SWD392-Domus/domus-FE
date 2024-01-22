@@ -17,7 +17,7 @@ const slice = createSlice({
             state.count--;
         },
         addAmount: (state, action) => {
-            state.count = action.payload;
+            state.count += action.payload;
         },
     },
 });

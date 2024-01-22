@@ -5,6 +5,8 @@ import CustomerSettings from "./customerSettings";
 import CustomerQuotations from "./customerSettings/quotations";
 import CustomerQuotationDetail from "./customerSettings/quotations/Detail";
 import PublicRoute from "./PublicRoute";
+import Home from "./home";
+import PublicLayout from "@/components/PublicComponents/PublicLayout";
 import CustomerRoute from "./CustomerRoute";
 import CustomerLayout from "../components/CustomerLayout";
 
@@ -14,7 +16,13 @@ const RouterComponent: React.FC = () => {
       index: true,
       path: "demo",
       component: <Demo />,
-
+      exact: true,
+      restrict: true,
+    },
+    {
+      index: true,
+      path: "home",
+      component: <Home />,
       exact: true,
       restrict: true,
     },
@@ -47,15 +55,17 @@ const RouterComponent: React.FC = () => {
       <Routes>
         <Route path="/" element={<Navigate to="home" />} />
         <Route path="/" element={<PublicRoute />}>
-          <Route>
-            {publicRoute.map((route) => (
-              <Route
-                index={route.index}
-                key={route.path}
-                path={route.path}
-                element={route.component}
-              />
-            ))}
+          <Route element={<PublicLayout />}>
+            <Route>
+              {publicRoute.map((route) => (
+                <Route
+                  index={route.index}
+                  key={route.path}
+                  path={route.path}
+                  element={route.component}
+                />
+              ))}
+            </Route>
           </Route>
         </Route>
         <Route element={<CustomerRoute />}>
