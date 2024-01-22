@@ -10,7 +10,9 @@ const PublicLayout: React.FC = () => {
   return (
     <div className="flex flex-col w-full h-screen">
       <Header />
-      <Outlet/>
+      <div className="h-screen">
+        <Outlet />
+      </div>
       <Footer />
     </div>
   );

@@ -9,6 +9,7 @@ import Home from "./home";
 import PublicLayout from "@/components/PublicComponents/PublicLayout";
 import CustomerRoute from "./CustomerRoute";
 import CustomerLayout from "../components/CustomerLayout";
+import ProductList from "./products";
 
 const RouterComponent: React.FC = () => {
   const publicRoute = [
@@ -26,6 +27,13 @@ const RouterComponent: React.FC = () => {
       exact: true,
       restrict: true,
     },
+    {
+      index: true,
+      path: "products",
+      component: <ProductList />,
+      exact: true,
+      restrict: true,
+    }
   ];
   const customerRoute = [
     {

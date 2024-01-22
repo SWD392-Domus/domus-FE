@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 
 import {
   slideInFromLeft,
-  slideInFromRight,
   slideInFromTop,
 } from "@/utils/motion";
 import { useInView } from "react-intersection-observer";
