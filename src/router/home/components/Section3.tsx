@@ -42,8 +42,8 @@ const Section3: React.FC = () => {
         animate={inView ? "visible" : "hidden"}
         variants={slideInFromLeft(0.3)}
       >
-        <div className="h-[3px] w-[305px] flex shrink bg-darkCustom ml-4" />
-        <div className="font-playfair text-6xl text-darkCustom">
+        <div className="h-[3px] w-[305px] max-[425px]:hidden flex shrink bg-darkCustom ml-4" />
+        <div className="font-playfair max-[425px]:pl-2 text-6xl text-darkCustom">
           {data[0].title}
         </div>
       </motion.div>

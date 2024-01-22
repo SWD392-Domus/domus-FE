@@ -65,7 +65,7 @@ const NavigationTab: React.FC = () => {
                     </Button>
                     <Button size={"lg"} variant={"yellowCustom"}>
                         <Link to={signUpLinks.href}>
-                        <p className="text-xl font-playfair">{signinLinks.title}</p>
+                        <p className="text-xl font-playfair">{signUpLinks.title}</p>
                         </Link>
                     </Button>
                 </motion.div>

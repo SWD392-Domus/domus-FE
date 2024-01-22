@@ -48,8 +48,8 @@ const Section5: React.FC = () => {
         variants={slideInFromLeft(0.3)}
       >
         <div className="flex items-center gap-4 pt-[80px]">
-          <div className="h-[3px] w-[305px] bg-white " />
-          <div className="font-playfair text-6xl text-white">{data.title}</div>
+          <div className="h-[3px] w-[305px] max-[425px]:hidden bg-white " />
+          <div className="font-playfair text-6xl max-[425px]:pl-2 text-white">{data.title}</div>
         </div>
 
         <motion.div 
