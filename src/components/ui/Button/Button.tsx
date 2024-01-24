@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
@@ -20,6 +21,7 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         custom: "bg-custom text-custom-foreground hover:bg-custom/80",
+        yellowCustom: "bg-yellowCustom shadow-sm hover:opacity-80",
       },
       size: {
         default: "h-9 px-4 py-2",
