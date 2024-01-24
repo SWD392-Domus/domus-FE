@@ -32,8 +32,8 @@ const Header: React.FC = () => {
     }, [open]);
 
     return (
-        <header>
-            <div className="p-[40px] w-full bg-darkCustom">
+        <header className="w-full">
+            <div className="p-[40px] w-full bg-darkCustom ">
                 <div
                     className="flex w-auto items-center lg:mx-16 md:mx-12  justify-between shrink
        "
