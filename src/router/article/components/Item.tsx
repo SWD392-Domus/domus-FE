@@ -15,7 +15,6 @@ import type { ArticleItem } from "../types";
 import { slideInFromTop } from "@/utils/motion";
 
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-import { Link } from "react-router-dom";
 interface ItemProps {
     item: ArticleItem;
 }

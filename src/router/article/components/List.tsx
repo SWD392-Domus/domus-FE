@@ -1,7 +1,6 @@
 import React from "react";
 import { ListProps } from "../types";
-import { GridContainer, Item } from "../styled";
-import { slideInFromTop } from "@/utils/motion";
+import { GridContainer } from "../styled";
 import ArticleItem from "./Item";
 
 const List: React.FC<ListProps> = (props) => {
