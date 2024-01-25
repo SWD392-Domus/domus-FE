@@ -46,32 +46,36 @@ const Header: React.FC = () => {
             <WebsiteName />
           </div>
           <div className="">
-            <div
+            <motion.div
               className="w-10 h-10 bg-yellowCustom flex justify-center items-center cursor-pointer "
               onClick={toggleMenu}
+              whileHover={{ scale: 1.2}}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
             >
               <AnimatePresence>
                 {open ? (
                   <motion.div
                     key="closeIcon"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
+                    // initial={{ opacity: 0 }}
+                    // animate={{ opacity: 1 }}
+                    // exit={{ opacity: 0 }}
                   >
-                    <IoCloseSharp className={iconClassname} />
+                    <IoCloseSharp className={`${iconClassname}`} />
                   </motion.div>
                 ) : (
                   <motion.div
                     key="hamburgerIcon"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
+                    // initial={{ opacity: 0 }}
+                    // animate={{ opacity: 1 }}
+                    // exit={{ opacity: 0 }}
                   >
-                    <RxHamburgerMenu className={iconClassname} />
+                    <RxHamburgerMenu className={`${iconClassname}`} />
                   </motion.div>
                 )}
               </AnimatePresence>
-            </div>
+            </motion.div>
           </div>
         </div>
         <AnimatePresence>{open && <NavigationTab />}</AnimatePresence>
