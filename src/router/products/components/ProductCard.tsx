@@ -9,8 +9,10 @@ import {
 import { FaCartArrowDown } from "react-icons/fa6";
 
 import React from "react";
+import { Link } from "react-router-dom";
 
 interface ProductProps {
+  id: number,
   name: string;
   description: string;
   price: number;
@@ -18,13 +20,14 @@ interface ProductProps {
 }
 
 const ProductCard: React.FC<ProductProps> = ({
+  id,
   name,
   description,
   price,
   src,
 }) => {
   return (
-    <div>
+    <Link to={`/product/${id}`}>
       <Card className="w-[auto] h-[auto]">
         <CardHeader className="w-full">
           <div className="flex justify-center">
@@ -59,7 +62,7 @@ const ProductCard: React.FC<ProductProps> = ({
           </div>
         </CardFooter>
       </Card>
-    </div>
+    </Link>
   );
 };
 

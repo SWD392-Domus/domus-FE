@@ -44,11 +44,11 @@ const NavigationTab: React.FC = () => {
             <div className="overflow-hidden">
               <motion.ul
                 variants={menuLinksVars}
-                className="list-disc h-[80px] ml-20"
+                className="list-disc h-[58px] ml-20"
               >
                 <li
                   key={index}
-                  className="text-white inline-block max-md:text-4xl text-6xl 
+                  className="text-white inline-block max-md:text-2xl text-4xl 
                             cursor-pointer font-playfair hover:text-yellowCustom"
                 >
                   <a href={link.href}>{link.title}</a>
@@ -58,7 +58,7 @@ const NavigationTab: React.FC = () => {
           ))}
           <motion.div
                 variants={menuLinksVars}
-                className="flex justify-center items-center  gap-10">
+                className="flex justify-center items-center gap-10">
                     <Button size={"lg"} variant={"yellowCustom"}>
                         <Link to={signinLinks.href}>
                             <p className="text-xl font-playfair">{signinLinks.title}</p>

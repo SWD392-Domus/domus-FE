@@ -3,8 +3,7 @@ import React from "react";
 import { Input } from "@/components/ui/Input";
 import { Badge } from "@/components/ui/Badge";
 import { FaChevronDown } from "react-icons/fa6";
-import ProductSkeleton from "./components/ProductSkeleton";
-
+import { productList } from "./data";
 // const products = [
 //     {
 //       src: "https://image.fritzhansen.com/~/media/7B0950DE4DC2462F9A9778BF6119C0F4.ashx",
@@ -41,14 +40,6 @@ const cate = [
   },
 ];
 
-const products = Array.from({ length: 9 }, (_, index) => ({
-  src: `https://govi.vn/wp-content/uploads/2022/01/1-PA-201A.jpg`,
-  name: `Product abdcjfdiajf ${index + 1}`,
-  description: `This is product This is produnProduct abdcjfdiajfProduct abdcjfdiajfProduct abdcjfdiajfProduct abdcjfdiajfProduct abdcjfdiajf${
-    index + 1
-  }`,
-  price: (index + 1) * 1000000000,
-}));
 
 const ProductList: React.FC = () => {
   return (
@@ -86,8 +77,9 @@ const ProductList: React.FC = () => {
       lg:grid-cols-4 lg:py-4 
       "
         >
-          {products.map((product, index) => (
+          {productList.map((product, index) => (
             <ProductCard
+              id={index}
               key={index}
               src={product.src}
               name={product.name}
