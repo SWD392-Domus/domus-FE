@@ -9,10 +9,14 @@ function BreadCrumbHeader() {
         '/customer/settings': 'Settings',
         '/customer/settings/quotations': 'Quotations',
         '/customer/settings/quotations/:quotationId': `Quotation ${quotationId} `,
+        '/staff': 'Staff',
+        '/staff/quotations': 'Quotations',
+        '/staff/quotations/:quotationId': `Quotation ${quotationId} `,
     };
 
     if (quotationId !== undefined) {
         breadcrumbNameMap[`/customer/settings/quotations/${quotationId}`] = `Quotation ${quotationId} `;
+        breadcrumbNameMap[`/staff/quotations/${quotationId}`] = `Quotation ${quotationId} `;
     }
 
     const location = useLocation();
