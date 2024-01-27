@@ -89,3 +89,8 @@
     @apply bg-background text-foreground;
   }
 }
+
+.thumbShow .swiper-button-next,
+.thumbShow .swiper-button-prev {
+  color: black
+}

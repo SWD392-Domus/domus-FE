@@ -92,5 +92,8 @@ export const productDetail = {
         "https://www.ikea.com/ca/en/images/products/enhet-base-cabinet-with-3-drawers-white-white-frame__1048155_pe843608_s5.jpg?f=xxs",
         "https://www.ikea.com/ca/en/images/products/knoxhult-base-cabinet-with-doors-and-drawer-white__0630750_pe694878_s5.jpg?f=xxs",
         "https://www.ikea.com/ca/en/images/products/sektion-base-cabinet-for-sink-2-doors-white-tistorp-brown-walnut-effect__1200962_pe905261_s5.jpg?f=xxs",
+        "https://www.ikea.com/ca/en/images/products/malm-bed-frame-high-black-brown-luroey__0638608_pe699032_s5.jpg?f=xxs",
+        "https://www.ikea.com/ca/en/images/products/neiden-bed-frame-pine__0749131_pe745500_s5.jpg?f=xxs",
+        "https://www.ikea.com/ca/en/images/products/kleppstad-bed-frame-white-vissle-beige__1035340_pe840527_s5.jpg?f=xxs",
     ]
 }

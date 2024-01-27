@@ -6,8 +6,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/Carousel";
-import Photo from "@/router/home/photos";
-
 interface Props {
   src: string[];
 }
