@@ -12,7 +12,8 @@ export const productList = [
         name: "Elegant Velvet Sofa",
         description: "Bring luxury and comfort into your living space with this elegant velvet sofa. Featuring a timeless design and plush cushions, it's the perfect addition to any modern or classic interior.",
         price: 899000,
-        src: "https://bizweb.dktcdn.net/thumb/1024x1024/100/055/169/products/z4882547703123-88c7e1b45c19f4d561ad8c72612ea63f.jpg?v=1700030999353",
+        src:         "https://www.ikea.com/ca/en/images/products/sektion-wall-cabinet-with-2-doors-white-tistorp-brown-walnut-effect__1200985_pe905310_s5.jpg?f=xxs",
+        
     },
     {
         name: "Sleek Mid-Century Coffee Table",
@@ -81,3 +82,15 @@ export const productList = [
         src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAuP30v_Zn5YL5G0RbmclnrrL3jSvZ-h8v8A&usqp=CAU",
     },
 ]
+
+export const productDetail = {
+    name: "Luxurious Velvet Bedding Set",
+    description: "Elevate your bedroom with this luxurious velvet bedding set. The soft and sumptuous material provides a cozy haven for rest, while the elegant design adds a touch of opulence to your space.",
+    price: 159000,
+    src: [
+        "https://www.ikea.com/ca/en/images/products/sektion-wall-cabinet-with-2-doors-white-tistorp-brown-walnut-effect__1200985_pe905310_s5.jpg?f=xxs",
+        "https://www.ikea.com/ca/en/images/products/enhet-base-cabinet-with-3-drawers-white-white-frame__1048155_pe843608_s5.jpg?f=xxs",
+        "https://www.ikea.com/ca/en/images/products/knoxhult-base-cabinet-with-doors-and-drawer-white__0630750_pe694878_s5.jpg?f=xxs",
+        "https://www.ikea.com/ca/en/images/products/sektion-base-cabinet-for-sink-2-doors-white-tistorp-brown-walnut-effect__1200962_pe905261_s5.jpg?f=xxs",
+    ]
+}

@@ -50,31 +50,12 @@ const Header: React.FC = () => {
             <motion.div
               className="w-12 h-12 bg-yellowCustom flex flex-col group justify-center items-center cursor-pointer "
               onClick={toggleMenu}
-              whileHover={{ scale: 1.2 }}
+              whileHover={{ scale: 1.1 }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
               <AnimatePresence>
-                {/* {open ? (
-                  <motion.div
-                    key="closeIcon"
-                    // initial={{ opacity: 0 }}
-                    // animate={{ opacity: 1 }}
-                    // exit={{ opacity: 0 }}
-                  >
-                    <IoCloseSharp className={`${iconClassname}`} />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="hamburgerIcon"
-                    // initial={{ opacity: 0 }}
-                    // animate={{ opacity: 1 }}
-                    // exit={{ opacity: 0 }}
-                  >
-                    <RxHamburgerMenu className={`${iconClassname}`} />
-                  </motion.div>
-                )} */}
                 <div
                   className={`${genericHamburgerLine} ${
                     open

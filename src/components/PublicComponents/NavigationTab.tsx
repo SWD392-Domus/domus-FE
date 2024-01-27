@@ -40,6 +40,7 @@ const NavigationTab: React.FC = () => {
         animate="open"
         exit="initial"
         className="h-full w-screen flex flex-col justify-center gap-2">
+          
           {navLinks.map((link, index) => (
             <div className="overflow-hidden">
               <motion.ul
@@ -51,7 +52,7 @@ const NavigationTab: React.FC = () => {
                   className="text-white inline-block max-md:text-2xl text-4xl 
                             cursor-pointer font-playfair hover:text-yellowCustom"
                 >
-                  <a href={link.href}>{link.title}</a>
+                  <a key={index} href={link.href}>{link.title}</a>
                 </li>
               </motion.ul>
             </div>
