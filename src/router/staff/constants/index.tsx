@@ -18,6 +18,7 @@ export const staffInfo =
 {
     avaLink: "https://cdn1.iconfinder.com/data/icons/avatar-2-2/512/Employee-512.png",
     name: "Nguyen Van B",
+    address: "111 Le Van B",
     phone: "+8411111111",
     email: "nguyenvana@fpt.edu.vn"
 }
@@ -55,12 +56,12 @@ export const quotationInfo =
 
 export const negoList = [
     {
-        staffInfo: staffInfo,
+        userInfo: staffInfo,
         time: "12:00 12/1/2004",
         content: "Here is the comment! Here is the comment! Here is the comment!Here is the comment! Here is the comment! Here is the comment! Here is the comment!"
     },
     {
-        staffInfo: staffInfo,
+        userInfo: userInfo,
         time: "12:00 12/1/2004",
         content: "Here is the comment!"
     },

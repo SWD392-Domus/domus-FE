@@ -1,42 +1,24 @@
 import React from "react";
-import { useParams } from "react-router-dom"
-import { DataTable } from "./Table/quotationDetail";
-import { columns, data } from './Table/quotationDetail/column'
-import { userInfo, quotationInfo, negoNum, staffInfo, negoList } from "../constants"
+import { DataTable } from "./Table/quotationNew";
+import { columns, data } from './Table/quotationNew/column'
+import { userInfo, quotationInfo, negoNum, staffInfo } from "../constants"
 import { EnvelopeClosedIcon, HomeIcon, PersonIcon, ChatBubbleIcon } from "@radix-ui/react-icons"
-import { Textarea } from "@/components/ui/Textarea"
-import { SendButton, UpdateButton, DeleteButton, MakeContractButton } from "./Button";
+// import { Textarea } from "@/components/ui/Textarea"
+import { CreateButton } from "./Button";
 
 interface Props {
     // define your props here
 }
 
-const QuotationDetail: React.FC<Props> = () => {
-    const { quotationId } = useParams();
+const StaffNewQuotation: React.FC<Props> = () => {
     return (
         <>
-            <div className="flex flex-row flex-wrap">
-                <div className="left-side-2 basis-1/3">
-                    <div className="my-7 text-2xl font-semibold">
-                        {new Intl.NumberFormat("en-US", {
-                            style: "currency",
-                            currency: "VND",
-                        }).format(quotationInfo.totalPrice)}
-                    </div>
-                    <MakeContractButton></MakeContractButton>
-                    <div className="staff-assigned-info my-7">
-                        <div className="mb-2">Assigned Staff</div>
-                        <div className="flex flex-row mb-2">
-                            <img src={staffInfo.avaLink} alt="" className="h-10 w-10 bg-gray-300 mr-2" />
-                            <span className="my-auto font-medium">{staffInfo.name}</span>
-                        </div>
-                    </div>
-                </div>
+            <div className="flex flex-row flex-wrap justify-center mb-5">
                 <div className="right-side-2 basis-2/3">
-                    <div className="border-solid border-b-2 border-zinc-400">
+                    <div className="">
                         <div className="general-info">
                             <div className="my-7 text-2xl font-semibold">
-                                Quotation - {quotationId}
+                                New Quotation
                             </div>
                             <div className="flex flex-row flex-wrap">
                                 <div className="left-side-3 basis-1/3">
@@ -102,44 +84,9 @@ const QuotationDetail: React.FC<Props> = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="action-buttons mb-2 flex flex-row justify-center space-x-2">
-                            <UpdateButton></UpdateButton>
-                            <DeleteButton></DeleteButton>
-                            <MakeContractButton></MakeContractButton>
-                        </div>
-
                     </div>
-                    <div className="nego-info">
-                        <div className="my-3 text-2xl font-semibold">
-                            Negotiation History
-                        </div>
-                        <div className="nego-info-body text-sm">
-                            <div className="mail-info flex flex-row mb-1">
-                                <ChatBubbleIcon className="my-auto mr-2" />
-                                <span className="">{negoNum} negotiation chats</span>
-                            </div>
-                        </div>
-                        <div className="my-5">
-                            <div className="flex flex-row mb-2">
-                                <img src={staffInfo.avaLink} alt="" className="h-10 w-10 bg-gray-300 mr-2" />
-                                <Textarea>
-                                </Textarea>
-                            </div>
-                            <div className="flex justify-end">
-                                <SendButton></SendButton>
-                            </div>
-                        </div>
-
-                        {negoList.map((nego) => (
-                            <div className="flex flex-row my-5">
-                                <img src={nego.userInfo.avaLink} alt="" className="h-10 w-10 bg-gray-300 mr-2" />
-                                <div className="nego-detail">
-                                    <span className="my-auto font-medium">{nego.userInfo.name}</span>
-                                    <div className="date-info text-xs">Published on{nego.time}</div>
-                                    <div className="cmt-info text-sm">{nego.content}</div>
-                                </div>
-                            </div>
-                        ))}
+                    <div className="flex justify-end">
+                        <CreateButton></CreateButton>
                     </div>
                 </div>
             </div>
@@ -147,4 +94,4 @@ const QuotationDetail: React.FC<Props> = () => {
     )
 }
 
-export default QuotationDetail
+export default StaffNewQuotation

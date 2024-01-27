@@ -11,6 +11,7 @@ function BreadCrumbHeader() {
         '/customer/settings/quotations/:quotationId': `Quotation ${quotationId} `,
         '/staff': 'Staff',
         '/staff/quotations': 'Quotations',
+        '/staff/quotations/newQuotation': 'New Quotation',
         '/staff/quotations/:quotationId': `Quotation ${quotationId} `,
     };
 

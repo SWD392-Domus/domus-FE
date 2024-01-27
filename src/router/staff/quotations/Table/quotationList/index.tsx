@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from "react-router-dom"
+import { useNavigate, useLocation, Link } from "react-router-dom"
 
 import {
   ChevronDownIcon,
@@ -50,8 +50,7 @@ export function DataTable<TData, TValue>({
   return (
     <>
       <div className="flex flex-row justify-between mb-5">
-        <Button className="bg-green-600">Create New</Button>
-
+        <Button className="bg-green-600"><Link to="/staff/quotations/newQuotation">Create New</Link></Button>
 
         {table.getFilteredSelectedRowModel().rows.length == 0
           ? <div className="basis-1/3">
