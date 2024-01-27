@@ -1,10 +1,12 @@
 import React from "react";
 import { DataTable } from "./Table/quotationNew";
 import { columns, data } from './Table/quotationNew/column'
-import { userInfo, quotationInfo, negoNum, staffInfo } from "../constants"
-import { EnvelopeClosedIcon, HomeIcon, PersonIcon, ChatBubbleIcon } from "@radix-ui/react-icons"
+import { userInfo, quotationInfo, staffInfo } from "../constants"
+// import { EnvelopeClosedIcon, HomeIcon, PersonIcon } from "@radix-ui/react-icons"
+import { DatePickerWithPresets } from "./DateInput"
 // import { Textarea } from "@/components/ui/Textarea"
 import { CreateButton } from "./Button";
+import { ComboBoxResponsive } from "./ComboBox";
 
 interface Props {
     // define your props here
@@ -27,26 +29,26 @@ const StaffNewQuotation: React.FC<Props> = () => {
                                     </div>
                                     <div className="text-xs mb-1 ">
                                         <div className="flex flex-row">
-                                            <div className="font-semibold mr-1">Beginning Date</div>
-                                            <p>{quotationInfo.beginDate}</p>
+                                            <div className="font-semibold mr-1 my-auto w-[100px]">Beginning Date</div>
+                                            <DatePickerWithPresets></DatePickerWithPresets>
                                         </div>
                                     </div>
                                     <div className="text-xs">
                                         <div className="flex flex-row">
-                                            <div className="font-semibold mr-1">Ending Date</div>
-                                            <p>{quotationInfo.endDate}</p>
+                                            <div className="font-semibold mr-1 my-auto w-[100px]">Ending Date</div>
+                                            <DatePickerWithPresets></DatePickerWithPresets>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="right-side-3 basis-2/3">
+                                <div className="right-side-3 basis-1/3">
                                     <div className="text-sm font-semibold mr-5 mb-1 pb-1 border-solid border-b-2 border-zinc-400">
-                                        Shipping Point
+                                        Customer
                                     </div>
                                     <div className="ava-header flex flex-row mb-1">
                                         <img src={userInfo.avaLink} alt="" className="h-10 w-10 bg-gray-300 mr-2" />
-                                        <span className="my-auto font-medium">{userInfo.name}</span>
+                                        <ComboBoxResponsive></ComboBoxResponsive>
                                     </div>
-                                    <div className="user-info-body text-sm">
+                                    {/* <div className="user-info-body text-sm">
                                         <div className="mail-info flex flex-row mb-1">
                                             <HomeIcon className="my-auto mr-2" />
                                             <span className="">{userInfo.address}</span>
@@ -63,6 +65,15 @@ const StaffNewQuotation: React.FC<Props> = () => {
                                             <PersonIcon className="my-auto mr-2" />
                                             <span className="">{userInfo.phone}</span>
                                         </div>
+                                    </div> */}
+                                </div>
+                                <div className="right-side-3 basis-1/3">
+                                    <div className="text-sm font-semibold mr-5 mb-1 pb-1 border-solid border-b-2 border-zinc-400">
+                                        Assigned Staff
+                                    </div>
+                                    <div className="ava-header flex flex-row mb-1">
+                                        <img src={staffInfo.avaLink} alt="" className="h-10 w-10 bg-gray-300 mr-2" />
+                                        <span className="my-auto font-medium">{staffInfo.name}</span>
                                     </div>
                                 </div>
                             </div>

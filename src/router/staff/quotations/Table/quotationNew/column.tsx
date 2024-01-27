@@ -9,7 +9,7 @@ export type QuotationDetailInfo = {
     quantityType: string
     priceSum: number
 }
-export const data: QuotationDetailInfo[] = Array.from({ length: 5 }, (_, i) => ({
+export const data: QuotationDetailInfo[] = Array.from({ length: 2 }, (_, i) => ({
 
     id: `${i + 1}`,
     productName: `Product ${i + 1}`,
