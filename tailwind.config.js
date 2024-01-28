@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   darkMode: ["class"],
   content: [
@@ -17,6 +18,10 @@ module.exports = {
       },
     },
     extend: {
+      fontFamily: {
+        'openSans':['Open Sans'],
+        'playfair':['Playfair Display']
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

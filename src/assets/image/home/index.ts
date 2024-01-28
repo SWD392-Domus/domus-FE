@@ -1,0 +1,10 @@
+export {default as picture1} from './picture1.png';
+export {default as picture2} from './picture2.png';
+export {default as picture3} from './picture3.png';
+export {default as picture4} from './picture4.png';
+export {default as leaf} from './leaf.png';
+export {default as tools} from './tools.png';
+export {default as icon24h} from './24h.png';
+export {default as blog1} from './blog-pic1.png';
+export {default as blog2} from './blog-pic2.png';
+export {default as blog3} from './blog-pic3.png';
