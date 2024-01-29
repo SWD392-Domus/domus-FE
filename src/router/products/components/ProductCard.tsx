@@ -10,55 +10,58 @@ import { FaCartArrowDown } from "react-icons/fa6";
 
 import React from "react";
 import { Link } from "react-router-dom";
+import { ProductProps } from "@/router/products/type";
 
-interface ProductProps {
-  id: number,
-  name: string;
-  description: string;
-  price: number;
-  src: string;
+interface Product{
+  product: ProductProps;
 }
 
-const ProductCard: React.FC<ProductProps> = ({
-  id,
-  name,
-  description,
-  price,
-  src,
+const ProductCard: React.FC<Product> = ({
+  product
 }) => {
+  const productImage = product.productDetails[0]?.productImages[0]?.imageUrl;
+  const productId = product?.id;
+  const productName = product?.productName;
+  const productPrice =(product?.productDetails[0]?.displayPrice)*1000;
   return (
-    <Link to={`/product/${id}`}>
+    <Link to={`/product/${productId}`}>
       <Card className="w-[auto] h-[auto]">
         <CardHeader className="w-full">
           <div className="flex justify-center">
-             <img src={src} className="w-[288px] h-[288px] object-cover" loading="lazy"/>
+            <img
+              src={productImage}
+              className="w-[288px] h-[288px] object-contain"
+              loading="lazy"
+            />
           </div>
-           
         </CardHeader>
         <CardContent className="overflow-hidden">
           <CardTitle className="">
-          <h2 className="truncate">{name}</h2>
-
+            <h2 className="truncate">{productName}</h2>
           </CardTitle>
-          <CardDescription className="pb-2 shrink">
-          <p className="truncate">{description}</p>
-
+          <CardDescription className="pb-2 pt-1 shrink">
+            <p className="truncate">
+              Materials:Powder-coated aluminum frame. Marine grade Sunbrella
+              fabric canopy. Protective cover included. Parasol base covers will
+              display a slight color difference compared to the pole. This is in
+              order to offer an improved resistance to scratching.
+            </p>
           </CardDescription>
           <CardTitle>
             <p className="text-2xl truncate">
               {new Intl.NumberFormat("en-US", {
                 style: "currency",
                 currency: "VND",
-              }).format(price)}
+              }).format(productPrice)}
             </p>
           </CardTitle>
         </CardContent>
         <CardFooter className="">
           <div
-            className="w-10 h-10 bg-blue-600 flex justify-center items-center 
+            className="w-10 h-10 bg-yellowCustom flex justify-center items-center 
           rounded-full cursor-pointer hover:opacity-80"
           >
-            <FaCartArrowDown className="text-white" />
+            <FaCartArrowDown className="text-black" />
           </div>
         </CardFooter>
       </Card>

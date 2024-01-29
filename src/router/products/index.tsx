@@ -1,17 +1,14 @@
-import ProductCard from "@/router/products/components/ProductCard";
-import React from "react";
+// import ProductCard from "@/router/products/components/ProductCard";
+import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/Input";
 import { Badge } from "@/components/ui/Badge";
 import { FaChevronDown } from "react-icons/fa6";
-import { productList } from "./data";
-// const products = [
-//     {
-//       src: "https://image.fritzhansen.com/~/media/7B0950DE4DC2462F9A9778BF6119C0F4.ashx",
-//       name: "Product 1",
-//       description: "product 123 jkhldsa",
-//       price: 100000
-//     },
-//   ];
+import ProductSkeleton from "./components/ProductSkeleton";
+import ProductsPagination from "./components/ProductsPagination";
+import { getProducts } from "./usecases";
+import { ProductProps } from "@/router/products/type";
+import CategorySelection from "./components/CategorySelection";
+
 
 const cate = [
   {
@@ -42,53 +39,88 @@ const cate = [
 
 
 const ProductList: React.FC = () => {
+  const [products, setProducts] = useState<ProductProps[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [totalPages, setTotalPages] = useState(0);
+  const [totalItems, setTotalItems] = useState(0);
+  const ProductCard = React.lazy(
+    () => import("@/router/products/components/ProductCard")
+  );
+  const pageSize = 12;
+  const [pageIndex, setPageIndex] = useState(1);
+
+  async function getProductsService(pageSize: number, pageIndex: number) {
+    const res = await getProducts(pageSize, pageIndex);
+    if (res) {
+      const productsData = res?.data;
+      setLoading(false);
+      setProducts(productsData.items);
+      setTotalPages(productsData.lastPage);
+      setTotalItems(productsData.total);
+    }
+  }
+  useEffect(() => {
+    getProductsService(pageSize, pageIndex);
+  }, [pageIndex]);
   return (
     <header className="flex justify-center">
       <div className="h-auto w-screen max-w-[1440px] px-10">
-        <div className="flex justify-between items-center py-8">
+        <div
+          className="flex justify-between items-center py-8 
+        max-md:flex-col max-md:gap-4 max-md:items-start
+        lg:px-40"
+        >
           <div className="w-full md:w-[50%] lg:w-[40%]">
             <Input placeholder="Type a command or search" />
           </div>
+
           <div className="flex justify-center items-center gap-4">
-            <div className="flex justify-center items-center">
-              <p className="font-notoSans hidden">tim thay:</p>
-            </div>
+            <p className="font-notoSans text-sm text-gray-500">
+              Found: <span className="font-bold">{totalItems}</span> products
+            </p>
           </div>
         </div>
 
         <div
           className=" grid grid-cols-2 gap-4 pb-4
-      md:grid-cols-4 md:gap-4 md:py-2
-      lg:flex lg:items-center "
+      md:grid-cols-4 md:gap-4 md:py-4
+      lg:flex lg:items-center lg:justify-center"
         >
-          {cate.map((item, index) => (
+          {cate.map((item) => (
             <div className="w-auto">
-              <Badge key={index} variant={"gray"} className="flex gap-2">
-                {item.name}
-                <FaChevronDown />
-              </Badge>
+              <CategorySelection name={item.name} />
             </div>
           ))}
         </div>
 
         <div
-          className="grid grid-cols-1 gap-4 pt-8
+          className="grid grid-cols-1 gap-4 pt-8 
       md:grid-cols-3 md:py-2
-      lg:grid-cols-4 lg:py-4 
+      lg:grid-cols-4 lg:py-4 lg:px-10
       "
         >
-          {productList.map((product, index) => (
-            <ProductCard
-              id={index}
-              key={index}
-              src={product.src}
-              name={product.name}
-              description={product.description}
-              price={product.price}
-            />
-          ))}
+          {loading
+            ? Array(pageSize)
+                .fill(null)
+                .map((_, index) => <ProductSkeleton key={index} />)
+            : products.map((product: ProductProps) => (
+                <>
+                  <React.Suspense
+                    key={product.id}
+                    fallback={<ProductSkeleton />}
+                  >
+                    <ProductCard product={product} />
+                  </React.Suspense>
+                </>
+              ))}
         </div>
-        <div className="mb-5"></div>
+        <div className="py-20 w-full flex justify-center items-center border-gray-200">
+          <ProductsPagination
+            totalPages={totalPages}
+            pageIndex={pageIndex}
+            setPageIndex={setPageIndex}
+          />
+        </div>
       </div>
     </header>
   );
