@@ -1,7 +1,7 @@
 import React from "react";
-import { DataTable } from "./Table/quotationNew";
-import { columns, data } from './Table/quotationNew/column'
-import { userInfo, quotationInfo, staffInfo } from "../constants"
+import { DataTable } from "./Table";
+import { columns, data } from './Table/column'
+import { userInfo, quotationInfo, staffInfo } from "./constants"
 // import { EnvelopeClosedIcon, HomeIcon, PersonIcon } from "@radix-ui/react-icons"
 import { DatePickerWithPresets } from "./DateInput"
 // import { Textarea } from "@/components/ui/Textarea"
