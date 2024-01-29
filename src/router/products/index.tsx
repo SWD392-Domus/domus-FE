@@ -1,8 +1,6 @@
 // import ProductCard from "@/router/products/components/ProductCard";
 import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/Input";
-import { Badge } from "@/components/ui/Badge";
-import { FaChevronDown } from "react-icons/fa6";
 import ProductSkeleton from "./components/ProductSkeleton";
 import ProductsPagination from "./components/ProductsPagination";
 import { getProducts } from "./usecases";
