@@ -1,8 +1,8 @@
 import React from "react";
 import { useParams } from "react-router-dom"
-import { DataTable } from "./Table/quotationDetail";
-import { columns, data } from './Table/quotationDetail/column'
-import { userInfo, quotationInfo, negoNum, staffInfo, negoList } from "../constants"
+import { DataTable } from "./Table";
+import { columns, data } from './Table/column'
+import { userInfo, quotationInfo, negoNum, staffInfo, negoList } from "./constants"
 import { EnvelopeClosedIcon, HomeIcon, PersonIcon, ChatBubbleIcon } from "@radix-ui/react-icons"
 import { Textarea } from "@/components/ui/Textarea"
 import { AcceptButton, DeclineButton, NegotiateButton, SendButton } from "./Button";
