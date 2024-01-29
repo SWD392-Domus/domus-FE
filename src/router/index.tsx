@@ -2,13 +2,13 @@ import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Demo from "./demo";
 import CustomerSettings from "./customerSettings";
-import CustomerQuotations from "./customerSettings/quotations";
-import CustomerQuotationDetail from "./customerSettings/quotations/Detail";
+import CustomerQuotations from "./customerQuotations";
+import CustomerQuotationDetail from "./customerQuotationDetail";
 // import Staff from "./staff";
 // import StaffProducts from "./staff/products";
-import StaffNewQuotation from "./staff/quotations/NewQuotation";
-import StaffQuotations from "./staff/quotations";
-import StaffQuotationDetail from "./staff/quotations/Detail";
+import StaffQuotationNew from "./staffQuotationNew";
+import StaffQuotations from "./staffQuotations";
+import StaffQuotationDetail from "./staffQuotationDetail";
 import PublicRoute from "./PublicRoute";
 import Home from "./home";
 import PublicLayout from "@/components/PublicComponents/PublicLayout";
@@ -68,7 +68,7 @@ const RouterComponent: React.FC = () => {
         {
             index: true,
             path: "staff/quotations/newQuotation",
-            component: <StaffNewQuotation />,
+            component: <StaffQuotationNew />,
             exact: true,
             restrict: true,
         },

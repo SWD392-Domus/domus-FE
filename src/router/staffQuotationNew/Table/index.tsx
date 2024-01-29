@@ -14,8 +14,8 @@ import {
   TableRow,
 } from "@/components/ui/Table/table"
 
-import { ComboBoxResponsive } from "../../ComboBox"
-import { Input } from "../../Input"
+import { ComboBoxResponsive } from "../ComboBox";
+import { Input } from "../Input"
 // import { useEffect, useState } from "react"
 
 import { useDispatch, useSelector } from "react-redux";

@@ -3,13 +3,11 @@ import { Outlet } from "react-router-dom";
 
 const CustomerLayout = () => {
     return (
-        <div className="flex flex-col min-h-screen">
+        <div className="flex flex-col min-h-screen bg-black">
             <header className="bg-black bg-cover h-10 text-white pt-2">
                 <div className="container flex flex-row justify-between my-auto">
                     <p className="logo">Domus Logo here</p>
-                    <div className="mr-20">
-                        {/* {userInfo.name} */}
-                    </div>
+                    <div className="mr-20">{/* {userInfo.name} */}</div>
                 </div>
             </header>
             <div className="flex-1 container">
@@ -19,7 +17,8 @@ const CustomerLayout = () => {
                 <Outlet />
             </div>
             <footer className="bg-black bg-cover h-10"></footer>
-        </div>)
-}
+        </div>
+    );
+};
 
-export default CustomerLayout
+export default CustomerLayout;
