@@ -1,4 +1,4 @@
-import { get, post, put, remove } from "./ApiCaller";
+import { get } from "./ApiCaller";
 
 export const productApi = {
     getAllProducts: (pageSize: number, pageIndex: number )=> {

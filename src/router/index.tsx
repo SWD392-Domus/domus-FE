@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import Demo from "./demo";
 import CustomerSettings from "./customerSettings";
 import CustomerQuotations from "./customerQuotations";
 import CustomerQuotationDetail from "./customerQuotationDetail";
@@ -21,13 +20,6 @@ import ProductDetails from "./productDetails";
 
 const RouterComponent: React.FC = () => {
     const publicRoute = [
-        {
-            index: true,
-            path: "demo",
-            component: <Demo />,
-            exact: true,
-            restrict: true,
-        },
         {
             index: true,
             path: "home",

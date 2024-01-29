@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Thumbs } from "swiper/modules";
+import { Swiper, SwiperSlide } from 'swiper/react';
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -12,15 +12,12 @@ import "swiper/css/autoplay";
 import "swiper/css/effect-fade";
 import "swiper/css/grid";
 
-interface Props  {
-    images: string[];
-}
 
-const Slider: React.FC<Props> = (
+
+const Slider= (
     { images}
 ) => {
-    const [activeThumb, setActiveThumb] = useState<null | boolean>(null);
-
+  const [activeThumb, setActiveThumb] = useState(null);
   return (
     <div className="lg:mx-auto max-w-5xl mx-[1.5rem]">
           <div
@@ -37,8 +34,7 @@ const Slider: React.FC<Props> = (
               grabCursor={true}
               navigation={true}
               thumbs={{
-                swiper:
-                  activeThumb && !activeThumb.destroyed ? activeThumb : null,
+                swiper: activeThumb && !activeThumb.destroyed ? activeThumb : null,
               }}
               className="thumbShow"
             >
