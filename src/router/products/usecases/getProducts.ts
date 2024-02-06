@@ -5,6 +5,7 @@ export const getProducts = async (pageSize: number, pageIndex: number) => {
     if(response.status === 200){
         return response.data;
     }else{
+
         return {
             status:400,
             data:[]

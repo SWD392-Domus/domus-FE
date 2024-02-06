@@ -12,17 +12,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ProductProps } from "@/router/products/type";
 
-interface Product{
+interface Product {
   product: ProductProps;
 }
 
-const ProductCard: React.FC<Product> = ({
-  product
-}) => {
-  const productImage = product.productDetails[0]?.productImages[0]?.imageUrl;
+const ProductCard: React.FC<Product> = ({ product }) => {
+  const productImage = product.details[0]?.images[0]?.imageUrl;
   const productId = product?.id;
   const productName = product?.productName;
-  const productPrice =(product?.productDetails[0]?.displayPrice)*1000;
+  const productPrice = product?.details[0]?.displayPrice * 1000;
+  const productDescription = product?.description;
   return (
     <Link to={`/product/${productId}`}>
       <Card className="w-[auto] h-[auto]">
@@ -41,10 +40,17 @@ const ProductCard: React.FC<Product> = ({
           </CardTitle>
           <CardDescription className="pb-2 pt-1 shrink">
             <p className="truncate">
-              Materials:Powder-coated aluminum frame. Marine grade Sunbrella
-              fabric canopy. Protective cover included. Parasol base covers will
-              display a slight color difference compared to the pole. This is in
-              order to offer an improved resistance to scratching.
+              {productDescription ? (
+                productDescription
+              ) : (
+                <p className="truncate">
+                  Materials:Powder-coated aluminum frame. Marine grade Sunbrella
+                  fabric canopy. Protective cover included. Parasol base covers
+                  will display a slight color difference compared to the pole.
+                  This is in order to offer an improved resistance to
+                  scratching.
+                </p>
+              )}
             </p>
           </CardDescription>
           <CardTitle>

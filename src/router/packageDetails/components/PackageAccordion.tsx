@@ -1,21 +1,16 @@
+import React from 'react'
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/Accordion/Accordion";
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+  } from "@/components/ui/Accordion/Accordion";
+  
+interface Props {}
 
-import React from "react";
-
-interface Props {
-  title: string;
-}
-
-const ProductAccordion: React.FC<Props> = ({
-  title
-}) => {
+const PackageAccordion: React.FC<Props> = () => {
   return (
-      <Accordion type="multiple">
+    <Accordion type="multiple">
         <AccordionItem value="item-1">
           <AccordionTrigger>Product Details</AccordionTrigger>
           <AccordionContent>
@@ -33,7 +28,16 @@ const ProductAccordion: React.FC<Props> = ({
                 617lb Base
               </p>
               <p>
-                {title}
+                Materials:Powder-coated aluminum frame. Marine grade Sunbrella
+                fabric canopy. Protective cover included. Parasol base covers
+                will display a slight color difference compared to the pole.
+                This is in order to offer an improved resistance to scratching.
+              </p>
+              <p>
+                Materials:Powder-coated aluminum frame. Marine grade Sunbrella
+                fabric canopy. Protective cover included. Parasol base covers
+                will display a slight color difference compared to the pole.
+                This is in order to offer an improved resistance to scratching.
               </p>
             </div>
           </AccordionContent>
@@ -49,7 +53,7 @@ const ProductAccordion: React.FC<Props> = ({
           </AccordionContent>
         </AccordionItem>
       </Accordion>
-  );
-};
+  )
+}
 
-export default ProductAccordion;
+export default PackageAccordion

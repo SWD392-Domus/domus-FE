@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { AxiosResponse } from 'axios';
 
-const defaultURL = 'http://137.116.118.11:443/api';
+const defaultURL = 'http://23.102.226.118:443/api';
 
 interface PublicCallParams {
     method: string;

@@ -2,12 +2,16 @@ export interface ProductProps {
     id: string;
     productName: string;
     description?: string;
-    productDetails: ProductDetails[];
+    details: ProductDetails[];
   }
   
 export interface ProductDetails {
-    productImages: {
+    images: {
       imageUrl: string;
+    }[];
+    attributes:{
+      name: string;
+      value: string;
     }[];
     displayPrice: number;
   }

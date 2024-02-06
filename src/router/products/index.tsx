@@ -49,7 +49,7 @@ const ProductList: React.FC = () => {
 
   async function getProductsService(pageSize: number, pageIndex: number) {
     const res = await getProducts(pageSize, pageIndex);
-    if (res) {
+    if(res){
       const productsData = res?.data;
       setLoading(false);
       setProducts(productsData.items);
