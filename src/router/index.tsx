@@ -17,6 +17,7 @@ import StaffRoute from "./StaffRoute";
 import StaffLayout from "@/components/StaffComponents/StaffLayout";
 import ProductList from "./products";
 import ProductDetails from "./productDetails";
+import Login from "./login";
 
 const RouterComponent: React.FC = () => {
     const publicRoute = [
@@ -38,6 +39,13 @@ const RouterComponent: React.FC = () => {
             index: true,
             path: "product/:id",
             component: <ProductDetails />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "login",
+            component: <Login />,
             exact: true,
             restrict: true,
         },
