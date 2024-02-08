@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineFacebook } from "react-icons/ai";
 import { FaInstagram } from "react-icons/fa";
-import { RxHamburgerMenu } from "react-icons/rx";
-import { IoCloseSharp } from "react-icons/io5";
+// import { RxHamburgerMenu } from "react-icons/rx";
+// import { IoCloseSharp } from "react-icons/io5";
 
 import WebsiteName from "./WebsiteName";
 import NavigationTab from "./NavigationTab";
@@ -12,6 +12,7 @@ const iconClassname = "text-white text-2xl";
 
 const Header: React.FC = () => {
   const [open, setOpen] = useState(false);
+  const genericHamburgerLine = `h-[3px] w-6 my-[2px] rounded-full bg-black transition ease transform duration-300`;
   const toggleMenu = () => {
     setOpen(!open);
   };
@@ -46,34 +47,39 @@ const Header: React.FC = () => {
             <WebsiteName />
           </div>
           <div className="">
-            <div
-              className="w-10 h-10 bg-yellowCustom flex justify-center items-center cursor-pointer "
+            <motion.div
+              className="w-12 h-12 bg-yellowCustom flex flex-col group justify-center items-center cursor-pointer "
               onClick={toggleMenu}
+              whileHover={{ scale: 1.1 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
             >
               <AnimatePresence>
-                {open ? (
-                  <motion.div
-                    key="closeIcon"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                  >
-                    <IoCloseSharp className={iconClassname} />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="hamburgerIcon"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                  >
-                    <RxHamburgerMenu className={iconClassname} />
-                  </motion.div>
-                )}
+                <div
+                  className={`${genericHamburgerLine} ${
+                    open
+                      ? "rotate-45 translate-y-[7.1px] opacity-100"
+                      : "opacity-100"
+                  }`}
+                />
+                <div
+                  className={`${genericHamburgerLine} ${
+                    open ? "opacity-0" : "opacity-100 "
+                  }`}
+                />
+                <div
+                  className={`${genericHamburgerLine} ${
+                    open
+                      ? "-rotate-45 -translate-y-[7.1px] opacity-100 "
+                      : "opacity-100"
+                  }`}
+                />
               </AnimatePresence>
-            </div>
+            </motion.div>
           </div>
         </div>
+
         <AnimatePresence>{open && <NavigationTab />}</AnimatePresence>
       </div>
     </header>

@@ -1,0 +1,1 @@
+export { getProductDetailsService } from './getProductDetailsService';
