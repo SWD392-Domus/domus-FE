@@ -17,6 +17,8 @@ import StaffRoute from "./StaffRoute";
 import StaffLayout from "@/components/StaffComponents/StaffLayout";
 import ProductList from "./products";
 import ProductDetails from "./productDetails";
+import PackageDetails from "./packageDetails";
+import CustomizePackage from "./customizePackage";
 
 const RouterComponent: React.FC = () => {
     const publicRoute = [
@@ -40,7 +42,21 @@ const RouterComponent: React.FC = () => {
             component: <ProductDetails />,
             exact: true,
             restrict: true,
-          }
+          },
+          {
+            index: true,
+            path: "package",
+            component: <PackageDetails />,
+            exact: true,
+            restrict: true,
+          },
+          {
+            index: true,
+            path: "customizepackage",
+            component: <CustomizePackage/>,
+            exact: true,
+            restrict: true,
+          },
     ];
     const customerRoute = [
         {
