@@ -5,7 +5,7 @@ interface Props {
     // define your props here
 }
 
-const Login: React.FC<Props> = (props) => {
+const Login: React.FC<Props> = () => {
     return <LoginContainer>login</LoginContainer>;
 };
 
