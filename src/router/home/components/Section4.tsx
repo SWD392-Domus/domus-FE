@@ -1,9 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import {
-  slideInFromLeft,
-  slideInFromTop,
-} from "@/utils/motion";
+import { slideInFromLeft, slideInFromTop } from "@/utils/motion";
 import { useInView } from "react-intersection-observer";
 import { leaf, tools, icon24h } from "@/assets/image/home";
 

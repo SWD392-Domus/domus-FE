@@ -33,14 +33,14 @@ const RouterComponent: React.FC = () => {
             component: <ProductList />,
             exact: true,
             restrict: true,
-          },
-          {
+        },
+        {
             index: true,
             path: "product/:id",
             component: <ProductDetails />,
             exact: true,
             restrict: true,
-          }
+        },
     ];
     const customerRoute = [
         {
