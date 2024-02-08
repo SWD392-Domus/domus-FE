@@ -20,7 +20,8 @@ module.exports = {
     extend: {
       fontFamily: {
         'openSans':['Open Sans'],
-        'playfair':['Playfair Display']
+        'playfair':['Playfair Display'],
+        'notoSans':['Noto Sans'],
       },
       colors: {
         border: "hsl(var(--border))",

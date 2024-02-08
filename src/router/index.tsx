@@ -1,26 +1,25 @@
 import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import Demo from "./demo";
 import CustomerSettings from "./customerSettings";
-import CustomerQuotations from "./customerSettings/quotations";
-import CustomerQuotationDetail from "./customerSettings/quotations/Detail";
+import CustomerQuotations from "./customerQuotations";
+import CustomerQuotationDetail from "./customerQuotationDetail";
+// import Staff from "./staff";
+// import StaffProducts from "./staff/products";
+import StaffQuotationNew from "./staffQuotationNew";
+import StaffQuotations from "./staffQuotations";
+import StaffQuotationDetail from "./staffQuotationDetail";
 import PublicRoute from "./PublicRoute";
 import Home from "./home";
 import PublicLayout from "@/components/PublicComponents/PublicLayout";
 import CustomerRoute from "./CustomerRoute";
-import CustomerLayout from "../components/CustomerLayout";
-import ArticleList from "./article";
-import ArticleDetail from "./articleDetail";
+import CustomerLayout from "@/components/CustomerComponents/CustomerLayout";
+import StaffRoute from "./StaffRoute";
+import StaffLayout from "@/components/StaffComponents/StaffLayout";
+import ProductList from "./products";
+import ProductDetails from "./productDetails";
 
 const RouterComponent: React.FC = () => {
     const publicRoute = [
-        {
-            index: true,
-            path: "demo",
-            component: <Demo />,
-            exact: true,
-            restrict: true,
-        },
         {
             index: true,
             path: "home",
@@ -30,15 +29,15 @@ const RouterComponent: React.FC = () => {
         },
         {
             index: true,
-            path: "article",
-            component: <ArticleList />,
+            path: "products",
+            component: <ProductList />,
             exact: true,
             restrict: true,
         },
         {
             index: true,
-            path: "article/:id",
-            component: <ArticleDetail />,
+            path: "product/:id",
+            component: <ProductDetails />,
             exact: true,
             restrict: true,
         },
@@ -66,6 +65,43 @@ const RouterComponent: React.FC = () => {
             restrict: true,
         },
     ];
+    const staffRoute = [
+        // {
+        //   index: true,
+        //   path: "staff",
+        //   component: <Staff />,
+        //   exact: true,
+        //   restrict: true,
+        // },
+        {
+            index: true,
+            path: "staff/quotations/newQuotation",
+            component: <StaffQuotationNew />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/quotations",
+            component: <StaffQuotations />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/quotations/:quotationId",
+            component: <StaffQuotationDetail />,
+            exact: true,
+            restrict: true,
+        },
+        // {
+        //   index: true,
+        //   path: "staff/products",
+        //   component: <StaffProducts />,
+        //   exact: true,
+        //   restrict: true,
+        // },
+    ];
     return (
         <BrowserRouter>
             <Routes>
@@ -87,6 +123,18 @@ const RouterComponent: React.FC = () => {
                 <Route element={<CustomerRoute />}>
                     <Route element={<CustomerLayout />}>
                         {customerRoute.map((route) => (
+                            <Route
+                                index={route.index}
+                                key={route.path}
+                                path={route.path}
+                                element={route.component}
+                            />
+                        ))}
+                    </Route>
+                </Route>
+                <Route element={<StaffRoute />}>
+                    <Route element={<StaffLayout />}>
+                        {staffRoute.map((route) => (
                             <Route
                                 index={route.index}
                                 key={route.path}

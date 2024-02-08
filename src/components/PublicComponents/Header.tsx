@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineFacebook } from "react-icons/ai";
 import { FaInstagram } from "react-icons/fa";
-import { RxHamburgerMenu } from "react-icons/rx";
-import { IoCloseSharp } from "react-icons/io5";
+// import { RxHamburgerMenu } from "react-icons/rx";
+// import { IoCloseSharp } from "react-icons/io5";
 
 import WebsiteName from "./WebsiteName";
 import NavigationTab from "./NavigationTab";
