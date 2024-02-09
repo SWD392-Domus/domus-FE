@@ -19,6 +19,7 @@ import ProductList from "./products";
 import ProductDetails from "./productDetails";
 import PackageDetails from "./packageDetails";
 import CustomizePackage from "./customizePackage";
+import ProductDetailsStaff from "./staffProductDetail";
 
 const RouterComponent: React.FC = () => {
     const publicRoute = [
@@ -117,6 +118,13 @@ const RouterComponent: React.FC = () => {
         //   exact: true,
         //   restrict: true,
         // },
+        {
+            index: true,
+            path: "staff/product/:id",
+            component: <ProductDetailsStaff/>,
+            exact: true,
+            restrict: true,
+        }
     ];
     return (
         <BrowserRouter>
