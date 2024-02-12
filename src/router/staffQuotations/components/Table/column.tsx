@@ -15,35 +15,13 @@ import { ColumnDef } from "@tanstack/react-table"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar"
 import { Checkbox } from "@/components/ui/Checkbox/checkbox"
 import { Badge } from "@/components/ui/Badge"
+import { QuotationsProps } from "../../types"
 
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type QuotationInfo = {
-    id: string
-    expiredAt: string
-    createdAt: string
-    lastUpdatedAt: string
-    createdBy: string
-    lastUpdatedBy: string
-    staff: string
-    amount: number
-    status: "pending" | "processing" | "success" | "failed"
-}
-export const data: QuotationInfo[] = Array.from({ length: 5 }, (_, i) => ({
 
-    id: `Q${i + 1}`,
-    expiredAt: `2022-01-0${(i % 9) + 1}`,
-    createdAt: `2022-01-0${(i % 9) + 1}`,
-    lastUpdatedAt: `2022-01-0${(i % 9) + 1}`,
-    createdBy: `Staff ${i + 1}`,
-    lastUpdatedBy: `Staff ${i + 1}`,
-    customer: `Customer ${i + 1}`,
-    staff: `Staff ${i + 1}`,
-    amount: (i + 1) * 100000,
-    status: "pending",
-}));
-export const columns: ColumnDef<QuotationInfo>[] = [
+export const columns: ColumnDef<QuotationsProps>[] = [
     {
         id: "select",
         header: ({ table }) => (
@@ -144,7 +122,7 @@ export const columns: ColumnDef<QuotationInfo>[] = [
             const value: string = (row.getValue("status") as string).toUpperCase()
             return (
                 <>
-                    <Badge variant="success">{value}</Badge>
+                    <Badge variant="outline">{value}</Badge>
                 </>
             )
         },

@@ -1,10 +1,10 @@
-import { getQuotationsPagingService } from "../service";
+import { getProductsPagingService } from "../service";
 
-export const getQuotationsPaging = async (
+export const getProductsPaging = async (
   pageSize: number,
   pageIndex: number
 ) => {
-  const response = await getQuotationsPagingService(pageSize, pageIndex);
+  const response = await getProductsPagingService(pageSize, pageIndex);
   if (response.status === 200) {
     return response.data;
   } else {
