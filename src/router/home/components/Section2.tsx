@@ -5,6 +5,7 @@ import { picture2 } from "@/assets/image/home";
 import { slideInFromRight, slideInFromTop } from "@/utils/motion";
 import { Button } from "@/components/ui/Button/Button";
 import Photo from "../photos";
+import { useToast } from "@/components/ui/Toast/use-toast";
 
 const data = {
   title: "Our DNA",
@@ -19,6 +20,7 @@ const data = {
 };
 
 const Section2: React.FC = () => {
+  const {toast} = useToast();
   return (
     <div className="flex justify-center bg-white z-0">
       <motion.div
@@ -70,6 +72,14 @@ const Section2: React.FC = () => {
               <Button
                 className="w-[30%] max-[456px]:w-[50%] mt-8 text-black font-playfair"
                 variant={"yellowCustom"}
+                onClick={() => {
+                  toast({
+                    variant: "destructive",
+
+                    title: "Uh oh! Something went wrong.",
+                    description: "There was a problem with your request.",
+                  })
+                }}
               >
                 {data.button.text}
               </Button>
