@@ -8,6 +8,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/Dialog"
+import { CheckIcon, XIcon, PencilIcon, SendIcon } from "lucide-react"
 
 function onUpdate() {
 
@@ -31,19 +32,19 @@ function onSend() {
 
 export const UpdateButton = () => {
     return (
-        <Button onClick={onUpdate} className="bg-green-600 min-w-1" >Update</Button>
+        <Button onClick={onUpdate} className="bg-variant text-black h-9 border-2 border-zinc-500 bg-zinc-50 rounded hover:text-white pl-2" ><PencilIcon className="h-3.5 pr-2 my-auto"></PencilIcon>Update</Button>
     )
 }
 export const MakeContractButton = () => {
     return (
-        <Button onClick={onMakeContract} className="bg-black" >Make Contract</Button>
+        <Button onClick={onMakeContract} className="bg-black pl-2" > <CheckIcon className="h-3.5 pr-2 my-auto"></CheckIcon>Make Contract</Button>
     )
 }
 export const DeleteButton = () => {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button className="bg-red-600" >Delete</Button>
+                <Button className="bg-variant text-black h-9 border-2 border-zinc-500 bg-zinc-50 rounded hover:text-white pl-2" ><XIcon className="h-3.5 pr-2 my-auto"></XIcon>Delete</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
@@ -68,6 +69,6 @@ export const CreateButton = () => {
 }
 export const SendButton = () => {
     return (
-        <Button onClick={onSend} className="bg-green-500" >Send</Button>
+        <Button onClick={onSend} className="bg-black pl-2" > <SendIcon className="h-3 pr-2 my-auto"></SendIcon>Send</Button>
     )
 }

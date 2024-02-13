@@ -17,7 +17,6 @@ import {
 } from "./table"
 import { SearchField } from "../Input"
 import { PrintButton, CreateButton, ActionButton, SortButton } from "../Button"
-import { DataTablePagination } from "../Pagination"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -110,7 +109,6 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table}></DataTablePagination>
     </div>
   )
 }

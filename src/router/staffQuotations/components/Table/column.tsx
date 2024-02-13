@@ -49,28 +49,29 @@ export const columns: ColumnDef<QuotationsProps>[] = [
         header: "Id",
     },
     {
-        accessorKey: "expiredAt",
-        header: "Expired At",
+        accessorKey: "expireAt",
+        header: "Expire At",
     },
     {
-        accessorKey: "createdAt",
-        header: "Created At",
+        accessorKey: "staffId",
+        header: "Staff Id",
+        cell: ({ row }) => {
+            const staff: string = row.getValue("staffId");
+            return <div className=" text-right font-medium">{
+                <div className="flex items-center gap-1 ">
+                    <Avatar>
+                        <AvatarImage src="https://github.com/shadcn.png" />
+                        <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                    <div className="text-destructive">{staff}</div>
+                </div>
+
+            }</div>
+        }
     },
     {
-        accessorKey: "lastUpdatedAt",
-        header: "Last Updated At",
-    },
-    {
-        accessorKey: "createdBy",
-        header: "Last Updated By",
-    },
-    {
-        accessorKey: "lastUpdatedBy",
-        header: "Last Updated By",
-    },
-    {
-        accessorKey: "customer",
-        header: "Customer",
+        accessorKey: "customerId",
+        header: "Customer Id",
         cell: ({ row }) => {
             const customer: string = row.getValue("customer");
             return <div className=" text-right font-medium">{
@@ -85,36 +86,19 @@ export const columns: ColumnDef<QuotationsProps>[] = [
             }</div>
         }
     },
-    {
-        accessorKey: "staff",
-        header: "Staff",
-        cell: ({ row }) => {
-            const staff: string = row.getValue("staff");
-            return <div className=" text-right font-medium">{
-                <div className="flex items-center gap-1 ">
-                    <Avatar>
-                        <AvatarImage src="https://github.com/shadcn.png" />
-                        <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
-                    <div className="text-destructive">{staff}</div>
-                </div>
+    // {
+    //     accessorKey: "amount",
+    //     header: () => <div className="text-right">Amount</div>,
+    //     cell: ({ row }) => {
+    //         const amount = parseFloat(row.getValue("amount"))
+    //         const formatted = new Intl.NumberFormat("en-US", {
+    //             style: "currency",
+    //             currency: "VND",
+    //         }).format(amount)
 
-            }</div>
-        }
-    },
-    {
-        accessorKey: "amount",
-        header: () => <div className="text-right">Amount</div>,
-        cell: ({ row }) => {
-            const amount = parseFloat(row.getValue("amount"))
-            const formatted = new Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: "VND",
-            }).format(amount)
-
-            return <div className="text-right font-medium">{formatted}</div>
-        },
-    },
+    //         return <div className="text-right font-medium">{formatted}</div>
+    //     },
+    // },
     {
         accessorKey: "status",
         header: "Status",

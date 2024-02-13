@@ -50,7 +50,7 @@ export const CreateButton = () => {
         <Link to="/staff/quotations/newQuotation">
             <Button className="bg-variant text-black hover:text-white">
                 <PlusCircledIcon className="my-auto mr-2" />
-                Quotation
+                Product
             </Button>
         </Link>
     )
