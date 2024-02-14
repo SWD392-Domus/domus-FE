@@ -1,4 +1,4 @@
-import { get } from "./ApiCaller";
+import { get, remove } from "./ApiCaller";
 
 export const productApi = {
   getAllProducts: (pageSize: number, pageIndex: number) => {
@@ -20,5 +20,9 @@ export const productStaffApi = {
 
   getAllProducts: () => {
     return get(`/Products`);
+  },
+
+  deleteProduct: (id: number) => {
+    return remove(`/Products?id=${id}`);
   },
 };

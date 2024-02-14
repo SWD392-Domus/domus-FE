@@ -21,6 +21,17 @@ function onPrint() {
 
 }
 
+function onConfirmDelete() {
+
+}
+
+export const ConfirmDeleteButton = () => {
+    return (
+        <Button onClick={onConfirmDelete} className="bg-red-600" >Delete</Button>
+
+    )
+}
+
 export const ActionButton = () => {
     return (
         <DropdownMenu>
@@ -32,11 +43,7 @@ export const ActionButton = () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                <DropdownMenuItem
-                // onClick={() => delete(quotation.id)}
-                >
-                    View
-                </DropdownMenuItem>
+                <DropdownMenuItem>View</DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>Update</DropdownMenuItem>
                 <DropdownMenuItem>Delete</DropdownMenuItem>

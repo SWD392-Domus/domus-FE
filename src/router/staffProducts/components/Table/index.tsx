@@ -92,7 +92,7 @@ export function DataTable<TData, TValue>({
                     !cell.id.includes("select") &&
                     <TableCell
                       key={cell.id}
-                      onClick={() => navigate(`${location.pathname}/${row.getUniqueValues('id')}`)}
+                    // onClick={() => navigate(`${location.pathname}/${row.getUniqueValues('id')}`)}
                     >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>

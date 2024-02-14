@@ -9,6 +9,15 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/Dropdown-menu"
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "@/components/ui/Dialog"
 import { Button } from "@/components/ui/Button/Button"
 
 import { ColumnDef } from "@tanstack/react-table"
@@ -16,7 +25,7 @@ import { Avatar, AvatarImage } from "@/components/ui/Avatar"
 import { Checkbox } from "@/components/ui/Checkbox/checkbox"
 import { ProductsProps } from "../../types"
 
-
+import { ConfirmDeleteButton } from "../Button"
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 
@@ -85,27 +94,39 @@ export const columns: ColumnDef<ProductsProps>[] = [
         enableHiding: false,
         cell: ({ row }) => {
             // const quotation = row.original
-
             return (
-                <DropdownMenu key={row.id}>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="h-8 w-8 p-0">
-                            <span className="sr-only">Open menu</span>
-                            <DotsHorizontalIcon className="h-4 w-4" />
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem
-                        // onClick={() => delete(quotation.id)}
-                        >
-                            View
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>Update</DropdownMenuItem>
-                        <DropdownMenuItem>Delete</DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                <Dialog>
+                    <DropdownMenu key={row.id}>
+                        <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" className="h-8 w-8 p-0">
+                                <span className="sr-only">Open menu</span>
+                                <DotsHorizontalIcon className="h-4 w-4" />
+                            </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                            <DropdownMenuItem>View</DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem>Update</DropdownMenuItem>
+                            <DropdownMenuItem>
+                                <DialogTrigger>
+                                    Delete
+                                </DialogTrigger>
+                            </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                    <DialogContent className="sm:max-w-[425px]">
+                        <DialogHeader>
+                            <DialogTitle>Delete?</DialogTitle>
+                            <DialogDescription>
+                                Are you really sure that you want to Delete? This action cannot be reverted!
+                            </DialogDescription>
+                        </DialogHeader>
+                        <DialogFooter>
+                            <ConfirmDeleteButton></ConfirmDeleteButton>
+                        </DialogFooter>
+                    </DialogContent>
+                </Dialog>
             )
         },
     },
