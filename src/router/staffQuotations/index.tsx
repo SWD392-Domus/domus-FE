@@ -20,8 +20,25 @@ const StaffQuotations: React.FC<Props> = () => {
     async function getQuotationsService(pageSize: number, pageIndex: number) {
         const res = await getQuotationsPaging(pageSize, pageIndex);
         if (res) {
-            const quotationsData = res?.data;
             // setLoading(false);
+            const quotationsData = res?.data;
+            // const quotationsItems = quotationsData?.items;
+            // setQuotations(quotationsItems.map(
+            //     (item: {
+            //         id: string,
+            //         expireAt: string,
+            //         staffName: string,
+            //         customerName: string,
+            //         status: string
+            //     }) => (
+            //         {
+            //             id: item.id,
+            //             expireAt: item.expireAt,
+            //             staffName: item.staffName,
+            //             customerName: item.customerName,
+            //             status: item.status,
+            //         }
+            //     )));
             setQuotations(quotationsData.items);
             setTotalPages(quotationsData.lastPage);
             setTotalItems(quotationsData.total);

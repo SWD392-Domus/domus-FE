@@ -1,4 +1,4 @@
-import { quotationStaffApi } from "@/utils/api/QuotationCaller";
+import { quotationStaffApi } from "@/utils/api/QuotationApi";
 
 export const getQuotationsPagingService = async (
   pageSize: number,

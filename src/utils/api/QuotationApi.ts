@@ -5,7 +5,13 @@ import {
 
 export const quotationStaffApi = {
   getQuotationsPaging: (pageSize: number, pageIndex: number) => {
-    return get(`/Quotations?PageSize=${pageSize}&PageIndex=${pageIndex}`);
+    return get(
+      `/Quotations?PageSize=${pageSize}&PageIndex=${pageIndex}`,
+      {},
+      {
+        Authorization: "Bearer ",
+      }
+    );
   },
 
   getQuotationById: (id: number) => {

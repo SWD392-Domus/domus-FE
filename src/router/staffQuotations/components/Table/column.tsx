@@ -53,34 +53,34 @@ export const columns: ColumnDef<QuotationsProps>[] = [
         header: "Expire At",
     },
     {
-        accessorKey: "staffId",
-        header: "Staff Id",
+        accessorKey: "staffName",
+        header: "Staff",
         cell: ({ row }) => {
-            const staff: string = row.getValue("staffId");
+            const staffName: string = row.getValue("staffName");
             return <div className=" text-right font-medium">{
                 <div className="flex items-center gap-1 ">
                     <Avatar>
                         <AvatarImage src="https://github.com/shadcn.png" />
                         <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
-                    <div className="text-destructive">{staff}</div>
+                    <div className="text-destructive">{staffName}</div>
                 </div>
 
             }</div>
         }
     },
     {
-        accessorKey: "customerId",
-        header: "Customer Id",
+        accessorKey: "customerName",
+        header: "Customer",
         cell: ({ row }) => {
-            const customer: string = row.getValue("customer");
+            const customerName: string = row.getValue("customerName");
             return <div className=" text-right font-medium">{
                 <div className="flex items-center gap-1 ">
                     <Avatar>
                         <AvatarImage src="https://github.com/shadcn.png" />
                         <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
-                    <div className="text-destructive">{customer}</div>
+                    <div className="text-destructive">{customerName}</div>
                 </div>
 
             }</div>
