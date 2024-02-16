@@ -12,7 +12,7 @@ import {
 import { Button } from "@/components/ui/Button/Button"
 
 import { ColumnDef } from "@tanstack/react-table"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar"
+// import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar"
 import { Checkbox } from "@/components/ui/Checkbox/checkbox"
 import { Badge } from "@/components/ui/Badge"
 import { QuotationsProps } from "../../types"
@@ -59,10 +59,10 @@ export const columns: ColumnDef<QuotationsProps>[] = [
             const staffName: string = row.getValue("staffName");
             return <div className=" text-right font-medium">{
                 <div className="flex items-center gap-1 ">
-                    <Avatar>
+                    {/* <Avatar>
                         <AvatarImage src="https://github.com/shadcn.png" />
                         <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
+                    </Avatar> */}
                     <div className="text-destructive">{staffName}</div>
                 </div>
 
@@ -76,38 +76,38 @@ export const columns: ColumnDef<QuotationsProps>[] = [
             const customerName: string = row.getValue("customerName");
             return <div className=" text-right font-medium">{
                 <div className="flex items-center gap-1 ">
-                    <Avatar>
+                    {/* <Avatar>
                         <AvatarImage src="https://github.com/shadcn.png" />
                         <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
+                    </Avatar> */}
                     <div className="text-destructive">{customerName}</div>
                 </div>
 
             }</div>
         }
     },
-    // {
-    //     accessorKey: "amount",
-    //     header: () => <div className="text-right">Amount</div>,
-    //     cell: ({ row }) => {
-    //         const amount = parseFloat(row.getValue("amount"))
-    //         const formatted = new Intl.NumberFormat("en-US", {
-    //             style: "currency",
-    //             currency: "VND",
-    //         }).format(amount)
+    {
+        accessorKey: "totalPrice",
+        header: () => <div className="text-right">Total Price</div>,
+        cell: ({ row }) => {
+            const totalPrice = parseFloat(row.getValue("totalPrice")) * 1000
+            const formatted = new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "VND",
+            }).format(totalPrice)
 
-    //         return <div className="text-right font-medium">{formatted}</div>
-    //     },
-    // },
+            return <div className="text-right font-medium">{formatted}</div>
+        },
+    },
     {
         accessorKey: "status",
-        header: "Status",
+        header: () => <div className="text-center">Status</div>,
         cell: ({ row }) => {
             const value: string = (row.getValue("status") as string).toUpperCase()
             return (
-                <>
+                <div className="text-center">
                     <Badge variant="outline">{value}</Badge>
-                </>
+                </div>
             )
         },
     },

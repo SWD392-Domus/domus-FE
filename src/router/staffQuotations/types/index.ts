@@ -3,5 +3,6 @@ export type QuotationsProps = {
   expireAt: string;
   staffName: string;
   customerName: string;
+  totalPrice: number;
   status: string;
 };

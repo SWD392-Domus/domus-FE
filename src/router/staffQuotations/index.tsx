@@ -22,23 +22,6 @@ const StaffQuotations: React.FC<Props> = () => {
         if (res) {
             // setLoading(false);
             const quotationsData = res?.data;
-            // const quotationsItems = quotationsData?.items;
-            // setQuotations(quotationsItems.map(
-            //     (item: {
-            //         id: string,
-            //         expireAt: string,
-            //         staffName: string,
-            //         customerName: string,
-            //         status: string
-            //     }) => (
-            //         {
-            //             id: item.id,
-            //             expireAt: item.expireAt,
-            //             staffName: item.staffName,
-            //             customerName: item.customerName,
-            //             status: item.status,
-            //         }
-            //     )));
             setQuotations(quotationsData.items);
             setTotalPages(quotationsData.lastPage);
             setTotalItems(quotationsData.total);
