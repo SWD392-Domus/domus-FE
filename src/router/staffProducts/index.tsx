@@ -21,19 +21,9 @@ const StaffProducts: React.FC<Props> = () => {
         const res = await getProductsPaging(pageSize, pageIndex);
         if (res) {
             // setLoading(false);
-            const productsData = res?.data;
-            const productsItems = productsData?.items;
-            setProducts(productsItems.map((item: { id: string; details: { displayPrice: number; images: { imageUrl: string }[] }[]; productName: string; brand: string; }) => (
-                {
-                    id: item.id,
-                    image: item.details[0]?.images[0]?.imageUrl,
-                    name: item.productName,
-                    brand: item.brand,
-                    price: item.details[0]?.displayPrice * 1000,
-                }
-            )));
-            setTotalPages(productsData.lastPage);
-            setTotalItems(productsData.total);
+            setProducts(res.productsItems);
+            setTotalPages(res.lastPage);
+            setTotalItems(res.total);
         }
     }
 

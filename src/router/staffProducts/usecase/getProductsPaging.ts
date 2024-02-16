@@ -5,12 +5,35 @@ export const getProductsPaging = async (
   pageIndex: number
 ) => {
   const response = await getProductsPagingService(pageSize, pageIndex);
+
   if (response.status === 200) {
-    return response.data;
-  } else {
+    const productsData = response.data.data;
+    const productsItems = productsData.items.map(
+      (item: {
+        id: string;
+        details: { images: { imageUrl: string }[] }[];
+        category: { name: string };
+        productName: string;
+        brand: string;
+        description: string;
+        totalQuantity: number;
+      }) => ({
+        id: item.id,
+        image: item.details[0].images[0].imageUrl,
+        category: item.category.name,
+        name: item.productName,
+        brand: item.brand,
+        description: item.description,
+        totalQuantity: item.totalQuantity,
+      })
+    );
+    const lastPage = productsData.lastPage;
+    const total = productsData.total;
+
     return {
-      status: 400,
-      data: [],
+      productsItems,
+      lastPage,
+      total,
     };
   }
 };

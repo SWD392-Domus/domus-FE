@@ -89,11 +89,18 @@ export function DataTable<TData, TValue>({
                     </TableCell>
                   ))}
                   {row.getVisibleCells().map((cell) => (
-                    !cell.id.includes("select") &&
+                    !cell.id.includes("select") && !cell.id.includes("actions") &&
                     <TableCell
                       key={cell.id}
-                    // onClick={() => navigate(`${location.pathname}/${row.getUniqueValues('id')}`)}
+                      onClick={() => navigate(`${location.pathname}/${row.getValue('id')}`)}
+                      className="cursor-pointer"
                     >
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </TableCell>
+                  ))}
+                  {row.getVisibleCells().map((cell) => (
+                    cell.id.includes("actions") &&
+                    <TableCell key={cell.id}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}

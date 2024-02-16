@@ -17,19 +17,10 @@ import {
     ClipboardIcon, GearIcon, PlusCircledIcon
 } from "@radix-ui/react-icons"
 
+
+
 function onPrint() {
 
-}
-
-function onConfirmDelete() {
-
-}
-
-export const ConfirmDeleteButton = () => {
-    return (
-        <Button onClick={onConfirmDelete} className="bg-red-600" >Delete</Button>
-
-    )
 }
 
 export const ActionButton = () => {
