@@ -1,11 +1,11 @@
 import React from "react";
 import { useParams } from "react-router-dom"
-import { DataTable } from "./Table";
-import { columns, data } from './Table/column'
+import { DataTable } from "./components/Table";
+import { columns, data } from './components/Table/column'
 import { userInfo, quotationInfo, negoNum, staffInfo, negoList } from "./constants"
 import { EnvelopeClosedIcon, HomeIcon, PersonIcon, ChatBubbleIcon } from "@radix-ui/react-icons"
 import { Textarea } from "@/components/ui/Textarea"
-import { SendButton, UpdateButton, DeleteButton, MakeContractButton } from "./Button";
+import { SendButton, UpdateButton, DeleteButton, MakeContractButton } from "./components/Button";
 
 interface Props {
     // define your props here
