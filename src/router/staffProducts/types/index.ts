@@ -2,6 +2,8 @@ export type ProductsProps = {
   id: string;
   image: string;
   name: string;
+  category: string;
   brand: string;
-  price: number;
+  description: string;
+  totalQuantity: number;
 };

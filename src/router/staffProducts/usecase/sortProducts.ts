@@ -25,8 +25,8 @@ export const sortProducts = async (
         totalQuantity: number;
       }) => ({
         id: item.id,
-        image: item.details[0].images[0].imageUrl,
-        category: item.category.name,
+        image: item.details[0]?.images[0]?.imageUrl,
+        category: item.category?.name,
         name: item.productName,
         brand: item.brand,
         description: item.description,

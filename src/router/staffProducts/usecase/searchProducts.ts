@@ -13,8 +13,8 @@ export const searchProducts = async (
     searchKeyword
   );
   if (response.status === 200) {
-    const productsData = response.data.data;
-    const productsItems = productsData.items.map(
+    const productsData = response?.data?.data;
+    const productsItems = productsData?.items?.map(
       (item: {
         id: string;
         details: { images: { imageUrl: string }[] }[];
@@ -25,8 +25,8 @@ export const searchProducts = async (
         totalQuantity: number;
       }) => ({
         id: item.id,
-        image: item.details[0].images[0].imageUrl,
-        category: item.category.name,
+        image: item.details[0]?.images[0]?.imageUrl,
+        category: item.category?.name,
         name: item.productName,
         brand: item.brand,
         description: item.description,

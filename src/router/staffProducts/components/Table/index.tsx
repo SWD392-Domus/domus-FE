@@ -15,17 +15,28 @@ import {
   TableHeader,
   TableRow,
 } from "./table"
-import { SearchField } from "../Input"
-import { PrintButton, CreateButton, SortButton } from "../Button"
+import { SearchField } from "../Input/SearchField"
+import { PrintButton, CreateButton } from "../Button"
 import { ActionsDropdownMenu } from "../DropdownMenu/Actions"
+import { ProductsProps } from "../../types";
+import { SortButton } from "../Button/SortButton"
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  pageIndex: number;
+  pageSize: number;
+  setTotalPages: React.Dispatch<React.SetStateAction<number>>;
+  setProducts: React.Dispatch<React.SetStateAction<ProductsProps[]>>;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  pageIndex,
+  pageSize,
+  setTotalPages,
+  setProducts
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -48,12 +59,11 @@ export function DataTable<TData, TValue>({
       <div className="flex flex-row justify-between mb-5">
 
         <div className="basis-1/2 flex space-x-2">
-          <SearchField></SearchField>
-          <CreateButton></CreateButton>
+          <SearchField pageSize={pageSize} pageIndex={pageIndex} setTotalPages={setTotalPages} setProducts={setProducts}></SearchField>
         </div>
 
         <div className="flex justify-end">
-          <SortButton></SortButton>
+          <CreateButton></CreateButton>
         </div>
       </div>
       <div className="rounded-md border mb-5">
@@ -70,6 +80,7 @@ export function DataTable<TData, TValue>({
                           header.column.columnDef.header,
                           header.getContext()
                         )}
+                      <SortButton name={header.id} pageIndex={pageIndex} pageSize={pageSize} setProducts={setProducts} setTotalPages={setTotalPages}></SortButton>
                     </TableHead>
                   )
                 })}

@@ -1,34 +1,29 @@
-import { deleteProduct } from "../../usecase/deleteProduct"
+import { sortProducts } from "../../usecase/sortProducts"
 import { Button } from "@/components/ui/Button/Button"
-import { ToastAction } from "@/components/ui/Toast/toast"
-import { useToast } from "@/components/ui/Toast/use-toast"
-
+import { CaretSortIcon } from "@radix-ui/react-icons"
+import { ProductsProps } from "../../types";
 interface Props {
-    id: string
+    name: string;
+    pageIndex: number;
+    pageSize: number;
+    setTotalPages: React.Dispatch<React.SetStateAction<number>>;
+    setProducts: React.Dispatch<React.SetStateAction<ProductsProps[]>>;
 }
 
-export const ConfirmDeleteButton: React.FC<Props> = (props) => {
-    const { toast } = useToast()
+export const SortButton: React.FC<Props> = (props) => {
     return (
-        <Button onClick={() => deleteProduct(props.id)
-            .then(res => {
-                if (res === 200) {
-                    toast({
-                        variant: "success",
-                        title: "Delete Successfully.",
-                        description: "A product was deleted.",
-                        action: <ToastAction altText="Close">Close</ToastAction>,
-                    })
-                }
-            })
-            .catch(() =>
-                toast({
-                    variant: "destructive",
-                    title: "Fail to Delete.",
-                    description: "There was a problem with your request.",
-                    action: <ToastAction altText="Try again">Try again</ToastAction>,
-                })
-            )
-        } className="bg-red-600" >Delete</Button>
+        <Button
+            variant="ghost"
+            onClick={() => sortProducts(props.pageSize, props.pageIndex, props.name, true)
+                .then(
+                    res => {
+                        props.setTotalPages(res?.total);
+                        props.setProducts(res?.productsItems);
+                    }
+                )
+            }
+        >
+            < CaretSortIcon className="ml-1 h-4 w-4" />
+        </Button >
     )
 }

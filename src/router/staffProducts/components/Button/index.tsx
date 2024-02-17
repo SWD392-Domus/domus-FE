@@ -1,17 +1,5 @@
 import { Button } from "@/components/ui/Button/Button"
 import { Link } from "react-router-dom"
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuTrigger,
-    // DropdownMenuItem,
-    // DropdownMenuLabel,
-    // DropdownMenuSeparator,
-    DropdownMenuCheckboxItem,
-} from "@/components/ui/Dropdown-menu"
-import {
-    ChevronDownIcon,
-} from "@radix-ui/react-icons"
 
 import {
     ClipboardIcon, PlusCircledIcon
@@ -28,7 +16,7 @@ function onPrint() {
 export const CreateButton = () => {
     return (
         <Link to="/staff/quotations/newQuotation">
-            <Button className="bg-variant text-black hover:text-white">
+            <Button className="">
                 <PlusCircledIcon className="my-auto mr-2" />
                 Product
             </Button>
@@ -41,32 +29,5 @@ export const PrintButton = () => {
         <Button onClick={onPrint} className="h-8" >
             <ClipboardIcon className="my-auto mr-1" /> Print
         </Button>
-    )
-}
-
-export const SortButton = () => {
-    const sortFields: string[] = ["ExpiredDate", "Customer"]
-    return (
-        <DropdownMenu>
-            <div className="my-auto mx-2">Sort By:</div>
-            <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="ml-auto">
-                    Select <ChevronDownIcon className="ml-2 h-4 w-4" />
-                </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-                {sortFields
-                    .map((field) => {
-                        return (
-                            <DropdownMenuCheckboxItem
-                                key={field}
-                                className="capitalize"
-                            >
-                                {field}
-                            </DropdownMenuCheckboxItem>
-                        )
-                    })}
-            </DropdownMenuContent>
-        </DropdownMenu>
     )
 }

@@ -34,7 +34,14 @@ const StaffProducts: React.FC<Props> = () => {
     return (
         <div className="">
             <div className="text-xl font-bold py-5">Product List</div>
-            <DataTable columns={columns} data={products} />
+            <DataTable
+                columns={columns}
+                data={products}
+                pageIndex={pageIndex}
+                pageSize={pageSize}
+                setTotalPages={setTotalPages}
+                setProducts={setProducts}
+            />
             <div className="flex justify-between text-sm font-medium">
                 <div className="">{totalItems} Products</div>
                 <ProductsPagination
