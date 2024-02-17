@@ -4,9 +4,9 @@ import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuTrigger,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
+    // DropdownMenuItem,
+    // DropdownMenuLabel,
+    // DropdownMenuSeparator,
     DropdownMenuCheckboxItem,
 } from "@/components/ui/Dropdown-menu"
 import {
@@ -14,7 +14,7 @@ import {
 } from "@radix-ui/react-icons"
 
 import {
-    ClipboardIcon, GearIcon, PlusCircledIcon
+    ClipboardIcon, PlusCircledIcon
 } from "@radix-ui/react-icons"
 
 
@@ -23,25 +23,7 @@ function onPrint() {
 
 }
 
-export const ActionButton = () => {
-    return (
-        <DropdownMenu>
-            <DropdownMenuTrigger>
-                <Button className="bg-variant text-black h-8 border-2 border-zinc-500 bg-zinc-50 rounded hover:text-white">
-                    <GearIcon className="my-auto mr-1" />
-                    <span>Actions</span>
-                </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-                <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                <DropdownMenuItem>View</DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Update</DropdownMenuItem>
-                <DropdownMenuItem>Delete</DropdownMenuItem>
-            </DropdownMenuContent>
-        </DropdownMenu>
-    )
-}
+
 
 export const CreateButton = () => {
     return (

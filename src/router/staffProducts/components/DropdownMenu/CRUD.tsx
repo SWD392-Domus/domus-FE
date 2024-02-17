@@ -15,6 +15,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogClose
 } from "@/components/ui/Dialog";
 import { Button } from "@/components/ui/Button/Button";
 import { ConfirmDeleteButton } from "../Button/ConfirmDeleteButton";
@@ -54,7 +55,9 @@ export const CRUDDropdownMenu: React.FC<Props> = (props) => {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <ConfirmDeleteButton id={props.id}></ConfirmDeleteButton>
+          <DialogClose>
+            <ConfirmDeleteButton id={props.id}></ConfirmDeleteButton>
+          </DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>

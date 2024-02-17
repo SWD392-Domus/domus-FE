@@ -16,7 +16,8 @@ import {
   TableRow,
 } from "./table"
 import { SearchField } from "../Input"
-import { PrintButton, CreateButton, ActionButton, SortButton } from "../Button"
+import { PrintButton, CreateButton, SortButton } from "../Button"
+import { ActionsDropdownMenu } from "../DropdownMenu/Actions"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -41,7 +42,7 @@ export function DataTable<TData, TValue>({
           {table.getFilteredSelectedRowModel().rows.length} Selected
         </div>
         <PrintButton></PrintButton>
-        <ActionButton></ActionButton>
+        <ActionsDropdownMenu ids={table.getSelectedRowModel().rows.map(item => item.getValue('id'))}></ActionsDropdownMenu>
       </div>
 
       <div className="flex flex-row justify-between mb-5">
