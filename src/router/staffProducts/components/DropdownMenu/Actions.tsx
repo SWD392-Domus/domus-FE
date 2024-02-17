@@ -42,9 +42,13 @@ export const ActionsDropdownMenu: React.FC<Props> = (props) => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                    <ViewButton id={props.ids[0]}></ViewButton>
-                    <DropdownMenuSeparator />
-                    <UpdateButton id={props.ids[0]}></UpdateButton>
+                    {props.ids.length <= 1 &&
+                        <>
+                            <ViewButton id={props.ids[0]}></ViewButton>
+                            <DropdownMenuSeparator />
+                            <UpdateButton id={props.ids[0]}></UpdateButton>
+                        </>
+                    }
                     <DropdownMenuItem>
                         <DialogTrigger className="w-full text-left">Delete</DialogTrigger>
                     </DropdownMenuItem>
