@@ -72,15 +72,19 @@ export function DataTable<TData, TValue>({
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
+                  const headerId = header.getContext().column.id
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead key={header.id} className="">
                       {header.isPlaceholder
                         ? null
                         : flexRender(
                           header.column.columnDef.header,
                           header.getContext()
-                        )}
-                      <SortButton name={header.id} pageIndex={pageIndex} pageSize={pageSize} setProducts={setProducts} setTotalPages={setTotalPages}></SortButton>
+                        )
+                      }
+                      {["id", "productName", "category", "brand", "totalQuantity"].includes(headerId) &&
+                        <SortButton sortField={headerId} pageIndex={pageIndex} pageSize={pageSize} setProducts={setProducts} setTotalPages={setTotalPages}></SortButton>
+                      }
                     </TableHead>
                   )
                 })}

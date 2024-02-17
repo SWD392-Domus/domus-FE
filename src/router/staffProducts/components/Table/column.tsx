@@ -51,7 +51,7 @@ export const columns: ColumnDef<ProductsProps>[] = [
         }
     },
     {
-        accessorKey: "name",
+        accessorKey: "productName",
         header: "Name",
     },
     {

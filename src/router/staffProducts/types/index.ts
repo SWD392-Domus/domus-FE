@@ -1,7 +1,7 @@
 export type ProductsProps = {
   id: string;
   image: string;
-  name: string;
+  productName: string;
   category: string;
   brand: string;
   description: string;
