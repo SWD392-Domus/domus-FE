@@ -1,4 +1,4 @@
-import { get, remove } from "./ApiCaller";
+import { get, post, remove } from "./ApiCaller";
 
 export const productApi = {
   getAllProducts: (pageSize: number, pageIndex: number) => {
@@ -17,6 +17,57 @@ export const productStaffApi = {
   },
   deleteManyProducts: (ids: string[]) => {
     return remove(`/Products/multiple`, ids, {}, { Authorization: token });
+  },
+  searchProducts: (
+    pageSize: number,
+    pageIndex: number,
+    searchField: string,
+    searchKeyword: string
+  ) => {
+    return post(
+      `/Products/search`,
+      {
+        pageSize: pageSize,
+        pageIndex: pageIndex,
+        // conjunctionSearchInfos: [
+        //   {
+        //     fieldName: searchField,
+        //     keyword: searchKeyword,
+        //   },
+        // ],
+        disjunctionSearchInfos: [
+          {
+            fieldName: searchField,
+            keyword: searchKeyword,
+          },
+        ],
+      },
+      {},
+      { Authorization: token }
+    );
+  },
+  sortProducts: (
+    pageSize: number,
+    pageIndex: number,
+    sortField: string,
+    descending: boolean
+  ) => {
+    return post(
+      `/Products/search`,
+      {
+        pageSize: pageSize,
+        pageIndex: pageIndex,
+        sortInfos: [
+          {
+            fieldName: sortField,
+            priority: 0,
+            descending: descending,
+          },
+        ],
+      },
+      {},
+      { Authorization: token }
+    );
   },
   getProductsPaging: (pageSize: number, pageIndex: number) => {
     return get(`/Products?PageSize=${pageSize}&PageIndex=${pageIndex}`);

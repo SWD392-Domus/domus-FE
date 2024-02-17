@@ -4,6 +4,8 @@ import { Checkbox } from "@/components/ui/Checkbox/checkbox"
 import { ProductsProps } from "../../types"
 import { CRUDDropdownMenu } from "../DropdownMenu/CRUD"
 import { TooltipDes } from "../Tooltip"
+import { CaretSortIcon } from "@radix-ui/react-icons"
+import { Button } from "@/components/ui/Button/Button"
 
 export const columns: ColumnDef<ProductsProps>[] = [
     {
@@ -30,7 +32,20 @@ export const columns: ColumnDef<ProductsProps>[] = [
     },
     {
         accessorKey: "id",
-        header: "Id",
+        // header: "Id",
+        header: ({ column }) => {
+            return (
+                <>
+                    <Button
+                        variant="ghost"
+                        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                    >
+                        Id
+                        <CaretSortIcon className="ml-1 h-4 w-4" />
+                    </Button>
+                </>
+            )
+        },
     },
     {
         accessorKey: "image",

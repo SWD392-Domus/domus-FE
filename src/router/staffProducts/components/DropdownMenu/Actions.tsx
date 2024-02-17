@@ -41,17 +41,23 @@ export const ActionsDropdownMenu: React.FC<Props> = (props) => {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                    {props.ids.length <= 1 &&
+                    {props.ids.length == 0 ?
+                        <div className="text-center px-2">Please Select Items!</div>
+                        :
                         <>
-                            <ViewButton id={props.ids[0]}></ViewButton>
-                            <DropdownMenuSeparator />
-                            <UpdateButton id={props.ids[0]}></UpdateButton>
+                            {props.ids.length == 1 &&
+                                <>
+                                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                                    <ViewButton id={props.ids[0]}></ViewButton>
+                                    <DropdownMenuSeparator />
+                                    <UpdateButton id={props.ids[0]}></UpdateButton>
+                                </>
+                            }
+                            <DropdownMenuItem>
+                                <DialogTrigger className="w-full text-left">Delete</DialogTrigger>
+                            </DropdownMenuItem>
                         </>
                     }
-                    <DropdownMenuItem>
-                        <DialogTrigger className="w-full text-left">Delete</DialogTrigger>
-                    </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
             <DialogContent className="sm:max-w-[425px]">
@@ -68,6 +74,6 @@ export const ActionsDropdownMenu: React.FC<Props> = (props) => {
                     </DialogClose>
                 </DialogFooter>
             </DialogContent>
-        </Dialog>
+        </Dialog >
     )
 }
