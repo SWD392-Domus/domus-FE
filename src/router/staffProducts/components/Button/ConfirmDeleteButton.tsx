@@ -14,7 +14,7 @@ export const ConfirmDeleteButton: React.FC<Props> = (props) => {
             .then(res => {
                 if (res === 200) {
                     toast({
-                        variant: "default",
+                        variant: "success",
                         title: "Delete Successfully.",
                         description: "A product was deleted.",
                         action: <ToastAction altText="Close">Close</ToastAction>,

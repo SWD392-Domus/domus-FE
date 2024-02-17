@@ -68,6 +68,9 @@ export const columns: ColumnDef<ProductsProps>[] = [
     {
         accessorKey: "totalQuantity",
         header: "Total Quantity",
+        cell: ({ row }) => {
+            return <div className="text-center">{row.getValue("totalQuantity")}</div>
+        },
     },
     {
         id: "actions",

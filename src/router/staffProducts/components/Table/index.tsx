@@ -18,7 +18,6 @@ import {
 import { SearchField } from "../Input"
 import { PrintButton, CreateButton, SortButton } from "../Button"
 import { ActionsDropdownMenu } from "../DropdownMenu/Actions"
-
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
@@ -35,6 +34,7 @@ export function DataTable<TData, TValue>({
   })
   const location = useLocation();
   const navigate = useNavigate();
+
   return (
     <div className="">
       <div className="flex space-x-5 justify-center mb-3">
