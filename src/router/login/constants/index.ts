@@ -1,0 +1,1 @@
+export const devEnvGoogleAuth = `https://accounts.google.com/o/oauth2/v2/auth?client_id=897518282928-bld8l8o32hplqgo4irb1dv0pj6krlgr4.apps.googleusercontent.com&scope=email&redirect_uri=http://localhost:3000/oauth/gg&response_type=code`;
