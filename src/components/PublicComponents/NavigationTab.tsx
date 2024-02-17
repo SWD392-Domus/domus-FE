@@ -16,7 +16,7 @@ const navLinks = [
 
 const signinLinks = {
     title: "Sign In",
-    href: "/",
+    href: "/login",
 };
 
 const signUpLinks = {

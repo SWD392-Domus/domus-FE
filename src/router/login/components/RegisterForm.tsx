@@ -10,7 +10,7 @@ import Google from "@/assets/image/Google.png";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export function LoginForm({ className, ...props }: UserAuthFormProps) {
+export function RegisterForm({ className, ...props }: UserAuthFormProps) {
     const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
     async function onSubmit(event: React.SyntheticEvent) {
@@ -51,17 +51,33 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
                         </Label>
                         <Input
                             id="password"
-                            placeholder="something screret..."
+                            placeholder="something secret..."
                             type="password"
                             autoCapitalize="none"
                             autoComplete="password"
                             autoCorrect="off"
                             disabled={isLoading}
-                            className="text-white"
+                            className="text-white mb-4"
+                        />
+                        <Label
+                            className=" border-yellowCustom text-white mb-2"
+                            htmlFor="password"
+                        >
+                            Confirm Password
+                        </Label>
+                        <Input
+                            id="password"
+                            placeholder="something secret..."
+                            type="password"
+                            autoCapitalize="none"
+                            autoComplete="password"
+                            autoCorrect="off"
+                            disabled={isLoading}
+                            className="text-white mb-4"
                         />
                     </div>
                     <Button disabled={isLoading} variant={"yellowCustom"}>
-                        Sign In with Email
+                        Sign up with Email
                     </Button>
                 </div>
             </form>
@@ -74,7 +90,7 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
             </div>
             <Button variant="outline" type="button" disabled={isLoading}>
                 <img src={Google} width={25} className="mr-3" />
-                Sign in with Google
+                Sign up with Google
             </Button>
         </div>
     );
