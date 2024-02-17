@@ -13,8 +13,8 @@ export const sortProducts = async (
     sortKeyword
   );
   if (response.status === 200) {
-    const productsData = response.data.data;
-    const productsItems = productsData.items.map(
+    const productsData = response?.data?.data;
+    const productsItems = productsData?.items?.map(
       (item: {
         id: string;
         details: { images: { imageUrl: string }[] }[];
@@ -33,8 +33,8 @@ export const sortProducts = async (
         totalQuantity: item.totalQuantity,
       })
     );
-    const lastPage = productsData.lastPage;
-    const total = productsData.total;
+    const lastPage = productsData?.lastPage;
+    const total = productsData?.total;
 
     return {
       productsItems,

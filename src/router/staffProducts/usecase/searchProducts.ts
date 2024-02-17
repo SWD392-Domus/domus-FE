@@ -33,8 +33,8 @@ export const searchProducts = async (
         totalQuantity: item.totalQuantity,
       })
     );
-    const lastPage = productsData.lastPage;
-    const total = productsData.total;
+    const lastPage = productsData?.lastPage;
+    const total = productsData?.total;
 
     return {
       productsItems,

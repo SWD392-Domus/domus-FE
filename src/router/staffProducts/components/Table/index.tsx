@@ -27,6 +27,7 @@ interface DataTableProps<TData, TValue> {
   pageIndex: number;
   pageSize: number;
   setTotalPages: React.Dispatch<React.SetStateAction<number>>;
+  setTotalItems: React.Dispatch<React.SetStateAction<number>>;
   setProducts: React.Dispatch<React.SetStateAction<ProductsProps[]>>;
 }
 
@@ -36,6 +37,7 @@ export function DataTable<TData, TValue>({
   pageIndex,
   pageSize,
   setTotalPages,
+  setTotalItems,
   setProducts
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
@@ -59,7 +61,7 @@ export function DataTable<TData, TValue>({
       <div className="flex flex-row justify-between mb-5">
 
         <div className="basis-1/2 flex space-x-2">
-          <SearchField pageSize={pageSize} pageIndex={pageIndex} setTotalPages={setTotalPages} setProducts={setProducts}></SearchField>
+          <SearchField pageSize={pageSize} pageIndex={pageIndex} setTotalPages={setTotalPages} setTotalItems={setTotalItems} setProducts={setProducts}></SearchField>
         </div>
 
         <div className="flex justify-end">
@@ -83,7 +85,7 @@ export function DataTable<TData, TValue>({
                         )
                       }
                       {["id", "productName", "category", "brand", "totalQuantity"].includes(headerId) &&
-                        <SortButton sortField={headerId} pageIndex={pageIndex} pageSize={pageSize} setProducts={setProducts} setTotalPages={setTotalPages}></SortButton>
+                        <SortButton sortField={headerId} pageIndex={pageIndex} pageSize={pageSize} setProducts={setProducts} setTotalPages={setTotalPages} setTotalItems={setTotalItems}></SortButton>
                       }
                     </TableHead>
                   )

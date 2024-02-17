@@ -40,12 +40,14 @@ const StaffProducts: React.FC<Props> = () => {
                 pageIndex={pageIndex}
                 pageSize={pageSize}
                 setTotalPages={setTotalPages}
+                setTotalItems={setTotalItems}
                 setProducts={setProducts}
             />
             <div className="flex justify-between text-sm font-medium">
                 <div className="">{totalItems} Products</div>
                 <ProductsPagination
                     totalPages={totalPages}
+                    totalItems={totalItems}
                     pageIndex={pageIndex}
                     setPageIndex={setPageIndex}
                     pageSize={pageSize}

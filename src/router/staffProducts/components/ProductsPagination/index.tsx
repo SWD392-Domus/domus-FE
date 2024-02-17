@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/Select"
 interface Props {
   totalPages: number;
+  totalItems: number;
   pageIndex: number;
   setPageIndex: React.Dispatch<React.SetStateAction<number>>;
   pageSize: number;
@@ -25,6 +26,7 @@ interface Props {
 
 const ProductsPagination: React.FC<Props> = ({
   totalPages,
+  totalItems,
   pageIndex,
   setPageIndex,
   pageSize,
@@ -83,7 +85,7 @@ const ProductsPagination: React.FC<Props> = ({
               <SelectValue placeholder={pageSize} />
             </SelectTrigger>
             <SelectContent side="top">
-              {[5, 10, 15, 20].map((pageSize) => (
+              {[5, 10, 15, 20, totalItems].map((pageSize) => (
                 <SelectItem key={pageSize} value={`${pageSize}`}>
                   {pageSize}
                 </SelectItem>

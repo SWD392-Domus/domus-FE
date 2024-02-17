@@ -34,7 +34,6 @@ export const columns: ColumnDef<ProductsProps>[] = [
         // header: () => {
         //     return (
         //         // <>Id</>
-        //         <SortButton name="Id" pageSize={5} pageIndex={1} setTotalPages={ } setProducts={ }></SortButton>
         //     )
         // },
     },

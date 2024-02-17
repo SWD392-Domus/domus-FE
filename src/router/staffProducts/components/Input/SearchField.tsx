@@ -8,6 +8,7 @@ interface Props {
     pageIndex: number;
     pageSize: number;
     setTotalPages: React.Dispatch<React.SetStateAction<number>>;
+    setTotalItems: React.Dispatch<React.SetStateAction<number>>;
     setProducts: React.Dispatch<React.SetStateAction<ProductsProps[]>>;
 }
 
@@ -21,7 +22,8 @@ export const SearchField: React.FC<Props> = (props) => {
                 onChange={(e) => searchProducts(props.pageSize, props.pageIndex, searchField, e.target.value)
                     .then(
                         res => {
-                            props.setTotalPages(res?.total);
+                            props.setTotalPages(res?.lastPage);
+                            props.setTotalItems(res?.total);
                             props.setProducts(res?.productsItems);
                         }
                     )}
