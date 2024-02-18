@@ -20,12 +20,16 @@ import { z } from "zod";
 import { loginApi } from "@/utils/api/loginApi";
 import { toastError, toastSuccess } from "@/components/Toast";
 import { redirect, useNavigate } from "react-router-dom";
+import { devEnvGoogleAuth } from "../constants";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function LoginForm({ className, ...props }: UserAuthFormProps) {
     // const [userName, setUserName] = React.useState("");
     const navigate = useNavigate();
+    const handleGoogleLogin = () => {
+        window.location.replace(devEnvGoogleAuth);
+    };
     const formSchema = z.object({
         email: z.string().email({
             message: "Invalid email format.",
@@ -138,7 +142,7 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
                     </span>
                 </div>
             </div>
-            <Button variant="outline" type="button">
+            <Button variant="outline" type="button" onClick={handleGoogleLogin}>
                 <img src={Google} width={25} className="mr-3" />
                 Sign in with Google
             </Button>
