@@ -2,22 +2,19 @@ export interface SingleProductProps{
     "id": string;
     "productName": string;
     "brand": string;
-    "weightUnit"?: string;
     "description": string;
-    // "productCategory"?: ProductCategoryProps;
+    "colors"?: string[];
+    "sizes"?: string[];
+    "images"?: string[];
+    "material"?: string[];
     "details": ProductDetailsProps[];
 }
-
-// export interface ProductCategoryProps{
-//     "id": string;
-//     "name": string;
-// }
 
 export interface ProductDetailsProps{
     "id": string;
     "displayPrice":number;
     "attributes"?: AttributesProps[];
-    "images"?: ImagesProps[];
+    "images": ImagesProps[];
 }
 
 export interface AttributesProps{

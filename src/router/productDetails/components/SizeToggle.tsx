@@ -1,17 +1,20 @@
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/ToggleGroup"
 
 
-interface Props {}
+interface Props {
+  sizes: string[];
+}
 
-const SizeToggle: React.FC<Props> = () => {
+const SizeToggle: React.FC<Props> = ({
+  sizes
+}) => {
   return (
     <ToggleGroup type="single" variant="outline">
-      <ToggleGroupItem value="2" aria-label="Toggle bold">
-        <p>118"</p>
+      {sizes.map((size) => (
+         <ToggleGroupItem value={size} aria-label="Toggle bold">
+        <p>{size}</p>
       </ToggleGroupItem>
-      <ToggleGroupItem value="1" aria-label="Toggle bold">
-      <p>157.5"</p>
-      </ToggleGroupItem>
+      ))}
       {/* <ToggleGroupItem value="italic" aria-label="Toggle italic">
         
       </ToggleGroupItem>
