@@ -44,7 +44,7 @@ const Slider= (
                     className="flex justify-center items-center"
                     key={index}
                   >
-                    <img className="object-cover" src={p} alt="" />
+                    <img className="object-contain w-[400px] h-[400px]" src={p} alt="" />
                   </SwiperSlide>
                 );
               })}

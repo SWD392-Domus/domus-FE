@@ -6,11 +6,13 @@ import { LoginForm } from "./components/loginForm";
 import { Tabs, TabsContent, TabsList } from "@/components/ui/Tabs";
 import { TabsTrigger } from "@radix-ui/react-tabs";
 import { RegisterForm } from "./components/RegisterForm";
+
 interface Props {
-    // define your props here
+  // define your props here
 }
 
 const Login: React.FC<Props> = () => {
+
     return (
         <LoginContainer>
             <div className="container relative hidden h-[750px] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
@@ -135,6 +137,7 @@ const Login: React.FC<Props> = () => {
             </div>
         </LoginContainer>
     );
+
 };
 
 export default Login;

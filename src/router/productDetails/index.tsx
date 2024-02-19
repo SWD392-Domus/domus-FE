@@ -1,4 +1,3 @@
-import { productDetail } from "../products/data";
 import TabNavigation from "./components/TabNavigation";
 import { Button } from "@/components/ui/Button/Button";
 import SizeToggle from "./components/SizeToggle";
@@ -9,8 +8,10 @@ import Slider from "@/components/PublicComponents/Slider";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getProductDetails } from "./usecases/getProductDetails";
-import { SingleProductProps } from "./type";
 import Loading from "@/components/PublicComponents/Loading";
+import { useDispatch, useSelector } from "react-redux";
+import { productSelector } from "./slice/selector";
+import { setProduct } from "./slice";
 
 type RouteParams = {
   id: string;
@@ -19,12 +20,8 @@ type RouteParams = {
 const ProductDetails: React.FC = () => {
   const { id } = useParams<RouteParams>();
   const [isLoading, setIsLoading] = useState(true);
-  const [product, setProduct] = useState<SingleProductProps>();
-  // const [productName, setProductName] = useState<string>("");
-  // const [productBrand, setProductBrand] = useState<string>("Domus");
-  // const [productDescription, setProductDescription] = useState<string>("");
-  // const [productDetails, setProductDetails] = useState<ProductDetailsProps[]>();
-  const productTest = productDetail;
+  const dispatch = useDispatch();
+  const { product } = useSelector(productSelector);
 
   useEffect(() => {
     const getProductDetailsData = async () => {
@@ -32,8 +29,7 @@ const ProductDetails: React.FC = () => {
         const res = await getProductDetails(id);
         if (res) {
           setIsLoading(false);
-          setProduct(res);
-        }
+          dispatch(setProduct(res));}
       }
     };
 
@@ -52,14 +48,7 @@ const ProductDetails: React.FC = () => {
     );
   }
 
-  const {
-    productName,
-    brand,
-    description,
-    details,
-  } = product;
-
-  console.log(details);
+  const { productName, brand, description, details, sizes, colors, images, material } = product;
 
   const price = details && details.length > 0 ? details[0].displayPrice : 0;
 
@@ -72,15 +61,15 @@ const ProductDetails: React.FC = () => {
           </nav>
 
           <div
-            className="w-auto h-auto p-10 flex justify-center items-center
+            className="w-auto h-auto p-10 flex justify-center items-center py-20
       lg:justify-start lg:ml-4 lg:gap-2"
           >
             <div
-              className="w-[300px] h-[300px] shrink
+              className="w-[300px] h-[300px] shrink 
         md:w-[600px] md:h-[600px]
         xl:w-[700px] xl:h-[700px]"
             >
-              <Slider images={productTest.src} />
+              <Slider images={images} />
               {/* <Slider images={productDetails.images.imageURL} /> */}
             </div>
           </div>
@@ -108,24 +97,35 @@ const ProductDetails: React.FC = () => {
               currency: "VND",
             }).format(price)}
           </div>
-          <div className="flex flex-col gap-2">
-            <div className="text-black font-thin">Size</div>
-            <div className="flex justify-start">
-              <SizeToggle />
+          {material && material.length > 0 && (
+            <div className="flex flex-col gap-2">
+              <div className="text-black font-thin">Material</div>
+              <div className="flex justify-start">
+                <SizeToggle sizes={material} />
+              </div>
             </div>
-          </div>
-          <div className="flex flex-col gap-2">
-            <div className="text-black font-thin">Color</div>
-            <div className="flex justify-start">
-              <ColorToggle />
+          )}
+          {colors && colors.length > 0 && (
+            <div className="flex flex-col gap-2">
+              <div className="text-black font-thin">Color</div>
+              <div className="flex justify-start">
+                <ColorToggle colors={colors}/>
+              </div>
             </div>
-          </div>
-
+          )}
+          {sizes && sizes.length > 0 && (
+            <div className="flex flex-col gap-2">
+              <div className="text-black font-thin">Size</div>
+              <div className="flex justify-start">
+                <SizeToggle sizes={sizes} />
+              </div>
+            </div>
+          )}
           <div className="mt-10">
             <Button className="cursor-pointer">Request quotation</Button>
           </div>
           <div className="h-auto pr-2">
-            <ProductAccordion title={description} />
+            <ProductAccordion sizes={sizes} title={description} />
           </div>
         </div>
         <div className="flex justify-center items-center py-20">
