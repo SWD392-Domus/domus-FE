@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-import { HomeIcon, FileTextIcon, TextAlignJustifyIcon, GearIcon } from "@radix-ui/react-icons"
+import { HomeIcon, FileTextIcon, TextAlignJustifyIcon, GearIcon, BackpackIcon } from "@radix-ui/react-icons"
 import { IconProps } from "@radix-ui/react-icons/dist/types";
 
 const components: {
@@ -29,6 +29,13 @@ const components: {
             href: "/staff/products",
             description:
                 "Product Management",
+        },
+        {
+            title: "Package",
+            icon: BackpackIcon,
+            href: "/staff/packages",
+            description:
+                "Package Management",
         },
         {
             title: "Settings",

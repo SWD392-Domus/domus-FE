@@ -8,6 +8,7 @@ import StaffProducts from "./staffProducts";
 import StaffQuotationNew from "./staffQuotationNew";
 import StaffQuotations from "./staffQuotations";
 import StaffQuotationDetail from "./staffQuotationDetail";
+import StaffPackageDetail from "./staffPackageDetail";
 import PublicRoute from "./PublicRoute";
 import Home from "./home";
 import ArticleList from "./article";
@@ -58,21 +59,21 @@ const RouterComponent: React.FC = () => {
             component: <ProductDetails />,
             exact: true,
             restrict: true,
-          },
-          {
+        },
+        {
             index: true,
             path: "package",
             component: <PackageDetails />,
             exact: true,
             restrict: true,
-          },
-          {
+        },
+        {
             index: true,
             path: "customizepackage",
-            component: <CustomizePackage/>,
+            component: <CustomizePackage />,
             exact: true,
             restrict: true,
-          },
+        },
     ];
     const customerRoute = [
         {
@@ -130,6 +131,13 @@ const RouterComponent: React.FC = () => {
             index: true,
             path: "staff/products",
             component: <StaffProducts />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/packages/:packageId",
+            component: <StaffPackageDetail />,
             exact: true,
             restrict: true,
         },

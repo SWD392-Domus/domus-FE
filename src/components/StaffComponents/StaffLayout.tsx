@@ -19,7 +19,7 @@ const StaffLayout = () => {
                     <Outlet />
                 </div>
             </div>
-            <footer className="bg-zinc-300 bg-cover h-8 text-xs text-zinc-500"><div className="my-2 ml-36">Copyright @Domus</div></footer>
+            <footer className="bg-zinc-300 bg-cover h-8 text-xs text-zinc-500 mt-5"><div className="my-2 ml-36">Copyright @Domus</div></footer>
         </div >)
 }
 
