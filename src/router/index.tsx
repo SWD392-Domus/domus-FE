@@ -4,12 +4,16 @@ import CustomerSettings from "./customerSettings";
 import CustomerQuotations from "./customerQuotations";
 import CustomerQuotationDetail from "./customerQuotationDetail";
 // import Staff from "./staff";
-// import StaffProducts from "./staff/products";
+import StaffProducts from "./staffProducts";
+import StaffPackages from "./staffPackages";
 import StaffQuotationNew from "./staffQuotationNew";
 import StaffQuotations from "./staffQuotations";
 import StaffQuotationDetail from "./staffQuotationDetail";
+import StaffPackageDetail from "./staffPackageDetail";
 import PublicRoute from "./PublicRoute";
 import Home from "./home";
+import ArticleList from "./article";
+import ArticleDetail from "./articleDetail";
 import PublicLayout from "@/components/PublicComponents/PublicLayout";
 import CustomerRoute from "./CustomerRoute";
 import CustomerLayout from "@/components/CustomerComponents/CustomerLayout";
@@ -28,6 +32,20 @@ const RouterComponent: React.FC = () => {
             index: true,
             path: "home",
             component: <Home />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "article",
+            component: <ArticleList />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "article/:id",
+            component: <ArticleDetail />,
             exact: true,
             restrict: true,
         },
@@ -64,6 +82,20 @@ const RouterComponent: React.FC = () => {
             index: true,
             path: "login",
             component: <Login />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "package",
+            component: <PackageDetails />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "customizepackage",
+            component: <CustomizePackage />,
             exact: true,
             restrict: true,
         },
@@ -117,6 +149,27 @@ const RouterComponent: React.FC = () => {
             index: true,
             path: "staff/quotations/:quotationId",
             component: <StaffQuotationDetail />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/products",
+            component: <StaffProducts />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/packages",
+            component: <StaffPackages />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/packages/:packageId",
+            component: <StaffPackageDetail />,
             exact: true,
             restrict: true,
         },

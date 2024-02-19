@@ -1,12 +1,12 @@
 import React from "react";
-import { DataTable } from "./Table";
-import { columns, data } from './Table/column'
+import { DataTable } from "./components/Table";
+import { columns, data } from './components/Table/column'
 import { userInfo, quotationInfo, staffInfo } from "./constants"
 // import { EnvelopeClosedIcon, HomeIcon, PersonIcon } from "@radix-ui/react-icons"
-import { DatePickerWithPresets } from "./DateInput"
+import { DatePickerWithPresets } from "./components/DateInput"
 // import { Textarea } from "@/components/ui/Textarea"
-import { CreateButton } from "./Button";
-import { ComboBoxResponsive } from "./ComboBox";
+import { CreateButton } from "./components/Button";
+import { ComboBoxResponsive } from "./components/ComboBox";
 
 interface Props {
     // define your props here
