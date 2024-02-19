@@ -1,15 +1,51 @@
-import React from "react";
-import { DataTable } from "./Table";
-import { columns, data } from './Table/column.tsx'
+import React, { useEffect, useState } from "react";
+import { DataTable } from "./components/Table/index.tsx";
+import { columns } from './components/Table/column.tsx'
+import { QuotationsProps } from "./types/index.ts";
+import { getQuotationsPaging } from "./usecase";
+import QuotationsPagination from "./components/QuotationsPagination";
 
 interface Props {
     // define your props here
 }
 
 const StaffQuotations: React.FC<Props> = () => {
+    const [quotations, setQuotations] = useState<QuotationsProps[]>([]);
+    // const [loading, setLoading] = useState(true);
+    const [totalPages, setTotalPages] = useState(0);
+    const [totalItems, setTotalItems] = useState(0);
+    const [pageSize, setPageSize] = useState(5);
+    const [pageIndex, setPageIndex] = useState(1);
+
+    async function getQuotationsService(pageSize: number, pageIndex: number) {
+        const res = await getQuotationsPaging(pageSize, pageIndex);
+        if (res) {
+            // setLoading(false);
+            const quotationsData = res?.data;
+            setQuotations(quotationsData.items);
+            setTotalPages(quotationsData.lastPage);
+            setTotalItems(quotationsData.total);
+        }
+    }
+
+    useEffect(() => {
+        getQuotationsService(pageSize, pageIndex);
+    }, [pageSize, pageIndex]);
+
     return (
-        <div className="mx-auto py-5">
-            <DataTable columns={columns} data={data} />
+        <div className="mx-auto ">
+            <div className="text-xl font-bold py-5">Quotation List</div>
+            <DataTable columns={columns} data={quotations} />
+            <div className="flex justify-between text-sm font-medium">
+                <div className="">{totalItems} Quotations</div>
+                <QuotationsPagination
+                    totalPages={totalPages}
+                    pageIndex={pageIndex}
+                    setPageIndex={setPageIndex}
+                    pageSize={pageSize}
+                    setPageSize={setPageSize}
+                />
+            </div>
         </div>
     )
 }

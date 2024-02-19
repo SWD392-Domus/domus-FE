@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useParams } from "react-router-dom"
 
 function BreadCrumbHeader() {
-    const { quotationId } = useParams();
+    const { quotationId, productId, packageId } = useParams();
     const breadcrumbNameMap: Record<string, string> = {
         '/customer': 'Customer',
         '/customer/settings': 'Settings',
@@ -13,11 +13,20 @@ function BreadCrumbHeader() {
         '/staff/quotations': 'Quotations',
         '/staff/quotations/newQuotation': 'New Quotation',
         '/staff/quotations/:quotationId': `Quotation ${quotationId} `,
+        '/staff/packages': `Packages`,
+        '/staff/packages/:packageId': `Package ${packageId} `,
+        '/staff/products': 'Products',
     };
 
     if (quotationId !== undefined) {
         breadcrumbNameMap[`/customer/settings/quotations/${quotationId}`] = `Quotation ${quotationId} `;
         breadcrumbNameMap[`/staff/quotations/${quotationId}`] = `Quotation ${quotationId} `;
+    }
+    if (productId !== undefined) {
+        breadcrumbNameMap[`/staff/products/${productId}`] = `Product ${productId} `;
+    }
+    if (packageId !== undefined) {
+        breadcrumbNameMap[`/staff/packages/${packageId}`] = `Package ${packageId} `;
     }
 
     const location = useLocation();
