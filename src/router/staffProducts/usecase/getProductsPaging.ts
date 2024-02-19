@@ -1,10 +1,21 @@
 import { getProductsPagingService } from "../service";
 
 export const getProductsPaging = async (
+  searchField: string,
+  searchValue: string,
+  sortField: string,
+  descending: boolean,
   pageSize: number,
   pageIndex: number
 ) => {
-  const response = await getProductsPagingService(pageSize, pageIndex);
+  const response = await getProductsPagingService(
+    searchField,
+    searchValue,
+    sortField,
+    descending,
+    pageSize,
+    pageIndex
+  );
 
   if (response.status === 200) {
     const productsData = response?.data?.data;

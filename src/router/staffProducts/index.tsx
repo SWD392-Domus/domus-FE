@@ -12,13 +12,30 @@ interface Props {
 const StaffProducts: React.FC<Props> = () => {
     const [products, setProducts] = useState<ProductsProps[]>([]);
     // const [loading, setLoading] = useState(true);
+    const [searchField, setSearchField] = useState("productName");
+    const [searchValue, setSearchValue] = useState("");
+    const [sortField, setSortField] = useState("");
+    const [descending, setDescending] = useState(false);
     const [totalPages, setTotalPages] = useState(0);
     const [totalItems, setTotalItems] = useState(0);
     const [pageSize, setPageSize] = useState(5);
     const [pageIndex, setPageIndex] = useState(1);
 
-    async function getProductsService(pageSize: number, pageIndex: number) {
-        const res = await getProductsPaging(pageSize, pageIndex);
+    async function getProductsService(
+        searchField: string,
+        searchValue: string,
+        sortField: string,
+        descending: boolean,
+        pageSize: number,
+        pageIndex: number) {
+        const res = await getProductsPaging(
+            searchField,
+            searchValue,
+            sortField,
+            descending,
+            pageSize,
+            pageIndex
+        );
         if (res) {
             // setLoading(false);
             setProducts(res.productsItems);
@@ -28,8 +45,19 @@ const StaffProducts: React.FC<Props> = () => {
     }
 
     useEffect(() => {
-        getProductsService(pageSize, pageIndex);
-    }, [pageSize, pageIndex]);
+        getProductsService(
+            searchField,
+            searchValue,
+            sortField,
+            descending,
+            pageSize,
+            pageIndex);
+    }, [searchField,
+        searchValue,
+        sortField,
+        descending,
+        pageSize,
+        pageIndex]);
 
     return (
         <div className="">
@@ -37,11 +65,10 @@ const StaffProducts: React.FC<Props> = () => {
             <DataTable
                 columns={columns}
                 data={products}
-                pageIndex={pageIndex}
-                pageSize={pageSize}
-                setTotalPages={setTotalPages}
-                setTotalItems={setTotalItems}
-                setProducts={setProducts}
+                setSearchField={setSearchField}
+                setSearchValue={setSearchValue}
+                setSortField={setSortField}
+                setDescending={setDescending}
             />
             <div className="flex justify-between text-sm font-medium">
                 <div className="">{totalItems} Products</div>

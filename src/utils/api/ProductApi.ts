@@ -69,8 +69,17 @@ export const productStaffApi = {
       { Authorization: token }
     );
   },
-  getProductsPaging: (pageSize: number, pageIndex: number) => {
-    return get(`/Products?PageSize=${pageSize}&PageIndex=${pageIndex}`);
+  getProductsPaging: (
+    searchField: string,
+    searchValue: string,
+    sortField: string,
+    descending: boolean,
+    pageSize: number,
+    pageIndex: number
+  ) => {
+    return get(
+      `/Products?SearchField=${searchField}&SearchValue=${searchValue}&SortField=${sortField}&Descending=${descending}&PageSize=${pageSize}&PageIndex=${pageIndex}`
+    );
   },
   getProductById: (id: number) => {
     return get(`/Products/${id}`);
