@@ -25,6 +25,8 @@ import PackageDetails from "./packageDetails";
 import CustomizePackage from "./customizePackage";
 import ProductDetailsStaff from "./staffProductDetail";
 import Login from "./login";
+import Auth from "./auth";
+
 
 const RouterComponent: React.FC = () => {
     const publicRoute = [
@@ -46,6 +48,13 @@ const RouterComponent: React.FC = () => {
             index: true,
             path: "article/:id",
             component: <ArticleDetail />,
+            exact: true,
+            restrict: true,
+        },
+          {
+            index: true,
+            path: "oauth/gg",
+            component: <Auth />,
             exact: true,
             restrict: true,
         },
@@ -96,6 +105,13 @@ const RouterComponent: React.FC = () => {
             index: true,
             path: "customizepackage",
             component: <CustomizePackage />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "login",
+            component: <Login />,
             exact: true,
             restrict: true,
         },
