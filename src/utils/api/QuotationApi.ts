@@ -1,41 +1,86 @@
-import {
-  get,
-  // post, put, remove
-} from "./ApiCaller";
+import { get, post, remove } from "./ApiCaller";
 
-const token =
-  "Bearer " +
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImR1eXN0YWZmQGRvbXVzLmNvbSIsInN1YiI6ImM3MTNhYWNjLTM1ODItNDU5OC04NjcwLTIyNTkwZDgzNzE3OSIsIm5hbWUiOiJkdXlzdGFmZkBkb211cy5jb20iLCJyb2xlIjpbIkNsaWVudCIsIlN0YWZmIl0sIm5iZiI6MTcwODEwNjE5NCwiZXhwIjoxNzA4MTA3MDk0LCJpYXQiOjE3MDgxMDYxOTQsImlzcyI6Imh0dHA6Ly8yMy4xMDIuMjI2LjExODo0NDMiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjMwMDAifQ.x94Qw24cKWMfdEyVhizFMehBUCBIzd9eXy5OCD95_VI";
+const tokenS = localStorage.getItem("Token") as string;
+
+const token = "Bearer " + tokenS;
 
 export const quotationStaffApi = {
-  getQuotationsPaging: (pageSize: number, pageIndex: number) => {
+  deleteQuotation: (id: string) => {
+    return remove(`/Quotations/${id}`, {}, {}, { Authorization: token });
+  },
+  deleteManyQuotations: (ids: string[]) => {
+    return remove(`/Quotations/multiple`, ids, {}, { Authorization: token });
+  },
+  searchQuotations: (
+    pageSize: number,
+    pageIndex: number,
+    searchField: string,
+    searchKeyword: string
+  ) => {
+    return post(
+      `/Quotations/search`,
+      {
+        pageSize: pageSize,
+        pageIndex: pageIndex,
+        // conjunctionSearchInfos: [
+        //   {
+        //     fieldName: searchField,
+        //     keyword: searchKeyword,
+        //   },
+        // ],
+        disjunctionSearchInfos: [
+          {
+            fieldName: searchField,
+            keyword: searchKeyword,
+          },
+        ],
+      },
+      {},
+      { Authorization: token }
+    );
+  },
+  sortQuotations: (
+    pageSize: number,
+    pageIndex: number,
+    sortField: string,
+    descending: boolean
+  ) => {
+    return post(
+      `/Quotations/search`,
+      {
+        pageSize: pageSize,
+        pageIndex: pageIndex,
+        sortInfos: [
+          {
+            fieldName: sortField,
+            priority: 0,
+            descending: descending,
+          },
+        ],
+      },
+      {},
+      { Authorization: token }
+    );
+  },
+  getQuotationsPaging: (
+    searchField: string,
+    searchValue: string,
+    sortField: string,
+    descending: boolean,
+    pageSize: number,
+    pageIndex: number
+  ) => {
     return get(
-      `/Quotations?PageSize=${pageSize}&PageIndex=${pageIndex}`,
+      `/Quotations/search?SearchField=${searchField}&SearchValue=${searchValue}&SortField=${sortField}&Descending=${descending}&PageSize=${pageSize}&PageIndex=${pageIndex}`,
       {},
       {
         Authorization: token,
       }
     );
   },
-
   getQuotationById: (id: number) => {
     return get(`/Quotations/${id}`);
   },
-
-  getAllQuotations: () => {
-    return get(`/Quotations`);
-  },
-};
-
-export const quotationCustomerApi = {
-  getQuotationsPaging: (pageSize: number, pageIndex: number) => {
-    return get(`/Quotations?PageSize=${pageSize}&PageIndex=${pageIndex}`);
-  },
-
-  getQuotationById: (id: number) => {
-    return get(`/Quotations/${id}`);
-  },
-
   getAllQuotations: () => {
     return get(`/Quotations`);
   },

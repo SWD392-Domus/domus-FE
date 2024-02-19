@@ -51,7 +51,7 @@ const RouterComponent: React.FC = () => {
             exact: true,
             restrict: true,
         },
-          {
+        {
             index: true,
             path: "oauth/gg",
             component: <Auth />,
@@ -71,22 +71,22 @@ const RouterComponent: React.FC = () => {
             component: <ProductDetails />,
             exact: true,
             restrict: true,
-          },
-          {
+        },
+        {
             index: true,
             path: "package",
             component: <PackageDetails />,
             exact: true,
             restrict: true,
-          },
-          {
+        },
+        {
             index: true,
             path: "customizepackage",
-            component: <CustomizePackage/>,
+            component: <CustomizePackage />,
             exact: true,
             restrict: true,
-          },
-        
+        },
+
         {
             index: true,
             path: "login",
@@ -198,8 +198,8 @@ const RouterComponent: React.FC = () => {
         // },
         {
             index: true,
-            path: "staff/product/:id",
-            component: <ProductDetailsStaff/>,
+            path: "staff/products/:id",
+            component: <ProductDetailsStaff />,
             exact: true,
             restrict: true,
         }

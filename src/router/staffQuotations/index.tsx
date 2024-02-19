@@ -3,7 +3,7 @@ import { DataTable } from "./components/Table/index.tsx";
 import { columns } from './components/Table/column.tsx'
 import { QuotationsProps } from "./types/index.ts";
 import { getQuotationsPaging } from "./usecase";
-import QuotationsPagination from "./components/QuotationsPagination";
+import QuotationsPagination from "./components/QuotationsPagination"
 
 interface Props {
     // define your props here
@@ -12,34 +12,69 @@ interface Props {
 const StaffQuotations: React.FC<Props> = () => {
     const [quotations, setQuotations] = useState<QuotationsProps[]>([]);
     // const [loading, setLoading] = useState(true);
+    const [searchField, setSearchField] = useState("quotationName");
+    const [searchValue, setSearchValue] = useState("");
+    const [sortField, setSortField] = useState("");
+    const [descending, setDescending] = useState(false);
     const [totalPages, setTotalPages] = useState(0);
     const [totalItems, setTotalItems] = useState(0);
     const [pageSize, setPageSize] = useState(5);
     const [pageIndex, setPageIndex] = useState(1);
 
-    async function getQuotationsService(pageSize: number, pageIndex: number) {
-        const res = await getQuotationsPaging(pageSize, pageIndex);
+    async function getQuotationsService(
+        searchField: string,
+        searchValue: string,
+        sortField: string,
+        descending: boolean,
+        pageSize: number,
+        pageIndex: number) {
+        const res = await getQuotationsPaging(
+            searchField,
+            searchValue,
+            sortField,
+            descending,
+            pageSize,
+            pageIndex
+        );
         if (res) {
             // setLoading(false);
-            const quotationsData = res?.data;
-            setQuotations(quotationsData.items);
-            setTotalPages(quotationsData.lastPage);
-            setTotalItems(quotationsData.total);
+            setQuotations(res.quotationsItems);
+            setTotalPages(res.lastPage);
+            setTotalItems(res.total);
         }
     }
 
     useEffect(() => {
-        getQuotationsService(pageSize, pageIndex);
-    }, [pageSize, pageIndex]);
+        getQuotationsService(
+            searchField,
+            searchValue,
+            sortField,
+            descending,
+            pageSize,
+            pageIndex);
+    }, [searchField,
+        searchValue,
+        sortField,
+        descending,
+        pageSize,
+        pageIndex]);
 
     return (
-        <div className="mx-auto ">
+        <div className="">
             <div className="text-xl font-bold py-5">Quotation List</div>
-            <DataTable columns={columns} data={quotations} />
+            <DataTable
+                columns={columns}
+                data={quotations}
+                setSearchField={setSearchField}
+                setSearchValue={setSearchValue}
+                setSortField={setSortField}
+                setDescending={setDescending}
+            />
             <div className="flex justify-between text-sm font-medium">
                 <div className="">{totalItems} Quotations</div>
                 <QuotationsPagination
                     totalPages={totalPages}
+                    totalItems={totalItems}
                     pageIndex={pageIndex}
                     setPageIndex={setPageIndex}
                     pageSize={pageSize}

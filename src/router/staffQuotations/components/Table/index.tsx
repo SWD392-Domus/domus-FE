@@ -15,17 +15,27 @@ import {
   TableHeader,
   TableRow,
 } from "./table"
-import { SearchField } from "../Input"
-import { PrintButton, CreateButton, ActionButton, SortButton } from "../Button"
+import { SearchField } from "../Input/SearchField"
+import { PrintButton, CreateButton } from "../Button"
+import { ActionsDropdownMenu } from "../DropdownMenu/Actions"
+import { SortButton } from "../Button/SortButton"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  setSearchField: React.Dispatch<React.SetStateAction<string>>;
+  setSearchValue: React.Dispatch<React.SetStateAction<string>>;
+  setSortField: React.Dispatch<React.SetStateAction<string>>;
+  setDescending: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  setSearchField,
+  setSearchValue,
+  setSortField,
+  setDescending,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -34,41 +44,48 @@ export function DataTable<TData, TValue>({
   })
   const location = useLocation();
   const navigate = useNavigate();
+
   return (
-    <div className="mb-5">
+    <div className="">
       <div className="flex space-x-5 justify-center mb-3">
         <div className="my-auto px-2 h-8 border-2 border-zinc-500 bg-zinc-50 rounded pointer-events-none">
           {table.getFilteredSelectedRowModel().rows.length} Selected
         </div>
         <PrintButton></PrintButton>
-        <ActionButton></ActionButton>
+        <ActionsDropdownMenu ids={table.getSelectedRowModel().rows.map(item => item.getValue('id'))}></ActionsDropdownMenu>
       </div>
 
       <div className="flex flex-row justify-between mb-5">
 
         <div className="basis-1/2 flex space-x-2">
-          <SearchField></SearchField>
-          <CreateButton></CreateButton>
+          <SearchField setSearchField={setSearchField} setSearchValue={setSearchValue}></SearchField>
         </div>
 
         <div className="flex justify-end">
-          <SortButton></SortButton>
+          <CreateButton></CreateButton>
         </div>
       </div>
       <div className="rounded-md border mb-5">
         <Table>
-          <TableHeader>
+          <TableHeader className="bg-slate-200">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
+                  const headerId = header.getContext().column.id
                   return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                    <TableHead key={header.id} className="text-neutral-700">
+                      <div className="flex flex-row items-center gap-1">
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )
+                        }
+                        {["id", "expireAt", "totalPrice", "status"].includes(headerId) &&
+                          <SortButton sortField={headerId} setSortField={setSortField} setDescending={setDescending}></SortButton>
+                        }
+                      </div>
                     </TableHead>
                   )
                 })}
