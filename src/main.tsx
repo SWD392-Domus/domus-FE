@@ -3,11 +3,13 @@ import App from "./index.tsx";
 import "./index.css";
 import { Provider } from "react-redux";
 import store from "./store";
-import { Toaster } from "./components/ui/Toast/toaster.tsx";
+import { ThemeProvider } from "styled-components";
+import { themes } from "./theme/index.ts";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-    <Provider store={store}>
-        <App />
-        <Toaster />
-    </Provider>
+    <ThemeProvider theme={themes}>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </ThemeProvider>
 );

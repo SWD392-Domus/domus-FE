@@ -4,12 +4,14 @@ import CustomerSettings from "./customerSettings";
 import CustomerQuotations from "./customerQuotations";
 import CustomerQuotationDetail from "./customerQuotationDetail";
 // import Staff from "./staff";
-// import StaffProducts from "./staff/products";
+import StaffProducts from "./staffProducts";
 import StaffQuotationNew from "./staffQuotationNew";
 import StaffQuotations from "./staffQuotations";
 import StaffQuotationDetail from "./staffQuotationDetail";
 import PublicRoute from "./PublicRoute";
 import Home from "./home";
+import ArticleList from "./article";
+import ArticleDetail from "./articleDetail";
 import PublicLayout from "@/components/PublicComponents/PublicLayout";
 import CustomerRoute from "./CustomerRoute";
 import CustomerLayout from "@/components/CustomerComponents/CustomerLayout";
@@ -31,12 +33,26 @@ const RouterComponent: React.FC = () => {
         },
         {
             index: true,
+            path: "article",
+            component: <ArticleList />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "article/:id",
+            component: <ArticleDetail />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
             path: "products",
             component: <ProductList />,
             exact: true,
             restrict: true,
-          },
-          {
+        },
+        {
             index: true,
             path: "product/:id",
             component: <ProductDetails />,
@@ -110,13 +126,13 @@ const RouterComponent: React.FC = () => {
             exact: true,
             restrict: true,
         },
-        // {
-        //   index: true,
-        //   path: "staff/products",
-        //   component: <StaffProducts />,
-        //   exact: true,
-        //   restrict: true,
-        // },
+        {
+            index: true,
+            path: "staff/products",
+            component: <StaffProducts />,
+            exact: true,
+            restrict: true,
+        },
     ];
     return (
         <BrowserRouter>
