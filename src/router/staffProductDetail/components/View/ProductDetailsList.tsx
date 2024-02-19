@@ -1,17 +1,14 @@
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/Sheet";
 // import { productList } from "@/router/products/data";
 import React from "react";
-import { FaPlus } from "react-icons/fa";
 
 import ProductPopup from "./ProductPopup";
 import { useSelector } from "react-redux";
 import { productSelector } from "@/router/productDetails/slice/selector";
 import { ProductDetailsProps } from "@/router/productDetails/type";
-import { editModeSelector } from "../slice/selector";
 
 const ProductDetailsList: React.FC = () => {
   const { product } = useSelector(productSelector);
-  const { isEditMode } = useSelector(editModeSelector);
   if(!product){
     return <div>No product</div>
   }
@@ -53,23 +50,6 @@ const ProductDetailsList: React.FC = () => {
             </SheetContent>
           </Sheet>
         ))}
-        {isEditMode && (
-          <Sheet key={"top"}>
-          <SheetTrigger asChild>
-            <div
-              className="w-[40%] h-[30%] flex justify-center items-center gap-2 cursor-pointer
-              md:w-[20%] md:h-[20%] hover:bg-slate-100 rounded-md border border-black shrink px-12 py-16"
-            >
-                <FaPlus className="shrink-0 text-2xl"/>
-              
-              
-            </div>
-          </SheetTrigger>
-          <SheetContent side={"top"}>
-            {/* <ProductPopup details={product}/> */}
-          </SheetContent>
-        </Sheet>
-        )}
       </div>
     </div>
   );

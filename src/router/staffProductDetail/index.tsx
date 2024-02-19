@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import ProductCard from "./components/ProductCard";
+import ProductCard from "./components/View/ProductCard";
 import { useParams } from "react-router-dom";
 import { getProductDetails } from "@/router/productDetails/usecases";
 import { useDispatch, useSelector } from "react-redux";
 import { productSelector } from "../productDetails/slice/selector";
 import { setProduct } from "../productDetails/slice";
-import EditProduct from "./components/EditProduct";
-import ProductDetailsSection from "./components/ProductDetailsSection";
+import EditProduct from "./components/Edit/EditProduct";
+import ProductDetailsSection from "./components/View/ProductDetailsSection";
 import { editModeSelector } from "./slice/selector";
 import { changeMode } from "./slice";
 type RouteParams = {
@@ -53,9 +53,6 @@ const ProductDetailsStaff: React.FC = () => {
         <>
           <div className="flex p-10 h-auto">
             <EditProduct />
-          </div>
-          <div className="flex p-10">
-            <ProductDetailsSection />
           </div>
         </>
       ) : (
