@@ -78,7 +78,7 @@ export const productStaffApi = {
     pageIndex: number
   ) => {
     return get(
-      `/Products?SearchField=${searchField}&SearchValue=${searchValue}&SortField=${sortField}&Descending=${descending}&PageSize=${pageSize}&PageIndex=${pageIndex}`
+      `/Products/search?SearchField=${searchField}&SearchValue=${searchValue}&SortField=${sortField}&Descending=${descending}&PageSize=${pageSize}&PageIndex=${pageIndex}`
     );
   },
   getProductById: (id: number) => {
