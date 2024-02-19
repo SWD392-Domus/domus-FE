@@ -52,12 +52,7 @@ const ProductDetails: React.FC = () => {
     );
   }
 
-  const {
-    productName,
-    brand,
-    description,
-    details,
-  } = product;
+  const { productName, brand, description, details } = product;
 
   console.log(details);
 
@@ -76,7 +71,7 @@ const ProductDetails: React.FC = () => {
       lg:justify-start lg:ml-4 lg:gap-2"
           >
             <div
-              className="w-[300px] h-[300px] shrink
+              className="w-[300px] h-[300px] shrink 
         md:w-[600px] md:h-[600px]
         xl:w-[700px] xl:h-[700px]"
             >
