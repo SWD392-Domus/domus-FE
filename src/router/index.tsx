@@ -23,6 +23,8 @@ import ProductList from "./products";
 import ProductDetails from "./productDetails";
 import PackageDetails from "./packageDetails";
 import CustomizePackage from "./customizePackage";
+import ProductDetailsStaff from "./staffProductDetail";
+import Login from "./login";
 
 const RouterComponent: React.FC = () => {
     const publicRoute = [
@@ -58,6 +60,28 @@ const RouterComponent: React.FC = () => {
             index: true,
             path: "product/:id",
             component: <ProductDetails />,
+            exact: true,
+            restrict: true,
+          },
+          {
+            index: true,
+            path: "package",
+            component: <PackageDetails />,
+            exact: true,
+            restrict: true,
+          },
+          {
+            index: true,
+            path: "customizepackage",
+            component: <CustomizePackage/>,
+            exact: true,
+            restrict: true,
+          },
+        
+        {
+            index: true,
+            path: "login",
+            component: <Login />,
             exact: true,
             restrict: true,
         },
@@ -149,6 +173,20 @@ const RouterComponent: React.FC = () => {
             exact: true,
             restrict: true,
         },
+        // {
+        //   index: true,
+        //   path: "staff/products",
+        //   component: <StaffProducts />,
+        //   exact: true,
+        //   restrict: true,
+        // },
+        {
+            index: true,
+            path: "staff/product/:id",
+            component: <ProductDetailsStaff/>,
+            exact: true,
+            restrict: true,
+        }
     ];
     return (
         <BrowserRouter>
