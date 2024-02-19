@@ -35,6 +35,7 @@
         "date-fns": "^3.3.1",
         "embla-carousel-react": "^8.0.0-rc21",
         "framer-motion": "^10.18.0",
+        "html-react-parser": "^5.1.1",
         "lucide-react": "^0.315.0",
         "react": "^18.2.0",
         "react-day-picker": "^8.10.0",

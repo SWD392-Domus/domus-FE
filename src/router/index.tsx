@@ -20,6 +20,7 @@ import ProductDetails from "./productDetails";
 import PackageDetails from "./packageDetails";
 import CustomizePackage from "./customizePackage";
 import ProductDetailsStaff from "./staffProductDetail";
+import Login from "./login";
 
 const RouterComponent: React.FC = () => {
     const publicRoute = [
@@ -36,8 +37,8 @@ const RouterComponent: React.FC = () => {
             component: <ProductList />,
             exact: true,
             restrict: true,
-          },
-          {
+        },
+        {
             index: true,
             path: "product/:id",
             component: <ProductDetails />,
@@ -58,6 +59,14 @@ const RouterComponent: React.FC = () => {
             exact: true,
             restrict: true,
           },
+        
+        {
+            index: true,
+            path: "login",
+            component: <Login />,
+            exact: true,
+            restrict: true,
+        },
     ];
     const customerRoute = [
         {
