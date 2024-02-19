@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
+import { JwtPayload, jwtDecode } from "jwt-decode";
 import { toastError } from "../Toast";
-
-const getJwtUser = (token: string) => {
+interface customJWTPayload extends JwtPayload {
+    role: string;
+}
+const getJwtUser = (token: string): customJWTPayload => {
     return jwtDecode(token);
 };
 export const useAuth = () => {

@@ -78,7 +78,9 @@ const Header: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                <AnimatePresence>{open && <NavigationTab />}</AnimatePresence>
+                <AnimatePresence>
+                    {open && <NavigationTab setOpen={setOpen} />}
+                </AnimatePresence>
             </div>
         </header>
     );
