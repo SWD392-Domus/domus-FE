@@ -12,11 +12,11 @@ import {
   Card,
   CardContent,
   // CardDescription,
-  CardFooter,
+  // CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/Card";
-import { FaCartArrowDown } from "react-icons/fa6";
+// import { FaCartArrowDown } from "react-icons/fa6";
 import React, { useEffect, useState } from 'react'
 import { getPackageById } from "./usecase";
 import { useParams } from "react-router-dom"
@@ -86,8 +86,7 @@ const PackageDetails: React.FC<Props> = () => {
 
             <div className="lg:w-[30%] flex flex-col gap-2 pl-4 pt-20">
               <div
-                className="text-black text-xl font-thin
-          md:text-4xl
+                className="mb-5 font-semibold text-black text-xl md:text-4xl
         "
               >
                 {name}
@@ -110,9 +109,9 @@ const PackageDetails: React.FC<Props> = () => {
                 <Button onClick={() => navigate(`${location.pathname}/update`)} variant={'yellowCustom'} className="cursor-pointer w-40">Update</Button>
               </div>
               <div className="h-auto pr-2 pb-10 w-[70%]">
-                <Accordion type="multiple">
+                <Accordion type="single" defaultValue="item-1" collapsible>
                   <AccordionItem value="item-1">
-                    <AccordionTrigger>Services</AccordionTrigger>
+                    <AccordionTrigger className='text-xl'>Services</AccordionTrigger>
                     <AccordionContent>
                       <div className="flex flex-col gap-2 shrink">
                         {services.map((service: ServiceProps) =>
@@ -174,13 +173,13 @@ const PackageDetails: React.FC<Props> = () => {
                           </p>
                         </CardTitle>
                       </CardContent>
-                      <CardFooter className="">
+                      {/* <CardFooter className="">
                         <div
                           className="w-10 h-10 bg-yellowCustom flex justify-center items-center rounded-full cursor-pointer hover:opacity-80"
                         >
                           <FaCartArrowDown className="text-black" />
                         </div>
-                      </CardFooter>
+                      </CardFooter> */}
                     </Card>
                   </>
                 ))}
