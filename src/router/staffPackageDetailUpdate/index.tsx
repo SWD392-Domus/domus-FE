@@ -47,7 +47,7 @@ import { useToast } from "@/components/ui/Toast/use-toast"
 import { ToastAction } from "@/components/ui/Toast/toast"
 import { Input } from "@/components/ui/Input";
 import { PencilIcon } from "lucide-react"
-import StaffProducts from './components/Table/staffProducts';
+// import StaffProducts from './components/Table/staffProducts';
 
 interface Props { }
 
@@ -101,7 +101,7 @@ const PackageDetails: React.FC<Props> = () => {
   });
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const formData = new FormData();
-    formData.append("Images", values.pictures);
+    formData.append("Images", values.pictures.toString());
     formData.append('Name', values.name);
     formData.append('Discount', values.discount.toString());
     formData.append('ServiceIds', "6c745475-6b46-41c2-2ae6-08dc3155b379");
@@ -269,7 +269,7 @@ const PackageDetails: React.FC<Props> = () => {
                       <Button className="my-auto bg-variant text-black h-9 border-2 border-zinc-500 bg-zinc-50 rounded hover:text-white pl-2" ><PencilIcon className="h-3.5 pr-2 my-auto"></PencilIcon>Products</Button>
                     </DialogTrigger>
                     <DialogContent className="">
-                      <StaffProducts></StaffProducts>
+                      {/* <StaffProducts></StaffProducts> */}
                       <DialogFooter>
                         {/* <Button onClick={onCancle} className="bg-zinc-500" >Cancle</Button>
                         <Button onClick={onDelete} className="bg-red-600" >Delete</Button> */}
