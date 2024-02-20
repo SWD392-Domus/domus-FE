@@ -2,38 +2,44 @@ export type PackageProps = {
   id: string;
   name: string;
   discount: number;
-  services: {
-    id: string;
-    name: string;
-    price: number;
-    monetaryUnit: string;
-  }[];
-  productDetails: ProductProps[];
-  packageImages: {
-    id: string;
-    imageUrl: string;
-    width: number;
-    height: number;
-  }[];
+  services: ServiceProps[];
+  productDetails: ProductDetailProps[];
+  packageImages: PackageImageProps[];
 };
 
-export type ProductProps = {
+export type ServiceProps = {
   id: string;
+  name: string;
+  price: number;
+  monetaryUnit: string;
+};
+export type PackageImageProps = {
+  id: string;
+  imageUrl: string;
+  width: number;
+  height: number;
+};
+
+export type ProductDetailProps = {
+  id: string;
+  productName: string;
   displayPrice: number;
   attributes: {
     name: string;
     value: string;
     valueType: string;
   }[];
-  images: {
-    imageUrl: string;
-    width: number;
-    height: number;
-  }[];
+  images: ProductImageProps[];
   prices: {
     price: number;
     monetaryUnit: string;
     quantity: number;
     quantityType: string;
   }[];
+};
+
+export type ProductImageProps = {
+  imageUrl: string;
+  width: number;
+  height: number;
 };

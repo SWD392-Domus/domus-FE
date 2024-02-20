@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/Button/Button';
 import Slider from './components/ImagesPackageSlider';
 // import Slider from '@/components/PublicComponents/Slider';
 
-import { PackageProps, ProductProps } from './types';
+import { ProductDetailProps, PackageImageProps, ServiceProps } from './types';
 import {
   Accordion,
   AccordionContent,
@@ -31,26 +31,26 @@ const PackageDetails: React.FC<Props> = () => {
   const { packageId } = useParams();
   const dispatch = useDispatch();
 
-  const id: any = useSelector(selector.id);
-  const name: any = useSelector(selector.name);
-  const estimatedPrice: any = useSelector(selector.estimatedPrice);
-  const discount: any = useSelector(selector.discount);
-  const services: any = useSelector(selector.services);
-  const productDetails: any = useSelector(selector.productDetails);
-  const packageImages: any = useSelector(selector.packageImages);
+  const id: string = useSelector(selector.id);
+  const name: string = useSelector(selector.name);
+  const estimatedPrice: number = useSelector(selector.estimatedPrice);
+  const discount: number = useSelector(selector.discount);
+  const services: ServiceProps[] = useSelector(selector.services);
+  const productDetails: ProductDetailProps[] = useSelector(selector.productDetails);
+  const packageImages: PackageImageProps[] = useSelector(selector.packageImages);
 
   async function fetchData() {
-    try {
-      if (packageId) {
+    if (packageId) {
+      try {
         const response = await getPackageById(packageId);
         if (response) {
           dispatch(actions.setPackage(response))
           // console.log(response)
           dispatch(actions.getPackageInfo());
         }
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
     }
   }
 
@@ -70,7 +70,7 @@ const PackageDetails: React.FC<Props> = () => {
         md:w-[600px] md:h-[600px]
         xl:w-[700px] xl:h-[700px]"
           >
-            <Slider images={packageImages.map((item: any) => item.imageUrl)} />
+            <Slider images={packageImages.map((item: PackageImageProps) => item.imageUrl)} />
           </div>
         </div>
       </div>
@@ -106,7 +106,7 @@ const PackageDetails: React.FC<Props> = () => {
               <AccordionTrigger>Services</AccordionTrigger>
               <AccordionContent>
                 <div className="flex flex-col gap-2 shrink">
-                  {services.map((service: any) => <p>{service.name}</p>)}
+                  {services.map((service: ServiceProps) => <p>{service.name}</p>)}
                 </div>
               </AccordionContent>
             </AccordionItem>
@@ -124,7 +124,7 @@ const PackageDetails: React.FC<Props> = () => {
     lg:grid-cols-4
     "
           >
-            {productDetails.map((product: any) => (
+            {productDetails.map((product: ProductDetailProps) => (
               <>
                 <Card className="w-[auto] h-[auto]">
                   <CardHeader className="w-full">
@@ -146,11 +146,7 @@ const PackageDetails: React.FC<Props> = () => {
                           productDescription
                         ) : (
                           <p className="truncate">
-                            Materials:Powder-coated aluminum frame. Marine grade Sunbrella
-                            fabric canopy. Protective cover included. Parasol base covers
-                            will display a slight color difference compared to the pole.
-                            This is in order to offer an improved resistance to
-                            scratching.
+                            Materials
                           </p>
                         )}
                       </p>

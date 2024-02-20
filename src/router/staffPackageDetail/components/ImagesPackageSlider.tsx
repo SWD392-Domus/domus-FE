@@ -60,7 +60,7 @@ const Slider: React.FC<Props> = (
                     {props.images.map((item: string) => (
                         <SwiperSlide>
                             <div className="">
-                                <img src={item} alt="product images" />
+                                <img src={item} alt="Product images" />
                             </div>
                         </SwiperSlide>
                     ))}
