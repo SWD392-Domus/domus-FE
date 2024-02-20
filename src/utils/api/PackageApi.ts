@@ -1,4 +1,4 @@
-import { get, post, remove } from "./ApiCaller";
+import { get, post, put, remove } from "./ApiCaller";
 
 export const packageApi = {
   getAllPackages: (pageSize: number, pageIndex: number) => {
@@ -13,6 +13,27 @@ const tokenS = localStorage.getItem("Token") as string;
 const token = "Bearer " + tokenS;
 
 export const packageStaffApi = {
+  updatePackage: (
+    id: string,
+    ServiceIds: string[],
+    ProductDetailIds: string[],
+    Name: string,
+    Discount: number,
+    Images: string[]
+  ) => {
+    return put(
+      `/Packages?id=${id}`,
+      {
+        ServiceIds: ServiceIds,
+        ProductDetailIds: ProductDetailIds,
+        Name: Name,
+        Discount: Discount,
+        Images: Images,
+      },
+      {},
+      { Authorization: token }
+    );
+  },
   deletePackage: (id: string) => {
     return remove(`/Packages?id=${id}`, {}, {}, { Authorization: token });
   },
