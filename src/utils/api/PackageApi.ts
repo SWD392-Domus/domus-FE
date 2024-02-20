@@ -14,7 +14,7 @@ const token = "Bearer " + tokenS;
 
 export const packageStaffApi = {
   deletePackage: (id: string) => {
-    return remove(`/Packages/${id}`, {}, {}, { Authorization: token });
+    return remove(`/Packages?id=${id}`, {}, {}, { Authorization: token });
   },
   deleteManyPackages: (ids: string[]) => {
     return remove(`/Packages/multiple`, ids, {}, { Authorization: token });
@@ -82,7 +82,7 @@ export const packageStaffApi = {
       `/Packages/search?SearchField=${searchField}&SearchValue=${searchValue}&SortField=${sortField}&Descending=${descending}&PageSize=${pageSize}&PageIndex=${pageIndex}`
     );
   },
-  getPackageById: (id: number) => {
+  getPackageById: (id: string) => {
     return get(`/Packages/${id}`);
   },
   getAllPackages: () => {
