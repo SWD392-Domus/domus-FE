@@ -1,7 +1,5 @@
 import { Button } from '@/components/ui/Button/Button';
 import Slider from './components/ImagesPackageSlider';
-// import Slider from '@/components/PublicComponents/Slider';
-
 import { ProductDetailProps, PackageImageProps, ServiceProps } from './types';
 import {
   Accordion,
@@ -30,7 +28,6 @@ interface Props { }
 const PackageDetails: React.FC<Props> = () => {
   const { packageId } = useParams();
   const dispatch = useDispatch();
-
   const id: string = useSelector(selector.id);
   const name: string = useSelector(selector.name);
   const estimatedPrice: number = useSelector(selector.estimatedPrice);
@@ -38,6 +35,8 @@ const PackageDetails: React.FC<Props> = () => {
   const services: ServiceProps[] = useSelector(selector.services);
   const productDetails: ProductDetailProps[] = useSelector(selector.productDetails);
   const packageImages: PackageImageProps[] = useSelector(selector.packageImages);
+
+  const [updated, setUpdated] = useState(false);
 
   async function fetchData() {
     if (packageId) {
@@ -47,6 +46,7 @@ const PackageDetails: React.FC<Props> = () => {
           dispatch(actions.setPackage(response))
           // console.log(response)
           dispatch(actions.getPackageInfo());
+          setUpdated(true);
         }
       } catch (error) {
         console.error(error);
@@ -59,88 +59,90 @@ const PackageDetails: React.FC<Props> = () => {
   }, []);
 
   return (
-    <div className="h-auto lg:flex lg:flex-wrap xl:justify-center ">
-      <div className="flex flex-col">
-        <div
-          className="w-auto h-auto p-10 flex justify-center items-center
-      lg:justify-start lg:ml-4 lg:gap-2"
-        >
-          <div
-            className="w-[300px] h-[300px] shrink
-        md:w-[600px] md:h-[600px]
-        xl:w-[700px] xl:h-[700px]"
-          >
-            <Slider images={packageImages.map((item: PackageImageProps) => item.imageUrl)} />
-          </div>
-        </div>
+    <>
+      <div className="my-7 text-2xl font-semibold">
+        Package - {name}
       </div>
+      {updated &&
+        <div className="">
+          <div className="flex flex-row justify-center gap-10">
+            <div className="flex flex-col">
+              <div
+                className="w-auto h-auto flex justify-center items-center
+      lg:justify-start lg:ml-4 lg:gap-2"
+              >
+                <div
+                  className="w-[300px] shrink md:w-[600px] xl:w-[700px] mb-10"
+                >
+                  <Slider images={packageImages.map((item: PackageImageProps) => item?.imageUrl)} />
+                </div>
+              </div>
+            </div>
 
-      <div className="lg:w-[30%] flex flex-col gap-2 pl-4 pt-20">
-        <div
-          className="text-black text-xl font-thin
+            <div className="lg:w-[30%] flex flex-col gap-2 pl-4 pt-20">
+              <div
+                className="text-black text-xl font-thin
           md:text-4xl
         "
-        >
-          {name}
-        </div>
-        <div className="font-semibold md:text-2xl flex flex-col">
-          <span className="text-sm font-thin">Estimated price: </span>
-          {new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "VND",
-          }).format(estimatedPrice)}
-        </div>
-        <div className="font-semibold md:text-2xl flex flex-col">
-          <span className="text-sm font-thin">Discount: </span>
-          {discount}%
-        </div>
-        <div className="mt-2">
-          <Button className="cursor-pointer w-40">Delete</Button>
-        </div>
-        <div className="mt-2">
-          <Button variant={'yellowCustom'} className="cursor-pointer w-40">Update</Button>
-        </div>
-        <div className="h-auto pr-2 pb-10">
-          <Accordion type="multiple">
-            <AccordionItem value="item-1">
-              <AccordionTrigger>Services</AccordionTrigger>
-              <AccordionContent>
-                <div className="flex flex-col gap-2 shrink">
-                  {services.map((service: ServiceProps) => <p>{service.name}</p>)}
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        </div>
-      </div>
-      <div className='flex justify-center items-center'>
-        <div className="flex flex-col gap-8 justify-center items-center px-2 w-[90%] rounded-md">
-          <div>
-            <p className="text-2xl font-thin pb-4 border-b-2 border-slate-400">Products In This Package</p>
+              >
+                {name}
+              </div>
+              <div className="font-semibold md:text-2xl flex flex-col">
+                <span className="text-sm font-thin">Estimated price: </span>
+                {new Intl.NumberFormat("en-US", {
+                  style: "currency",
+                  currency: "VND",
+                }).format(estimatedPrice)}
+              </div>
+              <div className="font-semibold md:text-2xl flex flex-col">
+                <span className="text-sm font-thin">Discount: </span>
+                {discount}%
+              </div>
+              <div className="mt-2">
+                <Button className="cursor-pointer w-40">Delete</Button>
+              </div>
+              <div className="mt-2">
+                <Button variant={'yellowCustom'} className="cursor-pointer w-40">Update</Button>
+              </div>
+              <div className="h-auto pr-2 pb-10">
+                <Accordion type="multiple">
+                  <AccordionItem value="item-1">
+                    <AccordionTrigger>Services</AccordionTrigger>
+                    <AccordionContent>
+                      <div className="flex flex-col gap-2 shrink">
+                        {services.map((service: ServiceProps) => <p>{service.name}</p>)}
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              </div>
+            </div>
           </div>
-          <div
-            className="overflow-scroll h-[1000px] grid grid-cols-1 gap-4 pt-8 
-    md:grid-cols-3
-    lg:grid-cols-4
-    "
-          >
-            {productDetails.map((product: ProductDetailProps) => (
-              <>
-                <Card className="w-[auto] h-[auto]">
-                  <CardHeader className="w-full">
-                    <div className="flex justify-center">
-                      <img
-                        src={product.images[0].imageUrl}
-                        className="w-[288px] h-[288px] object-contain"
-                        loading="lazy"
-                      />
-                    </div>
-                  </CardHeader>
-                  <CardContent className="overflow-hidden">
-                    <CardTitle className="">
-                      <h2 className="truncate">{product.productName}</h2>
-                    </CardTitle>
-                    {/* <CardDescription className="pb-2 pt-1 shrink">
+          <div className='flex justify-center items-center'>
+            <div className="flex flex-col gap-8 justify-center items-center px-2 w-[80%] rounded-md">
+              <div>
+                <p className="text-2xl font-thin pb-4 border-b-2 border-slate-400">Products In This Package</p>
+              </div>
+              <div
+                className="grid grid-cols-1 gap-4 pt-8 md:grid-cols-3 lg:grid-cols-4"
+              >
+                {productDetails.map((product: ProductDetailProps) => (
+                  <>
+                    <Card className="w-[auto] h-[auto]">
+                      <CardHeader className="w-full">
+                        <div className="flex justify-center h-[200px]">
+                          <img
+                            src={product.images[0]?.imageUrl}
+                            className="w-[288px] object-contain"
+                          // loading="lazy"
+                          />
+                        </div>
+                      </CardHeader>
+                      <CardContent className="overflow-hidden">
+                        <CardTitle className="">
+                          <h2 className="truncate">{product.productName}</h2>
+                        </CardTitle>
+                        {/* <CardDescription className="pb-2 pt-1 shrink">
                       <p className="truncate">
                         {productDescription ? (
                           productDescription
@@ -151,29 +153,32 @@ const PackageDetails: React.FC<Props> = () => {
                         )}
                       </p>
                     </CardDescription> */}
-                    <CardTitle>
-                      <p className="text-2xl truncate">
-                        {new Intl.NumberFormat("en-US", {
-                          style: "currency",
-                          currency: "VND",
-                        }).format(product.displayPrice * 1000)}
-                      </p>
-                    </CardTitle>
-                  </CardContent>
-                  <CardFooter className="">
-                    <div
-                      className="w-10 h-10 bg-yellowCustom flex justify-center items-center rounded-full cursor-pointer hover:opacity-80"
-                    >
-                      <FaCartArrowDown className="text-black" />
-                    </div>
-                  </CardFooter>
-                </Card>
-              </>
-            ))}
+                        <CardTitle>
+                          <p className="text-2xl truncate">
+                            {new Intl.NumberFormat("en-US", {
+                              style: "currency",
+                              currency: "VND",
+                            }).format(product.displayPrice * 1000)}
+                          </p>
+                        </CardTitle>
+                      </CardContent>
+                      <CardFooter className="">
+                        <div
+                          className="w-10 h-10 bg-yellowCustom flex justify-center items-center rounded-full cursor-pointer hover:opacity-80"
+                        >
+                          <FaCartArrowDown className="text-black" />
+                        </div>
+                      </CardFooter>
+                    </Card>
+                  </>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      }
+    </>
+
   )
 }
 

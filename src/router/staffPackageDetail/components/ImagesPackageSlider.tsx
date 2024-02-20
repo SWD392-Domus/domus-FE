@@ -43,7 +43,7 @@ const Slider: React.FC<Props> = (
                             <SwiperSlide
                                 className="flex justify-center items-center"
                             >
-                                <img className="object-contain w-[400px] h-[400px]" src={p} alt="" />
+                                <img className="object-contain h-96" src={p} alt="" />
                             </SwiperSlide>
                         );
                     })}
@@ -53,15 +53,13 @@ const Slider: React.FC<Props> = (
                     loop={false}
                     grabCursor={true}
                     spaceBetween={10}
-                    slidesPerView={4}
+                    slidesPerView={3}
                     modules={[Navigation, Thumbs]}
-                    className="thumbBtn mt-5"
+                    className="thumbBtn mt-5 flex flex-row justify-center"
                 >
                     {props.images.map((item: string) => (
                         <SwiperSlide>
-                            <div className="">
-                                <img src={item} alt="Product images" />
-                            </div>
+                            <img className="h-40" src={item} alt="Product Image" />
                         </SwiperSlide>
                     ))}
                 </Swiper>
