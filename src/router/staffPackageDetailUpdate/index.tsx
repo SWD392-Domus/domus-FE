@@ -2,10 +2,10 @@ import { Button } from '@/components/ui/Button/Button';
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
+  // DialogDescription,
   DialogFooter,
-  DialogHeader,
-  DialogTitle,
+  // DialogHeader,
+  // DialogTitle,
   DialogTrigger,
 } from "@/components/ui/Dialog"
 import Slider from './components/ImagesPackageSlider';
@@ -46,7 +46,8 @@ import { updatePackage } from './usecase';
 import { useToast } from "@/components/ui/Toast/use-toast"
 import { ToastAction } from "@/components/ui/Toast/toast"
 import { Input } from "@/components/ui/Input";
-import { XIcon, PencilIcon } from "lucide-react"
+import { PencilIcon } from "lucide-react"
+import StaffProducts from './components/Table/staffProducts';
 
 interface Props { }
 
@@ -246,12 +247,7 @@ const PackageDetails: React.FC<Props> = () => {
                       <Button className="mt-4 bg-variant text-black h-9 border-2 border-zinc-500 bg-zinc-50 rounded hover:text-white pl-2" ><PencilIcon className="h-3.5 pr-2 my-auto"></PencilIcon>Services</Button>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-[425px]">
-                      <DialogHeader>
-                        <DialogTitle>Delete?</DialogTitle>
-                        <DialogDescription>
-                          Are you really sure that you want to Delete? This action cannot be reverted!
-                        </DialogDescription>
-                      </DialogHeader>
+                      {/* <StaffProducts></StaffProducts> */}
                       <DialogFooter>
                         {/* <Button onClick={onCancle} className="bg-zinc-500" >Cancle</Button>
                         <Button onClick={onDelete} className="bg-red-600" >Delete</Button> */}
@@ -266,8 +262,20 @@ const PackageDetails: React.FC<Props> = () => {
             </div>
             <div className='flex justify-center items-center'>
               <div className="flex flex-col gap-8 justify-center items-center px-2 w-[80%] rounded-md">
-                <div>
-                  <p className="text-2xl font-thin pb-4 border-b-2 border-slate-400">Products In This Package</p>
+                <div className='flex gap-10'>
+                  <div className="text-2xl font-thin pb-4 border-b-2 border-slate-400">Products In This Package</div>
+                  <Dialog>
+                    <DialogTrigger>
+                      <Button className="my-auto bg-variant text-black h-9 border-2 border-zinc-500 bg-zinc-50 rounded hover:text-white pl-2" ><PencilIcon className="h-3.5 pr-2 my-auto"></PencilIcon>Products</Button>
+                    </DialogTrigger>
+                    <DialogContent className="">
+                      <StaffProducts></StaffProducts>
+                      <DialogFooter>
+                        {/* <Button onClick={onCancle} className="bg-zinc-500" >Cancle</Button>
+                        <Button onClick={onDelete} className="bg-red-600" >Delete</Button> */}
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
                 </div>
                 <div
                   className="grid grid-cols-1 gap-4 pt-8 md:grid-cols-3 lg:grid-cols-4"
