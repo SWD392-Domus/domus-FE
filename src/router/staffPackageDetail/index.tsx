@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/Button/Button';
+import { DeleteButton } from './components/DeleteButton';
 import Slider from './components/ImagesPackageSlider';
 import { ProductDetailProps, PackageImageProps, ServiceProps } from './types';
 import {
@@ -99,18 +100,25 @@ const PackageDetails: React.FC<Props> = () => {
                 {discount}%
               </div>
               <div className="mt-2">
-                <Button className="cursor-pointer w-40">Delete</Button>
+                <DeleteButton id={id}></DeleteButton>
               </div>
               <div className="mt-2">
                 <Button variant={'yellowCustom'} className="cursor-pointer w-40">Update</Button>
               </div>
-              <div className="h-auto pr-2 pb-10">
+              <div className="h-auto pr-2 pb-10 w-[70%]">
                 <Accordion type="multiple">
                   <AccordionItem value="item-1">
                     <AccordionTrigger>Services</AccordionTrigger>
                     <AccordionContent>
                       <div className="flex flex-col gap-2 shrink">
-                        {services.map((service: ServiceProps) => <p>{service.name}</p>)}
+                        {services.map((service: ServiceProps) =>
+                          <div className="flex flex-row justify-between">
+                            <div className='font-semibold'>{service.name}</div>
+                            <div>{new Intl.NumberFormat("en-US", {
+                              style: "currency",
+                              currency: "VND",
+                            }).format(service.price)}</div>
+                          </div>)}
                       </div>
                     </AccordionContent>
                   </AccordionItem>
