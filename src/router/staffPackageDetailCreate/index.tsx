@@ -52,7 +52,6 @@ import { PencilIcon } from "lucide-react"
 interface Props { }
 
 const PackageDetails: React.FC<Props> = () => {
-  const { packageId } = useParams();
   const dispatch = useDispatch();
   const id: string = useSelector(selector.id);
   const name: string = useSelector(selector.name);
@@ -65,24 +64,24 @@ const PackageDetails: React.FC<Props> = () => {
   const [updated, setUpdated] = useState(false);
   const { toast } = useToast()
 
-  async function fetchData() {
-    if (packageId) {
-      try {
-        const response = await getPackageById(packageId);
-        if (response) {
-          dispatch(actions.setPackage(response))
-          // console.log(response)
-          dispatch(actions.getPackageInfo());
-          setUpdated(true);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  }
+  // async function fetchData() {
+  //   if (packageId) {
+  //     try {
+  //       const response = await getPackageById(packageId);
+  //       if (response) {
+  //         dispatch(actions.setPackage(response))
+  //         // console.log(response)
+  //         dispatch(actions.getPackageInfo());
+  //         setUpdated(true);
+  //       }
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+  // }
 
   useEffect(() => {
-    fetchData()
+    // fetchData()
   }, []);
 
   const formSchema = z.object({
@@ -333,7 +332,6 @@ const PackageDetails: React.FC<Props> = () => {
         }
       </form>
     </Form>
-
   )
 }
 

@@ -11,6 +11,7 @@ import StaffQuotations from "./staffQuotations";
 import StaffQuotationDetail from "./staffQuotationDetail";
 import StaffPackageDetail from "./staffPackageDetail";
 import StaffPackageDetailUpdate from "./staffPackageDetailUpdate";
+import StaffPackageDetailCreate from "./staffPackageDetailCreate";
 import PublicRoute from "./PublicRoute";
 import Home from "./home";
 import ArticleList from "./article";
@@ -194,6 +195,13 @@ const RouterComponent: React.FC = () => {
             index: true,
             path: "staff/packages/:packageId/update",
             component: <StaffPackageDetailUpdate />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/packages/newPackage",
+            component: <StaffPackageDetailCreate />,
             exact: true,
             restrict: true,
         },

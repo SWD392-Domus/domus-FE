@@ -25,9 +25,6 @@ const slice = createSlice({
     modal_confirm: (state: any, action: any) => {
       state.modal.confirm = action.payload;
     },
-    setProductDetails: (state: any, action: any) => {
-      state.productDetails = action.payload.productDetails;
-    },
     setPackage: (state: any, action: any) => {
       state.id = action.payload.id;
       state.name = action.payload.name;
