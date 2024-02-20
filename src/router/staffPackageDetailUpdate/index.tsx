@@ -27,7 +27,7 @@ import {
 import { FaDeleteLeft } from "react-icons/fa6";
 import React, { useEffect, useState } from 'react'
 import { getPackageById } from "./usecase";
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import selector from "./slice/selector";
 import { actions } from "./slice";
@@ -64,7 +64,7 @@ const PackageDetails: React.FC<Props> = () => {
 
   const [updated, setUpdated] = useState(false);
   const { toast } = useToast()
-
+  const navigate = useNavigate()
   async function fetchData() {
     if (packageId) {
       try {
@@ -100,12 +100,20 @@ const PackageDetails: React.FC<Props> = () => {
     },
   });
   async function onSubmit(values: z.infer<typeof formSchema>) {
+    console.log(values.pictures);
+
     const formData = new FormData();
-    formData.append("Images", values.pictures.toString());
+    // values.pictures.map((picture: string) =>
+    //   formData.append("Images", picture)
+    // )
+    formData.append("Images", values.pictures[0])
     formData.append('Name', values.name);
     formData.append('Discount', values.discount.toString());
     formData.append('ServiceIds', "6c745475-6b46-41c2-2ae6-08dc3155b379");
+    formData.append('ServiceIds', "397d7f86-5dae-4f0a-2ae7-08dc3155b379");
     formData.append('ProductDetailIds', "6368e5df-c2d9-4d7f-9263-045a8afc26f9");
+    formData.append('ProductDetailIds', "6b388ca1-b69e-40d2-6b01-08dc2631263d");
+    formData.append('ProductDetailIds', "f60aabe1-7b42-4dcf-2a6c-08dc31e67559");
 
     const res = await updatePackage(id, formData);
     if (res === 200) {
@@ -115,6 +123,7 @@ const PackageDetails: React.FC<Props> = () => {
         description: "A package was updated.",
         action: <ToastAction altText="Close">Close</ToastAction>,
       })
+      // navigate(`/staff/packages/${packageId}`)
     } else {
       toast({
         variant: "destructive",
@@ -133,7 +142,7 @@ const PackageDetails: React.FC<Props> = () => {
         </div>
         {updated &&
           <div className="">
-            <div className="flex flex-row justify-center gap-10">
+            <div className="flex flex-row justify-center gap-10 min-h-[550px]">
               <div className="flex flex-col">
                 <div
                   className="w-auto h-auto flex justify-center items-center
