@@ -8,7 +8,9 @@ export const initialState = {
   estimatedPrice: 0,
   discount: 0,
   services: [{ id: 0, name: "" }],
-  productDetails: [{ id: 0, displayPrice: 0, productName: "" }],
+  productDetails: [
+    { id: 0, displayPrice: 0, productName: "", images: [{ imageUrl: "" }] },
+  ],
   packageImages: [{ id: 0, imageUrl: "" }],
 };
 
@@ -22,6 +24,9 @@ const slice = createSlice({
 
     modal_confirm: (state: any, action: any) => {
       state.modal.confirm = action.payload;
+    },
+    setProductDetails: (state: any, action: any) => {
+      state.productDetails = action.payload.productDetails;
     },
     setPackage: (state: any, action: any) => {
       state.id = action.payload.id;

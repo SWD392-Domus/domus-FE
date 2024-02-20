@@ -19,9 +19,19 @@ import {
 } from "./table"
 import { SearchField } from "../Input/SearchField"
 // import { PrintButton, CreateButton } from "../Button"
-import { CreateButton } from "../Button"
+import { Button } from "@/components/ui/Button/Button"
+// import { Link } from "react-router-dom"
+// import { ToastAction } from "@/components/ui/Toast/toast"
+// import { useToast } from "@/components/ui/Toast/use-toast"
+import {
+  PlusCircledIcon
+} from "@radix-ui/react-icons"
 // import { ActionsDropdownMenu } from "../DropdownMenu/Actions"
 import { SortButton } from "../Button/SortButton"
+import { ProductDetailProps } from "@/router/staffPackageDetailUpdate/types"
+import { useDispatch, useSelector } from "react-redux";
+import selector from "@/router/staffPackageDetailUpdate/slice/selector"
+import { actions } from "@/router/staffPackageDetailUpdate/slice";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -45,8 +55,11 @@ export function DataTable<TData, TValue>({
     columns,
     getCoreRowModel: getCoreRowModel(),
   })
-  const location = useLocation();
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  // const location = useLocation();
+  // const navigate = useNavigate();
+  // const { toast } = useToast()
+  // const productDetails: ProductDetailProps[] = useSelector(selector.productDetails);
 
   return (
     <div className="">
@@ -66,7 +79,16 @@ export function DataTable<TData, TValue>({
 
         <div className="flex justify-end">
           <DialogClose>
-            <CreateButton></CreateButton>
+            {/* <Button onClick={() => dispatch(actions.setProductDetails(
+              table.getSelectedRowModel().rows.map(item => ({
+                id: item.id,
+                displayPrice: 0,
+                productName: "",
+                images: [{ imageUrl: "" }]
+              }))
+            ))} className="my-auto mr-2" >
+              <PlusCircledIcon className="my-auto mr-2" />
+              Select</Button> */}
           </DialogClose>
         </div>
       </div>
@@ -114,7 +136,7 @@ export function DataTable<TData, TValue>({
                     !cell.id.includes("select") && !cell.id.includes("actions") &&
                     <TableCell
                       key={cell.id}
-                      onClick={() => navigate(`${location.pathname}/${row.getValue('id')}`)}
+                      // onClick={() => navigate(`${location.pathname}/${row.getValue('id')}`)}
                       className="cursor-pointer"
                     >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}

@@ -8,13 +8,13 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/Pagination";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/Select"
+// import {
+//   Select,
+//   SelectContent,
+//   SelectItem,
+//   SelectTrigger,
+//   SelectValue,
+// } from "@/components/ui/Select"
 interface Props {
   totalPages: number;
   totalItems: number;
@@ -29,8 +29,8 @@ const ProductsPagination: React.FC<Props> = ({
   // totalItems,
   pageIndex,
   setPageIndex,
-  pageSize,
-  setPageSize
+  // pageSize,
+  // setPageSize
 }) => {
   const handlePageChange = (newPageIndex: number) => {
     setPageIndex(newPageIndex);
@@ -73,7 +73,7 @@ const ProductsPagination: React.FC<Props> = ({
   return (
     <div className="flex space-x-5">
       <div className="flex">
-        {/* <div className="font-medium w-28 my-auto">Rows per page</div> */}
+        {/* <div className="font-medium w-28 my-auto">Rows per page</div>
         <div className="my-auto">
           <Select
             value={`${pageSize}`}
@@ -92,7 +92,7 @@ const ProductsPagination: React.FC<Props> = ({
               ))}
             </SelectContent>
           </Select>
-        </div>
+        </div> */}
       </div>
       <Pagination className="flex">
         <PaginationContent className="shrink">
