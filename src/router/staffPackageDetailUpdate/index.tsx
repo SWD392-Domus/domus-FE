@@ -1,5 +1,13 @@
 import { Button } from '@/components/ui/Button/Button';
-// import { DeleteButton } from './components/DeleteButton';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/Dialog"
 import Slider from './components/ImagesPackageSlider';
 import { ProductDetailProps, PackageImageProps, ServiceProps } from './types';
 import {
@@ -233,7 +241,23 @@ const PackageDetails: React.FC<Props> = () => {
                       </AccordionItem>
                     </Accordion>
                   </div>
-                  <Button className="mt-4 bg-variant text-black h-9 border-2 border-zinc-500 bg-zinc-50 rounded hover:text-white pl-2" ><PencilIcon className="h-3.5 pr-2 my-auto"></PencilIcon>Services</Button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button className="mt-4 bg-variant text-black h-9 border-2 border-zinc-500 bg-zinc-50 rounded hover:text-white pl-2" ><PencilIcon className="h-3.5 pr-2 my-auto"></PencilIcon>Services</Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-[425px]">
+                      <DialogHeader>
+                        <DialogTitle>Delete?</DialogTitle>
+                        <DialogDescription>
+                          Are you really sure that you want to Delete? This action cannot be reverted!
+                        </DialogDescription>
+                      </DialogHeader>
+                      <DialogFooter>
+                        {/* <Button onClick={onCancle} className="bg-zinc-500" >Cancle</Button>
+                        <Button onClick={onDelete} className="bg-red-600" >Delete</Button> */}
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
                 </div>
                 <div className="mt-2">
                   <Button variant={'yellowCustom'} className="cursor-pointer w-40" type="submit">Save</Button>
