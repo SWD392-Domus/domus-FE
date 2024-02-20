@@ -13,6 +13,14 @@ const tokenS = localStorage.getItem("Token") as string;
 const token = "Bearer " + tokenS;
 
 export const packageStaffApi = {
+  createPackage: (formData: HTMLElement | null | undefined) => {
+    return post(
+      `/Packages`,
+      formData,
+      {},
+      { Authorization: token, "Content-Type": "multipart/form-data" }
+    );
+  },
   updatePackage: (id: string, formData: HTMLElement | null | undefined) => {
     return put(
       `/Packages?id=${id}`,

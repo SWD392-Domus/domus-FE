@@ -14,7 +14,7 @@ export const initialState = {
   packageImages: [{ id: 0, imageUrl: "" }],
 };
 
-export const name = "AddPackage";
+export const name = "UpdatePackage";
 
 const slice = createSlice({
   name,

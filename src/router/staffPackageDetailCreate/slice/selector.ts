@@ -1,4 +1,4 @@
-import { initialState, name } from ".";
+import { initialState, name } from "./";
 
 import generateSelectors from "./generateSelectors";
 import { createSelector } from "@reduxjs/toolkit";

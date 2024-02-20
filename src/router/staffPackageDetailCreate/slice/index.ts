@@ -3,18 +3,14 @@ import generateActions from "./generateActions";
 import { createSlice } from "@reduxjs/toolkit";
 
 export const initialState = {
-  id: "",
   name: "",
-  estimatedPrice: 0,
   discount: 0,
-  services: [{ id: 0, name: "" }],
-  productDetails: [
-    { id: 0, displayPrice: 0, productName: "", images: [{ imageUrl: "" }] },
-  ],
-  packageImages: [{ id: 0, imageUrl: "" }],
+  serviceIds: [""],
+  productDetailIds: [""],
+  images: [""],
 };
 
-export const name = "AddPackage";
+export const name = "CreatePackage";
 
 const slice = createSlice({
   name,
@@ -26,25 +22,19 @@ const slice = createSlice({
       state.modal.confirm = action.payload;
     },
     setPackage: (state: any, action: any) => {
-      state.id = action.payload.id;
       state.name = action.payload.name;
-      state.estimatedPrice = action.payload.estimatedPrice;
       state.discount = action.payload.discount;
-      state.services = action.payload.services;
-      state.productDetails = action.payload.productDetails;
-      state.packageName = action.payload.packageName;
-      state.packageImages = action.payload.packageImages;
+      state.serviceIds = action.payload.serviceIds;
+      state.productDetailIds = action.payload.productDetailIds;
+      state.images = action.payload.images;
     },
     getPackageInfo: (state: any) => {
       state.info = {
-        id: state.id,
         name: state.name,
-        estimatedPrice: state.estimatedPrice,
         discount: state.discount,
-        services: state.services,
-        productDetails: state.productDetails,
-        packageName: state.packageName,
-        packageImages: state.packageImages,
+        serviceIds: state.serviceIds,
+        productDetailIds: state.productDetailIds,
+        images: state.images,
       };
     },
   },

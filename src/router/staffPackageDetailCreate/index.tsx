@@ -26,8 +26,6 @@ import {
 } from "@/components/ui/Card";
 import { FaDeleteLeft } from "react-icons/fa6";
 import React, { useEffect, useState } from 'react'
-import { getPackageById } from "./usecase";
-import { useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import selector from "./slice/selector";
 import { actions } from "./slice";
@@ -42,12 +40,11 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { updatePackage } from './usecase';
+import { createPackage } from './usecase';
 import { useToast } from "@/components/ui/Toast/use-toast"
 import { ToastAction } from "@/components/ui/Toast/toast"
 import { Input } from "@/components/ui/Input";
 import { PencilIcon } from "lucide-react"
-// import StaffProducts from './components/Table/staffProducts';
 
 interface Props { }
 
@@ -55,11 +52,10 @@ const PackageDetails: React.FC<Props> = () => {
   const dispatch = useDispatch();
   const id: string = useSelector(selector.id);
   const name: string = useSelector(selector.name);
-  // const estimatedPrice: number = useSelector(selector.estimatedPrice);
   const discount: number = useSelector(selector.discount);
-  const services: ServiceProps[] = useSelector(selector.services);
-  const productDetails: ProductDetailProps[] = useSelector(selector.productDetails);
-  const packageImages: PackageImageProps[] = useSelector(selector.packageImages);
+  const serviceIds: string[] = useSelector(selector.serviceIds);
+  const productDetailIds: string[] = useSelector(selector.productDetailIds);
+  const images: any[] = useSelector(selector.images);
 
   const [updated, setUpdated] = useState(false);
   const { toast } = useToast()
@@ -106,7 +102,7 @@ const PackageDetails: React.FC<Props> = () => {
     formData.append('ServiceIds', "6c745475-6b46-41c2-2ae6-08dc3155b379");
     formData.append('ProductDetailIds', "6368e5df-c2d9-4d7f-9263-045a8afc26f9");
 
-    const res = await updatePackage(id, formData);
+    const res = await createPackage(formData);
     if (res === 200) {
       toast({
         variant: "success",
@@ -128,7 +124,7 @@ const PackageDetails: React.FC<Props> = () => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="my-7 text-2xl font-semibold">
-          Update Package - {name}
+          New Package
         </div>
         {updated &&
           <div className="">
@@ -141,7 +137,7 @@ const PackageDetails: React.FC<Props> = () => {
                   <div
                     className="w-[300px] shrink md:w-[600px] xl:w-[700px] mb-10"
                   >
-                    <Slider images={packageImages.map((item: PackageImageProps) => item?.imageUrl)} />
+                    {/* <Slider images={packageImages.map((item: PackageImageProps) => item?.imageUrl)} /> */}
                   </div>
                 </div>
               </div>
@@ -149,7 +145,7 @@ const PackageDetails: React.FC<Props> = () => {
                 <div
                   className="mb-7 font-semibold text-black text-xl md:text-4xl"
                 >
-                  Update {name}
+                  New Package
                 </div>
                 {/* Package Name Input Start */}
                 <FormField
@@ -162,7 +158,7 @@ const PackageDetails: React.FC<Props> = () => {
                       </FormLabel>
                       <FormControl>
                         <Input
-                          placeholder={name}
+                          placeholder={"Name"}
                           {...field}
                           className="mb-4"
                         />
@@ -184,7 +180,7 @@ const PackageDetails: React.FC<Props> = () => {
                       </FormLabel>
                       <FormControl>
                         <Input
-                          // placeholder={discount}
+                          placeholder={"0-100%"}
                           {...field}
                           className="mb-4"
                           type='number'
@@ -228,14 +224,14 @@ const PackageDetails: React.FC<Props> = () => {
                         <AccordionTrigger>Services</AccordionTrigger>
                         <AccordionContent>
                           <div className="flex flex-col gap-2 shrink">
-                            {services.map((service: ServiceProps) =>
+                            {/* {services.map((service: ServiceProps) =>
                               <div className="flex flex-row justify-between">
                                 <div className='font-semibold'>{service.name}</div>
                                 <div>{new Intl.NumberFormat("en-US", {
                                   style: "currency",
                                   currency: "VND",
                                 }).format(service.price)}</div>
-                              </div>)}
+                              </div>)} */}
                           </div>
                         </AccordionContent>
                       </AccordionItem>
@@ -279,7 +275,7 @@ const PackageDetails: React.FC<Props> = () => {
                 <div
                   className="grid grid-cols-1 gap-4 pt-8 md:grid-cols-3 lg:grid-cols-4"
                 >
-                  {productDetails.map((product: ProductDetailProps) => (
+                  {/* {productDetails.map((product: ProductDetailProps) => (
                     <>
                       <Card className="w-[auto] h-[auto]">
                         <CardHeader className="w-full">
@@ -295,7 +291,7 @@ const PackageDetails: React.FC<Props> = () => {
                           <CardTitle className="">
                             <h2 className="truncate">{product.productName}</h2>
                           </CardTitle>
-                          {/* <CardDescription className="pb-2 pt-1 shrink">
+                          <CardDescription className="pb-2 pt-1 shrink">
                             <p className="truncate">
                               {productDescription ? (
                                 productDescription
@@ -305,7 +301,7 @@ const PackageDetails: React.FC<Props> = () => {
                                 </p>
                               )}
                             </p>
-                          </CardDescription> */}
+                          </CardDescription>
                           <CardTitle>
                             <p className="text-2xl truncate">
                               {new Intl.NumberFormat("en-US", {
@@ -324,7 +320,7 @@ const PackageDetails: React.FC<Props> = () => {
                         </CardFooter>
                       </Card>
                     </>
-                  ))}
+                  ))} */}
                 </div>
               </div>
             </div>
