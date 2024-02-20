@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/Button/Button';
-import { DeleteButton } from './components/DeleteButton';
+// import { DeleteButton } from './components/DeleteButton';
 import Slider from './components/ImagesPackageSlider';
 import { ProductDetailProps, PackageImageProps, ServiceProps } from './types';
 import {
@@ -16,7 +16,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/Card";
-import { FaCartArrowDown } from "react-icons/fa6";
+import { FaDeleteLeft } from "react-icons/fa6";
 import React, { useEffect, useState } from 'react'
 import { getPackageById } from "./usecase";
 import { useParams } from "react-router-dom"
@@ -38,6 +38,7 @@ import { updatePackage } from './usecase';
 import { useToast } from "@/components/ui/Toast/use-toast"
 import { ToastAction } from "@/components/ui/Toast/toast"
 import { Input } from "@/components/ui/Input";
+import { XIcon, PencilIcon } from "lucide-react"
 
 interface Props { }
 
@@ -46,7 +47,7 @@ const PackageDetails: React.FC<Props> = () => {
   const dispatch = useDispatch();
   const id: string = useSelector(selector.id);
   const name: string = useSelector(selector.name);
-  const estimatedPrice: number = useSelector(selector.estimatedPrice);
+  // const estimatedPrice: number = useSelector(selector.estimatedPrice);
   const discount: number = useSelector(selector.discount);
   const services: ServiceProps[] = useSelector(selector.services);
   const productDetails: ProductDetailProps[] = useSelector(selector.productDetails);
@@ -77,19 +78,23 @@ const PackageDetails: React.FC<Props> = () => {
 
   const formSchema = z.object({
     name: z.string(),
-    // discount: z.number(),
+    discount: z.coerce.number().lte(100).nonnegative(),
+    pictures: z.any(),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      // discount: 0,
+      name: name,
+      discount: discount,
+      pictures: undefined
     },
   });
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const formData = new FormData();
+    formData.append("Images", values.pictures);
     formData.append('Name', values.name);
+    formData.append('Discount', values.discount.toString());
     formData.append('ServiceIds', "6c745475-6b46-41c2-2ae6-08dc3155b379");
     formData.append('ProductDetailIds', "6368e5df-c2d9-4d7f-9263-045a8afc26f9");
 
@@ -115,7 +120,7 @@ const PackageDetails: React.FC<Props> = () => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="my-7 text-2xl font-semibold">
-          Package - {name}
+          Update Package - {name}
         </div>
         {updated &&
           <div className="">
@@ -132,77 +137,106 @@ const PackageDetails: React.FC<Props> = () => {
                   </div>
                 </div>
               </div>
-
-              <div className="lg:w-[30%] flex flex-col gap-2 pl-4 pt-20">
+              <div className="lg:w-[30%] flex flex-col gap-2 pl-4">
                 <div
-                  className="text-black text-xl font-thin
-          md:text-4xl
-        "
+                  className="mb-7 font-semibold text-black text-xl md:text-4xl"
                 >
-                  {name}
+                  Update {name}
+                </div>
+                {/* Package Name Input Start */}
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="border-yellowCustom text-xl text-black mb-2">
+                        Package Name
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder={name}
+                          {...field}
+                          className="mb-4"
+                        />
+                      </FormControl>
 
-                  {/* Package Name Input Start */}
-                  <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="border-yellowCustom text-xl text-black mb-2">
-                          Package Name
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder={name}
-                            {...field}
-                            // value={name}
-                            className="mb-4"
-                          />
-                        </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                {/* Package Name Input End*/}
+                {/* Package Discount Input Start */}
+                <FormField
+                  control={form.control}
+                  name="discount"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="border-yellowCustom text-xl text-black mb-2">
+                        Discount
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          // placeholder={discount}
+                          {...field}
+                          className="mb-4"
+                          type='number'
+                        />
+                      </FormControl>
 
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  {/* Package Name Input End*/}
-                </div>
-                <div className="font-semibold md:text-2xl flex flex-col">
-                  <span className="text-sm font-thin">Estimated price: </span>
-                  {new Intl.NumberFormat("en-US", {
-                    style: "currency",
-                    currency: "VND",
-                  }).format(estimatedPrice)}
-                </div>
-                <div className="font-semibold md:text-2xl flex flex-col">
-                  <span className="text-sm font-thin">Discount: </span>
-                  {discount}%
-                </div>
-                <div className="mt-2">
-                  <DeleteButton id={id}></DeleteButton>
-                </div>
-                <div className="mt-2">
-                  <Button variant={'yellowCustom'} className="cursor-pointer w-40">Update</Button>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                {/* Package Discount Input End*/}
+                {/* Package Name Input Start */}
+                <FormField
+                  control={form.control}
+                  name="pictures"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="border-yellowCustom text-xl text-black mb-2">
+                        Package Images
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          // placeholder={ }
+                          {...field}
+                          className="mb-4"
+                          type='file'
+                          multiple
+                          accept="image/png, image/jpeg, image/jpg"
+                        />
+                      </FormControl>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                {/* Package Name Input End*/}
+                <div className="h-auto flex justify-between gap-10">
+                  <div className="w-[70%]">
+                    <Accordion type="single" collapsible defaultValue='item-1'>
+                      <AccordionItem value="item-1">
+                        <AccordionTrigger>Services</AccordionTrigger>
+                        <AccordionContent>
+                          <div className="flex flex-col gap-2 shrink">
+                            {services.map((service: ServiceProps) =>
+                              <div className="flex flex-row justify-between">
+                                <div className='font-semibold'>{service.name}</div>
+                                <div>{new Intl.NumberFormat("en-US", {
+                                  style: "currency",
+                                  currency: "VND",
+                                }).format(service.price)}</div>
+                              </div>)}
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                  </div>
+                  <Button className="mt-4 bg-variant text-black h-9 border-2 border-zinc-500 bg-zinc-50 rounded hover:text-white pl-2" ><PencilIcon className="h-3.5 pr-2 my-auto"></PencilIcon>Services</Button>
                 </div>
                 <div className="mt-2">
                   <Button variant={'yellowCustom'} className="cursor-pointer w-40" type="submit">Save</Button>
-                </div>
-                <div className="h-auto pr-2 pb-10 w-[70%]">
-                  <Accordion type="multiple">
-                    <AccordionItem value="item-1">
-                      <AccordionTrigger>Services</AccordionTrigger>
-                      <AccordionContent>
-                        <div className="flex flex-col gap-2 shrink">
-                          {services.map((service: ServiceProps) =>
-                            <div className="flex flex-row justify-between">
-                              <div className='font-semibold'>{service.name}</div>
-                              <div>{new Intl.NumberFormat("en-US", {
-                                style: "currency",
-                                currency: "VND",
-                              }).format(service.price)}</div>
-                            </div>)}
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
                 </div>
               </div>
             </div>
@@ -254,7 +288,7 @@ const PackageDetails: React.FC<Props> = () => {
                           <div
                             className="w-10 h-10 bg-yellowCustom flex justify-center items-center rounded-full cursor-pointer hover:opacity-80"
                           >
-                            <FaCartArrowDown className="text-black" />
+                            <FaDeleteLeft className="text-black" />
                           </div>
                         </CardFooter>
                       </Card>
