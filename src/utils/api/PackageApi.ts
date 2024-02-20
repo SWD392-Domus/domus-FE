@@ -13,27 +13,15 @@ const tokenS = localStorage.getItem("Token") as string;
 const token = "Bearer " + tokenS;
 
 export const packageStaffApi = {
-  updatePackage: (
-    id: string,
-    ServiceIds: string[],
-    ProductDetailIds: string[],
-    Name: string,
-    Discount: number,
-    Images: string[]
-  ) => {
+  updatePackage: (id: string, formData: HTMLElement | null | undefined) => {
     return put(
       `/Packages?id=${id}`,
-      {
-        ServiceIds: ServiceIds,
-        ProductDetailIds: ProductDetailIds,
-        Name: Name,
-        Discount: Discount,
-        Images: Images,
-      },
+      formData,
       {},
-      { Authorization: token }
+      { Authorization: token, "Content-Type": "multipart/form-data" }
     );
   },
+
   deletePackage: (id: string) => {
     return remove(`/Packages?id=${id}`, {}, {}, { Authorization: token });
   },
