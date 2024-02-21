@@ -28,7 +28,7 @@ import CustomizePackage from "./customizePackage";
 import ProductDetailsStaff from "./staffProductDetail";
 import Login from "./login";
 import Auth from "./auth";
-
+import Staff from "./staff";
 
 const RouterComponent: React.FC = () => {
     const publicRoute = [
@@ -142,13 +142,13 @@ const RouterComponent: React.FC = () => {
         },
     ];
     const staffRoute = [
-        // {
-        //   index: true,
-        //   path: "staff",
-        //   component: <Staff />,
-        //   exact: true,
-        //   restrict: true,
-        // },
+        {
+            index: true,
+            path: "staff",
+            component: <Staff />,
+            exact: true,
+            restrict: true,
+        },
         {
             index: true,
             path: "staff/quotations/newQuotation",
@@ -218,7 +218,7 @@ const RouterComponent: React.FC = () => {
             component: <ProductDetailsStaff />,
             exact: true,
             restrict: true,
-        }
+        },
     ];
     return (
         <BrowserRouter>
