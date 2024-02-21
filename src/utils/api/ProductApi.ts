@@ -1,4 +1,4 @@
-import { get, post, remove } from "./ApiCaller";
+import { get, post, remove, put } from "./ApiCaller";
 
 export const productApi = {
   getAllProducts: (pageSize: number, pageIndex: number) => {
@@ -86,5 +86,11 @@ export const productStaffApi = {
   },
   getAllProducts: () => {
     return get(`/Products`);
+  },
+  createProduct: (product: any, token: string) => {
+    return post(`/Products`, product, {}, { Authorization: token });
+  },
+  updateProduct: (id: string, product: any, token: string) => {
+    return put(`/Products/${id}`, product, {}, { Authorization: token });
   },
 };

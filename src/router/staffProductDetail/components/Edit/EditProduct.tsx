@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-import { useSelector } from "react-redux";
-import { productSelector } from "@/router/productDetails/slice/selector";
+import { useDispatch, useSelector } from "react-redux";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -21,10 +20,20 @@ import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import EditProductDetailsList from "./EditProductDetailsList";
 import { productSchema } from "../ProductForm";
+import { productSelector } from "@/router/productDetails/slice/selector";
+import { setProduct } from "@/router/productDetails/slice";
+// import { SingleProductProps } from "@/router/productDetails/type";
 
 const EditProduct: React.FC = () => {
+  const dispatch = useDispatch();
   const { product } = useSelector(productSelector);
   const { productName, brand, description } = product;
+  // const [productCopy, setProductCopy] = React.useState<SingleProductProps | null>(product);
+  const [name, setName] = React.useState<string>(productName);
+  const [productBrand, setBrand] = React.useState<string>(brand);
+  const [productDescription, setDescription] =
+    React.useState<string>(description);
+  // const [productDetails, setProductDetails] = React.useState<string[]>([]);
   const form = useForm<z.infer<typeof productSchema>>({
     resolver: zodResolver(productSchema),
     defaultValues: {
@@ -33,6 +42,10 @@ const EditProduct: React.FC = () => {
       description: description,
     },
   });
+  useEffect(() => {
+    // Dispatch setProduct action when name, productBrand, or productDescription changes
+    dispatch(setProduct({ ...product, productName: name, brand: productBrand, description: productDescription }));
+  }, [name, productBrand, productDescription]);
   if (!product) {
     return (
       <div className="h-screen flex justify-center items-center text-2xl">
@@ -40,6 +53,9 @@ const EditProduct: React.FC = () => {
       </div>
     );
   }
+  // if(productCopy){
+  //   console.log(productCopy)
+  // }
   return (
     <>
       <div className="w-full rounded-lg border h-auto">
@@ -53,7 +69,14 @@ const EditProduct: React.FC = () => {
                   <FormItem>
                     <FormLabel className="text-xl">Product name</FormLabel>
                     <FormControl>
-                      <Input placeholder={productName} {...field} />
+                      <Input
+                        placeholder={name}
+                        {...field}
+                        onChange={(e) => {
+                          field.onChange(e);
+                          setName(e.target.value);
+                        }}
+                      />
                     </FormControl>
                     <FormDescription>
                       This is product display name.
@@ -69,7 +92,14 @@ const EditProduct: React.FC = () => {
                   <FormItem>
                     <FormLabel>Product brand</FormLabel>
                     <FormControl>
-                      <Input placeholder={brand} {...field} />
+                      <Input
+                        placeholder={productBrand}
+                        {...field}
+                        onChange={(e) => {
+                          field.onChange(e);
+                          setBrand(e.target.value);
+                        }}
+                      />
                     </FormControl>
                     <FormDescription>This is product brand.</FormDescription>
                     <FormMessage />
@@ -83,7 +113,14 @@ const EditProduct: React.FC = () => {
                   <FormItem>
                     <FormLabel>Product description</FormLabel>
                     <FormControl>
-                      <Textarea placeholder={description} {...field} />
+                      <Textarea
+                        placeholder={productDescription}
+                        {...field}
+                        onChange={(e) => {
+                          field.onChange(e);
+                          setDescription(e.target.value);
+                        }}
+                      />
                     </FormControl>
                     <FormDescription>
                       This is product description.
@@ -93,7 +130,7 @@ const EditProduct: React.FC = () => {
                 )}
               />
 
-            <EditProductDetailsList/>
+              <EditProductDetailsList />
             </form>
           </Form>
         </div>

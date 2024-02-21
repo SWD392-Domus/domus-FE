@@ -9,11 +9,10 @@ import { userApi } from "@/utils/api/userApi";
 
 const navLinks = [
     { title: "Home", href: "/" },
-    { title: "Blog", href: "/" },
+    { title: "Blogs", href: "/article" },
     { title: "Products", href: "/products" },
-    { title: "Past Projects", href: "/" },
-    { title: "Our Current Packages", href: "/" },
-    { title: "Settings", href: "/" },
+    { title: "Our Current Packages", href: "/package" },
+    { title: "Settings", href: "/settings" },
 ];
 
 const signinLinks = {
@@ -70,11 +69,11 @@ const NavigationTab: React.FC<Props> = (props) => {
             initial="initial"
             animate="animate"
             exit="exit"
-            className="bg-darkCustom z-50 w-screen h-full
+            className="bg-darkCustom z-50 w-screen h-[70%]
              origin-top fixed left-0"
         >
             <div className="w-full flex justify-end mt-10 text-center items-center">
-                <h1 className="text-white cursor-pointer font-playfair max-md:text-2xl text-3xl mr-2 ">
+                <h1 className="text-white cursor-pointer font-playfair max-md:text-xl mr-2 ">
                     {profile?.name}
                 </h1>
 
@@ -94,7 +93,7 @@ const NavigationTab: React.FC<Props> = (props) => {
                 initial="initial"
                 animate="open"
                 exit="initial"
-                className="h-full w-screen flex flex-col gap-2 justify-center"
+                className="h-full w-screen flex flex-col gap-2 mt-20 justify-start"
             >
                 {navLinks.map((link, index) => (
                     <div className="overflow-hidden">
@@ -104,8 +103,8 @@ const NavigationTab: React.FC<Props> = (props) => {
                         >
                             <li
                                 key={index}
-                                className="text-white inline-block max-md:text-2xl text-4xl 
-                            cursor-pointer font-playfair hover:text-yellowCustom"
+                                className="text-white inline-block max-md:text-3xl text-2xl 
+                            cursor-pointer font-openSans tracking-tighter font-bold hover:text-yellowCustom"
                             >
                                 <Link
                                     key={index}
@@ -128,7 +127,7 @@ const NavigationTab: React.FC<Props> = (props) => {
                                 to={signinLinks.href}
                                 onClick={handleCloseMenu}
                             >
-                                <p className="text-xl font-playfair">
+                                <p className="text-xl font-bold tracking-tighter font-openSans">
                                     {signinLinks.title}
                                 </p>
                             </Link>
@@ -138,7 +137,7 @@ const NavigationTab: React.FC<Props> = (props) => {
                                 to={signUpLinks.href}
                                 onClick={handleCloseMenu}
                             >
-                                <p className="text-xl font-playfair">
+                                <p className="text-xl font-bold tracking-tighter font-openSans">
                                     {signUpLinks.title}
                                 </p>
                             </Link>
@@ -158,7 +157,7 @@ const NavigationTab: React.FC<Props> = (props) => {
                                 to={logOutLinks.href}
                                 onClick={handleCloseMenu}
                             >
-                                <p className="text-xl font-playfair">
+                                <p className="text-xl font-bold tracking-tighter font-openSans">
                                     {logOutLinks.title}
                                 </p>
                             </Link>

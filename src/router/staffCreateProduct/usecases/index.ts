@@ -1,0 +1,1 @@
+export {createProducts} from './createProduct';
