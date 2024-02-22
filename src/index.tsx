@@ -1,6 +1,6 @@
 import { Toaster } from "./components/ui/Toast/toaster";
 import RouterComponent from "./router";
-Toaster
+Toaster;
 
 function App() {
     return (
