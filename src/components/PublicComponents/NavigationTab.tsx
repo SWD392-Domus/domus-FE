@@ -9,11 +9,11 @@ import { userApi } from "@/utils/api/userApi";
 
 const navLinks = [
     { title: "Home", href: "/" },
-    { title: "Blog", href: "/" },
+    { title: "Blog", href: "/article" },
     { title: "Products", href: "/products" },
-    { title: "Past Projects", href: "/" },
-    { title: "Our Current Packages", href: "/" },
-    { title: "Settings", href: "/" },
+    { title: "Staff", href: "/staff" },
+    // { title: "Our Current Packages", href: "/" },
+    // { title: "Settings", href: "/profile" },
 ];
 
 const signinLinks = {

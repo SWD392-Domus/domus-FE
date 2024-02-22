@@ -13,6 +13,7 @@ export const ConfirmDeleteManyButton: React.FC<Props> = (props) => {
         <Button onClick={() => deleteManyProducts(props.ids)
             .then(res => {
                 if (res === 200) {
+                    window.location.reload();
                     toast({
                         variant: "success",
                         title: "Delete Successfully.",
