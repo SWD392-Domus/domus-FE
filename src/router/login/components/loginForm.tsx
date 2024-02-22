@@ -69,11 +69,11 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
             toastError("Something Wrong");
         } else {
             const data = res.data;
-            console.log(data);
+
             if (data.isSuccess) {
                 toastSuccess("Success");
                 const token = data.token.accessToken;
-                console.log(token);
+
                 localStorage.setItem("Token", token);
                 navigate("/home");
             } else {
