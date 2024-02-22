@@ -6,6 +6,7 @@ import {
     TextAlignJustifyIcon,
     GearIcon,
     BackpackIcon,
+    PersonIcon,
 } from "@radix-ui/react-icons";
 import { IconProps } from "@radix-ui/react-icons/dist/types";
 
@@ -47,19 +48,30 @@ const components: {
         href: "/staff",
         description: "Settings",
     },
+    {
+        title: "Profile",
+        icon: PersonIcon,
+        href: "/staff/profile",
+        description: "Profile",
+    },
 ];
 
 export default function NavigationMenuDemo() {
     return (
-        <div className="flex-col">
-            {components.map((component) => (
-                <Link to={component.href}>
-                    <div className="flex text-sm font-medium p-3 hover:bg-slate-100 hover:rounded">
-                        <component.icon className="my-auto mr-2"></component.icon>
-                        {component.title}
-                    </div>
-                </Link>
-            ))}
+        <div className=" flex flex-col justify-between h-[95%] ">
+            <div className="flex-col">
+                {components.map((component) => (
+                    <Link to={component.href}>
+                        <div className="flex text-sm font-medium p-3 hover:bg-slate-100 hover:rounded">
+                            <component.icon className="my-auto mr-2"></component.icon>
+                            {component.title}
+                        </div>
+                    </Link>
+                ))}
+            </div>
+            <div className=" flex items-center justify-center">
+                <Link to="/login">Log Out</Link>
+            </div>
         </div>
     );
 }
