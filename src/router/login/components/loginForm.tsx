@@ -70,10 +70,8 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
             const data = res.data;
             if (data.isSuccess) {
                 toastSuccess("Success");
-
                 const token = data.data.accessToken;
                 localStorage.setItem("Token", token);
-
                 navigate("/home");
             } else {
                 for (let mess of data.messages) {

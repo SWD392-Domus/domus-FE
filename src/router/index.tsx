@@ -28,6 +28,7 @@ import Login from "./login";
 import Auth from "./auth";
 import Staff from "./staff";
 import StaffProfile from "./profile";
+import CreateProduct from "./staffCreateProduct";
 
 const RouterComponent: React.FC = () => {
     const publicRoute = [
@@ -39,6 +40,13 @@ const RouterComponent: React.FC = () => {
             restrict: true,
         },
         {
+            index: true,
+            path: "oauth/gg",
+            component: <Auth />,
+            exact: true,
+            restrict: true,
+        },
+      {
             index: true,
             path: "article",
             component: <ArticleList />,
@@ -197,6 +205,13 @@ const RouterComponent: React.FC = () => {
             exact: true,
             restrict: true,
         },
+        {
+            index: true,
+            path: "staff/products/create",
+            component: <CreateProduct/>,
+            exact: true,
+            restrict: true,
+        },
         // {
         //   index: true,
         //   path: "staff/products",
@@ -207,7 +222,7 @@ const RouterComponent: React.FC = () => {
         {
             index: true,
             path: "staff/products/:id",
-            component: <ProductDetailsStaff />,
+            component: <ProductDetailsStaff/>,
             exact: true,
             restrict: true,
         },

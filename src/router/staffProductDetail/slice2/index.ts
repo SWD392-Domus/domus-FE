@@ -8,30 +8,25 @@ interface ProductState {
 export const initialState: ProductState = {
     product: null
 }
-export const name = "product";
+export const name = "productCopy";
 const slice = createSlice({
     name,
     initialState,
     reducers: {
-        setProduct: (state, action) => {
+        setProductCopy: (state, action) => {
             state.product = action.payload; // Set product
         },
-        deleteOneDetail: (state, action) => {
+        deleteOneDetailCopy: (state, action) => {
             if (state.product) {
                 state.product.details = state.product.details.filter(detail => detail.id !== action.payload);
             }
         },
-        setProductDetails: (state, action) => {
+        setProductDetailsCopy: (state, action) => {
             if (state.product) {
                 const { updatedDetail } = action.payload;
                 state.product.details = state.product.details.map(detail =>
                     detail.id === updatedDetail.id ? { ...detail, ...updatedDetail } : detail
                 );
-            }
-        },
-        addProductDetails: (state, action) => {
-            if (state.product) {
-                state.product.details = [...state.product.details, action.payload];
             }
         }
     },
@@ -39,8 +34,7 @@ const slice = createSlice({
 injectReducer(name, slice.reducer);
 
 export const { 
-    setProduct,
-    deleteOneDetail,
-    setProductDetails,
-    addProductDetails
+    setProductCopy,
+    deleteOneDetailCopy,
+    setProductDetailsCopy
  } = slice.actions;
