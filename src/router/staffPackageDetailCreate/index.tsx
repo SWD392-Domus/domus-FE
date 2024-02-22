@@ -50,6 +50,7 @@ import ServiceList from "./components/ServiceList";
 interface Props {}
 
 const StaffPackageDetailCreate: React.FC<Props> = () => {
+    const [uploadedImages, setUploadedImages] = useState<File[]>([]);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const id: string = useSelector(selector.id);
@@ -65,19 +66,50 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
     );
     const { toast } = useToast();
 
-    const fileToDataUri = (file) =>
-        new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = (event) => {
-                resolve(event.target.result);
-            };
-            reader.readAsDataURL(file);
-        });
-
-    const onChange = (file) => {
-        fileToDataUri(file).then((dataUri) => {
-            console.log(dataUri);
-        });
+    const handleAddImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const files = event.target.files;
+        if (files) {
+            const newFiles = Array.from(files);
+            setUploadedImages((prevImages) => [...prevImages, ...newFiles]);
+        }
+        const uploadFunc = async () => {
+            if (uploadedImages.length === 0) {
+                toast({
+                    variant: "destructive",
+                    title: "No images selected",
+                    description: "Please select one or more images to upload.",
+                });
+                return;
+            }
+            const id = details.id;
+            const formData = new FormData();
+            uploadedImages.forEach((image) => {
+                formData.append("images", image);
+            });
+            try {
+                const res = await addPhoto(id, formData);
+                if (res) {
+                    toast({
+                        variant: "success",
+                        title: "Upload successful",
+                        description: "Images uploaded successfully.",
+                    });
+                } else {
+                    toast({
+                        variant: "destructive",
+                        title: "Upload failed",
+                        description: "Failed to upload images.",
+                    });
+                }
+            } catch (error) {
+                console.error("Error uploading images:", error);
+                toast({
+                    variant: "destructive",
+                    title: "Upload failed",
+                    description: "An error occurred while uploading images.",
+                });
+            }
+        };
     };
 
     const formSchema = z.object({
@@ -216,17 +248,10 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
                                             </FormLabel>
                                             <FormControl>
                                                 <Input
-                                                    // placeholder={ }
-                                                    {...field}
-                                                    className="mb-4"
+                                                    id="picture"
+                                                    multiple
                                                     type="file"
-                                                    onChange={(event) =>
-                                                        onChange(
-                                                            event.target
-                                                                .files[0] ||
-                                                                null
-                                                        )
-                                                    }
+                                                    onChange={handleAddImage}
                                                 />
                                             </FormControl>
 
@@ -385,11 +410,7 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
                                                                 </p>
                                                             </CardTitle>
                                                         </CardContent>
-                                                        <CardFooter className="">
-                                                            <div className="w-10 h-10 bg-yellowCustom flex justify-center items-center rounded-full cursor-pointer hover:opacity-80">
-                                                                <FaDeleteLeft className="text-black" />
-                                                            </div>
-                                                        </CardFooter>
+                                                        <CardFooter className=""></CardFooter>
                                                     </Card>
                                                 </>
                                             );

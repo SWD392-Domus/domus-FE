@@ -405,11 +405,7 @@ const PackageDetails: React.FC<Props> = () => {
                                                                 </p>
                                                             </CardTitle>
                                                         </CardContent>
-                                                        <CardFooter className="">
-                                                            <div className="w-10 h-10 bg-yellowCustom flex justify-center items-center rounded-full cursor-pointer hover:opacity-80">
-                                                                <FaDeleteLeft className="text-black" />
-                                                            </div>
-                                                        </CardFooter>
+                                                        <CardFooter className=""></CardFooter>
                                                     </Card>
                                                 </>
                                             );
