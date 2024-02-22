@@ -18,8 +18,8 @@ import {
     DialogClose,
 } from "@/components/ui/Dialog";
 import { Button } from "@/components/ui/Button/Button";
-import { ConfirmDeleteButton } from "../Button/ConfirmDeleteButton";
-import { ViewButton } from "../Button/ViewButton";
+import { useDispatch } from "react-redux";
+import { actions } from "../../slice";
 
 interface Props {
     // define your props here
@@ -27,6 +27,10 @@ interface Props {
 }
 
 export const CRUDDropdownMenu: React.FC<Props> = (props) => {
+    const dispatch = useDispatch();
+    const handleDelete = (id: string) => {
+        dispatch(actions.deleteSerivce(id));
+    };
     return (
         <Dialog>
             <DropdownMenu>
@@ -38,7 +42,7 @@ export const CRUDDropdownMenu: React.FC<Props> = (props) => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                    <ViewButton id={props.id}></ViewButton>
+
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>Update</DropdownMenuItem>
                     <DropdownMenuItem>
@@ -58,9 +62,12 @@ export const CRUDDropdownMenu: React.FC<Props> = (props) => {
                 </DialogHeader>
                 <DialogFooter>
                     <DialogClose>
-                        <ConfirmDeleteButton
-                            id={props.id}
-                        ></ConfirmDeleteButton>
+                        <Button
+                            variant={"destructive"}
+                            onClick={() => handleDelete(props.id)}
+                        >
+                            Delete
+                        </Button>
                     </DialogClose>
                 </DialogFooter>
             </DialogContent>
