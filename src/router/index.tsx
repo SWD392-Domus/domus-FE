@@ -26,6 +26,8 @@ import CustomizePackage from "./customizePackage";
 import ProductDetailsStaff from "./staffProductDetail";
 import Login from "./login";
 import Auth from "./auth";
+import Staff from "./staff";
+import StaffProfile from "./profile";
 import CreateProduct from "./staffCreateProduct";
 
 const RouterComponent: React.FC = () => {
@@ -60,6 +62,13 @@ const RouterComponent: React.FC = () => {
         },
         {
             index: true,
+            path: "oauth/gg",
+            component: <Auth />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
             path: "products",
             component: <ProductList />,
             exact: true,
@@ -71,22 +80,22 @@ const RouterComponent: React.FC = () => {
             component: <ProductDetails />,
             exact: true,
             restrict: true,
-          },
-          {
+        },
+        {
             index: true,
             path: "package",
             component: <PackageDetails />,
             exact: true,
             restrict: true,
-          },
-          {
+        },
+        {
             index: true,
             path: "customizepackage",
-            component: <CustomizePackage/>,
+            component: <CustomizePackage />,
             exact: true,
             restrict: true,
-          },
-        
+        },
+
         {
             index: true,
             path: "login",
@@ -105,6 +114,13 @@ const RouterComponent: React.FC = () => {
             index: true,
             path: "customizepackage",
             component: <CustomizePackage />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "login",
+            component: <Login />,
             exact: true,
             restrict: true,
         },
@@ -133,13 +149,20 @@ const RouterComponent: React.FC = () => {
         },
     ];
     const staffRoute = [
-        // {
-        //   index: true,
-        //   path: "staff",
-        //   component: <Staff />,
-        //   exact: true,
-        //   restrict: true,
-        // },
+        {
+            index: true,
+            path: "staff",
+            component: <Staff />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/profile",
+            component: <StaffProfile />,
+            exact: true,
+            restrict: true,
+        },
         {
             index: true,
             path: "staff/quotations/newQuotation",
@@ -202,7 +225,7 @@ const RouterComponent: React.FC = () => {
             component: <ProductDetailsStaff/>,
             exact: true,
             restrict: true,
-        }
+        },
     ];
     return (
         <BrowserRouter>

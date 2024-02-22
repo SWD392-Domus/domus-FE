@@ -67,23 +67,25 @@ export function DataTable<TData, TValue>({
       </div>
       <div className="rounded-md border mb-5">
         <Table>
-          <TableHeader>
+          <TableHeader className="bg-slate-200">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   const headerId = header.getContext().column.id
                   return (
-                    <TableHead key={header.id} className="">
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )
-                      }
-                      {["id", "productName", "category", "brand", "totalQuantity"].includes(headerId) &&
-                        <SortButton sortField={headerId} setSortField={setSortField} setDescending={setDescending}></SortButton>
-                      }
+                    <TableHead key={header.id} className="text-neutral-700">
+                      <div className="flex flex-row items-center gap-1">
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )
+                        }
+                        {["id", "productName", "brand", "totalQuantity"].includes(headerId) &&
+                          <SortButton sortField={headerId} setSortField={setSortField} setDescending={setDescending}></SortButton>
+                        }
+                      </div>
                     </TableHead>
                   )
                 })}

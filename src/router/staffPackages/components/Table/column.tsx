@@ -3,7 +3,7 @@ import { Avatar, AvatarImage } from "@/components/ui/Avatar"
 import { Checkbox } from "@/components/ui/Checkbox/checkbox"
 import { PackagesProps } from "../../types"
 import { CRUDDropdownMenu } from "../DropdownMenu/CRUD"
-import { TooltipDes } from "../Tooltip"
+// import { TooltipDes } from "../Tooltip"
 
 export const columns: ColumnDef<PackagesProps>[] = [
     {
@@ -50,32 +50,19 @@ export const columns: ColumnDef<PackagesProps>[] = [
         }
     },
     {
-        accessorKey: "packageName",
+        accessorKey: "name",
         header: "Name",
     },
     {
-        accessorKey: "category",
-        header: "Category",
-    },
-    {
-        accessorKey: "brand",
-        header: "Brand",
-    },
-    {
-        accessorKey: "description",
-        header: "Description",
+        accessorKey: "discount",
+        header: "Discount",
         cell: ({ row }) => {
-            return (
-                <TooltipDes description={row.getValue("description")}></TooltipDes>
-            )
+            return <div className="text-center">{row.getValue("discount")}</div>
         },
     },
     {
-        accessorKey: "totalQuantity",
-        header: "Total Quantity",
-        cell: ({ row }) => {
-            return <div className="text-center">{row.getValue("totalQuantity")}</div>
-        },
+        accessorKey: "serviceName",
+        header: "Service",
     },
     {
         id: "actions",

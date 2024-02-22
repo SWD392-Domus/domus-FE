@@ -58,7 +58,7 @@ const QuotationDetail: React.FC<Props> = () => {
                                 </div>
                                 <div className="right-side-3 basis-2/3">
                                     <div className="text-sm font-semibold mr-5 mb-1 pb-1 border-solid border-b-2 border-zinc-400">
-                                        Shipping Point
+                                        Customer Information
                                     </div>
                                     <div className="ava-header flex flex-row mb-1">
                                         <img src={userInfo.avaLink} alt="" className="h-10 w-10 bg-gray-300 mr-2" />

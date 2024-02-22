@@ -22,20 +22,16 @@ export const getPackagesPaging = async (
     const packagesItems = packagesData?.items?.map(
       (item: {
         id: string;
-        details: { images: { imageUrl: string }[] }[];
-        category: { name: string };
-        packageName: string;
-        brand: string;
-        description: string;
-        totalQuantity: number;
+        name: string;
+        discount: number;
+        services: { name: string }[];
+        packageImages: string[];
       }) => ({
-        id: item.id,
-        image: item.details[0]?.images[0]?.imageUrl,
-        category: item.category?.name,
-        packageName: item.packageName,
-        brand: item.brand,
-        description: item.description,
-        totalQuantity: item.totalQuantity,
+        id: item?.id,
+        image: item?.packageImages[0],
+        name: item?.name,
+        discount: item?.discount,
+        serviceName: item?.services[0]?.name,
       })
     );
     const lastPage = packagesData?.lastPage;

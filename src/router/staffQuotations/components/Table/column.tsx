@@ -1,21 +1,9 @@
-import {
-    DotsHorizontalIcon,
-} from "@radix-ui/react-icons"
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/Dropdown-menu"
-import { Button } from "@/components/ui/Button/Button"
-
 import { ColumnDef } from "@tanstack/react-table"
-// import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar"
 import { Checkbox } from "@/components/ui/Checkbox/checkbox"
-import { Badge } from "@/components/ui/Badge"
 import { QuotationsProps } from "../../types"
+import { CRUDDropdownMenu } from "../DropdownMenu/CRUD"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar"
+import { Badge } from "@/components/ui/Badge"
 
 
 // This type is used to define the shape of our data.
@@ -59,10 +47,10 @@ export const columns: ColumnDef<QuotationsProps>[] = [
             const staffName: string = row.getValue("staffName");
             return <div className=" text-right font-medium">{
                 <div className="flex items-center gap-1 ">
-                    {/* <Avatar>
-                        <AvatarImage src="https://github.com/shadcn.png" />
+                    <Avatar>
+                        <AvatarImage src={row.getValue("staffAva")} />
                         <AvatarFallback>CN</AvatarFallback>
-                    </Avatar> */}
+                    </Avatar>
                     <div className="text-destructive">{staffName}</div>
                 </div>
 
@@ -76,10 +64,10 @@ export const columns: ColumnDef<QuotationsProps>[] = [
             const customerName: string = row.getValue("customerName");
             return <div className=" text-right font-medium">{
                 <div className="flex items-center gap-1 ">
-                    {/* <Avatar>
-                        <AvatarImage src="https://github.com/shadcn.png" />
+                    <Avatar>
+                        <AvatarImage src={row.getValue("customerAva")} />
                         <AvatarFallback>CN</AvatarFallback>
-                    </Avatar> */}
+                    </Avatar>
                     <div className="text-destructive">{customerName}</div>
                 </div>
 
@@ -101,11 +89,11 @@ export const columns: ColumnDef<QuotationsProps>[] = [
     },
     {
         accessorKey: "status",
-        header: () => <div className="text-center">Status</div>,
+        header: () => <div className="text-right">Status</div>,
         cell: ({ row }) => {
             const value: string = (row.getValue("status") as string).toUpperCase()
             return (
-                <div className="text-center">
+                <div className="text-right">
                     <Badge variant="outline">{value}</Badge>
                 </div>
             )
@@ -115,28 +103,8 @@ export const columns: ColumnDef<QuotationsProps>[] = [
         id: "actions",
         enableHiding: false,
         cell: ({ row }) => {
-            // const quotation = row.original
-
             return (
-                <DropdownMenu key={row.id}>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="h-8 w-8 p-0">
-                            <span className="sr-only">Open menu</span>
-                            <DotsHorizontalIcon className="h-4 w-4" />
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem
-                        // onClick={() => delete(quotation.id)}
-                        >
-                            View
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>Update</DropdownMenuItem>
-                        <DropdownMenuItem>Delete</DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                <CRUDDropdownMenu id={row.getValue('id')} />
             )
         },
     },
