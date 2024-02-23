@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import CustomerSettings from "./customerSettings";
+import CustomerCart from "./customerCart";
 import CustomerQuotations from "./customerQuotations";
 import CustomerQuotationDetail from "./customerQuotationDetail";
-// import Staff from "./staff";
 import StaffProducts from "./staffProducts";
 import StaffPackages from "./staffPackages";
 import StaffQuotationNew from "./staffQuotationNew";
@@ -132,6 +132,13 @@ const RouterComponent: React.FC = () => {
             index: true,
             path: "customer/settings",
             component: <CustomerSettings />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "customer/settings/cart",
+            component: <CustomerCart />,
             exact: true,
             restrict: true,
         },

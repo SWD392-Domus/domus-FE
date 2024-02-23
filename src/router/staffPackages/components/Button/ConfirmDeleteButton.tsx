@@ -13,6 +13,7 @@ export const ConfirmDeleteButton: React.FC<Props> = (props) => {
         <Button onClick={() => deletePackage(props.id)
             .then(res => {
                 if (res === 200) {
+                    window.location.reload();
                     toast({
                         variant: "success",
                         title: "Delete Successfully.",
