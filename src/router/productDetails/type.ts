@@ -1,6 +1,7 @@
 export interface SingleProductProps{
     "id": string;
     "productName": string;
+    "productCategoryId": string;
     "brand": string;
     "description": string;
     "colors"?: string[];
