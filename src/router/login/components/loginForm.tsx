@@ -64,14 +64,16 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
     });
     async function onSubmit(values: z.infer<typeof formSchema>) {
         const res = await loginApi.login(values.email, values.password);
+        console.log(res);
         if (res.status != 200) {
             toastError("Something Wrong");
         } else {
             const data = res.data;
+
             if (data.isSuccess) {
                 toastSuccess("Success");
-                console.log(data);
-                const token = data.data.accessToken;
+                const token = data.token.accessToken;
+
                 localStorage.setItem("Token", token);
                 navigate("/home");
             } else {

@@ -1,4 +1,4 @@
-import { get, post, remove } from "./ApiCaller";
+import { get, post, put, remove } from "./ApiCaller";
 
 export const packageApi = {
   getAllPackages: (pageSize: number, pageIndex: number) => {
@@ -13,8 +13,25 @@ const tokenS = localStorage.getItem("Token") as string;
 const token = "Bearer " + tokenS;
 
 export const packageStaffApi = {
+  createPackage: (formData: HTMLElement | null | undefined) => {
+    return post(
+      `/Packages`,
+      formData,
+      {},
+      { Authorization: token, "Content-Type": "multipart/form-data" }
+    );
+  },
+  updatePackage: (id: string, formData: HTMLElement | null | undefined) => {
+    return put(
+      `/Packages?id=${id}`,
+      formData,
+      {},
+      { Authorization: token, "Content-Type": "multipart/form-data" }
+    );
+  },
+
   deletePackage: (id: string) => {
-    return remove(`/Packages/${id}`, {}, {}, { Authorization: token });
+    return remove(`/Packages?id=${id}`, {}, {}, { Authorization: token });
   },
   deleteManyPackages: (ids: string[]) => {
     return remove(`/Packages/multiple`, ids, {}, { Authorization: token });
@@ -82,7 +99,7 @@ export const packageStaffApi = {
       `/Packages/search?SearchField=${searchField}&SearchValue=${searchValue}&SortField=${sortField}&Descending=${descending}&PageSize=${pageSize}&PageIndex=${pageIndex}`
     );
   },
-  getPackageById: (id: number) => {
+  getPackageById: (id: string) => {
     return get(`/Packages/${id}`);
   },
   getAllPackages: () => {

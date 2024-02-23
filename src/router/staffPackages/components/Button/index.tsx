@@ -15,7 +15,7 @@ function onPrint() {
 
 export const CreateButton = () => {
     return (
-        <Link to="/staff/quotations/newQuotation">
+        <Link to="/staff/packages/newPackage">
             <Button className="">
                 <PlusCircledIcon className="my-auto mr-2" />
                 Package

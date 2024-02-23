@@ -60,6 +60,11 @@ export const columns: ColumnDef<ProductsProps>[] = [
     {
         accessorKey: "brand",
         header: "Brand",
+        cell: ({ row }) => {
+            return (
+                row.getValue("brand") ? row.getValue("brand") : "No Brand"
+            );
+        },
     },
     {
         accessorKey: "description",

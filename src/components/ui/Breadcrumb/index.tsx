@@ -14,6 +14,7 @@ function BreadCrumbHeader() {
         '/staff/quotations/newQuotation': 'New Quotation',
         '/staff/quotations/:quotationId': `Quotation ${quotationId} `,
         '/staff/packages': `Packages`,
+        '/staff/packages/newPackage': `New Package`,
         '/staff/packages/:packageId': `Package ${packageId} `,
         '/staff/products': 'Products',
     };
