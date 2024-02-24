@@ -12,9 +12,8 @@ const navLinks = [
     { title: "Blogs", href: "/article" },
     { title: "Products", href: "/products" },
     { title: "Our Current Packages", href: "/package" },
-    // { title: "Settings", href: "/settings" },    
+    // { title: "Settings", href: "/settings" },
     { title: "Staff", href: "/staff" },
-
 ];
 
 const signinLinks = {
@@ -37,7 +36,7 @@ interface Props {
 interface ProfileType {
     id?: string;
     email?: string;
-    name?: string;
+    userName?: string;
     phoneNumber?: string;
     profileImage?: string;
 }
@@ -55,6 +54,7 @@ const NavigationTab: React.FC<Props> = (props) => {
         if (token) {
             const res = await userApi.getOwnProfile(token);
             if (res.data.isSuccess) {
+                console.log(res.data.data);
                 setProfile(res.data.data);
                 SetLogin(true);
             }
@@ -74,22 +74,24 @@ const NavigationTab: React.FC<Props> = (props) => {
             className="bg-darkCustom z-50 w-screen h-[70%]
              origin-top fixed left-0"
         >
-            <div className="w-full flex justify-end mt-10 text-center items-center">
-                <h1 className="text-white cursor-pointer font-playfair max-md:text-xl mr-2 ">
-                    {profile?.name}
-                </h1>
+            {isLogin && (
+                <div className="w-full flex justify-end mt-10 text-center items-center">
+                    <h1 className="text-white cursor-pointer font-playfair max-md:text-xl mr-2 ">
+                        {profile?.userName}
+                    </h1>
 
-                <Avatar className=" mr-20">
-                    <AvatarImage
-                        src={
-                            profile?.profileImage
-                                ? profile?.profileImage
-                                : `https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=740&t=st=1708278601~exp=1708279201~hmac=1aa24ff6087733cedf6f8e1a5b3a4494c2cd07599ae7f026027cea653cbb8151`
-                        }
-                    />
-                    <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-            </div>
+                    <Avatar className=" mr-20">
+                        <AvatarImage
+                            src={
+                                profile?.profileImage
+                                    ? profile?.profileImage
+                                    : `https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=740&t=st=1708278601~exp=1708279201~hmac=1aa24ff6087733cedf6f8e1a5b3a4494c2cd07599ae7f026027cea653cbb8151`
+                            }
+                        />
+                        <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                </div>
+            )}
             <motion.div
                 variants={containerVars}
                 initial="initial"
