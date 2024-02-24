@@ -8,3 +8,10 @@ export type ProductsProps = {
   description: string;
   totalQuantity: number;
 };
+
+export type ServiceProps = {
+  id: string;
+  name: string;
+  price: number;
+  monetaryUnit: string;
+};

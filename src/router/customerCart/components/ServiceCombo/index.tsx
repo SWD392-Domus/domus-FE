@@ -13,9 +13,13 @@ import {
 } from "@/components/ui/Dialog";
 import { PencilIcon } from "lucide-react";
 import { Button } from "@/components/ui/Button/Button";
-// import ServiceList from "./ServiceList";
+import ServiceList from "./ServiceList";
+import { useSelector } from "react-redux";
+import selector from "../../slice/selector";
+import { ServiceProps } from "../../types";
 
 const PackageCombo: React.FC = () => {
+    const services: ServiceProps[] = useSelector(selector.services);
     return (
         <div className="h-auto flex justify-between gap-10">
             <div className="w-[70%]">
@@ -24,19 +28,19 @@ const PackageCombo: React.FC = () => {
                         <AccordionTrigger className="font-semibold text-3xl p-4">Services</AccordionTrigger>
                         <AccordionContent>
                             <div className="flex flex-col gap-2 shrink">
-                                {/* {services.map((service: ServiceProps) => ( */}
-                                <div className="flex flex-row justify-between">
-                                    <div className="font-semibold">
-                                        {/* {service.name} */}
+                                {services.map((service: ServiceProps) => (
+                                    <div className="flex flex-row justify-between">
+                                        <div className="font-semibold">
+                                            {service.name}
+                                        </div>
+                                        <div>
+                                            {new Intl.NumberFormat("en-US", {
+                                                style: "currency",
+                                                currency: "VND",
+                                            }).format(service.price)}
+                                        </div>
                                     </div>
-                                    <div>
-                                        {/* {new Intl.NumberFormat("en-US", {
-                                            style: "currency",
-                                            currency: "VND",
-                                        }).format(service.price)} */}
-                                    </div>
-                                </div>
-                                {/* ))} */}
+                                ))}
                             </div>
                         </AccordionContent>
                     </AccordionItem>
@@ -50,7 +54,7 @@ const PackageCombo: React.FC = () => {
                     </Button>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-[700px]">
-                    {/* <ServiceList data={services} /> */}
+                    <ServiceList data={services} />
                     <DialogFooter></DialogFooter>
                 </DialogContent>
             </Dialog>
