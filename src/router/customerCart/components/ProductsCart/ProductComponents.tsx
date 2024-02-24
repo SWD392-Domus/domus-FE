@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import QuantityInput from "./QuantityInput";
-import { TooltipDes } from './Tooltip/index.tsx';
+import QuantityInput from "./QuantityInput.tsx";
+import { TooltipDes } from '../Tooltip/index.tsx';
 
 interface Products {
   products: ProductProps[];

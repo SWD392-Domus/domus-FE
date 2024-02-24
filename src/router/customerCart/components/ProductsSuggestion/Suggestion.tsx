@@ -1,8 +1,8 @@
 import { Input } from '@/components/ui/Input'
-import { getProductsPaging } from "../usecase";
+import { getProductsPaging } from "../../usecase/index.ts";
 import React, { useEffect, useState } from 'react'
-import ProductCard from './ProductCard';
-import { ProductsProps } from "../types/index.ts";
+import ProductCard from './ProductCard.tsx';
+import { ProductsProps } from "../../types/index.ts";
 
 const Suggestion: React.FC = () => {
     const [products, setProducts] = useState<ProductsProps[]>([]);

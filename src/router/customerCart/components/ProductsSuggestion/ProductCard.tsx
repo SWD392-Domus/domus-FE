@@ -1,11 +1,11 @@
 import React from 'react'
-import { ProductsProps } from "../types/index.ts";
-import {
-    ResizableHandle,
-    ResizablePanel,
-    ResizablePanelGroup,
-} from "@/components/ui/Resizable"
-import { TooltipDes } from './Tooltip/index.tsx';
+import { ProductsProps } from "../../types/index.ts";
+// import {
+//     ResizableHandle,
+//     ResizablePanel,
+//     ResizablePanelGroup,
+// } from "@/components/ui/Resizable"
+import { TooltipDes } from '../Tooltip/index.tsx';
 import { FaCartArrowDown } from "react-icons/fa6";
 
 interface Props {
@@ -17,7 +17,7 @@ const ProductCard: React.FC<Props> = (props) => {
     return (
         <div className='h-[548px] w-[500px] overflow-scroll pr-5'>
             {props.products?.length ? props.products?.map((product: ProductsProps, index) => (
-                <div className="flex gap-5" key={index}>
+                <div className="flex gap-5 mb-3" key={index}>
                     <div className="basis-1/3">
                         <img src={product.image} className="" alt={product.productName} />
                     </div>

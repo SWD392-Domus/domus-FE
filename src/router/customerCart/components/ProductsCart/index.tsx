@@ -2,15 +2,7 @@ import { productList } from "@/router/products/data";
 import React from "react";
 import ProductComponents from "./ProductComponents";
 
-interface ProductProps {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  src: string;
-}
-
-const PackageCombo: React.FC = () => {
+const Cart: React.FC = () => {
   const productData = productList;
   return (
     <div className="flex flex-col gap-5">
@@ -20,4 +12,4 @@ const PackageCombo: React.FC = () => {
   );
 };
 
-export default PackageCombo;
+export default Cart;
