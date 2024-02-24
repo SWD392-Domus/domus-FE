@@ -7,11 +7,11 @@ import { ProductsProps } from "../../types/index.ts";
 // } from "@/components/ui/Resizable"
 import { TooltipDes } from '../Tooltip/index.tsx';
 import { FaCartArrowDown } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 interface Props {
     products: ProductsProps[];
 }
-
 
 const ProductCard: React.FC<Props> = (props) => {
     return (
@@ -29,12 +29,14 @@ const ProductCard: React.FC<Props> = (props) => {
                                 style: "currency",
                                 currency: "VND",
                             }).format(product.displayPrice * 1000)}</h1>
-                            <div
-                                className="w-10 h-10 bg-yellowCustom flex justify-center items-center 
+                            <Link to={`/product/${product.id}`}>
+                                <div
+                                    className="w-10 h-10 bg-yellowCustom flex justify-center items-center 
           rounded-full cursor-pointer hover:opacity-80"
-                            >
-                                <FaCartArrowDown className="text-black" />
-                            </div>
+                                >
+                                    <FaCartArrowDown className="text-black" />
+                                </div>
+                            </Link>
                         </div>
                     </div>
                 </div>

@@ -21,11 +21,11 @@ import { ServiceProps } from "../../types";
 const PackageCombo: React.FC = () => {
     const services: ServiceProps[] = useSelector(selector.services);
     return (
-        <div className="h-auto flex justify-between gap-10">
+        <div className="h-auto flex justify-between gap-10 w-[600px]">
             <div className="w-[70%]">
                 <Accordion type="single" collapsible defaultValue="item-1">
                     <AccordionItem value="item-1">
-                        <AccordionTrigger className="font-semibold text-3xl p-4">Services</AccordionTrigger>
+                        <AccordionTrigger className="font-semibold text-3xl py-4">Services</AccordionTrigger>
                         <AccordionContent>
                             <div className="flex flex-col gap-2 shrink">
                                 {services.map((service: ServiceProps) => (

@@ -18,16 +18,6 @@ const slice = createSlice({
     modal_confirm: (state: any, action: any) => {
       state.modal.confirm = action.payload;
     },
-    setPackage: (state: any, action: any) => {
-      state.services = action.payload.services;
-      state.productDetails = action.payload.productDetails;
-    },
-    getPackageInfo: (state: any) => {
-      state.info = {
-        services: state.services,
-        productDetails: state.productDetails,
-      };
-    },
     addProduct: (state: any, action: any | null) => {
       state.productDetails.push({
         ...action.payload.details[0],
