@@ -81,8 +81,14 @@ export const quotationStaffApi = {
       }
     );
   },
-  getQuotationById: (id: number) => {
-    return get(`/Quotations/${id}`);
+  getQuotationById: (id: string) => {
+    return get(
+      `/Quotations/${id}`,
+      {},
+      {
+        Authorization: token,
+      }
+    );
   },
   getAllQuotations: () => {
     return get(`/Quotations`);

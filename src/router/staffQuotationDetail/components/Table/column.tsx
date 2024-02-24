@@ -48,13 +48,15 @@ export const columns: ColumnDef<QuotationDetailInfo>[] = [
         accessorKey: "priceSum",
         header: () => <div className="text-right">Sum Price</div>,
         cell: ({ row }) => {
-            const priceSum = parseFloat(row.getValue("priceSum"))
+            const price: number = parseFloat(row.getValue("price") as string);
+            const quantity: number = parseFloat(row.getValue("quantity") as string);
+            const priceSum: number = price * quantity;
             const formatted = new Intl.NumberFormat("en-US", {
                 style: "currency",
                 currency: "VND",
-            }).format(priceSum)
+            }).format(priceSum);
 
-            return <div className="text-right font-medium">{formatted}</div>
+            return <div className="text-right font-medium">{formatted}</div>;
         },
     }
 ]

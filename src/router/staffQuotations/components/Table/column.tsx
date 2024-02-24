@@ -76,7 +76,7 @@ export const columns: ColumnDef<QuotationsProps>[] = [
     },
     {
         accessorKey: "totalPrice",
-        header: () => <div className="text-right">Total Price</div>,
+        header: () => <div className="text-left">Total Price</div>,
         cell: ({ row }) => {
             const totalPrice = parseFloat(row.getValue("totalPrice")) * 1000
             const formatted = new Intl.NumberFormat("en-US", {
@@ -84,16 +84,16 @@ export const columns: ColumnDef<QuotationsProps>[] = [
                 currency: "VND",
             }).format(totalPrice)
 
-            return <div className="text-right font-medium">{formatted}</div>
+            return <div className="text-left font-medium">{formatted}</div>
         },
     },
     {
         accessorKey: "status",
-        header: () => <div className="text-right">Status</div>,
+        header: () => <div className="text-left">Status</div>,
         cell: ({ row }) => {
             const value: string = (row.getValue("status") as string).toUpperCase()
             return (
-                <div className="text-right">
+                <div className="text-left">
                     <Badge variant="outline">{value}</Badge>
                 </div>
             )
