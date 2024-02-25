@@ -33,13 +33,13 @@ const OneProductDetail: React.FC<Props> = (props) => {
                         <img src={product?.images[0]?.imageUrl} className="" alt={product?.id} />
                     </div>
                     <div className="w-[400px] flex flex-col justify-between">
-                        <h1 className="font-semibold text-lg">{product?.id}</h1>
-                        <TooltipDes description={product?.id}></TooltipDes>
+                        <h1 className="font-semibold text-lg">{product?.productName}</h1>
+                        <TooltipDes description={product?.description}></TooltipDes>
                         <div className="flex justify-between items-center">
                             <h1 className="font-semibold">{new Intl.NumberFormat("en-US", {
                                 style: "currency",
                                 currency: "VND",
-                            }).format(product?.displayPrice)}</h1>
+                            }).format(product?.displayPrice * 1000)}</h1>
                             <div className="flex justify-end items-center gap-4">
                                 <div className="hover:bg-slate-50 p-2 rounded-lg" onClick={() => handleRemoveProduct(product?.id)}>Remove</div>
                                 <QuantityInput
