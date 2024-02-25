@@ -71,7 +71,7 @@ const NavigationTab: React.FC<Props> = (props) => {
             initial="initial"
             animate="animate"
             exit="exit"
-            className="bg-darkCustom z-50 w-screen h-[70%]
+            className="bg-darkCustom z-50 w-screen h-full
              origin-top fixed left-0"
         >
             {isLogin && (
