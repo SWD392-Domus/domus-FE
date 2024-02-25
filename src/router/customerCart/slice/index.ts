@@ -1,12 +1,10 @@
 import { injectReducer } from "@/store";
 import generateActions from "./generateActions";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { addProductDetails } from "@/router/productDetails/slice";
 
 export const initialState = {
   services: [],
   productDetails: [],
-  productDetailsIds: [],
 };
 
 export const name = "updateCart";
@@ -19,9 +17,6 @@ const slice = createSlice({
 
     modal_confirm: (state: any, action: any) => {
       state.modal.confirm = action.payload;
-    },
-    addProductDetailsIds: (state: any, action: PayloadAction<string>) => {
-      state.productDetailsIds.push(action.payload);
     },
     addProduct: (state: any, action: any | null) => {
       state.productDetails.push({

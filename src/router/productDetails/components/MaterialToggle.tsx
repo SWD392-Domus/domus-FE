@@ -1,9 +1,10 @@
 import { Label } from "@/components/ui/Label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/RadioGroup"// import { ToggleGroup, ToggleGroupItem } from "@/components/ui/ToggleGroup"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/RadioGroup"
+// import { ToggleGroup, ToggleGroupItem } from "@/components/ui/ToggleGroup"
 import { useDispatch } from "react-redux";
-import { actions } from "../sliceForSearch";
+// import { actions } from "../sliceForSearch";
 interface Props {
-  materials: string[];
+  materials: string;
 }
 
 const MaterialToggle: React.FC<Props> = ({
@@ -19,13 +20,14 @@ const MaterialToggle: React.FC<Props> = ({
     //     </ToggleGroupItem>
     //   ))}
     // </ToggleGroup>
-    <RadioGroup defaultValue="comfortable" onValueChange={(e) => dispatch(actions.setMaterial(e))}>
-      {materials.map((material, index) => (
-        <div className="flex items-center space-x-2">
-          <RadioGroupItem value={material} id={index.toString()} />
-          <Label htmlFor={index.toString()}>{material}</Label>
-        </div>
-      ))}
+    <RadioGroup defaultValue="comfortable">
+      {/* <RadioGroup defaultValue="comfortable" onValueChange={(e) => dispatch(actions.setMaterial(e))}> */}
+      {/* {materials.map((material, index) => ( */}
+      <div className="flex items-center space-x-2">
+        <RadioGroupItem value={materials} />
+        <Label >{materials}</Label>
+      </div>
+      {/* ))} */}
       {/* <div className="flex items-center space-x-2">
         <RadioGroupItem value="comfortable" id="r2" />
         <Label htmlFor="r2">Comfortable</Label>
