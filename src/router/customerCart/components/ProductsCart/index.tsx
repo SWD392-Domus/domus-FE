@@ -7,7 +7,7 @@ const Cart: React.FC = () => {
   return (
     <div className="flex flex-col gap-5">
       <div className="font-semibold text-3xl py-4">Cart</div>
-      <ProductComponents productIds={localStorage.getItem("cart")} />
+      <ProductComponents productIds={JSON.parse(localStorage.getItem("cart") ?? "")} />
     </div>
   );
 };

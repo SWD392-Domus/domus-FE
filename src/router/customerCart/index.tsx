@@ -32,7 +32,7 @@ const CustomerCart: React.FC = () => {
         staffId: "c713aacc-3582-4598-8670-22590d837179",
         expireAt: "2024-09-24T06:54:12.762Z",
         services: servicesIds,
-        productDetails: productDetailIds
+        productDetails: JSON.parse(localStorage.getItem("cart") || "[]")
       }
     );
     if (res === 200) {
