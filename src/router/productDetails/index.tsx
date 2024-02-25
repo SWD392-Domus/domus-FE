@@ -13,6 +13,8 @@ import Loading from "@/components/PublicComponents/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "./sliceHuy";
 import selector from "./sliceHuy/selector"
+import { actions as actionsCart } from "@/router/customerCart/slice"
+// import { selector as selectorCart } from "@/router/customerCart/slice/selector"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/ToggleGroup"
 
 type RouteParams = {
@@ -96,8 +98,7 @@ const ProductDetails: React.FC = () => {
 
   const handleAddToCart = async () => {
     const cart = localStorage.getItem("cart");
-    const cartArray = cart ? JSON.parse(cart) : [];
-    let productDetailIdToAdd;
+    let productDetailIdToAdd: any;
     fields.some((field: any) => {
       const foundValue = field.values.find((value: any) => value.ids.length > 0);
       if (foundValue) {
@@ -105,8 +106,23 @@ const ProductDetails: React.FC = () => {
         return true;
       }
     });
-    cartArray.push(productDetailIdToAdd);
+    const cartArray = cart ? JSON.parse(cart) : [];
+
+    const productExists = cartArray.some((cartObject: any) => {
+      if (cartObject.id == productDetailIdToAdd) {
+        cartObject.quantity += 1;
+        return true;
+      }
+      return false;
+    });
+
+    if (!productExists) {
+      cartArray.push({ id: productDetailIdToAdd, quantity: 1 });
+    }
+
     localStorage.setItem("cart", JSON.stringify(cartArray));
+    const cartNumber: any = JSON.parse(localStorage.getItem("cart") ?? "[]").length;
+    dispatch(actionsCart.setCartNumber(cartNumber));
   }
 
   return (

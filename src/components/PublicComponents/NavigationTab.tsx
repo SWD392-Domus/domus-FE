@@ -13,9 +13,7 @@ const navLinks = [
     { title: "Products", href: "/products" },
     { title: "Our Current Packages", href: "/package" },
     { title: "Settings", href: "/customer/settings" },
-    { title: "Cart", href: "/customer/settings/cart" },
     { title: "Staff", href: "/staff" },
-
 ];
 
 const signinLinks = {

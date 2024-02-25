@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 
-const QuantityInput: React.FC = () => {
+interface Props {
+  quan: number;
+}
+
+const QuantityInput: React.FC<Props> = (props) => {
   const [quantity, setQuantity] = useState<number>(0); // Initial quantity value
 
   const handleDecrement = () => {
@@ -19,7 +23,7 @@ const QuantityInput: React.FC = () => {
       <span
         className=" min-w-10 text-center"
       >
-        {quantity}
+        {props.quan}
       </span>
       <button onClick={handleIncrement} className="flex justify-center items-center ">
         <span className='text-2xl p-2 rounded-full hover:bg-slate-50'>+</span>

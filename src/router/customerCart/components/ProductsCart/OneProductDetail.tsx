@@ -2,15 +2,17 @@ import React, { useState, useEffect } from "react";
 import QuantityInput from "./QuantityInput.tsx";
 import { TooltipDes } from '../Tooltip/index.tsx';
 import { getProductDetailById } from "../../usecase";
+import { actions } from "../../slice/index.ts";
+import { useDispatch } from "react-redux";
 
 interface Props {
-    productId: string;
+    productIdQuan: any;
 }
 
 const OneProductDetail: React.FC<Props> = (props) => {
     const [updated, setUpdated] = useState(false);
     const [product, setProduct] = useState<any>({});
-
+    const dispatch = useDispatch();
     async function getProductDetailByIdService(productId: string) {
         const res = await getProductDetailById(
             productId
@@ -20,10 +22,12 @@ const OneProductDetail: React.FC<Props> = (props) => {
     }
 
     useEffect(() => {
-        getProductDetailByIdService(props.productId);
+        getProductDetailByIdService(props.productIdQuan.id);
     }, []);
 
-    function handleRemoveProduct(productId: string) { }
+    function handleRemoveProduct(productId: string) {
+        dispatch(actions.deleteProduct(productId))
+    }
 
     return (
         <>
@@ -42,8 +46,7 @@ const OneProductDetail: React.FC<Props> = (props) => {
                             }).format(product?.displayPrice * 1000)}</h1>
                             <div className="flex justify-end items-center gap-4">
                                 <div className="hover:bg-slate-50 p-2 rounded-lg" onClick={() => handleRemoveProduct(product?.id)}>Remove</div>
-                                <QuantityInput
-                                />
+                                <QuantityInput quan={props.productIdQuan.quantity} />
                             </div>
                         </div>
                     </div>
