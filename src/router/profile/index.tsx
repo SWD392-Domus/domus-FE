@@ -38,9 +38,6 @@ const StaffProfile: React.FC<Props> = (props) => {
         name: z.string().nonempty({
             message: "Name is required.",
         }),
-        email: z.string().email({
-            message: "Invalid email format.",
-        }),
         phone: z
             .string()
             .min(10)
@@ -59,7 +56,6 @@ const StaffProfile: React.FC<Props> = (props) => {
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: "",
-            email: "",
             phone: "",
             address: "",
             sex: "",
@@ -306,26 +302,6 @@ const StaffProfile: React.FC<Props> = (props) => {
                                 <FormControl>
                                     <Input
                                         placeholder="0838631706"
-                                        {...field}
-                                        className="text-black mb-4"
-                                    />
-                                </FormControl>
-
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="email"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel className="border-yellowCustom text-white mb-2 text-m">
-                                    Email
-                                </FormLabel>
-                                <FormControl>
-                                    <Input
-                                        placeholder="shadcn@gmail.com"
                                         {...field}
                                         className="text-black mb-4"
                                     />

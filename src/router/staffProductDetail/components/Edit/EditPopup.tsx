@@ -30,11 +30,16 @@ import { useToast } from "@/components/ui/Toast/use-toast";
 import { addPhoto } from "../../usecase";
 import { useDispatch } from "react-redux";
 import { SheetClose } from "@/components/ui/Sheet";
-import { setProductDetails } from "@/router/productDetails/slice";
+import {
+  setOrUpdateDetail,
+  setProductDetails,
+} from "@/router/productDetails/slice";
 interface DetailsProps {
+  productName: string;
   details: ProductDetailsProps;
+  index: number;
 }
-const EditPopup: React.FC<DetailsProps> = ({ details }) => {
+const EditPopup: React.FC<DetailsProps> = ({ productName, details, index }) => {
   const [uploadedImages, setUploadedImages] = useState<File[]>([]);
   const dispatch = useDispatch();
   const { toast } = useToast();
@@ -103,6 +108,19 @@ const EditPopup: React.FC<DetailsProps> = ({ details }) => {
     try {
       const res = await addPhoto(id, formData);
       if (res) {
+        const photo = res.data;
+        console.log("photo", photo);
+        photo.forEach((image: string) => {
+          dispatch(
+          setOrUpdateDetail({
+            ...details,
+            images: [...details.images, {
+              imageUrl: image,
+            }],
+          })
+        );
+        })
+        
         toast({
           variant: "success",
           title: "Upload successful",
@@ -150,7 +168,9 @@ const EditPopup: React.FC<DetailsProps> = ({ details }) => {
 
       <div className="flex flex-wrap justify-between gap-5">
         <div className="flex flex-col gap-2">
-          <h1 className="font-semibold text-2xl pb-2">{details.id}</h1>
+          <h1 className="font-semibold text-2xl pb-2">
+            {productName} Variant {index}
+          </h1>
           {attributes &&
             attributes.map((attribute, index) => (
               <div className="flex justify-between items-center gap-4">
@@ -166,7 +186,7 @@ const EditPopup: React.FC<DetailsProps> = ({ details }) => {
             <Popover>
               <PopoverTrigger asChild>
                 <Button
-                  className="w-[40%] flex justify-center items-center"
+                  className=" flex justify-center items-center"
                   variant={"default"}
                 >
                   Add more attribute
@@ -226,7 +246,7 @@ const EditPopup: React.FC<DetailsProps> = ({ details }) => {
         </div>
         <div
           className="w-full
-        lg:w-[50%] lg:h-[20%] pr-10 flex flex-col gap-3 px-2"
+         pr-10 flex flex-col gap-3 px-2"
         >
           <div className="grid w-full max-w-sm items-center gap-1.5">
             <Label htmlFor="picture">Picture</Label>
@@ -242,11 +262,15 @@ const EditPopup: React.FC<DetailsProps> = ({ details }) => {
               </Button>
             </div>
           </div>
-          <div className="h-[300px] rounded-lg ring-1 ring-border w-full">
+          <div className="h-[200px] rounded-lg ring-1 ring-border w-full overflow-scroll">
             <div className="flex flex-col w-full h-full p-6">
-              <div className="pt-5 ">
-                <EditCard images={images} />
-              </div>
+              {images && images.length > 0 ? (
+                <div className="pt-5 ">
+                  <EditCard images={images} />
+                </div>
+              ) : (
+                <div className="pt-5 ">No images available</div>
+              )}
             </div>
           </div>
           <SheetClose asChild>
