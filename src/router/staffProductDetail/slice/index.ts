@@ -12,8 +12,11 @@ const slice = createSlice({
         changeMode: (state) => {
             state.isEditMode = !state.isEditMode // Set product
         },
+        changeToFalse: (state) => {
+            state.isEditMode = false // Set product
+        },
     },
 });
 injectReducer(name, slice.reducer);
 
-export const { changeMode } = slice.actions;
+export const { changeMode,changeToFalse } = slice.actions;
