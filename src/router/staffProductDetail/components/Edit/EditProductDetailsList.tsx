@@ -10,7 +10,6 @@ import EditPopup from "./EditPopup";
 import { Label } from "@/components/ui/Label";
 import CreateDetailsPopup from "./CreateDetails";
 import { IoIosRemoveCircle } from "react-icons/io";
-import { toast } from "@/components/ui/Toast/use-toast";
 // import { deleteDetails } from "../../usecase/deleteDetails";
 import { deleteOneDetail } from "@/router/productDetails/slice";
 import { productSelector } from "@/router/productDetails/slice/selector";
@@ -33,11 +32,6 @@ const EditProductDetailsList: React.FC = () => {
   const handleDeleteDetails = (id: string) => {
     dispatch(deleteOneDetail(id));
     // setProduct({...product, details: product.details?.filter(detail => detail.id !== id)})
-    toast({
-      variant: "success",
-      title: "Delete successfully",
-      description: "Delete successfully.",
-    });
   };
 
   const { productName, details } = product;
