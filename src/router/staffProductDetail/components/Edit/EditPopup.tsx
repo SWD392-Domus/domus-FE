@@ -112,15 +112,18 @@ const EditPopup: React.FC<DetailsProps> = ({ productName, details, index }) => {
         console.log("photo", photo);
         photo.forEach((image: string) => {
           dispatch(
-          setOrUpdateDetail({
-            ...details,
-            images: [...details.images, {
-              imageUrl: image,
-            }],
-          })
-        );
-        })
-        
+            setOrUpdateDetail({
+              ...details,
+              images: [
+                ...details.images,
+                {
+                  imageUrl: image,
+                },
+              ],
+            })
+          );
+        });
+
         toast({
           variant: "success",
           title: "Upload successful",
@@ -152,6 +155,13 @@ const EditPopup: React.FC<DetailsProps> = ({ productName, details, index }) => {
       })
     );
   };
+  const handleChangeAttributeValue = (index: number, newValue: string) => {
+    setAttributes((prevAttributes) =>
+      prevAttributes.map((attribute, i) =>
+        i === index ? { ...attribute, value: newValue } : attribute
+      )
+    );
+  };
   const images = details.images.map((image: ImagesProps) => image.imageUrl);
   return (
     <div
@@ -175,7 +185,12 @@ const EditPopup: React.FC<DetailsProps> = ({ productName, details, index }) => {
             attributes.map((attribute, index) => (
               <div className="flex justify-between items-center gap-4">
                 <Label className="pr-4">{attribute.name}</Label>
-                <Input defaultValue={attribute.value} />
+                <Input
+                  onChange={(e) =>
+                    handleChangeAttributeValue(index, e.target.value)
+                  }
+                  defaultValue={attribute.value}
+                />
                 <BsBackspace
                   className="text-xl cursor-pointer"
                   onClick={() => handleRemoveAttribute(index)}
