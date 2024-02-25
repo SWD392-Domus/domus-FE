@@ -46,7 +46,7 @@ const RouterComponent: React.FC = () => {
             exact: true,
             restrict: true,
         },
-      {
+        {
             index: true,
             path: "article",
             component: <ArticleList />,
@@ -208,7 +208,7 @@ const RouterComponent: React.FC = () => {
         {
             index: true,
             path: "staff/products/create",
-            component: <CreateProduct/>,
+            component: <CreateProduct />,
             exact: true,
             restrict: true,
         },
@@ -222,7 +222,7 @@ const RouterComponent: React.FC = () => {
         {
             index: true,
             path: "staff/products/:id",
-            component: <ProductDetailsStaff/>,
+            component: <ProductDetailsStaff />,
             exact: true,
             restrict: true,
         },

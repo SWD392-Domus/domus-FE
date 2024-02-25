@@ -1,8 +1,8 @@
-import { ColumnDef } from "@tanstack/react-table"
-import { Avatar, AvatarImage } from "@/components/ui/Avatar"
-import { Checkbox } from "@/components/ui/Checkbox/checkbox"
-import { PackagesProps } from "../../types"
-import { CRUDDropdownMenu } from "../DropdownMenu/CRUD"
+import { ColumnDef } from "@tanstack/react-table";
+import { Avatar, AvatarImage } from "@/components/ui/Avatar";
+import { Checkbox } from "@/components/ui/Checkbox/checkbox";
+import { PackagesProps } from "../../types";
+import { CRUDDropdownMenu } from "../DropdownMenu/CRUD";
 // import { TooltipDes } from "../Tooltip"
 
 export const columns: ColumnDef<PackagesProps>[] = [
@@ -14,7 +14,9 @@ export const columns: ColumnDef<PackagesProps>[] = [
                     table.getIsAllPageRowsSelected() ||
                     (table.getIsSomePageRowsSelected() && "indeterminate")
                 }
-                onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+                onCheckedChange={(value) =>
+                    table.toggleAllPageRowsSelected(!!value)
+                }
                 aria-label="Select all"
             />
         ),
@@ -46,8 +48,8 @@ export const columns: ColumnDef<PackagesProps>[] = [
                 <Avatar>
                     <AvatarImage src={image} />
                 </Avatar>
-            )
-        }
+            );
+        },
     },
     {
         accessorKey: "name",
@@ -57,7 +59,9 @@ export const columns: ColumnDef<PackagesProps>[] = [
         accessorKey: "discount",
         header: "Discount",
         cell: ({ row }) => {
-            return <div className="text-center">{row.getValue("discount")}</div>
+            return (
+                <div className="text-center">{row.getValue("discount")}</div>
+            );
         },
     },
     {
@@ -68,9 +72,7 @@ export const columns: ColumnDef<PackagesProps>[] = [
         id: "actions",
         enableHiding: false,
         cell: ({ row }) => {
-            return (
-                <CRUDDropdownMenu id={row.getValue('id')} />
-            )
+            return <CRUDDropdownMenu id={row.getValue("id")} />;
         },
     },
-]
+];

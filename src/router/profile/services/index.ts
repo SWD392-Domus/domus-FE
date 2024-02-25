@@ -1,0 +1,1 @@
+export { getOwnProfileService } from "./getOwnProfileServices";
