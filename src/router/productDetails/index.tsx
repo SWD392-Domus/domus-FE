@@ -2,6 +2,7 @@ import TabNavigation from "./components/TabNavigation";
 import { Button } from "@/components/ui/Button/Button";
 import SizeToggle from "./components/SizeToggle";
 import ColorToggle from "./components/ColorToggle";
+import MaterialToggle from "./components/MaterialToggle";
 import ProductAccordion from "./components/ProductAccordion";
 import Suggestion from "./components/Suggestion";
 import Slider from "@/components/PublicComponents/Slider";
@@ -12,6 +13,8 @@ import Loading from "@/components/PublicComponents/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { productSelector } from "./slice/selector";
 import { setProduct } from "./slice";
+import { actions } from "@/router/customerCart/slice";
+import selector from "./sliceForSearch/selector";
 
 type RouteParams = {
   id: string;
@@ -22,6 +25,9 @@ const ProductDetails: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   const { product } = useSelector(productSelector);
+  const sizeA: string = useSelector(selector.size);
+  const colorA: string = useSelector(selector.color);
+  const materialA: string = useSelector(selector.material);
 
   useEffect(() => {
     const getProductDetailsData = async () => {
@@ -29,7 +35,8 @@ const ProductDetails: React.FC = () => {
         const res = await getProductDetails(id);
         if (res) {
           setIsLoading(false);
-          dispatch(setProduct(res));}
+          dispatch(setProduct(res));
+        }
       }
     };
 
@@ -51,6 +58,30 @@ const ProductDetails: React.FC = () => {
   const { productName, brand, description, details, sizes, colors, images, material } = product;
 
   const price = details && details.length > 0 ? details[0].displayPrice : 0;
+
+  const searchProductDetailIds = async () => {
+    const pdIds: string[] = [];
+    if (id) {
+      const res = await getProductDetails(id);
+      if (res) {
+        res.details.forEach((detail) => {
+          if (detail.attributes) {
+            detail.attributes.forEach((attribute) => {
+              if ((attribute.name === "Color" && attribute.value === colorA) && (attribute.name === "Material" && attribute.value === materialA) && (attribute.name === "Size" && attribute.value === sizeA)) {
+                pdIds.push(detail.id);
+              }
+            });
+          }
+        })
+      }
+    }
+    return pdIds;
+  }
+
+  const handleAddToCart = async () => {
+    const pdIds = await searchProductDetailIds();
+    dispatch(actions.addProductDetailsIds(pdIds[0]));
+  }
 
   return (
     <div className="">
@@ -101,7 +132,7 @@ const ProductDetails: React.FC = () => {
             <div className="flex flex-col gap-2">
               <div className="text-black font-thin">Material</div>
               <div className="flex justify-start">
-                <SizeToggle sizes={material} />
+                <MaterialToggle materials={material} />
               </div>
             </div>
           )}
@@ -109,7 +140,7 @@ const ProductDetails: React.FC = () => {
             <div className="flex flex-col gap-2">
               <div className="text-black font-thin">Color</div>
               <div className="flex justify-start">
-                <ColorToggle colors={colors}/>
+                <ColorToggle colors={colors} />
               </div>
             </div>
           )}
@@ -122,7 +153,7 @@ const ProductDetails: React.FC = () => {
             </div>
           )}
           <div className="mt-10">
-            <Button className="cursor-pointer">Request quotation</Button>
+            <Button onClick={handleAddToCart} className="cursor-pointer">Add To Cart</Button>
           </div>
           <div className="h-auto pr-2">
             <ProductAccordion sizes={sizes} title={description} />

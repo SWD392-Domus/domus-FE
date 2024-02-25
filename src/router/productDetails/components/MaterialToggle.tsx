@@ -3,26 +3,27 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/RadioGroup"// import
 import { useDispatch } from "react-redux";
 import { actions } from "../sliceForSearch";
 interface Props {
-  sizes: string[];
+  materials: string[];
 }
 
-const SizeToggle: React.FC<Props> = ({
-  sizes
+const MaterialToggle: React.FC<Props> = ({
+  materials
 }) => {
   const dispatch = useDispatch();
+
   return (
     // <ToggleGroup type="single" variant="outline">
-    //   {sizes.map((size) => (
-    //     <ToggleGroupItem value={size} aria-label="Toggle bold" onClick={handleClick}>
-    //       <p>{size}</p>
+    //   {materials.map((material) => (
+    //     <ToggleGroupItem value={material} aria-label="Toggle bold" onClick={handleClick}>
+    //       <p>{material}</p>
     //     </ToggleGroupItem>
     //   ))}
     // </ToggleGroup>
-    <RadioGroup defaultValue="comfortable" onValueChange={(e) => dispatch(actions.setSize(e))}>
-      {sizes.map((size, index) => (
+    <RadioGroup defaultValue="comfortable" onValueChange={(e) => dispatch(actions.setMaterial(e))}>
+      {materials.map((material, index) => (
         <div className="flex items-center space-x-2">
-          <RadioGroupItem value={size} id={index.toString()} />
-          <Label htmlFor={index.toString()}>{size}</Label>
+          <RadioGroupItem value={material} id={index.toString()} />
+          <Label htmlFor={index.toString()}>{material}</Label>
         </div>
       ))}
       {/* <div className="flex items-center space-x-2">
@@ -37,4 +38,4 @@ const SizeToggle: React.FC<Props> = ({
   )
 }
 
-export default SizeToggle
+export default MaterialToggle
