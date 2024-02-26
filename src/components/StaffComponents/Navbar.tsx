@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import {
     HomeIcon,
@@ -57,12 +57,20 @@ const components: {
 ];
 
 export default function NavigationMenuDemo() {
+    const location = useLocation();
+    console.log(location);
     return (
         <div className=" flex flex-col justify-between h-[95%] ">
             <div className="flex-col">
                 {components.map((component) => (
                     <Link to={component.href}>
-                        <div className="flex text-sm font-medium p-3 hover:bg-slate-100 hover:rounded">
+                        <div
+                            className={`flex text-sm font-medium p-3 hover:bg-slate-100 hover:text-black rounded ${
+                                location.pathname === component.href
+                                    ? "bg-black text-white"
+                                    : ""
+                            }`}
+                        >
                             <component.icon className="my-auto mr-2"></component.icon>
                             {component.title}
                         </div>

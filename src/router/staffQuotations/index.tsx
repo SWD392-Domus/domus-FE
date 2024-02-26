@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { DataTable } from "./components/Table/index.tsx";
-import { columns } from './components/Table/column.tsx'
+import { columns } from "./components/Table/column.tsx";
 import { QuotationsProps } from "./types/index.ts";
 import { getQuotationsPaging } from "./usecase";
-import QuotationsPagination from "./components/QuotationsPagination"
+import QuotationsPagination from "./components/QuotationsPagination";
 
 interface Props {
     // define your props here
@@ -27,7 +27,8 @@ const StaffQuotations: React.FC<Props> = () => {
         sortField: string,
         descending: boolean,
         pageSize: number,
-        pageIndex: number) {
+        pageIndex: number
+    ) {
         const res = await getQuotationsPaging(
             searchField,
             searchValue,
@@ -51,13 +52,9 @@ const StaffQuotations: React.FC<Props> = () => {
             sortField,
             descending,
             pageSize,
-            pageIndex);
-    }, [searchField,
-        searchValue,
-        sortField,
-        descending,
-        pageSize,
-        pageIndex]);
+            pageIndex
+        );
+    }, [searchField, searchValue, sortField, descending, pageSize, pageIndex]);
 
     return (
         <div className="">
@@ -82,7 +79,7 @@ const StaffQuotations: React.FC<Props> = () => {
                 />
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default StaffQuotations
+export default StaffQuotations;

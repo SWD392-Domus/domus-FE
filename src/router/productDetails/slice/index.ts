@@ -3,11 +3,11 @@ import { injectReducer } from "../../../store";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface ProductState {
-    product: SingleProductProps | null;
+  product: SingleProductProps | null;
 }
 export const initialState: ProductState = {
-    product: null
-}
+  product: null,
+};
 export const name = "product";
 const slice = createSlice({
     name,
@@ -46,6 +46,7 @@ const slice = createSlice({
             }
         }
     },
+  },
 });
 injectReducer(name, slice.reducer);
 

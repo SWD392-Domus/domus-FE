@@ -12,7 +12,7 @@ const navLinks = [
     { title: "Blogs", href: "/article" },
     { title: "Products", href: "/products" },
     { title: "Our Current Packages", href: "/package" },
-    // { title: "Settings", href: "/settings" },
+    { title: "Settings", href: "/customer/settings" },
     { title: "Staff", href: "/staff" },
 ];
 

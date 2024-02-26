@@ -20,12 +20,12 @@ const CustomerRoute = () => {
         return <Navigate to="/login" replace />;
     }
 
-    // Assuming 'userRole' is set to 'role' in your JWT payload
-    // Adjust this condition based on your JWT structure
-    if (userRole !== "Client") {
-        // User does not have the required role, redirect to a forbidden page
-        return <Navigate to="/403" replace />;
-    }
+    // // Assuming 'userRole' is set to 'role' in your JWT payload
+    // // Adjust this condition based on your JWT structure
+    // if (userRole !== "Client") {
+    //     // User does not have the required role, redirect to a forbidden page
+    //     return <Navigate to="/403" replace />;
+    // }
 
     // User has the required role, render the child components
     return <Outlet />;

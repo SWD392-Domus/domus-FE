@@ -38,7 +38,7 @@ const Slider = (
           }}
           className="thumbShow"
         >
-          {images.map((p, index) => {
+          {images?.map((p, index) => {
             return (
               <SwiperSlide
                 className="flex justify-center items-center"
@@ -58,7 +58,7 @@ const Slider = (
           modules={[Navigation, Thumbs]}
           className="thumbBtn mt-5"
         >
-          {images.map((item, index) => (
+          {images?.map((item, index) => (
             <SwiperSlide key={index}>
               <div className="">
                 <img src={item} alt="product images" />

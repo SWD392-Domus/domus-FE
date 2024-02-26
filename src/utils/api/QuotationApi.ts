@@ -5,6 +5,9 @@ const tokenS = localStorage.getItem("Token") as string;
 const token = "Bearer " + tokenS;
 
 export const quotationStaffApi = {
+  createQuotation: (data: any) => {
+    return post(`/Quotations`, data, {}, { Authorization: token });
+  },
   deleteQuotation: (id: string) => {
     return remove(`/Quotations/${id}`, {}, {}, { Authorization: token });
   },
@@ -78,8 +81,14 @@ export const quotationStaffApi = {
       }
     );
   },
-  getQuotationById: (id: number) => {
-    return get(`/Quotations/${id}`);
+  getQuotationById: (id: string) => {
+    return get(
+      `/Quotations/${id}`,
+      {},
+      {
+        Authorization: token,
+      }
+    );
   },
   getAllQuotations: () => {
     return get(`/Quotations`);
