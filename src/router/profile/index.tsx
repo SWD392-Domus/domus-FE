@@ -27,16 +27,47 @@ import { z } from "zod";
 import { getOwnProfile } from "./usecases";
 import { toastError } from "@/components/Toast";
 import ChangePasswordForm from "./components/ChangePasswordForm";
+import ChangeAvatar from "./components/changeAvatar";
+import { changeProfile } from "./usecases/ChangeProfile";
+import { toast } from "@/components/ui/Toast/use-toast";
 
 interface Props {
     // define your props here
 }
-
+interface Image {
+    file: File | null;
+    imageUrl: string | null;
+    isUpload: boolean;
+}
 const StaffProfile: React.FC<Props> = (props) => {
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log({ ...values, gender: sex });
+        console.log(values.fullName);
+        const formData = new FormData();
+        formData.append("FullName", values.fullName);
+        formData.append("Gender", sex);
+        formData.append("Address", values.address);
+        formData.append("PhoneNumber", values.phoneNumber);
+        if (uploadedImage?.isUpload) {
+            formData.append("ProfileImage", uploadedImage.file);
+        }
+        const token = localStorage.getItem("Token");
+        const res = await changeProfile(token as string, formData);
+        if (res.data.isSuccess) {
+            toast({
+                variant: "success",
+                title: "Update Successfully.",
+                description: "A  profile have been updated.",
+            });
+        } else {
+            toast({
+                variant: "destructive",
+                title: "Update UnSuccessfully.",
+                description: "A  profile have not been updated.",
+            });
+        }
     }
-
+    const [uploadedImage, setUploadedImage] = useState<Image | null>(null);
+    const [profile, setProfile] = useState<any | null>(null);
     const fetchProfile = async () => {
         const token = localStorage.getItem("Token") as string;
         const res = await getOwnProfile(token as string);
@@ -44,11 +75,18 @@ const StaffProfile: React.FC<Props> = (props) => {
             toastError("Fail to fetch Information");
         } else {
             if (res.data.isSuccess) {
-                const { fullName, address, phoneNumber, email } = res.data.data;
+                const { fullName, address, phoneNumber, email, profileImage } =
+                    res.data.data;
                 form.setValue("fullName", fullName);
                 form.setValue("address", address);
                 form.setValue("phoneNumber", phoneNumber);
                 form.setValue("email", email);
+                setProfile(res.data.data);
+                setUploadedImage({
+                    file: null,
+                    imageUrl: profileImage,
+                    isUpload: false,
+                });
             } else {
                 toastError("Faild to fetch Information");
             }
@@ -99,26 +137,16 @@ const StaffProfile: React.FC<Props> = (props) => {
                     <div className="relative">
                         <Avatar className="w-56 h-56 ">
                             <AvatarImage
-                                src="https://avatars.githubusercontent.com/u/101063286?v=4"
+                                src={uploadedImage?.imageUrl as string}
                                 alt="Avatar"
                             />
                             <AvatarFallback>OM</AvatarFallback>
                         </Avatar>
-                        <div className="absolute bottom-5 right-5 bg-black text-white p-2 rounded-3xl cursor-pointer">
-                            <svg
-                                width="15"
-                                height="15"
-                                viewBox="0 0 15 15"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <path
-                                    d="M11.8536 1.14645C11.6583 0.951184 11.3417 0.951184 11.1465 1.14645L3.71455 8.57836C3.62459 8.66832 3.55263 8.77461 3.50251 8.89155L2.04044 12.303C1.9599 12.491 2.00189 12.709 2.14646 12.8536C2.29103 12.9981 2.50905 13.0401 2.69697 12.9596L6.10847 11.4975C6.2254 11.4474 6.3317 11.3754 6.42166 11.2855L13.8536 3.85355C14.0488 3.65829 14.0488 3.34171 13.8536 3.14645L11.8536 1.14645ZM4.42166 9.28547L11.5 2.20711L12.7929 3.5L5.71455 10.5784L4.21924 11.2192L3.78081 10.7808L4.42166 9.28547Z"
-                                    fill="currentColor"
-                                    fill-rule="evenodd"
-                                    clip-rule="evenodd"
-                                ></path>
-                            </svg>
+                        <div className="absolute bottom-5 right-5 bg-black text-white p-2 rounded-3xl cursor-pointer hover:bg-white hover:text-black">
+                            <ChangeAvatar
+                                setUploadedImage={setUploadedImage}
+                                uploadedImage={uploadedImage}
+                            />
                         </div>
                     </div>
 

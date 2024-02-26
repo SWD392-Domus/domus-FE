@@ -5,7 +5,15 @@ export const userApi = {
     getOwnProfile: (token: string) => {
         return get(`${ownProfileURL}/${token}`);
     },
-    changeProfile: (token: string, data: any) => {
-        return put(`${ownProfileURL}/${token}`, data);
-    }
+    changeProfile: (
+        token: string,
+        formData: HTMLElement | null | undefined
+    ) => {
+        return put(
+            `${ownProfileURL}/${token}`,
+            formData,
+            {},
+            { Authorization: token, "Content-Type": "multipart/form-data" }
+        );
+    },
 };
