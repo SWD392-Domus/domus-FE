@@ -52,7 +52,7 @@ const ProductDetails: React.FC = () => {
                       [
                         {
                           value: attribute.value,
-                          ids: [detail.id]
+                          ids: [{ id: detail.id, price: detail.displayPrice }]
                         }
                       ]
                   }
@@ -69,13 +69,13 @@ const ProductDetails: React.FC = () => {
                   fieldsArray[index].values.push(
                     {
                       value: attribute.value,
-                      ids: [detail.id]
+                      ids: [{ id: detail.id, price: detail.displayPrice }]
                     }
                   );
                 } else {
 
                   const valueIndex = fieldsArray[index].values.findIndex((value: any) => value.value === attribute.value);
-                  fieldsArray[index].values[valueIndex].ids.push(detail.id);
+                  fieldsArray[index].values[valueIndex].ids.push({ id: detail.id, price: detail.displayPrice });
                 }
               }
             });
@@ -109,7 +109,7 @@ const ProductDetails: React.FC = () => {
     const cartArray = cart ? JSON.parse(cart) : [];
 
     const productExists = cartArray.some((cartObject: any) => {
-      if (cartObject.id == productDetailIdToAdd) {
+      if (cartObject.id == productDetailIdToAdd.id) {
         cartObject.quantity += 1;
         return true;
       }
@@ -117,7 +117,7 @@ const ProductDetails: React.FC = () => {
     });
 
     if (!productExists) {
-      cartArray.push({ id: productDetailIdToAdd, quantity: 1 });
+      cartArray.push({ id: productDetailIdToAdd.id, price: productDetailIdToAdd.price * 1000, quantity: 1 });
     }
 
     localStorage.setItem("cart", JSON.stringify(cartArray));

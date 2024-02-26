@@ -41,7 +41,7 @@ const slice = createSlice({
       state.fields.forEach((field: any) => {
         field.values = field.values.filter((value: any) =>
           action.payload.some((payloadItem: any) =>
-            value.ids.includes(payloadItem)
+            value.ids.some((idObject: any) => idObject.id === payloadItem.id)
           )
         );
       });

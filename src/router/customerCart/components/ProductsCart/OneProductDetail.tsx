@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/Button/Button.tsx";
 
 interface Props {
     productIdQuan: any;
+    updatedS: number;
+    setUpdatedS: any;
 }
 
 const OneProductDetail: React.FC<Props> = (props) => {
@@ -24,12 +26,12 @@ const OneProductDetail: React.FC<Props> = (props) => {
 
     useEffect(() => {
         getProductDetailByIdService(props.productIdQuan.id);
-    }, [updated]);
+    }, [updated, props.updatedS, props.productIdQuan.id]);
 
     function handleRemoveProduct(productId: string) {
         setUpdated(false);
+        props.setUpdatedS(props.updatedS + 1);
         dispatch(actions.deleteProduct(productId))
-        // setUpdated(true);
     }
 
     return (
