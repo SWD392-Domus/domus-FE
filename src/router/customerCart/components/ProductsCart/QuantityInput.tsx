@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { actions } from '../../slice/index.ts';
 
 interface Props {
-  quan: number;
+  productIdQuan: any;
 }
 
 const QuantityInput: React.FC<Props> = (props) => {
-  const [quantity, setQuantity] = useState<number>(0); // Initial quantity value
+  const dispatch = useDispatch();
 
   const handleDecrement = () => {
-    setQuantity(Math.max(0, quantity - 1));
+    dispatch(actions.decrementQuantity(props.productIdQuan.id));
   };
 
   const handleIncrement = () => {
-    setQuantity(quantity + 1);
+    dispatch(actions.incrementQuantity(props.productIdQuan.id));
   };
 
   return (
@@ -23,7 +25,7 @@ const QuantityInput: React.FC<Props> = (props) => {
       <span
         className=" min-w-10 text-center"
       >
-        {props.quan}
+        {props?.productIdQuan?.quantity}
       </span>
       <button onClick={handleIncrement} className="flex justify-center items-center ">
         <span className='text-2xl p-2 rounded-full hover:bg-slate-50'>+</span>

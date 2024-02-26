@@ -7,9 +7,8 @@ import {
 import { useSelector } from "react-redux";
 import { productSelector } from "@/router/productDetails/slice/selector";
 
-
-const ProductCard: React.FC= () => {
- const { product } = useSelector(productSelector);
+const ProductCard: React.FC = () => {
+  const { product } = useSelector(productSelector);
   if (!product) {
     return (
       <div className="h-screen flex justify-center items-center text-2xl">
@@ -30,28 +29,34 @@ const ProductCard: React.FC= () => {
           <div className="text-slate-400">
             {description ? description : "No description available"}
           </div>
-          <div className="flex gap-2">
-            <div>Brand:</div>
-            <div className="text-slate-400">{brand}</div>
-          </div>
-          <div className="flex gap-2">
-            <div>Size:</div>
-            {sizes
-              ? sizes.map((size: string) => (
+          {brand && (
+            <div className="flex gap-2">
+              <div>Brand:</div>
+              <div className="text-slate-400">{brand}</div>
+            </div>
+          )}
+
+          {sizes
+            ? sizes.map((size: string) => (
+                <div className="flex gap-2">
+                  <div>Size:</div>
                   <div className="text-slate-400">{size}</div>
-                ))
-              : "No sizes available"}
-          </div>
+                </div>
+              ))
+            : "No sizes available"}
+
           <div className="flex justify-center items-center gap-2">
-            <div>Colors:</div>
             {colors ? (
               colors.map((color: string) => (
-                <div
-                  key={color}
-                  className={
-                    color === "black" ? "bg-black p-4" : `bg-${color}-600 p-4`
-                  }
-                />
+                <>
+                  <div>Colors:</div>
+                  <div
+                    key={color}
+                    className={
+                      color === "black" ? "bg-black p-4" : `bg-${color}-600 p-4`
+                    }
+                  />
+                </>
               ))
             ) : (
               <div>No colors available</div>

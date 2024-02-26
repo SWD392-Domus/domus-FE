@@ -11,8 +11,8 @@ import { useEffect, useState } from "react";
 import { getProductDetailsHuy } from "./usecases/getProductDetailsHuy";
 import Loading from "@/components/PublicComponents/Loading";
 import { useDispatch, useSelector } from "react-redux";
-import { actions } from "./sliceHuy";
-import selector from "./sliceHuy/selector"
+import { actions } from "./sliceForCart";
+import selector from "./sliceForCart/selector"
 import { actions as actionsCart } from "@/router/customerCart/slice"
 // import { selector as selectorCart } from "@/router/customerCart/slice/selector"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/ToggleGroup"
@@ -169,7 +169,7 @@ const ProductDetails: React.FC = () => {
               {new Intl.NumberFormat("en-US", {
                 style: "currency",
                 currency: "VND",
-              }).format(product?.details[0]?.displayPrice)}
+              }).format(product?.details[0]?.displayPrice * 1000)}
             </div>
             {fields.map((field) => (
               <div className="flex flex-col gap-2">
