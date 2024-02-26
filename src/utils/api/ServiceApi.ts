@@ -8,15 +8,16 @@ import { get, post, put, remove } from "./ApiCaller";
 //     return get(`/Services/${id}`);
 //   },
 // };
-const tokenS = localStorage.getItem("Token") as string;
-
-const token = "Bearer " + tokenS;
 
 export const serviceStaffApi = {
   getAllServices: () => {
     return get(`/Services/all`);
   },
-  updateService: (id: string, formData: HTMLElement | null | undefined) => {
+  updateService: (
+    id: string,
+    formData: HTMLElement | null | undefined,
+    token: string
+  ) => {
     return put(
       `/Services?id=${id}`,
       formData,
@@ -25,17 +26,18 @@ export const serviceStaffApi = {
     );
   },
 
-  deleteService: (id: string) => {
+  deleteService: (id: string, token: string) => {
     return remove(`/Services?id=${id}`, {}, {}, { Authorization: token });
   },
-  deleteManyServices: (ids: string[]) => {
+  deleteManyServices: (ids: string[], token: string) => {
     return remove(`/Services/multiple`, ids, {}, { Authorization: token });
   },
   searchServices: (
     pageSize: number,
     pageIndex: number,
     searchField: string,
-    searchKeyword: string
+    searchKeyword: string,
+    token: string
   ) => {
     return post(
       `/Services/search`,
@@ -63,7 +65,8 @@ export const serviceStaffApi = {
     pageSize: number,
     pageIndex: number,
     sortField: string,
-    descending: boolean
+    descending: boolean,
+    token: string
   ) => {
     return post(
       `/Services/search`,

@@ -8,12 +8,9 @@ export const packageApi = {
     return get(`/Packages/${id}`);
   },
 };
-const tokenS = localStorage.getItem("Token") as string;
-
-const token = "Bearer " + tokenS;
 
 export const packageStaffApi = {
-  createPackage: (formData: HTMLElement | null | undefined) => {
+  createPackage: (formData: HTMLElement | null | undefined, token: string) => {
     return post(
       `/Packages`,
       formData,
@@ -21,7 +18,11 @@ export const packageStaffApi = {
       { Authorization: token, "Content-Type": "multipart/form-data" }
     );
   },
-  updatePackage: (id: string, formData: HTMLElement | null | undefined) => {
+  updatePackage: (
+    id: string,
+    formData: HTMLElement | null | undefined,
+    token: string
+  ) => {
     return put(
       `/Packages?id=${id}`,
       formData,
@@ -30,17 +31,18 @@ export const packageStaffApi = {
     );
   },
 
-  deletePackage: (id: string) => {
+  deletePackage: (id: string, token: string) => {
     return remove(`/Packages?id=${id}`, {}, {}, { Authorization: token });
   },
-  deleteManyPackages: (ids: string[]) => {
+  deleteManyPackages: (ids: string[], token: string) => {
     return remove(`/Packages/multiple`, ids, {}, { Authorization: token });
   },
   searchPackages: (
     pageSize: number,
     pageIndex: number,
     searchField: string,
-    searchKeyword: string
+    searchKeyword: string,
+    token: string
   ) => {
     return post(
       `/Packages/search`,
@@ -68,7 +70,8 @@ export const packageStaffApi = {
     pageSize: number,
     pageIndex: number,
     sortField: string,
-    descending: boolean
+    descending: boolean,
+    token: string
   ) => {
     return post(
       `/Packages/search`,
