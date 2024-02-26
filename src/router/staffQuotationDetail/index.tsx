@@ -87,14 +87,17 @@ const QuotationDetail: React.FC<Props> = () => {
                         <MakeContractButton></MakeContractButton>
                         <div className="staff-assigned-info my-7">
                             <div className="mb-2">Assigned Staff</div>
-                            <div className="flex flex-row mb-2">
-                                <Avatar>
+                            <div
+                                className="flex flex-row 
+                            "
+                            >
+                                <Avatar className="mr-2">
                                     <AvatarImage src={staff.profileImage} />
                                 </Avatar>
 
-                                <span className="my-auto font-medium">
+                                <h2 className="my-auto font-medium">
                                     {staff.userName}
-                                </span>
+                                </h2>
                             </div>
                         </div>
                     </div>
@@ -142,13 +145,13 @@ const QuotationDetail: React.FC<Props> = () => {
                                         <div className=" flex flex-row mb-1">
                                             <Avatar className="mr-2">
                                                 <AvatarImage
-                                                    className="w-full"
+                                                    className=""
                                                     src={customer.profileImage}
                                                 />
                                             </Avatar>
-                                            <span className="my-auto font-medium font-sans">
-                                                {customer.fullName}
-                                            </span>
+                                            <h2 className="my-auto font-medium font-sans">
+                                                {customer.userName}
+                                            </h2>
                                         </div>
                                         <div className="user-info-body text-sm">
                                             <div className="mail-info flex flex-row mb-1">
