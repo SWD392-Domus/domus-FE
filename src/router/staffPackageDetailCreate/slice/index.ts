@@ -39,6 +39,16 @@ const slice = createSlice({
             state.packageName = action.payload.packageName;
             state.packageImages = action.payload.packageImages;
         },
+        resetPackage: (state: any, action: any) => {
+            state.id = "";
+            state.name = "";
+            state.estimatedPrice = "";
+            state.discount = "";
+            state.services = "";
+            state.productDetails = "";
+            state.packageName = "";
+            state.packageImages = "";
+        },
         getPackageInfo: (state: any) => {
             state.info = {
                 id: state.id,

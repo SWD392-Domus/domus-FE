@@ -27,7 +27,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import selector from "./slice/selector";
 import { actions } from "./slice";
-import { Avatar } from "@/components/ui/Avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/Avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
 import { serviceColums } from "./components/ServiceTable/column";
 
@@ -48,7 +48,7 @@ const QuotationDetail: React.FC<Props> = () => {
     const negotiationLog: any = useSelector(selector.negotiationLog);
     const services: any = useSelector(selector.services);
     const [updated, setUpdated] = useState(false);
-
+    console.log(totalPrice);
     // const location = useLocation();
     // const navigate = useNavigate();
 
@@ -82,7 +82,7 @@ const QuotationDetail: React.FC<Props> = () => {
                             {new Intl.NumberFormat("en-US", {
                                 style: "currency",
                                 currency: "VND",
-                            }).format(totalPrice)}
+                            }).format(totalPrice * 1000)}
                         </div>
                         <MakeContractButton></MakeContractButton>
                         <div className="staff-assigned-info my-7">
@@ -93,6 +93,7 @@ const QuotationDetail: React.FC<Props> = () => {
                             >
                                 <Avatar className="mr-2">
                                     <AvatarImage src={staff.profileImage} />
+                                    <AvatarFallback>Staff</AvatarFallback>
                                 </Avatar>
 
                                 <h2 className="my-auto font-medium">
@@ -148,6 +149,9 @@ const QuotationDetail: React.FC<Props> = () => {
                                                     className=""
                                                     src={customer.profileImage}
                                                 />
+                                                <AvatarFallback>
+                                                    C
+                                                </AvatarFallback>
                                             </Avatar>
                                             <h2 className="my-auto font-medium font-sans">
                                                 {customer.userName}
@@ -195,7 +199,7 @@ const QuotationDetail: React.FC<Props> = () => {
                             </div>
                             <div className="detail-table">
                                 <div className="mt-7 text-xl font-semibold">
-                                    Details
+                                    Services
                                 </div>
                                 <div className="mx-auto py-5">
                                     <DataTable
