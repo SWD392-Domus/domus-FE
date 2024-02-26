@@ -69,7 +69,7 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
         toastSuccess("Login Successfully");
         navigate("/home");
       } else {
-        for (let mess of res.data.messages) {
+        for (const mess of res.data.messages) {
           toastError(mess.content);
         }
       }

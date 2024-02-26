@@ -20,6 +20,7 @@ const ProductDetailsList: React.FC = () => {
   if (!details) {
     return <div>No details</div>;
   }
+  const { productName } = product;
   return (
     <div
       className="pt-2 ring-1 ring-border h-[250px] overflow-scroll
@@ -27,7 +28,7 @@ const ProductDetailsList: React.FC = () => {
     "
     >
       <div className="flex flex-wrap gap-2 p-2 justify-start items-center">
-        {details.map((product: ProductDetailsProps) => (
+        {details.map((product: ProductDetailsProps, index: number) => (
           <Dialog key={"top"}>
             <DialogTrigger asChild>
               <div
@@ -43,12 +44,12 @@ const ProductDetailsList: React.FC = () => {
                   )}
                 </div>
                 <div className="w-full flex justify-center items-center">
-                  <p className="truncate text-sm font-semibold">{product.id}</p>
+                  <p className="truncate text-sm font-semibold">{productName} Variant {index}</p>
                 </div>
               </div>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[70%]" >
-              <ProductPopup details={product} />
+              <ProductPopup index={index} details={product} />
             </DialogContent>
           </Dialog>
         ))}

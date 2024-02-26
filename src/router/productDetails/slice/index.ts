@@ -1,6 +1,6 @@
-import { SingleProductProps } from "@/router/productDetails/type";
+import { ProductDetailsProps, SingleProductProps } from "@/router/productDetails/type";
 import { injectReducer } from "../../../store";
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface ProductState {
     product: SingleProductProps | null;
@@ -33,6 +33,17 @@ const slice = createSlice({
             if (state.product) {
                 state.product.details = [...state.product.details, action.payload];
             }
+        },
+        setOrUpdateDetail: (state, action: PayloadAction<ProductDetailsProps>) => {
+            if (state.product) {
+                const updatedDetail = action.payload;
+                const index = state.product.details.findIndex(detail => detail.id === updatedDetail.id);
+                if (index !== -1) {
+                    state.product.details[index] = updatedDetail; // Update existing detail
+                } else {
+                    state.product.details.push(updatedDetail); // Add new detail if it doesn't exist
+                }
+            }
         }
     },
 });
@@ -42,5 +53,6 @@ export const {
     setProduct,
     deleteOneDetail,
     setProductDetails,
-    addProductDetails
+    addProductDetails,
+    setOrUpdateDetail
  } = slice.actions;
