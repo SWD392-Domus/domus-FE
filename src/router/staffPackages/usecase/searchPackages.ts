@@ -6,11 +6,13 @@ export const searchPackages = async (
   searchField: string,
   searchKeyword: string
 ) => {
+  const token = ("Bearer " + localStorage.getItem("Token")) as string;
   const response = await searchPackagesService(
     pageSize,
     pageIndex,
     searchField,
-    searchKeyword
+    searchKeyword,
+    token
   );
   if (response.status === 200) {
     const packagesData = response?.data?.data;

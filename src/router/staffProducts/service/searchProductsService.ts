@@ -4,12 +4,14 @@ export const searchProductsService = async (
   pageSize: number,
   pageIndex: number,
   searchField: string,
-  searchKeyword: string
+  searchKeyword: string,
+  token: string
 ) => {
   return productStaffApi.searchProducts(
     pageSize,
     pageIndex,
     searchField,
-    searchKeyword
+    searchKeyword,
+    token
   );
 };

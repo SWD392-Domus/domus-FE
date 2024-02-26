@@ -1,7 +1,8 @@
 import { createPackageService } from "../service";
 // import { PackageProps } from "../types";
 export const createPackage = async (formData: any) => {
-    const response = await createPackageService(formData);
+  const token = ("Bearer " + localStorage.getItem("Token")) as string;
+  const response = await createPackageService(formData, token);
 
-    return response.status;
+  return response.status;
 };

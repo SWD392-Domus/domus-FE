@@ -6,7 +6,8 @@ export const getQuotationsPagingService = async (
   sortField: string,
   descending: boolean,
   pageSize: number,
-  pageIndex: number
+  pageIndex: number,
+  token: string
 ) => {
   return quotationStaffApi.getQuotationsPaging(
     searchField,
@@ -14,6 +15,7 @@ export const getQuotationsPagingService = async (
     sortField,
     descending,
     pageSize,
-    pageIndex
+    pageIndex,
+    token
   );
 };

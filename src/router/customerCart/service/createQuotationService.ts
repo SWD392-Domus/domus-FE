@@ -1,5 +1,5 @@
 import { quotationStaffApi } from "@/utils/api/QuotationApi";
 
-export const createQuotationService = async (data: any) => {
-  return quotationStaffApi.createQuotation(data);
+export const createQuotationService = async (data: any, token: string) => {
+  return quotationStaffApi.createQuotation(data, token);
 };
