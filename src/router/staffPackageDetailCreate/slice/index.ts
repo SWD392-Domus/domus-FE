@@ -39,7 +39,7 @@ const slice = createSlice({
             state.packageName = action.payload.packageName;
             state.packageImages = action.payload.packageImages;
         },
-        resetPackage: (state: any, action: any) => {
+        resetPackage: (state: any) => {
             state.id = "";
             state.name = "";
             state.estimatedPrice = "";
