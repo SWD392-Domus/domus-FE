@@ -36,7 +36,7 @@ const CustomerCart: React.FC = () => {
         description: "A request was sent.",
         action: <ToastAction altText="Close">Close</ToastAction>,
       });
-      // navigate(`/staff/packages`);
+      localStorage.removeItem("cart");
     } else {
       toast({
         variant: "destructive",
