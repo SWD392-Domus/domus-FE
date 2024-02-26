@@ -1,4 +1,4 @@
-import { DataTable } from "./components/Table";
+import { DataTable } from "./components/ServiceTable";
 import { columns, data } from "./components/Table/column";
 import {
     userInfo,
@@ -29,6 +29,7 @@ import selector from "./slice/selector";
 import { actions } from "./slice";
 import { Avatar } from "@/components/ui/Avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
+import { serviceColums } from "./components/ServiceTable/column";
 
 interface Props {
     // define your props here
@@ -45,7 +46,7 @@ const QuotationDetail: React.FC<Props> = () => {
     const expireAt: string = useSelector(selector.expireAt);
     const products: any[] = useSelector(selector.products);
     const negotiationLog: any = useSelector(selector.negotiationLog);
-
+    const services: any = useSelector(selector.services);
     const [updated, setUpdated] = useState(false);
 
     // const location = useLocation();
@@ -106,10 +107,10 @@ const QuotationDetail: React.FC<Props> = () => {
                                 </div>
                                 <div className="flex flex-row flex-wrap">
                                     <div className="left-side-3 basis-1/3">
-                                        <div className="text-sm font-semibold mr-5 mb-1 pb-1 border-solid border-b-2 border-zinc-400">
+                                        <div className="text-md font-semibold mr-5 mb-1 pb-1 border-solid border-b-2 border-zinc-400">
                                             Sales Information
                                         </div>
-                                        <div className="text-xs mb-1 ">
+                                        <div className="text-md mb-1 ">
                                             <div className="flex flex-row">
                                                 <div className="font-semibold mr-1">
                                                     Request Date
@@ -121,7 +122,7 @@ const QuotationDetail: React.FC<Props> = () => {
                                                 </p>
                                             </div>
                                         </div>
-                                        <div className="text-xs">
+                                        <div className="text-md">
                                             <div className="flex flex-row">
                                                 <div className="font-semibold mr-1">
                                                     Exprie Date
@@ -135,8 +136,8 @@ const QuotationDetail: React.FC<Props> = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="right-side-3 basis-2/3 font-sans">
-                                        <div className="text-sm font-semibold mr-5 mb-1 pb-1 border-solid border-b-2 border-zinc-400">
+                                    <div className="right-side-3 basis-2/3 font-sans text-md">
+                                        <div className="text-md font-semibold mr-5 mb-1 pb-1 border-solid border-b-2 border-zinc-400">
                                             Customer Information
                                         </div>
                                         <div className=" flex flex-row mb-1">
@@ -146,21 +147,21 @@ const QuotationDetail: React.FC<Props> = () => {
                                                     src={customer.profileImage}
                                                 />
                                             </Avatar>
-                                            <span className="my-auto font-medium font-sans">
+                                            <span className="my-auto font-medium font-sans text-md">
                                                 {customer.fullName}
                                             </span>
                                         </div>
-                                        <div className="user-info-body text-sm">
+                                        <div className="user-info-body text-md">
                                             <div className="mail-info flex flex-row mb-1">
                                                 <HomeIcon className="my-auto mr-2" />
-                                                <span className="font-sans">
+                                                <span className="font-sans text-md">
                                                     {customer.address
                                                         ? customer.address
                                                         : "N/A"}
                                                 </span>
                                             </div>
                                         </div>
-                                        <div className="user-info-body text-sm">
+                                        <div className="user-info-body text-md">
                                             <div className="mail-info flex flex-row mb-1">
                                                 <EnvelopeClosedIcon className="my-auto mr-2" />
                                                 <span className="">
@@ -168,7 +169,7 @@ const QuotationDetail: React.FC<Props> = () => {
                                                 </span>
                                             </div>
                                         </div>
-                                        <div className="user-info-body text-sm">
+                                        <div className="user-info-body text-md">
                                             <div className="phone-info flex flex-row mb-1">
                                                 <PersonIcon className="my-auto mr-2" />
                                                 <span className="">
@@ -187,6 +188,15 @@ const QuotationDetail: React.FC<Props> = () => {
                                     <DataTable
                                         columns={columns}
                                         data={products}
+                                    />
+                                </div>
+                                <div className="mt-7 text-xl font-semibold">
+                                    Services
+                                </div>
+                                <div className="mx-auto py-5">
+                                    <DataTable
+                                        columns={serviceColums}
+                                        data={services}
                                     />
                                     <div className="p-2 flex flex-row justify-between font-semibold border-b-2 border-zinc-100">
                                         <div className="total-price-title mx-11">

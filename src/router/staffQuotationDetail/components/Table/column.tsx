@@ -36,7 +36,7 @@ export const columns: ColumnDef<QuotationDetailInfo>[] = [
         cell: ({ row }) => {
             const value: string = row.getValue("price");
             return (
-                <div className="text-center font-medium">
+                <div className="text-left font-medium">
                     {new Intl.NumberFormat("en-US", {
                         style: "currency",
                         currency: "VND",
@@ -59,7 +59,7 @@ export const columns: ColumnDef<QuotationDetailInfo>[] = [
     },
     {
         accessorKey: "priceSum",
-        header: () => <div className="text-right">Sum Price</div>,
+        header: () => <div className="text-left">Sum Price</div>,
         cell: ({ row }) => {
             const price: number = parseFloat(row.getValue("price") as string);
             const quantity: number = parseFloat(

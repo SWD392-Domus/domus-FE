@@ -11,6 +11,9 @@ export const initialState = {
     expireAt: "",
     products: [],
     negotiationLog: {},
+    services: [
+        { id: 123, name: "Lau Nha", price: 200, monetaryUnit: "Service" },
+    ],
 };
 
 export const name = "viewQuotation";

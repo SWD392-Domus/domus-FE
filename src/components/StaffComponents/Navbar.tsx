@@ -45,7 +45,7 @@ const components: {
     {
         title: "Settings",
         icon: GearIcon,
-        href: "/staff",
+        href: "/staff/settings",
         description: "Settings",
     },
     {
