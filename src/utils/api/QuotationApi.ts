@@ -1,24 +1,21 @@
 import { get, post, remove } from "./ApiCaller";
 
-const tokenS = localStorage.getItem("Token") as string;
-
-const token = "Bearer " + tokenS;
-
 export const quotationStaffApi = {
-  createQuotation: (data: any) => {
+  createQuotation: (data: any, token: string) => {
     return post(`/Quotations`, data, {}, { Authorization: token });
   },
-  deleteQuotation: (id: string) => {
+  deleteQuotation: (id: string, token: string) => {
     return remove(`/Quotations/${id}`, {}, {}, { Authorization: token });
   },
-  deleteManyQuotations: (ids: string[]) => {
+  deleteManyQuotations: (ids: string[], token: string) => {
     return remove(`/Quotations/multiple`, ids, {}, { Authorization: token });
   },
   searchQuotations: (
     pageSize: number,
     pageIndex: number,
     searchField: string,
-    searchKeyword: string
+    searchKeyword: string,
+    token: string
   ) => {
     return post(
       `/Quotations/search`,
@@ -46,7 +43,8 @@ export const quotationStaffApi = {
     pageSize: number,
     pageIndex: number,
     sortField: string,
-    descending: boolean
+    descending: boolean,
+    token: string
   ) => {
     return post(
       `/Quotations/search`,
@@ -71,7 +69,8 @@ export const quotationStaffApi = {
     sortField: string,
     descending: boolean,
     pageSize: number,
-    pageIndex: number
+    pageIndex: number,
+    token: string
   ) => {
     return get(
       `/Quotations/search?SearchField=${searchField}&SearchValue=${searchValue}&SortField=${sortField}&Descending=${descending}&PageSize=${pageSize}&PageIndex=${pageIndex}`,
@@ -81,7 +80,7 @@ export const quotationStaffApi = {
       }
     );
   },
-  getQuotationById: (id: string) => {
+  getQuotationById: (id: string, token: string) => {
     return get(
       `/Quotations/${id}`,
       {},

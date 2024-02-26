@@ -6,6 +6,21 @@ export const initialState = {
   services: [],
   productDetails: [],
   cartNumber: 0,
+  discount: 0,
+  totalPrice: 0,
+};
+
+const calculateTotalPrice = (state: any) => {
+  const productDetailsSum = state.productDetails.reduce(
+    (sum: number, pd: any) => sum + pd.price * pd.quantity,
+    0
+  );
+  const servicesSum = state.services.reduce(
+    (sum: number, s: any) => sum + s.price,
+    0
+  );
+
+  return ((productDetailsSum + servicesSum) * (100 - state.discount)) / 100;
 };
 
 export const name = "updateCart";
@@ -24,6 +39,7 @@ const slice = createSlice({
     },
     setProductDetails: (state: any, action: any) => {
       state.productDetails = action.payload;
+      state.totalPrice = calculateTotalPrice(state);
     },
     incrementQuantity: (state: any, action: PayloadAction<string>) => {
       state.productDetails.forEach((productDetail: any) => {
@@ -32,6 +48,7 @@ const slice = createSlice({
         }
       });
       localStorage.setItem("cart", JSON.stringify(state.productDetails));
+      state.totalPrice = calculateTotalPrice(state);
     },
     decrementQuantity: (state: any, action: PayloadAction<string>) => {
       state.productDetails.forEach((productDetail: any) => {
@@ -40,38 +57,19 @@ const slice = createSlice({
         }
       });
       localStorage.setItem("cart", JSON.stringify(state.productDetails));
+      state.totalPrice = calculateTotalPrice(state);
     },
-    // addProduct: (state: any, action: any) => {
-    //   state.productDetails.forEach((productDetail: any) => {
-    //     if (productDetail.id == action.payload.id) {
-    //       productDetail.quantity += 1;
-    //     } else {
-    //       state.productDetails.push({ id: action.payload.id, quantity: 1 });
-    //     }
-    //   });
-    // },
     deleteProduct: (state: any, action: PayloadAction<string>) => {
       state.productDetails = state.productDetails.filter(
         (productDetail: any) => productDetail.id != action.payload
       );
       localStorage.setItem("cart", JSON.stringify(state.productDetails));
       state.cartNumber = state.productDetails.length;
+      state.totalPrice = calculateTotalPrice(state);
     },
-    // deleteManyProducts: (state: any, action: PayloadAction<string[]>) => {
-    //   const idsToDelete = action.payload;
-
-    //   idsToDelete.forEach((id: string) => {
-    //     const indexToDelete = state.productDetails.findIndex(
-    //       (product: any) => product.id === id
-    //     );
-
-    //     if (indexToDelete !== -1) {
-    //       state.productDetails.splice(indexToDelete, 1);
-    //     }
-    //   });
-    // },
     addService: (state: any, action: any | null) => {
       state.services.push(action.payload);
+      state.totalPrice = calculateTotalPrice(state);
     },
     deleteSerivce: (state: any, action: PayloadAction<string>) => {
       const productIdToDelete = action.payload;
@@ -82,6 +80,7 @@ const slice = createSlice({
       if (indexToDelete !== -1) {
         state.services.splice(indexToDelete, 1);
       }
+      state.totalPrice = calculateTotalPrice(state);
     },
     deleteManyService: (state: any, action: PayloadAction<string[]>) => {
       const idsToDelete = action.payload;
@@ -95,6 +94,7 @@ const slice = createSlice({
           state.services.splice(indexToDelete, 1);
         }
       });
+      state.totalPrice = calculateTotalPrice(state);
     },
   },
 });

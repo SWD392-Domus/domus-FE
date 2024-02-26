@@ -6,11 +6,13 @@ export const searchQuotations = async (
   searchField: string,
   searchKeyword: string
 ) => {
+  const token = ("Bearer " + localStorage.getItem("Token")) as string;
   const response = await searchQuotationsService(
     pageSize,
     pageIndex,
     searchField,
-    searchKeyword
+    searchKeyword,
+    token
   );
   if (response.status === 200) {
     const quotationsData = response?.data?.data;
