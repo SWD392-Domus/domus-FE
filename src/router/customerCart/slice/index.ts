@@ -25,6 +25,22 @@ const slice = createSlice({
     setProductDetails: (state: any, action: any) => {
       state.productDetails = action.payload;
     },
+    incrementQuantity: (state: any, action: PayloadAction<string>) => {
+      state.productDetails.forEach((productDetail: any) => {
+        if (productDetail.id == action.payload) {
+          productDetail.quantity += 1;
+        }
+      });
+      localStorage.setItem("cart", JSON.stringify(state.productDetails));
+    },
+    decrementQuantity: (state: any, action: PayloadAction<string>) => {
+      state.productDetails.forEach((productDetail: any) => {
+        if (productDetail.id == action.payload && productDetail.quantity > 1) {
+          productDetail.quantity -= 1;
+        }
+      });
+      localStorage.setItem("cart", JSON.stringify(state.productDetails));
+    },
     // addProduct: (state: any, action: any) => {
     //   state.productDetails.forEach((productDetail: any) => {
     //     if (productDetail.id == action.payload.id) {
@@ -35,14 +51,11 @@ const slice = createSlice({
     //   });
     // },
     deleteProduct: (state: any, action: PayloadAction<string>) => {
-      const productIdToDelete = action.payload;
-      const indexToDelete = state.productDetails.findIndex(
-        (product: any) => product.id === productIdToDelete
+      state.productDetails = state.productDetails.filter(
+        (productDetail: any) => productDetail.id != action.payload
       );
-
-      if (indexToDelete !== -1) {
-        state.productDetails.splice(indexToDelete, 1);
-      }
+      localStorage.setItem("cart", JSON.stringify(state.productDetails));
+      state.cartNumber = state.productDetails.length;
     },
     // deleteManyProducts: (state: any, action: PayloadAction<string[]>) => {
     //   const idsToDelete = action.payload;
