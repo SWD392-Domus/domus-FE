@@ -22,12 +22,7 @@ export const createDetailsSchema = z.object({
         const parsed = parseFloat(value);
         return !isNaN(parsed) && parsed >= 1 && parsed <= 1000000;
       }, { message: "price must be a number between 1 and 1000000." }),
-      quantity: z
-      .string()
-      .refine(value => {
-        const parsed = parseFloat(value);
-        return !isNaN(parsed) && parsed >= 1 && parsed <= 1000000;
-      }, { message: "price must be a number between 1 and 1000000." }),
+
   });
 
   

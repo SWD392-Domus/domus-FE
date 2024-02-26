@@ -19,7 +19,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { loginApi } from "@/utils/api/loginApi";
 import { toastError, toastSuccess } from "@/components/Toast";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { devEnvGoogleAuth } from "../constants";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
@@ -63,21 +63,25 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
         },
     });
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        const res = await loginApi.login(values.email, values.password);
-        if (res.status != 200) {
-            toastError("Something Wrong");
-        } else {
-            const data = res.data;
-            if (data.isSuccess) {
-                toastSuccess("Success");
-                const token = data.data.token.accessToken;
-                localStorage.setItem("Token", token);
-                navigate("/home");
+        try {
+            const res = await loginApi.login(values.email, values.password);
+            if (res.status === 200) {
+                localStorage.setItem("Token", res.data.data.token.accessToken);
+                const roles: string[] = res.data.data.roles;
+                console.log(roles);
+                if (roles.includes("Staff")) {
+                    navigate("/staff");
+                } else {
+                    navigate("/home");
+                }
+                toastSuccess("Login Successfully");
             } else {
-                for (let mess of data.messages) {
+                for (const mess of res.data.messages) {
                     toastError(mess.content);
                 }
             }
+        } catch (error) {
+            toastError("Login Error");
         }
     }
     return (

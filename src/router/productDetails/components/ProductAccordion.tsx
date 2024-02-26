@@ -9,24 +9,24 @@ import React from "react";
 
 interface Props {
   title: string;
-  sizes?: string[];
+  // sizes?: string[];
 }
 
 const ProductAccordion: React.FC<Props> = ({
   title,
-  sizes,
+  // sizes,
 }) => {
   return (
-      <Accordion type="multiple">
-        <AccordionItem value="item-1">
-          <AccordionTrigger>Product Details</AccordionTrigger>
-          <AccordionContent>
-            <div className="flex flex-col gap-2 shrink">
-              {title? <p>{title}</p> : "No product name available"}
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="item-2">
+    <Accordion type="multiple">
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Product Description</AccordionTrigger>
+        <AccordionContent>
+          <div className="flex flex-col gap-2 shrink">
+            {title ? <p>{title}</p> : "No product description available"}
+          </div>
+        </AccordionContent>
+      </AccordionItem>
+      {/* <AccordionItem value="item-2">
           <AccordionTrigger>Technical Information</AccordionTrigger>
           <AccordionContent>
             <div className="flex flex-col gap-2 shrink">
@@ -36,8 +36,8 @@ const ProductAccordion: React.FC<Props> = ({
               )) : "No sizes available"}
             </div>
           </AccordionContent>
-        </AccordionItem>
-      </Accordion>
+        </AccordionItem> */}
+    </Accordion>
   );
 };
 

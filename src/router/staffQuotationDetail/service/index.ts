@@ -1,0 +1,1 @@
+export { getQuotationByIdService } from "./getQuotationByIdService";

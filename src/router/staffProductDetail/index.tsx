@@ -37,6 +37,7 @@ const ProductDetailsStaff: React.FC = () => {
   const handleSave = async () => {
     const res = await editProduct(id!, product);
     if (res) {
+      dispatch(changeMode());
       toast({
         variant: "success",
         title: "Update successfully",
@@ -67,7 +68,13 @@ const ProductDetailsStaff: React.FC = () => {
 
   useEffect(() => {
     getProductDetailsData();
-  }, [id, isEditMode]);
+  }, [id]);
+  // Call the API when isEditMode becomes false
+  useEffect(() => {
+    if (!isEditMode) {
+      getProductDetailsData();
+    }
+  }, [isEditMode]);
   return (
     <div className="pt-2">
       <div className="flex flex-col pb-4">

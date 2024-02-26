@@ -1,15 +1,17 @@
 import React from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import CustomerSettings from "./customerSettings";
+import CustomerCart from "./customerCart";
 import CustomerQuotations from "./customerQuotations";
 import CustomerQuotationDetail from "./customerQuotationDetail";
-// import Staff from "./staff";
 import StaffProducts from "./staffProducts";
 import StaffPackages from "./staffPackages";
 import StaffQuotationNew from "./staffQuotationNew";
 import StaffQuotations from "./staffQuotations";
 import StaffQuotationDetail from "./staffQuotationDetail";
 import StaffPackageDetail from "./staffPackageDetail";
+import StaffPackageDetailUpdate from "./staffPackageDetailUpdate";
+import StaffPackageDetailCreate from "./staffPackageDetailCreate";
 import PublicRoute from "./PublicRoute";
 import Home from "./home";
 import ArticleList from "./article";
@@ -135,6 +137,13 @@ const RouterComponent: React.FC = () => {
         },
         {
             index: true,
+            path: "customer/settings/cart",
+            component: <CustomerCart />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
             path: "customer/settings/quotations",
             component: <CustomerQuotations />,
             exact: true,
@@ -202,6 +211,20 @@ const RouterComponent: React.FC = () => {
             index: true,
             path: "staff/packages/:packageId",
             component: <StaffPackageDetail />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/packages/:packageId/update",
+            component: <StaffPackageDetailUpdate />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/packages/newPackage",
+            component: <StaffPackageDetailCreate />,
             exact: true,
             restrict: true,
         },

@@ -1,14 +1,19 @@
 import BreadCrumbHeader from "@/components/ui/Breadcrumb";
-import { Outlet } from "react-router-dom";
-import Navbar from "./Navbar"
+import { Link, Outlet } from "react-router-dom";
+import Navbar from "./Navbar";
 
 const StaffLayout = () => {
     return (
         <div className="flex flex-col min-h-screen">
             <div className="flex flex-1">
                 <div className="border-r basis-1/6">
-                    <div className="flex-col m-5">
-                        <div className="font-bold mb-5 pl-3 text-2xl">Domus</div>
+                    <div className="flex-col h-full">
+                        <Link
+                            className="font-bold mb-5 pl-3 text-2xl"
+                            to="/home"
+                        >
+                            Domus
+                        </Link>
                         <Navbar />
                     </div>
                 </div>
@@ -19,8 +24,11 @@ const StaffLayout = () => {
                     <Outlet />
                 </div>
             </div>
-            <footer className="bg-zinc-300 bg-cover h-8 text-xs text-zinc-500 mt-5"><div className="my-2 ml-36">Copyright @Domus</div></footer>
-        </div >)
-}
+            <footer className="bg-zinc-300 bg-cover h-8 text-xs text-zinc-500 mt-5">
+                <div className="my-2 ml-36">Copyright @Domus</div>
+            </footer>
+        </div>
+    );
+};
 
-export default StaffLayout
+export default StaffLayout;

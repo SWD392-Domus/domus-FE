@@ -4,6 +4,7 @@ import { Checkbox } from "@/components/ui/Checkbox/checkbox";
 import { PackagesProps } from "../../types";
 import { CRUDDropdownMenu } from "../DropdownMenu/CRUD";
 // import { TooltipDes } from "../Tooltip"
+import packagePlaceholder from "@/assets/image/package-placeholder.png";
 
 export const columns: ColumnDef<PackagesProps>[] = [
     {
@@ -43,10 +44,13 @@ export const columns: ColumnDef<PackagesProps>[] = [
         accessorKey: "image",
         header: "Image",
         cell: ({ row }) => {
-            const image: string = row.getValue("image");
+            const images: any = row.original.image;
+            const haveImg = images && images.imageUrl;
             return (
                 <Avatar>
-                    <AvatarImage src={image} />
+                    <AvatarImage
+                        src={haveImg ? images.imageUrl : packagePlaceholder}
+                    />
                 </Avatar>
             );
         },
@@ -60,7 +64,7 @@ export const columns: ColumnDef<PackagesProps>[] = [
         header: "Discount",
         cell: ({ row }) => {
             return (
-                <div className="text-center">{row.getValue("discount")}</div>
+                <div className="text-center">{row.getValue("discount")}%</div>
             );
         },
     },
