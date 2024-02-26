@@ -55,7 +55,7 @@ const slice = createSlice({
       }
     },
   },
-);
+});
 injectReducer(name, slice.reducer);
 
 export const {

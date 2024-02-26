@@ -37,6 +37,7 @@ const CustomerCart: React.FC = () => {
         action: <ToastAction altText="Close">Close</ToastAction>,
       });
       localStorage.removeItem("cart");
+      window.location.reload();
     } else {
       toast({
         variant: "destructive",
