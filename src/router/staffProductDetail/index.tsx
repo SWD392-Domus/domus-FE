@@ -67,7 +67,13 @@ const ProductDetailsStaff: React.FC = () => {
 
   useEffect(() => {
     getProductDetailsData();
-  }, [id, isEditMode]);
+  }, [id]);
+  // Call the API when isEditMode becomes false
+  useEffect(() => {
+    if (!isEditMode) {
+      getProductDetailsData();
+    }
+  }, [isEditMode]);
   return (
     <div className="pt-2">
       <div className="flex flex-col pb-4">

@@ -10,6 +10,9 @@ export const productApi = {
     getAllInOneProduct: () => {
         return get(`/Products/all`);
     },
+    searchProduct: (pageSize: number, pageIndex: number, searchValue: string, searchField: string) => {
+        return get(`/Products/search?PageSize=${pageSize}&PageIndex=${pageIndex}&SearchValue=${searchValue}&SearchField=${searchField}`);
+    }
 };
 const tokenS = localStorage.getItem("Token") as string;
 
