@@ -11,6 +11,7 @@ export const initialState = {
     expireAt: "",
     products: [],
     negotiationLog: {},
+    services: [],
 };
 
 export const name = "viewQuotation";
@@ -34,6 +35,7 @@ const slice = createSlice({
             state.expireAt = action.payload.expireAt;
             state.products = action.payload.products;
             state.negotiationLog = action.payload.negotiationLog;
+            state.services = action.payload.services;
         },
         getQuotationInfo: (state: any) => {
             state.info = {

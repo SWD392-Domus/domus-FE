@@ -29,6 +29,7 @@ import selector from "./slice/selector";
 import { actions } from "./slice";
 import { Avatar } from "@/components/ui/Avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
+import { serviceColums } from "./components/ServiceTable/column";
 
 interface Props {
     // define your props here
@@ -45,7 +46,7 @@ const QuotationDetail: React.FC<Props> = () => {
     const expireAt: string = useSelector(selector.expireAt);
     const products: any[] = useSelector(selector.products);
     const negotiationLog: any = useSelector(selector.negotiationLog);
-
+    const services: any = useSelector(selector.services);
     const [updated, setUpdated] = useState(false);
 
     // const location = useLocation();
@@ -55,7 +56,6 @@ const QuotationDetail: React.FC<Props> = () => {
         if (quotationId) {
             try {
                 const response = await getQuotationById(quotationId);
-                console.log(response);
 
                 if (response) {
                     dispatch(actions.setQuotation(response));
@@ -188,6 +188,17 @@ const QuotationDetail: React.FC<Props> = () => {
                                         columns={columns}
                                         data={products}
                                     />
+                                </div>
+                            </div>
+                            <div className="detail-table">
+                                <div className="mt-7 text-xl font-semibold">
+                                    Details
+                                </div>
+                                <div className="mx-auto py-5">
+                                    <DataTable
+                                        columns={serviceColums}
+                                        data={services}
+                                    />
                                     <div className="p-2 flex flex-row justify-between font-semibold border-b-2 border-zinc-100">
                                         <div className="total-price-title mx-11">
                                             Total Price
@@ -196,7 +207,7 @@ const QuotationDetail: React.FC<Props> = () => {
                                             {new Intl.NumberFormat("en-US", {
                                                 style: "currency",
                                                 currency: "VND",
-                                            }).format(quotationInfo.totalPrice)}
+                                            }).format(totalPrice * 1000)}
                                         </div>
                                     </div>
                                 </div>
