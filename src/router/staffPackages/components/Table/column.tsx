@@ -1,9 +1,10 @@
-import { ColumnDef } from "@tanstack/react-table"
-import { Avatar, AvatarImage } from "@/components/ui/Avatar"
-import { Checkbox } from "@/components/ui/Checkbox/checkbox"
-import { PackagesProps } from "../../types"
-import { CRUDDropdownMenu } from "../DropdownMenu/CRUD"
+import { ColumnDef } from "@tanstack/react-table";
+import { Avatar, AvatarImage } from "@/components/ui/Avatar";
+import { Checkbox } from "@/components/ui/Checkbox/checkbox";
+import { PackagesProps } from "../../types";
+import { CRUDDropdownMenu } from "../DropdownMenu/CRUD";
 // import { TooltipDes } from "../Tooltip"
+import packagePlaceholder from "@/assets/image/package-placeholder.png";
 
 export const columns: ColumnDef<PackagesProps>[] = [
     {
@@ -14,7 +15,9 @@ export const columns: ColumnDef<PackagesProps>[] = [
                     table.getIsAllPageRowsSelected() ||
                     (table.getIsSomePageRowsSelected() && "indeterminate")
                 }
-                onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+                onCheckedChange={(value) =>
+                    table.toggleAllPageRowsSelected(!!value)
+                }
                 aria-label="Select all"
             />
         ),
@@ -41,13 +44,16 @@ export const columns: ColumnDef<PackagesProps>[] = [
         accessorKey: "image",
         header: "Image",
         cell: ({ row }) => {
-            const image: string = row.getValue("image");
+            const images: any = row.original.image;
+            const haveImg = images && images.imageUrl;
             return (
                 <Avatar>
-                    <AvatarImage src={image} />
+                    <AvatarImage
+                        src={haveImg ? images.imageUrl : packagePlaceholder}
+                    />
                 </Avatar>
-            )
-        }
+            );
+        },
     },
     {
         accessorKey: "name",
@@ -57,7 +63,9 @@ export const columns: ColumnDef<PackagesProps>[] = [
         accessorKey: "discount",
         header: "Discount",
         cell: ({ row }) => {
-            return <div className="text-center">{row.getValue("discount")}</div>
+            return (
+                <div className="text-center">{row.getValue("discount")}%</div>
+            );
         },
     },
     {
@@ -68,9 +76,7 @@ export const columns: ColumnDef<PackagesProps>[] = [
         id: "actions",
         enableHiding: false,
         cell: ({ row }) => {
-            return (
-                <CRUDDropdownMenu id={row.getValue('id')} />
-            )
+            return <CRUDDropdownMenu id={row.getValue("id")} />;
         },
     },
-]
+];
