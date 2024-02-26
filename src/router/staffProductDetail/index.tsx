@@ -37,6 +37,7 @@ const ProductDetailsStaff: React.FC = () => {
   const handleSave = async () => {
     const res = await editProduct(id!, product);
     if (res) {
+      dispatch(changeMode());
       toast({
         variant: "success",
         title: "Update successfully",

@@ -43,7 +43,6 @@ const CreatePopup: React.FC<DetailsProps> = ({ addDetail }) => {
     resolver: zodResolver(createDetailsSchema),
     defaultValues: {
       price: "1",
-      quantity: "1",
     },
   });
 
@@ -56,7 +55,6 @@ const CreatePopup: React.FC<DetailsProps> = ({ addDetail }) => {
   });
 const handleAddDetails = (values: z.infer<typeof createDetailsSchema>) => {
     addDetail({
-        quantity: Number(values.quantity),
         displayPrice: Number(values.price),
         attributes: attributes,
         monetaryUnit: "usd",
@@ -199,22 +197,6 @@ const handleAddDetails = (values: z.infer<typeof createDetailsSchema>) => {
                 </FormControl>
                 <FormDescription>
                   This is your public display price.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form2.control}
-            name="quantity"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Quantity</FormLabel>
-                <FormControl>
-                  <Input type="number" placeholder="shadcn" {...field} />
-                </FormControl>
-                <FormDescription>
-                  This is your public display quantity.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
