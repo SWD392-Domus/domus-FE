@@ -34,7 +34,7 @@ export const packageStaffApi = {
     return remove(`/Packages?id=${id}`, {}, {}, { Authorization: token });
   },
   deleteManyPackages: (ids: string[]) => {
-    return remove(`/Packages/multiple`, ids, {}, { Authorization: token });
+    return remove(`/Packages/many`, ids, {}, { Authorization: token });
   },
   searchPackages: (
     pageSize: number,
