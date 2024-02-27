@@ -5,6 +5,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 export const initialState = {
   services: [],
   productDetails: [],
+  cartNumber: 0,
 };
 
 export const name = "updateCart";
@@ -18,24 +19,59 @@ const slice = createSlice({
     modal_confirm: (state: any, action: any) => {
       state.modal.confirm = action.payload;
     },
-    addProduct: (state: any, action: any | null) => {
-      state.productDetails.push({
-        ...action.payload.details[0],
-        productName: action.payload.productName,
-      });
+    setCartNumber: (state: any, action: any) => {
+      state.cartNumber = action.payload;
     },
+    setProductDetails: (state: any, action: any) => {
+      state.productDetails = action.payload;
+    },
+    incrementQuantity: (state: any, action: PayloadAction<string>) => {
+      state.productDetails.forEach((productDetail: any) => {
+        if (productDetail.id == action.payload) {
+          productDetail.quantity += 1;
+        }
+      });
+      localStorage.setItem("cart", JSON.stringify(state.productDetails));
+    },
+    decrementQuantity: (state: any, action: PayloadAction<string>) => {
+      state.productDetails.forEach((productDetail: any) => {
+        if (productDetail.id == action.payload && productDetail.quantity > 1) {
+          productDetail.quantity -= 1;
+        }
+      });
+      localStorage.setItem("cart", JSON.stringify(state.productDetails));
+    },
+    // addProduct: (state: any, action: any) => {
+    //   state.productDetails.forEach((productDetail: any) => {
+    //     if (productDetail.id == action.payload.id) {
+    //       productDetail.quantity += 1;
+    //     } else {
+    //       state.productDetails.push({ id: action.payload.id, quantity: 1 });
+    //     }
+    //   });
+    // },
+    deleteProduct: (state: any, action: PayloadAction<string>) => {
+      state.productDetails = state.productDetails.filter(
+        (productDetail: any) => productDetail.id != action.payload
+      );
+      localStorage.setItem("cart", JSON.stringify(state.productDetails));
+      state.cartNumber = state.productDetails.length;
+    },
+    // deleteManyProducts: (state: any, action: PayloadAction<string[]>) => {
+    //   const idsToDelete = action.payload;
+
+    //   idsToDelete.forEach((id: string) => {
+    //     const indexToDelete = state.productDetails.findIndex(
+    //       (product: any) => product.id === id
+    //     );
+
+    //     if (indexToDelete !== -1) {
+    //       state.productDetails.splice(indexToDelete, 1);
+    //     }
+    //   });
+    // },
     addService: (state: any, action: any | null) => {
       state.services.push(action.payload);
-    },
-    deleteProduct: (state: any, action: PayloadAction<string>) => {
-      const productIdToDelete = action.payload;
-      const indexToDelete = state.productDetails.findIndex(
-        (product: any) => product.id === productIdToDelete
-      );
-
-      if (indexToDelete !== -1) {
-        state.productDetails.splice(indexToDelete, 1);
-      }
     },
     deleteSerivce: (state: any, action: PayloadAction<string>) => {
       const productIdToDelete = action.payload;
@@ -57,19 +93,6 @@ const slice = createSlice({
 
         if (indexToDelete !== -1) {
           state.services.splice(indexToDelete, 1);
-        }
-      });
-    },
-    deleteManyProducts: (state: any, action: PayloadAction<string[]>) => {
-      const idsToDelete = action.payload;
-
-      idsToDelete.forEach((id: string) => {
-        const indexToDelete = state.productDetails.findIndex(
-          (product: any) => product.id === id
-        );
-
-        if (indexToDelete !== -1) {
-          state.productDetails.splice(indexToDelete, 1);
         }
       });
     },

@@ -18,14 +18,8 @@ const CustomerCart: React.FC = () => {
   const { toast } = useToast();
   // const dispatch = useDispatch();
   const services: ServiceProps[] = useSelector(selector.services);
-  const productDetails: ProductDetailProps[] = useSelector(selector.productDetails);
   const handleClick = async () => {
-    const servicesIds = services.map((service) => {
-      service.id
-    })
-    const productDetailIds = productDetails.map((productDetail) => {
-      productDetail.id
-    })
+    const servicesIds = services.map((service) => service.id)
     const res = await createQuotation(
       {
         customerId: "e403c308-274e-42f5-b5df-36ec234d6ee1",
@@ -42,7 +36,7 @@ const CustomerCart: React.FC = () => {
         description: "A request was sent.",
         action: <ToastAction altText="Close">Close</ToastAction>,
       });
-      // navigate(`/staff/packages`);
+      localStorage.removeItem("cart");
     } else {
       toast({
         variant: "destructive",

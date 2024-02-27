@@ -15,13 +15,20 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/Carousel";
+import { useSelector } from "react-redux";
+import { productSelector } from "@/router/productDetails/slice/selector";
 
 interface DetailsProps {
   details: ProductDetailsProps;
+  index: number;
 }
-const ProductPopup: React.FC<DetailsProps> = ({ details }) => {
-  console.log(details);
+const ProductPopup: React.FC<DetailsProps> = ({ 
+  details ,
+  index
+}) => {
   const images = details.images.map((image: ImagesProps) => image.imageUrl);
+  const { product } = useSelector(productSelector);
+  const indexRender = index + 1;
   return (
     <>
       <DialogHeader>
@@ -30,6 +37,11 @@ const ProductPopup: React.FC<DetailsProps> = ({ details }) => {
           This is a detail dialog of a product.{" "}
         </DialogDescription>
         <div className="grid gap-4 py-4">
+        <div className="flex items-center gap-4">
+            <Label htmlFor="name" className="text-left font-bold w-auto text-2xl">
+              {product?.productName} Variant {indexRender}
+            </Label>
+          </div>
           <div className="grid grid-cols-8 items-center gap-4">
             <Label htmlFor="name" className="text-left font-bold">
               Id
@@ -61,7 +73,8 @@ const ProductPopup: React.FC<DetailsProps> = ({ details }) => {
         </div>
       </DialogHeader>
       <div className="w-full flex justify-center items-center h-auto">
-        <Carousel className="w-full max-w-sm">
+        {images.length > 0 && (
+          <Carousel className="w-full max-w-sm">
           <CarouselContent className="-ml-1">
             {images.map((image, index) => (
               <CarouselItem key={index} className="">
@@ -81,6 +94,8 @@ const ProductPopup: React.FC<DetailsProps> = ({ details }) => {
           <CarouselPrevious />
           <CarouselNext />
         </Carousel>
+        )}
+        
       </div>
     </>
   );

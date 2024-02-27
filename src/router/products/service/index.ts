@@ -1,1 +1,1 @@
-export {getProductService} from './getProductService';  
+export {getProductService, getProductSearchService} from './getProductService';  

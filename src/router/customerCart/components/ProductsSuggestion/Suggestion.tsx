@@ -13,7 +13,7 @@ const Suggestion: React.FC = () => {
     const [descending, setDescending] = useState(false);
     const [totalPages, setTotalPages] = useState(0);
     const [totalItems, setTotalItems] = useState(0);
-    const [pageSize, setPageSize] = useState(5);
+    const [pageSize, setPageSize] = useState(100);
     const [pageIndex, setPageIndex] = useState(1);
 
     async function getProductsService(
