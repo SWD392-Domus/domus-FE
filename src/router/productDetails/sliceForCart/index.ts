@@ -6,6 +6,7 @@ export const initialState = {
   product: {},
   fields: [],
   cartNumber: 0,
+  isCheckedIds: [],
 };
 
 export const name = "viewProductHuy";
@@ -37,7 +38,7 @@ const slice = createSlice({
     setFields: (state: any, action: any) => {
       state.fields = action.payload;
     },
-    hideValueBasedOnIds: (state: any, action: any) => {
+    onClickCheck: (state: any, action: any) => {
       if (!action.payload.isChecked) {
         state.fields.forEach((field: any) => {
           field.values.forEach((value: any) => {
@@ -46,25 +47,25 @@ const slice = createSlice({
             }
           });
         });
-        const isCheckedValueIds: string[] = [];
-        state.fields.forEach((field: any) => {
-          field.values.forEach((value: any) => {
-            if (value.isChecked == true) {
-              value.ids.forEach((idAndPrice: any) => {
-                if (!isCheckedValueIds.includes(idAndPrice.id)) {
-                  isCheckedValueIds.push(idAndPrice.id);
-                }
-              });
-            }
-          });
+        // const isCheckedIds: string[] = [];
+        // state.fields.forEach((field: any) => {
+        //   field.values.forEach((value: any) => {
+        // if (value.isChecked == true) {
+        action.payload.ids.forEach((idAndPrice: any) => {
+          if (!state.isCheckedIds.includes(idAndPrice.id)) {
+            state.isCheckedIds.push(idAndPrice.id);
+          }
         });
-        // console.log(isCheckedValueIds, "isCheckedValueIds");
+        // }
+        //   });
+        // });
+        // console.log(state.isCheckedIds, "isCheckedIds");
 
         state.fields.forEach((field: any) => {
           field.values.forEach((value: any) => {
             if (value.isChecked == false) {
               value.ids.forEach((idAndPrice: any) => {
-                if (!isCheckedValueIds.includes(idAndPrice.id)) {
+                if (!state.isCheckedIds.includes(idAndPrice.id)) {
                   value.isDisabled = true;
                 }
               });
@@ -79,27 +80,34 @@ const slice = createSlice({
             }
           });
         });
-        const isCheckedValueIds: string[] = [];
+
+        action.payload.ids.forEach((idAndPrice: any) => {
+          if (!state.isCheckedIds.includes(idAndPrice.id)) {
+            state.isCheckedIds.push(idAndPrice.id);
+          }
+        });
+        const isCheckedIds: string[] = [];
         state.fields.forEach((field: any) => {
           field.values.forEach((value: any) => {
             if (value.isChecked == true) {
               value.ids.forEach((idAndPrice: any) => {
-                if (!isCheckedValueIds.includes(idAndPrice.id)) {
-                  isCheckedValueIds.push(idAndPrice.id);
+                if (!isCheckedIds.includes(idAndPrice.id)) {
+                  isCheckedIds.push(idAndPrice.id);
                 }
               });
             }
           });
         });
-        // console.log(isCheckedValueIds, "isCheckedValueIds");
+        // console.log(isCheckedIds, "isCheckedIds");
+        state.isCheckedIds = isCheckedIds;
 
         state.fields.forEach((field: any) => {
           field.values.forEach((value: any) => {
             if (value.isChecked == false) {
               value.ids.forEach((idAndPrice: any) => {
                 if (
-                  isCheckedValueIds.length !== 0 &&
-                  !isCheckedValueIds.includes(idAndPrice.id)
+                  state.isCheckedIds.length !== 0 &&
+                  !state.isCheckedIds.includes(idAndPrice.id)
                 ) {
                   value.isDisabled = true;
                 } else {

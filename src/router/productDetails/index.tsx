@@ -16,16 +16,22 @@ import selector from "./sliceForCart/selector"
 import { actions as actionsCart } from "@/router/customerCart/slice"
 // import { selector as selectorCart } from "@/router/customerCart/slice/selector"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/ToggleGroup"
+// import { ToastAction } from "@/components/ui/Toast/toast"
+// import { useToast } from "@/components/ui/Toast/use-toast"
+import { useNavigate } from "react-router-dom";
 
 type RouteParams = {
   id: string;
 };
 
 const ProductDetails: React.FC = () => {
+  // const toast = useToast();
+  const navigate = useNavigate();
   const { id } = useParams<RouteParams>();
   const dispatch = useDispatch();
   const product: any = useSelector(selector.product);
   const fields: any = useSelector(selector.fields);
+  const isCheckedIds: any = useSelector(selector.isCheckedIds);
   const [updated, setUpdated] = useState(false);
 
   useEffect(() => {
@@ -102,9 +108,10 @@ const ProductDetails: React.FC = () => {
 
   const handleAddToCart = async () => {
     const cart = localStorage.getItem("cart");
+    // const productDetailIdToAdd: any = isCheckedIds[0];
     let productDetailIdToAdd: any;
     fields.some((field: any) => {
-      const foundValue = field.values.find((value: any) => value.ids.length > 0);
+      const foundValue = field.values.find((value: any) => value.ids.length > 0 && value.isChecked === true);
       if (foundValue) {
         productDetailIdToAdd = foundValue.ids[0];
         return true;
@@ -127,6 +134,7 @@ const ProductDetails: React.FC = () => {
     localStorage.setItem("cart", JSON.stringify(cartArray));
     const cartNumber: any = JSON.parse(localStorage.getItem("cart") ?? "[]").length;
     dispatch(actionsCart.setCartNumber(cartNumber));
+    navigate("/customer/settings/cart");
   }
 
   return (
@@ -187,9 +195,13 @@ const ProductDetails: React.FC = () => {
                   >
 
                     {field.values.map((value) => (
-                      <ToggleGroupItem value={value.ids} aria-label="Toggle bold" disabled={value.isDisabled} data-state={value.isChecked ? "on" : "off"}
+                      <ToggleGroupItem
+                        value={value}
+                        aria-label="Toggle bold"
+                        disabled={value.isDisabled}
+                        data-state={value.isChecked ? "on" : "off"}
                         onClick={() => {
-                          dispatch(actions.hideValueBasedOnIds(value));
+                          dispatch(actions.onClickCheck(value));
                         }}
                       >
                         {value.value}
