@@ -52,7 +52,9 @@ const ProductDetails: React.FC = () => {
                       [
                         {
                           value: attribute.value,
-                          ids: [{ id: detail.id, price: detail.displayPrice }]
+                          ids: [{ id: detail.id, price: detail.displayPrice }],
+                          isDisabled: false,
+                          isChecked: false,
                         }
                       ]
                   }
@@ -69,7 +71,9 @@ const ProductDetails: React.FC = () => {
                   fieldsArray[index].values.push(
                     {
                       value: attribute.value,
-                      ids: [{ id: detail.id, price: detail.displayPrice }]
+                      ids: [{ id: detail.id, price: detail.displayPrice }],
+                      isDisabled: false,
+                      isChecked: false,
                     }
                   );
                 } else {
@@ -176,12 +180,18 @@ const ProductDetails: React.FC = () => {
                 <div className="text-black font-thin">{field.name}</div>
                 <div className="flex justify-start">
                   <ToggleGroup type="single" variant="outline"
-                    onValueChange={(e) => {
-                      dispatch(actions.hideValueBasedOnIds(e));
-                    }}>
+                  // onValueChange={(e) => {
+                  // dispatch(actions.hideValueBasedOnIds({ ids: e, name: field.name }));
+                  // console.log(e);
+                  // }}
+                  >
 
                     {field.values.map((value) => (
-                      <ToggleGroupItem value={value.ids} aria-label="Toggle bold">
+                      <ToggleGroupItem value={value.ids} aria-label="Toggle bold" disabled={value.isDisabled} data-state={value.isChecked ? "on" : "off"}
+                        onClick={() => {
+                          dispatch(actions.hideValueBasedOnIds(value));
+                        }}
+                      >
                         {value.value}
                       </ToggleGroupItem>
                     ))}
