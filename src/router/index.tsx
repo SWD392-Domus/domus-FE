@@ -22,6 +22,7 @@ import CustomerLayout from "@/components/CustomerComponents/CustomerLayout";
 import StaffRoute from "./StaffRoute";
 import StaffLayout from "@/components/StaffComponents/StaffLayout";
 import ProductList from "./products";
+import PackageList from "./packages";
 import ProductDetails from "./productDetails";
 import PackageDetails from "./packageDetails";
 import CustomizePackage from "./customizePackage";
@@ -78,6 +79,13 @@ const RouterComponent: React.FC = () => {
         },
         {
             index: true,
+            path: "packages",
+            component: <PackageList />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
             path: "product/:id",
             component: <ProductDetails />,
             exact: true,
@@ -85,7 +93,7 @@ const RouterComponent: React.FC = () => {
         },
         {
             index: true,
-            path: "package",
+            path: "package/:packageId",
             component: <PackageDetails />,
             exact: true,
             restrict: true,
