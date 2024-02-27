@@ -1,5 +1,8 @@
 import { packageStaffApi } from "@/utils/api/PackageApi";
 
-export const deleteManyPackagesService = async (ids: string[]) => {
-  return packageStaffApi.deleteManyPackages(ids);
+export const deleteManyPackagesService = async (
+  ids: string[],
+  token: string
+) => {
+  return packageStaffApi.deleteManyPackages(ids, token);
 };

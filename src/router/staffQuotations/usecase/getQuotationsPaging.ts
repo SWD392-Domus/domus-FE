@@ -8,13 +8,15 @@ export const getQuotationsPaging = async (
   pageSize: number,
   pageIndex: number
 ) => {
+  const token = ("Bearer " + localStorage.getItem("Token")) as string;
   const response = await getQuotationsPagingService(
     searchField,
     searchValue,
     sortField,
     descending,
     pageSize,
-    pageIndex
+    pageIndex,
+    token
   );
 
   if (response.status === 200) {

@@ -43,7 +43,7 @@ function BreadCrumbHeader() {
 
     return (
         <div className="navigation-line flex flex-row">
-            <HomeIcon className="my-auto mr-2" />
+            <Link className="my-auto mr-2" to={"/"}><HomeIcon className="" /></Link>
             <span className="text-black">
                 {breadcrumbItems.map((item) => (
                     <span key={item.key}> / {item.title}</span>

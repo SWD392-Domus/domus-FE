@@ -6,11 +6,13 @@ export const searchProducts = async (
   searchField: string,
   searchKeyword: string
 ) => {
+  const token = ("Bearer " + localStorage.getItem("Token")) as string;
   const response = await searchProductsService(
     pageSize,
     pageIndex,
     searchField,
-    searchKeyword
+    searchKeyword,
+    token
   );
   if (response.status === 200) {
     const productsData = response?.data?.data;

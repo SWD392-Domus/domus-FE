@@ -249,6 +249,13 @@ const RouterComponent: React.FC = () => {
             exact: true,
             restrict: true,
         },
+        {
+            index: true,
+            path: "staff/products/create",
+            component: <ProductDetailsStaff />,
+            exact: true,
+            restrict: true,
+        }
     ];
     return (
         <BrowserRouter>
