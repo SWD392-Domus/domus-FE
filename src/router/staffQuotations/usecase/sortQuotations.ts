@@ -6,11 +6,13 @@ export const sortQuotations = async (
   sortField: string,
   sortKeyword: boolean
 ) => {
+  const token = ("Bearer " + localStorage.getItem("Token")) as string;
   const response = await sortQuotationsService(
     pageSize,
     pageIndex,
     sortField,
-    sortKeyword
+    sortKeyword,
+    token
   );
   if (response.status === 200) {
     const quotationsData = response?.data?.data;

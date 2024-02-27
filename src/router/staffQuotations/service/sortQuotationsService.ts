@@ -4,12 +4,14 @@ export const sortQuotationsService = async (
   pageSize: number,
   pageIndex: number,
   sortField: string,
-  sortKeyword: boolean
+  sortKeyword: boolean,
+  token: string
 ) => {
   return quotationStaffApi.sortQuotations(
     pageSize,
     pageIndex,
     sortField,
-    sortKeyword
+    sortKeyword,
+    token
   );
 };

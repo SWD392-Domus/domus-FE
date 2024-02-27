@@ -6,11 +6,13 @@ export const sortProducts = async (
   sortField: string,
   sortKeyword: boolean
 ) => {
+  const token = ("Bearer " + localStorage.getItem("Token")) as string;
   const response = await sortProductsService(
     pageSize,
     pageIndex,
     sortField,
-    sortKeyword
+    sortKeyword,
+    token
   );
   if (response.status === 200) {
     const productsData = response?.data?.data;

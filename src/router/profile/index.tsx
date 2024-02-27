@@ -21,24 +21,91 @@ import {
 } from "@/components/ui/Select";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SelectValue } from "@radix-ui/react-select";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { getOwnProfile } from "./usecases";
+import { toastError } from "@/components/Toast";
+import ChangePasswordForm from "./components/ChangePasswordForm";
+import ChangeAvatar from "./components/changeAvatar";
+import { changeProfile } from "./usecases/ChangeProfile";
+import { toast } from "@/components/ui/Toast/use-toast";
 
 interface Props {
     // define your props here
 }
-
+interface Image {
+    file: File | null;
+    imageUrl: string | null;
+    isUpload: boolean;
+}
 const StaffProfile: React.FC<Props> = (props) => {
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values);
+        console.log(values.fullName);
+        const formData = new FormData();
+        formData.append("FullName", values.fullName);
+        formData.append("Gender", sex);
+        formData.append("Address", values.address);
+        formData.append("PhoneNumber", values.phoneNumber);
+        if (uploadedImage?.isUpload) {
+            formData.append("ProfileImage", uploadedImage.file);
+        }
+        const token = localStorage.getItem("Token");
+        const res = await changeProfile(token as string, formData);
+        if (res.data.isSuccess) {
+            toast({
+                variant: "success",
+                title: "Update Successfully.",
+                description: "A  profile have been updated.",
+            });
+        } else {
+            toast({
+                variant: "destructive",
+                title: "Update UnSuccessfully.",
+                description: "A  profile have not been updated.",
+            });
+        }
     }
-    const [profile, setProfile] = useState();
+    const [uploadedImage, setUploadedImage] = useState<Image | null>(null);
+    const [profile, setProfile] = useState<any | null>(null);
+    const fetchProfile = async () => {
+        const token = localStorage.getItem("Token") as string;
+        const res = await getOwnProfile(token as string);
+        if (res.status != 200) {
+            toastError("Fail to fetch Information");
+        } else {
+            if (res.data.isSuccess) {
+                const { fullName, address, phoneNumber, email, profileImage } =
+                    res.data.data;
+                form.setValue("fullName", fullName);
+                form.setValue("address", address);
+                form.setValue("phoneNumber", phoneNumber);
+                form.setValue("email", email);
+                setProfile(res.data.data);
+                setUploadedImage({
+                    file: null,
+                    imageUrl: profileImage,
+                    isUpload: false,
+                });
+            } else {
+                toastError("Faild to fetch Information");
+            }
+        }
+    };
+    useEffect(() => {
+        fetchProfile();
+    }, []);
+    const [sex, setSex] = useState("");
+    const [role, setRole] = useState("");
+
     const formSchema = z.object({
-        name: z.string().nonempty({
+        fullName: z.string().nonempty({
             message: "Name is required.",
         }),
-        phone: z
+        email: z.string().email({
+            message: "Invalid email format.",
+        }),
+        phoneNumber: z
             .string()
             .min(10)
             .max(15)
@@ -48,18 +115,15 @@ const StaffProfile: React.FC<Props> = (props) => {
         address: z.string().nonempty({
             message: "Address is required.",
         }),
-        sex: z.string(),
-        role: z.string(),
     });
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            name: "",
-            phone: "",
+            fullName: "",
+            email: "",
+            phoneNumber: "",
             address: "",
-            sex: "",
-            role: "",
         },
     });
 
@@ -73,11 +137,17 @@ const StaffProfile: React.FC<Props> = (props) => {
                     <div className="relative">
                         <Avatar className="w-56 h-56 ">
                             <AvatarImage
-                                src="https://avatars.githubusercontent.com/u/101063286?v=4"
+                                src={uploadedImage?.imageUrl as string}
                                 alt="Avatar"
                             />
                             <AvatarFallback>OM</AvatarFallback>
                         </Avatar>
+                        <div className="absolute bottom-5 right-5 bg-black text-white p-2 rounded-3xl cursor-pointer hover:bg-white hover:text-black">
+                            <ChangeAvatar
+                                setUploadedImage={setUploadedImage}
+                                uploadedImage={uploadedImage}
+                            />
+                        </div>
                     </div>
 
                     <h1 className="font-sans text-2xl mb-2">Nguyen Duc Bao</h1>
@@ -194,9 +264,9 @@ const StaffProfile: React.FC<Props> = (props) => {
 
                     <FormField
                         control={form.control}
-                        name="name"
+                        name="fullName"
                         render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="w-full">
                                 <FormLabel className="border-yellowCustom text-white mb-2 text-m">
                                     Name
                                 </FormLabel>
@@ -215,87 +285,69 @@ const StaffProfile: React.FC<Props> = (props) => {
 
                     <div className="flex justify-between w-full">
                         <div className="w-[48%]">
-                            <FormField
-                                control={form.control}
-                                name="sex"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel className="border-yellowCustom text-white mb-2 text-m">
-                                            Sex:
-                                        </FormLabel>
-                                        <FormControl>
-                                            <Select>
-                                                <SelectTrigger>
-                                                    <SelectValue placeholder="Select a Sex" />
-                                                </SelectTrigger>
-                                                <SelectContent>
-                                                    <SelectGroup>
-                                                        <SelectLabel>
-                                                            Sex
-                                                        </SelectLabel>
-                                                        <SelectItem value="Male">
-                                                            Male
-                                                        </SelectItem>
-                                                        <SelectItem value="Female">
-                                                            Female
-                                                        </SelectItem>
-                                                        <SelectItem value="Other">
-                                                            Other
-                                                        </SelectItem>
-                                                    </SelectGroup>
-                                                </SelectContent>
-                                            </Select>
-                                        </FormControl>
-
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
+                            <Label className="border-yellowCustom text-white mb-2 text-m">
+                                Sex
+                            </Label>
+                            <Select value={sex} onValueChange={setSex}>
+                                <SelectTrigger className="w-full">
+                                    <SelectValue
+                                        placeholder="Select your sex"
+                                        aria-label={sex}
+                                    />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectGroup>
+                                        <SelectLabel>Fruits</SelectLabel>
+                                        <SelectItem value="Male">
+                                            Male
+                                        </SelectItem>
+                                        <SelectItem value="Female">
+                                            Female
+                                        </SelectItem>
+                                        <SelectItem value="Other">
+                                            Other
+                                        </SelectItem>
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
                         </div>
                         <div className="w-[48%]">
-                            <FormField
-                                control={form.control}
-                                name="role"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel className="border-yellowCustom text-white mb-2 text-m">
-                                            Role:
-                                        </FormLabel>
-                                        <FormControl>
-                                            <Select>
-                                                <SelectTrigger>
-                                                    <SelectValue placeholder="Select a Sex" />
-                                                </SelectTrigger>
-                                                <SelectContent>
-                                                    <SelectGroup>
-                                                        <SelectLabel>
-                                                            Role
-                                                        </SelectLabel>
-                                                        <SelectItem value="Client">
-                                                            Client
-                                                        </SelectItem>
-                                                        <SelectItem value="Staff">
-                                                            Staff
-                                                        </SelectItem>
-                                                        <SelectItem value="Admin">
-                                                            Admin
-                                                        </SelectItem>
-                                                    </SelectGroup>
-                                                </SelectContent>
-                                            </Select>
-                                        </FormControl>
-
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
+                            <Label className="border-yellowCustom text-white mb-2 text-m">
+                                Role
+                            </Label>
+                            <Select
+                                value={role}
+                                onValueChange={setRole}
+                                disabled
+                            >
+                                <SelectTrigger className="w-full">
+                                    <SelectValue
+                                        placeholder="Select your Role"
+                                        aria-label={role}
+                                    />
+                                </SelectTrigger>
+                                <SelectContent>
+                                    <SelectGroup>
+                                        <SelectLabel>Fruits</SelectLabel>
+                                        <SelectItem value="Admin">
+                                            Admin
+                                        </SelectItem>
+                                        <SelectItem value="Staff">
+                                            Staff
+                                        </SelectItem>
+                                        <SelectItem value="Client">
+                                            Client
+                                        </SelectItem>
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
                         </div>
                     </div>
                     <FormField
                         control={form.control}
-                        name="phone"
+                        name="phoneNumber"
                         render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="w-full">
                                 <FormLabel className="border-yellowCustom text-white mb-2 text-m">
                                     Phone
                                 </FormLabel>
@@ -313,9 +365,29 @@ const StaffProfile: React.FC<Props> = (props) => {
                     />
                     <FormField
                         control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                            <FormItem className="w-full">
+                                <FormLabel className="border-yellowCustom text-white mb-2 text-m">
+                                    Email
+                                </FormLabel>
+                                <FormControl>
+                                    <Input
+                                        placeholder="shadcn@gmail.com"
+                                        {...field}
+                                        className="text-black mb-4"
+                                    />
+                                </FormControl>
+
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
                         name="address"
                         render={({ field }) => (
-                            <FormItem>
+                            <FormItem className="w-full mb-4">
                                 <FormLabel className="border-yellowCustom text-white mb-2 text-m">
                                     Address
                                 </FormLabel>
@@ -332,16 +404,14 @@ const StaffProfile: React.FC<Props> = (props) => {
                         )}
                     />
                     <Label className="text-m  mb-2">Password: </Label>
-                    <div className="flex justify-between w-full">
+                    <div className="flex justify-between w-full items-center">
                         <Input
                             className="text-m mb-2 w-[78%]"
                             value={"20 A Le Lai"}
                             type="password"
                             readOnly
                         />
-                        <Button variant={"secondary"} type="submit">
-                            Change Password
-                        </Button>
+                        <ChangePasswordForm />
                     </div>
                 </Card>
             </form>

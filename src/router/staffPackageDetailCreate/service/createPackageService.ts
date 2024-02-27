@@ -1,5 +1,5 @@
 import { packageStaffApi } from "@/utils/api/PackageApi";
 
-export const createPackageService = async (formData: any) => {
-    return packageStaffApi.createPackage(formData);
+export const createPackageService = async (formData: any, token: string) => {
+  return packageStaffApi.createPackage(formData, token);
 };

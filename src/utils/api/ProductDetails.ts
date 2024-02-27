@@ -1,7 +1,4 @@
 import { get, post, remove } from "./ApiCaller";
-const tokenS = localStorage.getItem("Token") as string;
-
-const token = "Bearer " + tokenS;
 export const productDetailsApi = {
   deleteProductDetails: (id: string, token: string) => {
     return remove(`/ProductDetails/${id}`, {}, {}, { Authorization: token });
@@ -14,7 +11,7 @@ export const productDetailsApi = {
       { Authorization: token }
     );
   },
-  getProductDetailById: (id: string) => {
+  getProductDetailById: (id: string, token: string) => {
     return get(
       `/ProductDetails/${id}`,
       {},

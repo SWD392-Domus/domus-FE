@@ -44,12 +44,13 @@ export const columns: ColumnDef<QuotationsProps>[] = [
         accessorKey: "staffName",
         header: "Staff",
         cell: ({ row }) => {
-            const staffName: string = row.getValue("staffName");
+            const staffName: string = (row.getValue("staffName") as { userName?: string })?.userName || "";
+            const staffAva: string = (row.getValue("staffName") as { profileImage?: string })?.profileImage || "";
             return <div className=" text-right font-medium">{
                 <div className="flex items-center gap-1 ">
                     <Avatar>
-                        <AvatarImage src={row.getValue("staffAva")} />
-                        <AvatarFallback>CN</AvatarFallback>
+                        <AvatarImage src={staffAva} />
+                        <AvatarFallback>S</AvatarFallback>
                     </Avatar>
                     <div className="text-destructive">{staffName}</div>
                 </div>
@@ -61,12 +62,13 @@ export const columns: ColumnDef<QuotationsProps>[] = [
         accessorKey: "customerName",
         header: "Customer",
         cell: ({ row }) => {
-            const customerName: string = row.getValue("customerName");
+            const customerName: string = (row.getValue("customerName") as { userName?: string })?.userName || "";
+            const customerAva: string = (row.getValue("customerName") as { profileImage?: string })?.profileImage || "";
             return <div className=" text-right font-medium">{
                 <div className="flex items-center gap-1 ">
                     <Avatar>
-                        <AvatarImage src={row.getValue("customerAva")} />
-                        <AvatarFallback>CN</AvatarFallback>
+                        <AvatarImage src={customerAva} />
+                        <AvatarFallback>S</AvatarFallback>
                     </Avatar>
                     <div className="text-destructive">{customerName}</div>
                 </div>

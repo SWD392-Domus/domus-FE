@@ -75,13 +75,14 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
                 } else {
                     navigate("/home");
                 }
+                toastSuccess("Login Successfully");
             } else {
-                for (let mess of res.data.messages) {
+                for (const mess of res.data.messages) {
                     toastError(mess.content);
                 }
             }
         } catch (error) {
-            toastError("Something Wrong");
+            toastError("Login Error");
         }
     }
     return (

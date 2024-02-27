@@ -8,13 +8,15 @@ export const getQuotationsPaging = async (
   pageSize: number,
   pageIndex: number
 ) => {
+  const token = ("Bearer " + localStorage.getItem("Token")) as string;
   const response = await getQuotationsPagingService(
     searchField,
     searchValue,
     sortField,
     descending,
     pageSize,
-    pageIndex
+    pageIndex,
+    token
   );
 
   if (response.status === 200) {
@@ -23,17 +25,19 @@ export const getQuotationsPaging = async (
       (item: {
         id: string;
         expireAt: string;
-        staff: { profileImage: string; name: string };
-        customer: { profileImage: string; name: string };
+        staff: { profileImage: string; userName: string };
+        customer: { profileImage: string; userName: string };
         totalPrice: number;
         status: string;
       }) => ({
         id: item?.id,
         expireAt: item?.expireAt,
-        staffAva: item?.staff?.profileImage,
-        staffName: item?.staff?.name,
-        customerAva: item?.customer?.profileImage,
-        customerName: item?.customer?.name,
+        // staffAva: item?.staff?.profileImage,
+        // staffName: item?.staff?.userName,
+        staffName: item?.staff,
+        // customerAva: item?.customer?.profileImage,
+        // customerName: item?.customer?.userName,
+        customerName: item?.customer,
         totalPrice: item?.totalPrice,
         status: item?.status,
       })

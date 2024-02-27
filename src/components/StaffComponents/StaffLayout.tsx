@@ -1,5 +1,5 @@
 import BreadCrumbHeader from "@/components/ui/Breadcrumb";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import Navbar from "./Navbar";
 
 const StaffLayout = () => {
@@ -8,9 +8,12 @@ const StaffLayout = () => {
             <div className="flex flex-1">
                 <div className="border-r basis-1/6">
                     <div className="flex-col h-full">
-                        <div className="font-bold mb-5 pl-3 text-2xl">
+                        <Link
+                            className="font-bold mb-5 pl-3 text-2xl"
+                            to="/home"
+                        >
                             Domus
-                        </div>
+                        </Link>
                         <Navbar />
                     </div>
                 </div>

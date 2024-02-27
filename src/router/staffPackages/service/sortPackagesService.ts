@@ -4,12 +4,14 @@ export const sortPackagesService = async (
   pageSize: number,
   pageIndex: number,
   sortField: string,
-  sortKeyword: boolean
+  sortKeyword: boolean,
+  token: string
 ) => {
   return packageStaffApi.sortPackages(
     pageSize,
     pageIndex,
     sortField,
-    sortKeyword
+    sortKeyword,
+    token
   );
 };

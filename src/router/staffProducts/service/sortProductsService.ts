@@ -4,12 +4,14 @@ export const sortProductsService = async (
   pageSize: number,
   pageIndex: number,
   sortField: string,
-  sortKeyword: boolean
+  sortKeyword: boolean,
+  token: string
 ) => {
   return productStaffApi.sortProducts(
     pageSize,
     pageIndex,
     sortField,
-    sortKeyword
+    sortKeyword,
+    token
   );
 };

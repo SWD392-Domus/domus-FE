@@ -1,9 +1,9 @@
-import { ColumnDef } from "@tanstack/react-table"
-import { Avatar, AvatarImage } from "@/components/ui/Avatar"
-import { Checkbox } from "@/components/ui/Checkbox/checkbox"
-import { ProductsProps } from "../../types"
-import { CRUDDropdownMenu } from "../DropdownMenu/CRUD"
-import { TooltipDes } from "../Tooltip"
+import { ColumnDef } from "@tanstack/react-table";
+import { Avatar, AvatarImage } from "@/components/ui/Avatar";
+import { Checkbox } from "@/components/ui/Checkbox/checkbox";
+import { ProductsProps } from "../../types";
+import { CRUDDropdownMenu } from "../DropdownMenu/CRUD";
+import { TooltipDes } from "../Tooltip";
 
 export const columns: ColumnDef<ProductsProps>[] = [
     {
@@ -14,7 +14,9 @@ export const columns: ColumnDef<ProductsProps>[] = [
                     table.getIsAllPageRowsSelected() ||
                     (table.getIsSomePageRowsSelected() && "indeterminate")
                 }
-                onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+                onCheckedChange={(value) =>
+                    table.toggleAllPageRowsSelected(!!value)
+                }
                 aria-label="Select all"
             />
         ),
@@ -46,8 +48,8 @@ export const columns: ColumnDef<ProductsProps>[] = [
                 <Avatar>
                     <AvatarImage src={image} />
                 </Avatar>
-            )
-        }
+            );
+        },
     },
     {
         accessorKey: "productName",
@@ -62,7 +64,13 @@ export const columns: ColumnDef<ProductsProps>[] = [
         header: "Brand",
         cell: ({ row }) => {
             return (
-                row.getValue("brand") ? row.getValue("brand") : "No Brand"
+                <>
+                    {row.getValue("brand") === "" ? (
+                        <div>No Brand</div>
+                    ) : (
+                        <div>{row.getValue("brand")}</div>
+                    )}
+                </>
             );
         },
     },
@@ -71,24 +79,24 @@ export const columns: ColumnDef<ProductsProps>[] = [
         header: "Description",
         cell: ({ row }) => {
             return (
-                <TooltipDes description={row.getValue("description")}></TooltipDes>
-            )
+                <TooltipDes
+                    description={row.getValue("description")}
+                ></TooltipDes>
+            );
         },
     },
     {
-        accessorKey: "totalQuantity",
-        header: "Total Quantity",
+        accessorKey: "brand",
+        header: "Brand",
         cell: ({ row }) => {
-            return <div className="text-center">{row.getValue("totalQuantity")}</div>
+            return row.getValue("brand") ? row.getValue("brand") : "No Brand";
         },
     },
     {
         id: "actions",
         enableHiding: false,
         cell: ({ row }) => {
-            return (
-                <CRUDDropdownMenu id={row.getValue('id')} />
-            )
+            return <CRUDDropdownMenu id={row.getValue("id")} />;
         },
     },
-]
+];

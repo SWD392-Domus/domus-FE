@@ -27,7 +27,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import selector from "./slice/selector";
 import { actions } from "./slice";
-import { Avatar } from "@/components/ui/Avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/Avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
 import { serviceColums } from "./components/ServiceTable/column";
 
@@ -48,7 +48,7 @@ const QuotationDetail: React.FC<Props> = () => {
     const negotiationLog: any = useSelector(selector.negotiationLog);
     const services: any = useSelector(selector.services);
     const [updated, setUpdated] = useState(false);
-
+    console.log(totalPrice);
     // const location = useLocation();
     // const navigate = useNavigate();
 
@@ -56,7 +56,6 @@ const QuotationDetail: React.FC<Props> = () => {
         if (quotationId) {
             try {
                 const response = await getQuotationById(quotationId);
-                console.log(response);
 
                 if (response) {
                     dispatch(actions.setQuotation(response));
@@ -83,19 +82,23 @@ const QuotationDetail: React.FC<Props> = () => {
                             {new Intl.NumberFormat("en-US", {
                                 style: "currency",
                                 currency: "VND",
-                            }).format(totalPrice)}
+                            }).format(totalPrice * 1000)}
                         </div>
                         <MakeContractButton></MakeContractButton>
                         <div className="staff-assigned-info my-7">
                             <div className="mb-2">Assigned Staff</div>
-                            <div className="flex flex-row mb-2">
-                                <Avatar>
+                            <div
+                                className="flex flex-row 
+                            "
+                            >
+                                <Avatar className="mr-2">
                                     <AvatarImage src={staff.profileImage} />
+                                    <AvatarFallback>Staff</AvatarFallback>
                                 </Avatar>
 
-                                <span className="my-auto font-medium">
+                                <h2 className="my-auto font-medium">
                                     {staff.userName}
-                                </span>
+                                </h2>
                             </div>
                         </div>
                     </div>
@@ -143,9 +146,12 @@ const QuotationDetail: React.FC<Props> = () => {
                                         <div className=" flex flex-row mb-1">
                                             <Avatar className="mr-2">
                                                 <AvatarImage
-                                                    className="w-full"
+                                                    className=""
                                                     src={customer.profileImage}
                                                 />
+                                                <AvatarFallback>
+                                                    C
+                                                </AvatarFallback>
                                             </Avatar>
                                             <span className="my-auto font-medium font-sans text-md">
                                                 {customer.fullName}
@@ -190,6 +196,8 @@ const QuotationDetail: React.FC<Props> = () => {
                                         data={products}
                                     />
                                 </div>
+                            </div>
+                            <div className="detail-table">
                                 <div className="mt-7 text-xl font-semibold">
                                     Services
                                 </div>
@@ -206,7 +214,7 @@ const QuotationDetail: React.FC<Props> = () => {
                                             {new Intl.NumberFormat("en-US", {
                                                 style: "currency",
                                                 currency: "VND",
-                                            }).format(quotationInfo.totalPrice)}
+                                            }).format(totalPrice * 1000)}
                                         </div>
                                     </div>
                                 </div>

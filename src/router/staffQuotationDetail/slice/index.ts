@@ -11,9 +11,7 @@ export const initialState = {
     expireAt: "",
     products: [],
     negotiationLog: {},
-    services: [
-        { id: 123, name: "Lau Nha", price: 200, monetaryUnit: "Service" },
-    ],
+    services: [],
 };
 
 export const name = "viewQuotation";
@@ -33,10 +31,11 @@ const slice = createSlice({
             state.customer = action.payload.customer;
             state.staff = action.payload.staff;
             state.status = action.payload.status;
-            state.totalPrice = action.payload.totalPrice;
+            state.totalPrice = Number.parseFloat(action.payload.totalPrice);
             state.expireAt = action.payload.expireAt;
             state.products = action.payload.products;
             state.negotiationLog = action.payload.negotiationLog;
+            state.services = action.payload.services;
         },
         getQuotationInfo: (state: any) => {
             state.info = {
