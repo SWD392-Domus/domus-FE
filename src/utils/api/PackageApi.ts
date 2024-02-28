@@ -7,6 +7,16 @@ export const packageApi = {
   getOnePackage: (id: string) => {
     return get(`/Packages/${id}`);
   },
+  searchPackage: (
+    pageSize: number,
+    pageIndex: number,
+    searchValue: string,
+    searchField: string
+  ) => {
+    return get(
+      `/Packages/search?PageSize=${pageSize}&PageIndex=${pageIndex}&SearchValue=${searchValue}&SearchField=${searchField}`
+    );
+  },
 };
 
 export const packageStaffApi = {
