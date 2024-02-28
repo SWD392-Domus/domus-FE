@@ -30,7 +30,7 @@ const ProductPopup: React.FC<DetailsProps> = ({
   const { product } = useSelector(productSelector);
   const indexRender = index + 1;
   return (
-    <>
+    <div className="flex justify-between gap-10">
       <DialogHeader>
         <DialogTitle>Product Details</DialogTitle>
         <DialogDescription>
@@ -42,17 +42,17 @@ const ProductPopup: React.FC<DetailsProps> = ({
               {product?.productName} Variant {indexRender}
             </Label>
           </div>
-          <div className="grid grid-cols-8 items-center gap-4">
+          {/* <div className="grid grid-cols-8 items-center gap-4">
             <Label htmlFor="name" className="text-left font-bold">
               Id
             </Label>
             <h1 className="col-span-7  font-openSans text-xl">{details.id}</h1>
-          </div>
+          </div> */}
           <div className="grid grid-cols-8 items-center gap-4">
-            <Label htmlFor="username" className="font-bold text-left">
+            <Label htmlFor="username" className="font-bold text-left col-span-3">
               Favorable Price
             </Label>
-            <div className="col-span-7 font-openSans">
+            <div className="col-span-5 font-openSans">
               {new Intl.NumberFormat("en-US", {
                 style: "currency",
                 currency: "USD",
@@ -62,10 +62,10 @@ const ProductPopup: React.FC<DetailsProps> = ({
           {details.attributes &&
             details.attributes.map((attribute) => (
               <div className="grid grid-cols-8 items-center gap-4">
-                <Label htmlFor="name" className="text-left font-bold">
+                <Label htmlFor="name" className="text-left font-bold col-span-3">
                   {attribute.name}:{" "}
                 </Label>
-                <span className="col-span-7 font-openSans">
+                <span className="col-span-5 font-openSans">
                   {attribute.value}
                 </span>
               </div>
@@ -97,7 +97,7 @@ const ProductPopup: React.FC<DetailsProps> = ({
         )}
         
       </div>
-    </>
+    </div>
   );
 };
 

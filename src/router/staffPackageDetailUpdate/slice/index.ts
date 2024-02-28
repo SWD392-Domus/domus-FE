@@ -1,6 +1,7 @@
 import { injectReducer } from "@/store";
 import generateActions from "./generateActions";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PackageImageProps } from "../types";
 
 export const initialState = {
   id: "",
@@ -9,7 +10,7 @@ export const initialState = {
   discount: 0,
   services: [],
   productDetails: [],
-  packageImages: [],
+  packageImages: [] as PackageImageProps[],
 };
 
 export const name = "UpdatePackage";
@@ -99,6 +100,9 @@ const slice = createSlice({
           state.productDetails.splice(indexToDelete, 1);
         }
       });
+    },
+    updatePackageImages: (state, action: PayloadAction<PackageImageProps[]>) => {
+      state.packageImages = [...state.packageImages, ...action.payload];
     },
   },
 });

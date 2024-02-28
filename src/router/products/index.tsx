@@ -5,6 +5,7 @@ import ProductSkeleton from "./components/ProductSkeleton";
 import ProductsPagination from "./components/ProductsPagination";
 import { searchProducts } from "./usecases";
 import { ProductProps } from "@/router/products/type";
+import ProductCard from "./components/ProductCard";
 // import { toast } from "@/components/ui/Toast/use-toast";
 // import CategorySelection from "./components/CategorySelection";
 
@@ -41,9 +42,6 @@ const ProductList: React.FC = () => {
     const [totalPages, setTotalPages] = useState(0);
     const [totalItems, setTotalItems] = useState(0);
     const [searchValue, setSearchValue] = useState("");
-    const ProductCard = React.lazy(
-        () => import("@/router/products/components/ProductCard")
-    );
     const pageSize = 12;
     const [pageIndex, setPageIndex] = useState(1);
 
@@ -136,13 +134,6 @@ const ProductList: React.FC = () => {
                             </div>
                         </div>
                     )}
-                    {/* <div className="py-20 w-full flex justify-center items-center border-gray-200">
-            <ProductsPagination
-              totalPages={totalPages}
-              pageIndex={pageIndex}
-              setPageIndex={setPageIndex}
-            />
-          </div> */}
                 </div>
             </header>
         </>
