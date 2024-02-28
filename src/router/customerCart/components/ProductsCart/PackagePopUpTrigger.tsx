@@ -57,7 +57,7 @@ const PackagePopUpTrigger: React.FC<Props> = (props) => {
                 <div className="w-[400px] flex flex-col justify-between">
                     <h1 className="font-semibold text-lg">{props?.packageA?.name}</h1>
                     {/* <TooltipDes description={props?.packageA?.description}></TooltipDes> */}
-                    <h1 className="font-semibold mt-2">Discount: <span className="text-red-600">{props.packageA.discount}%</span></h1>
+                    <h1 className="font-semibold mt-2">Discount: <span className="text-red-600">{props?.packageA?.discount}%</span></h1>
 
                     <div className="flex justify-between items-center">
                         <div className="font-semibold flex gap-1">

@@ -22,7 +22,7 @@ const Cart: React.FC = () => {
     }
 
     const packageB = cart.package;
-    if (packageB) {
+    if (packageB && packageB.id) {
       dispatch(actionsCart.setPackage(packageB));
       setPackageUpdated(true);
     }

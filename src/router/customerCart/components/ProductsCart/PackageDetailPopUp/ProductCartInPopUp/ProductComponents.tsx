@@ -15,7 +15,7 @@ const ProductComponents: React.FC<Props> = (props) => {
   return (
     <div className='h-[600px] w-[600px] overflow-scroll pr-5 flex flex-col gap-4 items-center pb-5'>
       {productIdQuans.map((productIdQuan) => (
-        <OneProductDetail updatedS={updatedS} setUpdatedS={setUpdatedS} productIdQuan={productIdQuan}></OneProductDetail>
+        <OneProductDetail updatedS={updatedS} setUpdatedS={setUpdatedS} productIdQuan={productIdQuan} productIdQuans={productIdQuans}></OneProductDetail>
       ))}
     </div>
   );

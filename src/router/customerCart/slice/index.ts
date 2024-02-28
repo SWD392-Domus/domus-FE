@@ -50,6 +50,22 @@ const slice = createSlice({
     },
     setPackage: (state: any, action: any) => {
       state.package = action.payload;
+      const cart = localStorage.getItem("cart")
+        ? JSON.parse(localStorage.getItem("cart") as string)
+        : { productDetails: [] };
+
+      cart.package = action.payload;
+      localStorage.setItem("cart", JSON.stringify(cart));
+      state.totalPrice = calculateTotalPrice(state);
+    },
+    removePackage: (state: any) => {
+      state.package = {};
+      const cart = localStorage.getItem("cart")
+        ? JSON.parse(localStorage.getItem("cart") as string)
+        : { productDetails: [] };
+
+      cart.package = {};
+      localStorage.setItem("cart", JSON.stringify(cart));
       state.totalPrice = calculateTotalPrice(state);
     },
     incrementQuantity: (state: any, action: PayloadAction<string>) => {

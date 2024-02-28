@@ -9,6 +9,7 @@ import { RemoveButton } from "./RemoveButton";
 
 interface Props {
     productIdQuan: any;
+    productIdQuans: any;
     updatedS: number;
     setUpdatedS: any;
 }
@@ -48,7 +49,7 @@ const OneProductDetail: React.FC<Props> = (props) => {
                                 <h1 className="font-semibold">Quantity: <span className="text-red-600">0{props?.productIdQuan?.quantity}</span></h1>
                             </div>
                             <div className="flex justify-end items-center gap-4">
-                                <RemoveButton></RemoveButton>
+                                <RemoveButton productIdQuans={props.productIdQuans}></RemoveButton>
                             </div>
                         </div>
                     </div>
