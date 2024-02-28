@@ -109,18 +109,19 @@ const ProductDetails: React.FC = () => {
   const handleAddToCart = async () => {
     const cart = localStorage.getItem("cart");
     // const productDetailIdToAdd: any = isCheckedIds[0];
-    let productDetailIdToAdd: any;
+    let productDetailIdPriceToAdd: any;
     fields.some((field: any) => {
       const foundValue = field.values.find((value: any) => value.ids.length > 0 && value.isChecked === true);
+      const sendValue = foundValue.ids.find((idAndPrice: any) => isCheckedIds.includes(idAndPrice.id));
       if (foundValue) {
-        productDetailIdToAdd = foundValue.ids[0];
+        productDetailIdPriceToAdd = sendValue;
         return true;
       }
     });
     const cartArray = cart ? JSON.parse(cart) : [];
 
     const productExists = cartArray.some((cartObject: any) => {
-      if (cartObject.id == productDetailIdToAdd.id) {
+      if (cartObject.id == productDetailIdPriceToAdd.id) {
         cartObject.quantity += 1;
         return true;
       }
@@ -128,7 +129,7 @@ const ProductDetails: React.FC = () => {
     });
 
     if (!productExists) {
-      cartArray.push({ id: productDetailIdToAdd.id, price: productDetailIdToAdd.price * 1000, quantity: 1 });
+      cartArray.push({ id: productDetailIdPriceToAdd.id, price: productDetailIdPriceToAdd.price * 1000, quantity: 1 });
     }
 
     localStorage.setItem("cart", JSON.stringify(cartArray));

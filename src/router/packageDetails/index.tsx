@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/Button/Button';
-import { DeleteButton } from './components/DeleteButton';
+import { RequestQuotationButton } from './components/Button/RequestQuotationButton';
+import { CustomizePackageButton } from './components/Button/CustomizePackageButton';
 import Slider from './components/ImagesPackageSlider';
 import { ProductDetailProps, PackageImageProps, ServiceProps } from './types';
 import {
@@ -103,12 +104,10 @@ const PackageDetails: React.FC<Props> = () => {
                 {discount}%
               </div>
               <div className="mt-2">
-                <DeleteButton id={id}></DeleteButton>
+                <RequestQuotationButton id={id}></RequestQuotationButton>
               </div>
               <div className="mt-2">
-                <Button
-                  // onClick={() => navigate(`${location.pathname}/update`)}
-                  variant={'yellowCustom'} className="cursor-pointer w-40">Customize Package</Button>
+                <CustomizePackageButton id={id}></CustomizePackageButton>
               </div>
               <div className="h-auto pr-2 pb-10 w-[70%]">
                 <Accordion type="single" defaultValue="item-1" collapsible>

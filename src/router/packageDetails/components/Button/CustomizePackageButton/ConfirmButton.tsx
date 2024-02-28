@@ -1,4 +1,4 @@
-import { deletePackage } from "../usecase"
+import { deletePackage } from "../../../usecase"
 import { Button } from "@/components/ui/Button/Button"
 import { ToastAction } from "@/components/ui/Toast/toast"
 import { useToast } from "@/components/ui/Toast/use-toast"
@@ -7,7 +7,7 @@ interface Props {
     id: string
 }
 
-export const ConfirmDeleteButton: React.FC<Props> = (props) => {
+export const ConfirmButton: React.FC<Props> = (props) => {
     const { toast } = useToast()
     return (
         <Button
@@ -31,6 +31,6 @@ export const ConfirmDeleteButton: React.FC<Props> = (props) => {
             //         })
             //     )
             // } 
-            className="bg-red-800" >Delete</Button>
+            className="bg-red-800" >Confirm</Button>
     )
 }

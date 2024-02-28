@@ -8,27 +8,29 @@ import {
     DialogTrigger,
     DialogClose
 } from "@/components/ui/Dialog";
-import { ConfirmDeleteButton } from "./ConfirmDeleteButton";
+import { ConfirmButton } from "./ConfirmButton";
 import { Button } from '@/components/ui/Button/Button';
 
 interface Props {
     id: string
 }
 
-export const DeleteButton: React.FC<Props> = (props) => {
+export const CustomizePackageButton: React.FC<Props> = (props) => {
     return (
         <Dialog>
-            <DialogTrigger><Button className="cursor-pointer w-40">Request Quotation</Button></DialogTrigger>
+            <DialogTrigger>
+                <Button variant={'yellowCustom'} className="cursor-pointer w-40">Customize Package</Button></DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
-                    <DialogTitle>Request?</DialogTitle>
+                    <DialogTitle className="mb-2">Customize Package?</DialogTitle>
                     <DialogDescription>
-                        Are you really sure that you want to Request Quotation?
+                        Customize This Package will make you lose the discount!
+                        Do you really want to Customize?
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter>
                     <DialogClose>
-                        <ConfirmDeleteButton id={props.id}></ConfirmDeleteButton>
+                        <ConfirmButton id={props.id}></ConfirmButton>
                     </DialogClose>
                 </DialogFooter>
             </DialogContent>
