@@ -1,13 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ProductsCart from './components/ProductsCart'
 import ProductsSuggestion from './components/ProductsSuggestion/Suggestion'
 import ServiceCombo from './components/ServiceCombo'
 import { Button } from "@/components/ui/Button/Button";
 import { ArrowRight } from 'lucide-react';
-import { useSelector } from "react-redux";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import selector from "./slice/selector";
-// import { actions } from "./slice";
+import { actions } from "./slice";
 import { ServiceProps, ProductDetailProps } from "./types";
 import { createQuotation } from './usecase/createQuotation';
 import { useToast } from "@/components/ui/Toast/use-toast";
@@ -16,11 +15,14 @@ import { ToastAction } from "@/components/ui/Toast/toast";
 
 const CustomerCart: React.FC = () => {
   const { toast } = useToast();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const services: ServiceProps[] = useSelector(selector.services);
   const productDetails: any[] = useSelector(selector.productDetails);
   const totalPrice: number = useSelector(selector.totalPrice);
   const discount: number = useSelector(selector.discount);
+  // useEffect(() => {
+  //   dispatch(actions.calculateTotalPrice());
+  // }, []);
   const handleClick = async () => {
     const servicesIds = services.map((service) => service.id)
     const res = await createQuotation(
@@ -60,15 +62,15 @@ const CustomerCart: React.FC = () => {
   return (
     <div className='h-auto flex flex-col mb-20 mx-16'>
       <h1 className='flex justify-center text-4xl p-4 font-semibold'>Request For Quotation</h1>
-      <div className='flex flex-wrap justify-between gap-20 mb-10'>
+      <div className='flex flex-row justify-between gap-20 mb-10'>
         <ProductsCart />
         <ProductsSuggestion />
       </div>
       <div className="flex flex-row items-center justify-between">
         <ServiceCombo></ServiceCombo>
-        <div className='flex flex-col text-lg'>
+        <div className='flex flex-col text-xl'>
           <div className='flex gap-2'>
-            <div className=''>Total Price:</div>
+            <div className='font-semibold'>Total Price:</div>
             <div className='font-semibold text-red-600'>
               {new Intl.NumberFormat("en-US", {
                 style: "currency",
@@ -76,7 +78,7 @@ const CustomerCart: React.FC = () => {
               }).format(totalPrice)}
             </div>
           </div>
-          <div>Discount: {discount}%</div>
+          {/* <div>Discount: {discount}%</div> */}
         </div>
         <Button
           variant={"yellowCustom"}

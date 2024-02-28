@@ -166,11 +166,16 @@ const PackageDetails: React.FC<Props> = () => {
                             </p>
                           </CardDescription> */}
                         <CardTitle>
-                          <p className="text-2xl truncate">
+                          <p className="text-2xl truncate mb-1">
                             {new Intl.NumberFormat("en-US", {
                               style: "currency",
                               currency: "VND",
                             }).format(product.displayPrice * 1000)}
+                          </p>
+                        </CardTitle>
+                        <CardTitle>
+                          <p className="truncate">
+                            Quantity: <span className='text-red-600'>{product.quantity}</span>
                           </p>
                         </CardTitle>
                       </CardContent>

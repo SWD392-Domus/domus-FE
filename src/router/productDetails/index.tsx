@@ -107,7 +107,7 @@ const ProductDetails: React.FC = () => {
   }
 
   const handleAddToCart = async () => {
-    const cart = localStorage.getItem("cart");
+    const cart = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart") as string) : { productDetails: [] };
     // const productDetailIdToAdd: any = isCheckedIds[0];
     let productDetailIdPriceToAdd: any;
     fields.some((field: any) => {
@@ -118,7 +118,7 @@ const ProductDetails: React.FC = () => {
         return true;
       }
     });
-    const cartArray = cart ? JSON.parse(cart) : [];
+    const cartArray = cart.productDetails ? cart.productDetails : [];
 
     const productExists = cartArray.some((cartObject: any) => {
       if (cartObject.id == productDetailIdPriceToAdd.id) {
@@ -132,8 +132,8 @@ const ProductDetails: React.FC = () => {
       cartArray.push({ id: productDetailIdPriceToAdd.id, price: productDetailIdPriceToAdd.price * 1000, quantity: 1 });
     }
 
-    localStorage.setItem("cart", JSON.stringify(cartArray));
-    const cartNumber: any = JSON.parse(localStorage.getItem("cart") ?? "[]").length;
+    localStorage.setItem("cart", JSON.stringify(cart));
+    const cartNumber: any = JSON.parse(localStorage.getItem("cart") as string).productDetails ? JSON.parse(localStorage.getItem("cart") as string).productDetails.length : 0;
     dispatch(actionsCart.setCartNumber(cartNumber));
     navigate("/customer/settings/cart");
   }
