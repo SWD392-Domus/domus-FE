@@ -16,11 +16,11 @@ import {
 import { Input } from "../Input";
 import { useState } from "react";
 
-import { ComboBoxResponsive } from "../ComboBox";
 import { Button } from "@/components/ui/Button/Button";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { useDispatch } from "react-redux";
 import { actions } from "../../slice";
+import { ServiceComboBox } from "../ServiceComboBox";
 export interface ProductDetails {
     images: {
         imageUrl: string;
@@ -34,28 +34,27 @@ export interface ProductDetails {
 type Status = {
     value: string;
     label: string;
-    id?: string;
-    productName?: string;
-    description?: string;
-    details?: ProductDetails[];
-    price?: string;
+    id: string;
+    name: string;
+    price: number;
+    monetaryUnit: string;
 };
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
     data: TData[];
-    cellValues: CellValues;
-    setCellValues: React.Dispatch<React.SetStateAction<CellValues>>;
+    serviceCellValues: CellValues;
+    setServiceCellValues: React.Dispatch<React.SetStateAction<CellValues>>;
 }
 interface CellValues {
     [key: string]: {
         [key: string]: string;
     };
 }
-export function EditDataTable<TData, TValue>({
+export function EditTableService<TData, TValue>({
     columns,
     data,
-    cellValues,
-    setCellValues,
+    serviceCellValues,
+    setServiceCellValues,
 }: DataTableProps<TData, TValue>) {
     const dispatch = useDispatch();
 
@@ -70,14 +69,14 @@ export function EditDataTable<TData, TValue>({
         let newCellValues = null;
         if (fromComboBox) {
             newCellValues = {
-                ...cellValues,
+                ...serviceCellValues,
                 [rowId]: value,
             };
         } else {
             newCellValues = {
-                ...cellValues,
+                ...serviceCellValues,
                 [rowId]: {
-                    ...(cellValues[rowId] || {}),
+                    ...(serviceCellValues[rowId] || {}),
                     [columnId]: fromComboBox ? value : value?.toString(),
                 },
             };
@@ -93,7 +92,7 @@ export function EditDataTable<TData, TValue>({
             }
         }
 
-        setCellValues(newCellValues as CellValues);
+        setServiceCellValues(newCellValues as CellValues);
     };
 
     const handleComboBoxChange = (
@@ -110,9 +109,10 @@ export function EditDataTable<TData, TValue>({
         columns,
         getCoreRowModel: getCoreRowModel(),
     });
-    const handleDeleteProduct = (id: string) => {
-        dispatch(actions.deleteRow(id));
-        delete cellValues[id];
+
+    const handleDeleteService = (id: string) => {
+        dispatch(actions.deleteServiceRow(id));
+        delete serviceCellValues[id];
     };
 
     return (
@@ -146,8 +146,10 @@ export function EditDataTable<TData, TValue>({
                             >
                                 {row.getVisibleCells().map((cell) => {
                                     const cellValue =
-                                        cellValues[row.id] &&
-                                        cellValues[row.id][cell.column.id];
+                                        serviceCellValues[row.id] &&
+                                        serviceCellValues[row.id][
+                                            cell.column.id
+                                        ];
 
                                     return (
                                         <TableCell key={cell.id}>
@@ -156,7 +158,7 @@ export function EditDataTable<TData, TValue>({
                                                     className="flex justify-center items-center cursor-pointer"
                                                     variant={"ghost"}
                                                     onClick={() =>
-                                                        handleDeleteProduct(
+                                                        handleDeleteService(
                                                             row.id
                                                         )
                                                     }
@@ -183,9 +185,14 @@ export function EditDataTable<TData, TValue>({
                                                         cell.column.id ==
                                                         "priceSum"
                                                     }
+                                                    className={
+                                                        cell.column.id == "name"
+                                                            ? "w-full"
+                                                            : ""
+                                                    }
                                                 />
                                             ) : (
-                                                <ComboBoxResponsive
+                                                <ServiceComboBox
                                                     selectedStatus={
                                                         selectedStatus as Status
                                                     }

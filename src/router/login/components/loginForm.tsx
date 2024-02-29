@@ -67,8 +67,9 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
             const res = await loginApi.login(values.email, values.password);
             if (res.status === 200) {
                 localStorage.setItem("Token", res.data.data.token.accessToken);
+
+                toastSuccess("Login Successfully");
                 const roles: string[] = res.data.data.roles;
-                console.log(roles);
                 if (roles.includes("Staff")) {
                     navigate("/staff");
                 } else {
