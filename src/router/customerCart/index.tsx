@@ -32,7 +32,7 @@ const CustomerCart: React.FC = () => {
           // customerId: "e403c308-274e-42f5-b5df-36ec234d6ee1",
           // staffId: "c713aacc-3582-4598-8670-22590d837179",
           expireAt: "2024-09-24T06:54:12.762Z",
-          // packageId: packageA.id,
+          packageId: packageA.id,
           services: servicesIds,
           productDetails: productDetails.map((productDetail: any) => {
             return {
