@@ -23,7 +23,7 @@ const Header: React.FC = () => {
   };
 
   useEffect(() => {
-    const cartNumber: any = JSON.parse(localStorage.getItem("cart") ?? "[]").length;
+    const cartNumber: any = localStorage.getItem("cart") && JSON.parse(localStorage.getItem("cart") as string).productDetails ? JSON.parse(localStorage.getItem("cart") as string).productDetails.length : 0;
     dispatch(actions.setCartNumber(cartNumber));
     // When the NavigationTab is open, prevent scrolling
     if (open) {

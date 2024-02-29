@@ -22,6 +22,7 @@ export type PackageImageProps = {
 
 export type ProductDetailProps = {
   id: string;
+  quantity: number;
   productName: string;
   displayPrice: number;
   attributes: {

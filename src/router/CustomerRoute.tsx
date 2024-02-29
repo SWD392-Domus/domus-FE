@@ -7,14 +7,13 @@ import { Navigate, Outlet } from "react-router-dom";
 // import { toastError } from "../components/Toast";
 
 const CustomerRoute = () => {
-    const { userRole, loading } = useAuth();
-
+    const { userRoles, loading } = useAuth();
     if (loading) {
         // Render a loading spinner or placeholder while authentication is being checked
         return <Loading />;
     }
 
-    if (userRole === null) {
+    if (userRoles === null) {
         // User is not logged in, handle accordingly
         toastError("Please Login First");
         return <Navigate to="/login" replace />;
@@ -22,10 +21,10 @@ const CustomerRoute = () => {
 
     // // Assuming 'userRole' is set to 'role' in your JWT payload
     // // Adjust this condition based on your JWT structure
-    // if (userRole !== "Client") {
-    //     // User does not have the required role, redirect to a forbidden page
-    //     return <Navigate to="/403" replace />;
-    // }
+    if (!userRoles.includes("Client")) {
+        // User does not have the required role, redirect to a forbidden page
+        return <Navigate to="/403" replace />;
+    }
 
     // User has the required role, render the child components
     return <Outlet />;
