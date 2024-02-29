@@ -27,12 +27,13 @@ const CustomerCart: React.FC = () => {
   const handleClick = async () => {
     if ((packageA && packageA.id) || (productDetails && productDetails.length > 0)) {
       const servicesIds = services.map((service) => service.id)
+
       const res = await createQuotation(
         {
           // customerId: "e403c308-274e-42f5-b5df-36ec234d6ee1",
           // staffId: "c713aacc-3582-4598-8670-22590d837179",
           expireAt: "2024-09-24T06:54:12.762Z",
-          packageId: packageA.id,
+          packageId: (packageA && packageA.id && packageA.id !== undefined) ? packageA.id : "0a755084-c616-4a0f-250a-08dc38ce79fc",
           services: servicesIds,
           productDetails: productDetails.map((productDetail: any) => {
             return {
