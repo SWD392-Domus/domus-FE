@@ -6,6 +6,7 @@ import { getProductDetailById } from "@/router/customerCart/usecase";
 // import { useDispatch } from "react-redux";
 // import { Button } from "@/components/ui/Button/Button.tsx";
 import { RemoveButton } from "./RemoveButton";
+import { AddButton } from "./AddButton";
 
 interface Props {
     productIdQuan: any;
@@ -50,6 +51,7 @@ const OneProductDetail: React.FC<Props> = (props) => {
                             </div>
                             <div className="flex justify-end items-center gap-4">
                                 <RemoveButton productIdQuans={props.productIdQuans}></RemoveButton>
+                                <AddButton productIdQuan={props.productIdQuan}></AddButton>
                             </div>
                         </div>
                     </div>

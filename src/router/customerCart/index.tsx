@@ -17,6 +17,7 @@ const CustomerCart: React.FC = () => {
   const { toast } = useToast();
   const dispatch = useDispatch();
   const services: ServiceProps[] = useSelector(selector.services);
+  const packageA: any = useSelector(selector.package);
   const productDetails: any[] = useSelector(selector.productDetails);
   const totalPrice: number = useSelector(selector.totalPrice);
   const discount: number = useSelector(selector.discount);
@@ -24,37 +25,49 @@ const CustomerCart: React.FC = () => {
   //   dispatch(actions.calculateTotalPrice());
   // }, []);
   const handleClick = async () => {
-    const servicesIds = services.map((service) => service.id)
-    const res = await createQuotation(
-      {
-        customerId: "e403c308-274e-42f5-b5df-36ec234d6ee1",
-        staffId: "c713aacc-3582-4598-8670-22590d837179",
-        expireAt: "2024-09-24T06:54:12.762Z",
-        services: servicesIds,
-        productDetails: productDetails.map((productDetail: any) => {
-          return {
-            id: productDetail.id,
-            quantity: productDetail.quantity,
-          }
-        })
+    if ((packageA && packageA.id) || (productDetails && productDetails.length > 0)) {
+      const servicesIds = services.map((service) => service.id)
+      const res = await createQuotation(
+        {
+          // customerId: "e403c308-274e-42f5-b5df-36ec234d6ee1",
+          // staffId: "c713aacc-3582-4598-8670-22590d837179",
+          expireAt: "2024-09-24T06:54:12.762Z",
+          // packageId: packageA.id,
+          services: servicesIds,
+          productDetails: productDetails.map((productDetail: any) => {
+            return {
+              id: productDetail.id,
+              quantity: productDetail.quantity,
+            }
+          })
+        }
+      );
+      if (res === 200) {
+        toast({
+          variant: "success",
+          title: "Request Successfully.",
+          description: "A request was sent.",
+          action: <ToastAction altText="Close">Close</ToastAction>,
+        });
+        localStorage.removeItem("cart");
+        window.location.reload();
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Fail to Request.",
+          description: "There was a problem with your request.",
+          action: (
+            <ToastAction altText="Try again">Try again</ToastAction>
+          ),
+        });
       }
-    );
-    if (res === 200) {
-      toast({
-        variant: "success",
-        title: "Request Successfully.",
-        description: "A request was sent.",
-        action: <ToastAction altText="Close">Close</ToastAction>,
-      });
-      localStorage.removeItem("cart");
-      window.location.reload();
     } else {
       toast({
         variant: "destructive",
-        title: "Fail to Request.",
-        description: "There was a problem with your request.",
+        title: "Select at least one PACKAGE or PRODUCT.",
+        description: "Failed to request.",
         action: (
-          <ToastAction altText="Try again">Try again</ToastAction>
+          <ToastAction altText="Close">Close</ToastAction>
         ),
       });
     }
