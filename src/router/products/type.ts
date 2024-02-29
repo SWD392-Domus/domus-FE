@@ -3,15 +3,15 @@ export interface ProductProps {
     productName: string;
     description?: string;
     details: ProductDetails[];
-  }
-  
+}
+
 export interface ProductDetails {
     images: {
-      imageUrl: string;
+        imageUrl: string;
     }[];
-    attributes:{
-      name: string;
-      value: string;
+    attributes: {
+        name: string;
+        value: string;
     }[];
-    displayPrice: number;
-  }
+    price: number;
+}

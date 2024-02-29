@@ -9,11 +9,6 @@ export interface ImagesProps {
 }
 export const serviceColums: ColumnDef<ServiceProps>[] = [
     {
-        accessorKey: "id",
-        header: "Id",
-    },
-
-    {
         accessorKey: "name",
         header: "Name",
     },

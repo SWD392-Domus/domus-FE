@@ -29,6 +29,7 @@ import { ProductProps } from "@/router/products/type";
 import { Avatar } from "@/components/ui/Avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
 export interface ProductDetails {
+    productDetailId?: string;
     id?: string;
     images: {
         imageUrl: string;
@@ -46,7 +47,7 @@ type Status = {
     productName?: string;
     description?: string;
     details?: ProductDetails[];
-    displayprice?: string;
+    price?: string;
 };
 const handleSelectDetail = (
     detail: ProductDetails,
@@ -55,12 +56,24 @@ const handleSelectDetail = (
     setSelectedStatus: any
 ) => {
     setSelectedStatus({
-        ...product,
+        productDetailId: detail.id,
         productName: product.productName + " Variant " + index + 1,
-        displayprice: detail.displayPrice,
+        price: detail.displayPrice,
+        monetaryUnit: "VND",
+        quantity: 1,
+        quantityType: "Unit",
+        priceSum: new Intl.NumberFormat("en-US", {
+            style: "currency",
+            currency: "VND",
+        }).format(detail.displayPrice * 1000),
     });
 };
-export function ComboBoxResponsive() {
+interface Props {
+    selectedStatus: Status;
+    setSelectedStatus: (value: Status | null) => void;
+    value: string;
+}
+export function ComboBoxResponsive(props: Props) {
     const [products, setProducts] = useState<Status[]>();
     const fetchData = async () => {
         const res = await getAllProducts();
@@ -74,33 +87,29 @@ export function ComboBoxResponsive() {
         });
         setProducts(labledItem);
     };
+
     useEffect(() => {
         fetchData();
     }, []);
     const [open, setOpen] = useState(false);
     const isDesktop = true;
     // const isDesktop = useMediaQuery("(min-width: 768px)")
-    const [selectedStatus, setSelectedStatus] = useState<Status | null>(null);
 
     if (isDesktop) {
         return (
             <Popover open={open} onOpenChange={setOpen}>
                 <PopoverTrigger asChild>
                     <Button
-                        variant="outline"
-                        className="min-w-10 justify-start hover:text-blue-600 font-normal"
+                        variant="default"
+                        className="min-w-10 justify-start font-normal "
                     >
-                        {selectedStatus ? (
-                            <>{selectedStatus.productName}</>
-                        ) : (
-                            <div className="font-semibold">+ select</div>
-                        )}
+                        <div className="font-semibold">+ select</div>
                     </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-[200px] p-0" align="start">
                     <StatusList
                         setOpen={setOpen}
-                        setSelectedStatus={setSelectedStatus}
+                        setSelectedStatus={props.setSelectedStatus}
                         products={products as Status[]}
                     />
                 </PopoverContent>
