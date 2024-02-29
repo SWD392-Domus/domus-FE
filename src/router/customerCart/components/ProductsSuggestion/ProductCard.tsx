@@ -18,7 +18,7 @@ interface Props {
 const ProductCard: React.FC<Props> = (props) => {
     const packageA: any = useSelector(selector.package);
     return (
-        <div className={`h-[${(packageA && packageA.id) ? "528" : "528"}px] w-[500px] overflow-scroll pr-5`}>
+        <div className={`h-[528px] w-[500px] overflow-scroll pr-5`}>
             {props.products?.length ? props.products?.map((product: ProductsProps, index) => (
                 <div className="flex gap-5 mb-3" key={index}>
                     <div className="basis-1/3">

@@ -50,7 +50,7 @@ const CustomerCart: React.FC = () => {
           action: <ToastAction altText="Close">Close</ToastAction>,
         });
         localStorage.removeItem("cart");
-        window.location.reload();
+        setTimeout(() => { window.location.reload(); }, 2000);
       } else {
         toast({
           variant: "destructive",
