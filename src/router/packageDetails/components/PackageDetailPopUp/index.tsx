@@ -1,134 +1,171 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
-    Dialog,
     DialogContent,
-    DialogDescription,
     DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
     DialogClose
 } from "@/components/ui/Dialog";
 import Slider from './ImagesPackageSlider';
-// import { ProductDetailProps, PackageImageProps, ServiceProps } from './types';
 import {
     Accordion,
     AccordionContent,
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/Accordion/Accordion";
-import {
-    Card,
-    CardContent,
-    // CardDescription,
-    // CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/Card";
-// import { FaCartArrowDown } from "react-icons/fa6";
 import selector from "@/router/packageDetails/slice/selector";
+import selectorB from "./slice/selector";
+import { actions } from "./slice";
+import { Button } from "@/components/ui/Button/Button";
 import { useDispatch, useSelector } from "react-redux";
-// import ProductCartInPopUp from "./ProductCartInPopUp";
+import { ComboBoxResponsive } from "./ComboBox";
 
 interface Props {
-    // packageA: any;
-    // updatedS: number;
-    // setUpdatedS: any;
 }
 
 const PackageDetailPopUp: React.FC<Props> = (props) => {
-    const name: any = useSelector(selector.name);
-    const services: any = useSelector(selector.services);
-    const packageImages: any = useSelector(selector.packageImages);
-    // const [updated, setUpdated] = useState(false);
-    // const [product, setProduct] = useState<any>({});
-    // const dispatch = useDispatch();
-    // async function getProductDetailByIdService(productId: string) {
-    //     const res = await getProductDetailById(
-    //         productId
-    //     );
-    //     setProduct(res);
-    //     setUpdated(true);
-    // }
+    const [updated, setUpdated] = useState(false);
 
-    // useEffect(() => {
-    //     getProductDetailByIdService(props.productIdQuan.id);
-    // }, [updated, props.updatedS, props.productIdQuan.id]);
+    const packageA: any = useSelector(selector.packageA);
+    const packageB: any = useSelector(selectorB.packageB);
 
-    // function handleRemoveProduct(productId: string) {
-    //     setUpdated(false);
-    //     props.setUpdatedS(props.updatedS + 1);
-    //     dispatch(actions.deleteProduct(productId))
-    // }
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(actions.setPackageB(packageA));
+        setUpdated(true);
+    }, []);
 
     return (
-        <DialogContent className="sm:max-w-[1200px] sm:max-h-[700px] overflow-y-scroll">
-            {/* <DialogHeader>
-                <DialogTitle>Delete?</DialogTitle>
-                <DialogDescription>
-                    Are you really sure that you want to Delete?
-                    This action cannot be reverted!
-                </DialogDescription>
-            </DialogHeader> */}
-            <>
-                <div className="my-7 text-2xl font-semibold">
-                    Package - {name}
-                </div>
-                <div className="">
-                    <div className="flex flex-row justify-between gap-10">
-                        <div className="flex flex-col">
-                            <div
-                                className="w-auto h-auto flex  lg:justify-start lg:ml-4 lg:gap-2"
-                            >
-                                <div className="flex flex-col gap-2">
-                                    {/* <div className="font-semibold md:text-2xl flex flex-col">
+        <>
+            {updated &&
+                <DialogContent className="sm:max-w-[1200px] sm:max-h-[700px] overflow-y-scroll">
+                    <>
+                        <div className="my-7 text-2xl font-semibold">
+                            Package - {packageB?.name}
+                        </div>
+                        <div className="">
+                            <div className="flex flex-row justify-between gap-10">
+                                <div className="flex flex-col">
+                                    <div
+                                        className="w-auto h-auto flex  lg:justify-start lg:ml-4 lg:gap-2"
+                                    >
+                                        <div className="flex flex-col gap-2">
+                                            {/* <div className="font-semibold md:text-2xl flex flex-col">
                                         <span className="text-sm font-thin">Estimated price: </span>
                                         {new Intl.NumberFormat("en-US", {
                                             style: "currency",
                                             currency: "VND",
                                         }).format(packageA?.estimatedPrice)}
                                     </div> */}
-                                    {/* <div className="font-semibold md:text-2xl flex flex-col">
+                                            {/* <div className="font-semibold md:text-2xl flex flex-col">
                                         <span className="text-sm font-thin">Discount: </span>
                                         {packageA?.discount}%
                                     </div> */}
-                                    <div className="h-auto pr-2 w-64">
-                                        <Accordion type="single" defaultValue="item-1" collapsible>
-                                            <AccordionItem value="item-1">
-                                                <AccordionTrigger className='text-xl'>Services</AccordionTrigger>
-                                                <AccordionContent>
-                                                    <div className="flex flex-col gap-2 shrink">
-                                                        {services?.map((service: any) =>
-                                                            <div className="flex flex-row justify-between">
-                                                                <div className='font-semibold'>{service.name}</div>
-                                                                <div>{new Intl.NumberFormat("en-US", {
-                                                                    style: "currency",
-                                                                    currency: "VND",
-                                                                }).format(service.price)}</div>
-                                                            </div>)}
+                                            <div className="h-auto pr-2 w-64">
+                                                <Accordion type="single" defaultValue="item-1" collapsible>
+                                                    <AccordionItem value="item-1">
+                                                        <AccordionTrigger className='text-xl'>Services</AccordionTrigger>
+                                                        <AccordionContent>
+                                                            <div className="flex flex-col gap-2 shrink">
+                                                                {packageB?.services?.map((service: any) =>
+                                                                    <div className="flex flex-row justify-between">
+                                                                        <div className='font-semibold'>{service.name}</div>
+                                                                        <div>{new Intl.NumberFormat("en-US", {
+                                                                            style: "currency",
+                                                                            currency: "VND",
+                                                                        }).format(service.price)}</div>
+                                                                    </div>)}
+                                                            </div>
+                                                        </AccordionContent>
+                                                    </AccordionItem>
+                                                </Accordion>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div
+                                        className="w-[300px]"
+                                    >
+                                        <Slider images={packageB?.packageImages?.map((item: any) => item?.imageUrl)} />
+                                    </div>
+                                </div>
+                                <div className="flex flex-col gap-4">
+                                    <div className="flex justify-start">
+                                        <ComboBoxResponsive
+                                        // selectedStatus={
+                                        //     selectedStatus as Status
+                                        // }
+                                        // setSelectedStatus={(
+                                        //     value: Status | null
+                                        // ) =>
+                                        //     handleComboBoxChange(
+                                        //         row.id,
+                                        //         cell.column.id,
+                                        //         value
+                                        //     )
+                                        // }
+                                        // value={cellValue}
+                                        ></ComboBoxResponsive>
+                                    </div>
+                                    <div className='h-[450px] w-[600px] overflow-scroll pr-5 flex flex-col gap-4 items-center pb-5'>
+                                        {packageB?.productDetails?.map((productDetail: any) => (
+                                            <div className="flex gap-5 items-center">
+                                                <div className="w-[150px]">
+                                                    <img
+                                                        src={productDetail?.images[0]?.imageUrl}
+                                                        className=""
+                                                        alt={productDetail?.id}
+                                                    />
+                                                </div>
+                                                <div className="w-[400px] flex flex-col justify-between">
+                                                    <h1 className="font-semibold text-lg">
+                                                        {productDetail?.productName}
+                                                    </h1>
+                                                    {/* <TooltipDes
+                                                    description={productDetail?.description}
+                                                ></TooltipDes> */}
+                                                    <div className="flex justify-between items-center">
+                                                        {/* <h1 className="font-semibold">
+                                                        {new Intl.NumberFormat("en-US", {
+                                                            style: "currency",
+                                                            currency: "VND",
+                                                        }).format(productDetail?.displayPrice * 1000)}
+                                                    </h1> */}
+                                                        <div className="flex justify-end items-center gap-4">
+                                                            <Button
+                                                                className="bg-neutral-400 hover:bg-black p-2 rounded-lg"
+                                                                onClick={() => { dispatch(actions.deleteProduct(productDetail?.id)); }
+                                                                }
+                                                            >
+                                                                Remove
+                                                            </Button>
+                                                            <div className='flex gap-4 justify-center items-center border border-gray-300 rounded-full px-4 py-1'>
+                                                                <button onClick={() => { dispatch(actions.decrementQuantity(productDetail?.id)) }} className="flex justify-center items-center ">
+                                                                    <span className='text-2xl p-2 rounded-full hover:bg-slate-50'>-</span>
+                                                                </button>
+                                                                <span
+                                                                    className=" min-w-10 text-center"
+                                                                >
+                                                                    {productDetail?.quantity}
+                                                                </span>
+                                                                <button onClick={() => { dispatch(actions.incrementQuantity(productDetail?.id)) }} className="flex justify-center items-center ">
+                                                                    <span className='text-2xl p-2 rounded-full hover:bg-slate-50'>+</span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </AccordionContent>
-                                            </AccordionItem>
-                                        </Accordion>
+                                                </div>
+                                            </div>
+                                        ))}
                                     </div>
                                 </div>
                             </div>
-                            <div
-                                className="w-[300px]"
-                            >
-                                <Slider images={packageImages?.map((item: any) => item?.imageUrl)} />
-                            </div>
                         </div>
-                        {/* <ProductCartInPopUp></ProductCartInPopUp> */}
-                    </div>
-                </div>
-            </>
-            <DialogFooter>
-                <DialogClose>
-                    {/* <ConfirmDeleteButton id={props.id}></ConfirmDeleteButton> */}
-                </DialogClose>
-            </DialogFooter>
-        </DialogContent>
+                    </>
+                    <DialogFooter>
+                        <DialogClose>
+                            <Button>Request Quotation</Button>
+                        </DialogClose>
+                    </DialogFooter>
+                </DialogContent>}
+        </>
     );
 };
 
