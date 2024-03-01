@@ -63,56 +63,36 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
     const productDetails: ProductDetailProps[] = useSelector(
         selector.productDetails
     );
-    const packageImages: PackageImageProps[] = useSelector(
+    const packageImagesRedux: PackageImageProps[] = useSelector(
         selector.packageImages
     );
+    const [packageImages, setPackageImages] = useState<PackageImageProps[]>([]);
+    useEffect(() => {
+        if (packageImagesRedux) {
+          setPackageImages(packageImagesRedux);
+        }
+      }, [packageImagesRedux]);
+
     const { toast } = useToast();
 
     const handleAddImage = (event: React.ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files;
         if (files) {
-            const newFiles = Array.from(files);
-            setUploadedImages((prevImages) => [...prevImages, ...newFiles]);
+          const newFiles = Array.from(files);
+          setUploadedImages((prevImages) => [...prevImages, ...newFiles]);
+          const newImages = newFiles.map((file) => {
+            return {
+              imageUrl: URL.createObjectURL(file),
+              id: "",
+              width: 0,
+              height: 0,
+            };
+          });
+        //   dispatch(actions.updatePackageImages(newImages));
+        setPackageImages([...packageImages, ...newImages]);
         }
-    };
-    //   const uploadFunc = async () => {
-    //     if (uploadedImages.length === 0) {
-    //       toast({
-    //         variant: "destructive",
-    //         title: "No images selected",
-    //         description: "Please select one or more images to upload.",
-    //       });
-    //       return;
-    //     }
-    //     const id = details.id;
-    //     const formData = new FormData();
-    //     uploadedImages.forEach((image) => {
-    //       formData.append("images", image);
-    //     });
-    //     try {
-    //       const res = await addPhoto(id, formData);
-    //       if (res) {
-    //         toast({
-    //           variant: "success",
-    //           title: "Upload successful",
-    //           description: "Images uploaded successfully.",
-    //         });
-    //       } else {
-    //         toast({
-    //           variant: "destructive",
-    //           title: "Upload failed",
-    //           description: "Failed to upload images.",
-    //         });
-    //       }
-    //     } catch (error) {
-    //       console.error("Error uploading images:", error);
-    //       toast({
-    //         variant: "destructive",
-    //         title: "Upload failed",
-    //         description: "An error occurred while uploading images.",
-    //       });
-    //     }
-    //   };
+      };
+   
     const formSchema = z.object({
         name: z.string(),
         discount: z.coerce.number().lte(100).nonnegative(),
@@ -194,7 +174,7 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
                             </div>
                             <div className="lg:w-[30%] flex flex-col gap-2 pl-4">
                                 <div className="mb-7 font-semibold text-black text-xl md:text-4xl">
-                                    Update {name}
+                                    Create {name}
                                 </div>
                                 {/* Package Name Input Start */}
                                 <FormField
@@ -267,7 +247,7 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
                                                 </AccordionTrigger>
                                                 <AccordionContent>
                                                     <div className="flex flex-col gap-2 shrink">
-                                                        {services.map(
+                                                        {Array.isArray(services) && services.map(
                                                             (
                                                                 service: ServiceProps
                                                             ) => (
@@ -352,7 +332,7 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
                                     </Dialog>
                                 </div>
                                 <div className="grid grid-cols-1 gap-4 pt-8 md:grid-cols-3 lg:grid-cols-4">
-                                    {productDetails.map(
+                                    {Array.isArray(productDetails) && productDetails.map(
                                         (product: ProductDetailProps) => {
                                             const imageUrl =
                                                 product &&
