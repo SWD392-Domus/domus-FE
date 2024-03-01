@@ -59,21 +59,7 @@ export const columns: ColumnDef<ProductsProps>[] = [
         accessorKey: "category",
         header: "Category",
     },
-    {
-        accessorKey: "brand",
-        header: "Brand",
-        cell: ({ row }) => {
-            return (
-                <>
-                    {row.getValue("brand") === "" ? (
-                        <div>No Brand</div>
-                    ) : (
-                        <div>{row.getValue("brand")}</div>
-                    )}
-                </>
-            );
-        },
-    },
+
     {
         accessorKey: "description",
         header: "Description",

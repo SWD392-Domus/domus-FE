@@ -38,6 +38,7 @@ import { PencilIcon } from "lucide-react";
 import { toast } from "@/components/ui/Toast/use-toast";
 import { pushNegotitaionService } from "./service";
 import Negotiation from "./components/Neogitation";
+import { toastError } from "@/components/Toast";
 
 interface Props {
     // define your props here
@@ -179,10 +180,28 @@ const QuotationDetail: React.FC<Props> = () => {
         };
     }, [quotationId]);
     const handleSave = () => {
-        const productsArray = Object.values(cellValues);
-        console.log(productsArray);
-        dispatch(actions.addProduct(productsArray as any));
-        setEditTable(false);
+        function validateCellValues(cellValues: CellValues): boolean {
+            for (let key in cellValues) {
+                let nestedObject = cellValues[key];
+                for (let nestedKey in nestedObject) {
+                    if (
+                        !nestedObject[nestedKey] ||
+                        nestedObject[nestedKey] === ""
+                    ) {
+                        return false; // Validation fails if any value is undefined, null, or empty
+                    }
+                }
+            }
+            return true; // All values have values
+        }
+        if (validateCellValues(cellValues)) {
+            const productsArray = Object.values(cellValues);
+
+            dispatch(actions.addProduct(productsArray as any));
+            setEditTable(false);
+        } else {
+            toastError("1 or more fields are invalid");
+        }
     };
     const handleSaveService = () => {
         const servicesArray = Object.values(serviceCellValues);

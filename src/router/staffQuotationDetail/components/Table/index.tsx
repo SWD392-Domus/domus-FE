@@ -170,20 +170,35 @@ export function EditDataTable<TData, TValue>({
                                             ) : !(
                                                   cell.column.id == "action"
                                               ) ? (
-                                                <Input
-                                                    value={cellValue || ""}
-                                                    onChange={(e) =>
-                                                        handleChange(
-                                                            row.id,
-                                                            cell.column.id,
-                                                            e.target.value
-                                                        )
-                                                    }
-                                                    readOnly={
-                                                        cell.column.id ==
-                                                        "priceSum"
-                                                    }
-                                                />
+                                                cell.column.id == "price" ||
+                                                cell.column.id == "quantity" ? (
+                                                    <Input
+                                                        value={cellValue || ""}
+                                                        type="number"
+                                                        onChange={(e) =>
+                                                            handleChange(
+                                                                row.id,
+                                                                cell.column.id,
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                    />
+                                                ) : (
+                                                    <Input
+                                                        value={cellValue || ""}
+                                                        onChange={(e) =>
+                                                            handleChange(
+                                                                row.id,
+                                                                cell.column.id,
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                        readOnly={
+                                                            cell.column.id ==
+                                                            "priceSum"
+                                                        }
+                                                    />
+                                                )
                                             ) : (
                                                 <ComboBoxResponsive
                                                     selectedStatus={

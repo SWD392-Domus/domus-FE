@@ -297,7 +297,6 @@ const StaffProfile: React.FC<Props> = (props) => {
                                 </SelectTrigger>
                                 <SelectContent>
                                     <SelectGroup>
-                                        <SelectLabel>Fruits</SelectLabel>
                                         <SelectItem value="Male">
                                             Male
                                         </SelectItem>

@@ -114,8 +114,17 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
     //     }
     //   };
     const formSchema = z.object({
-        name: z.string(),
-        discount: z.coerce.number().lte(100).nonnegative(),
+        name: z.string().nonempty({ message: "Name is required" }),
+        discount: z
+            .number({
+                required_error: "Discount is required",
+                invalid_type_error:
+                    "Discount must be a number between 0 and 100",
+            })
+            .lte(100)
+            .nonnegative(),
+
+        // pictures: z.any(),
     });
 
     const form = useForm<z.infer<typeof formSchema>>({
