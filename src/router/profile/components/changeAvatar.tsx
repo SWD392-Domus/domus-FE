@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
     DialogDescription,
     Dialog,
@@ -35,7 +35,7 @@ const ChangeAvatar: React.FC<Props> = ({ uploadedImage, setUploadedImage }) => {
         setUploadedImage(null);
     };
     return (
-        <div>
+        <div className="w-[15px] h-[15px] flex items-center justify-center">
             <Dialog>
                 <DialogTrigger className="underline" type="button">
                     <svg
@@ -72,7 +72,7 @@ const ChangeAvatar: React.FC<Props> = ({ uploadedImage, setUploadedImage }) => {
                         <div className="flex flex-wrap">
                             <Card className="border m-2 p-2 relative">
                                 <img
-                                    src={uploadedImage.imageUrl}
+                                    src={uploadedImage.imageUrl as string}
                                     width={300}
                                     height={300}
                                     className="object-contain"

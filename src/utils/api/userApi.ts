@@ -1,6 +1,6 @@
 import { get, put } from "./ApiCaller";
 let ownProfileURL = `/Users/self-profile`;
-
+let allUserEndpoint = `/Users/all`;
 export const userApi = {
     getOwnProfile: (token: string) => {
         return get(`${ownProfileURL}/${token}`);
@@ -15,5 +15,8 @@ export const userApi = {
             {},
             { Authorization: token, "Content-Type": "multipart/form-data" }
         );
+    },
+    getAllUser: (token: string) => {
+        return get(allUserEndpoint, {}, { Authorization: ` Bearer ${token}` });
     },
 };

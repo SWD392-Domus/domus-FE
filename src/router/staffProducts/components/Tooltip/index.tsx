@@ -15,7 +15,7 @@ export const TooltipDes: React.FC<Props> = (props) => {
         <TooltipProvider>
             <Tooltip>
                 <TooltipTrigger asChild>
-                    <Button variant="outline">Hover</Button>
+                    <h1>{props.description.slice(0, 15)}...</h1>
                 </TooltipTrigger>
                 <TooltipContent className="max-w-96">
                     <p>{props.description}</p>

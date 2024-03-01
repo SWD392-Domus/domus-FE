@@ -1,25 +1,29 @@
-import * as React from "react"
-import { CalendarIcon } from "@radix-ui/react-icons"
-import { addDays, format } from "date-fns"
+import * as React from "react";
+import { CalendarIcon } from "@radix-ui/react-icons";
+import { addDays, format } from "date-fns";
 
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/Button/Button"
-import { Calendar } from "@/components/ui/Calendar"
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/Button/Button";
+import { Calendar } from "@/components/ui/Calendar";
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-} from "@/components/ui/Popover"
+} from "@/components/ui/Popover";
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "@/components/ui/Select"
+} from "@/components/ui/Select";
+import { useSelector } from "react-redux";
+import selector from "../../slice/selector";
 
 export function DatePickerWithPresets() {
-    const [date, setDate] = React.useState<Date>()
+    const expireAt = useSelector(selector.expireAt);
+
+    const [date, setDate] = React.useState<Date>();
 
     return (
         <Popover>
@@ -55,9 +59,13 @@ export function DatePickerWithPresets() {
                     </SelectContent>
                 </Select>
                 <div className="rounded-md border">
-                    <Calendar mode="single" selected={date} onSelect={setDate} />
+                    <Calendar
+                        mode="single"
+                        selected={date}
+                        onSelect={setDate}
+                    />
                 </div>
             </PopoverContent>
         </Popover>
-    )
+    );
 }
