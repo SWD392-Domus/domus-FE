@@ -17,6 +17,11 @@ import { actions } from "./slice";
 import { Button } from "@/components/ui/Button/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { ComboBoxResponsive } from "./ComboBox";
+import { toastError } from "@/components/Toast";
+import { ToastAction } from "@/components/ui/Toast/toast";
+import { useToast } from "@/components/ui/Toast/use-toast";
+import { createQuotation } from "@/router/customerCart/usecase/createQuotation.ts";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
 }
@@ -32,6 +37,49 @@ const PackageDetailPopUp: React.FC<Props> = (props) => {
         dispatch(actions.setPackageB(packageA));
         setUpdated(true);
     }, []);
+    const { toast } = useToast();
+    const navigate = useNavigate();
+    const handleClick = async () => {
+        try {
+            const res = await createQuotation({
+                expireAt: "2024-09-24T06:54:12.762Z",
+                packageId: packageB.id,
+                services: packageB.services.map((ser: any) => {
+                    return ser.id
+                }),
+                productDetails: packageB.productDetails.map((productDetail: any) => {
+                    return {
+                        id: productDetail.id,
+                        quantity: productDetail.quantity,
+                    }
+                })
+            });
+            if (res === 200) {
+                toast({
+                    variant: "success",
+                    title: "Request Successfully.",
+                    description: "A request was sent.",
+                    action: <ToastAction altText="Close">Close</ToastAction>,
+                });
+                localStorage.removeItem("cart");
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
+            } else {
+                toast({
+                    variant: "destructive",
+                    title: "Fail to Request.",
+                    description: "There was a problem with your request.",
+                    action: (
+                        <ToastAction altText="Try again">Try again</ToastAction>
+                    ),
+                });
+            }
+        } catch (err) {
+            navigate("/login");
+            toastError("Please Login first");
+        }
+    };
 
     return (
         <>
@@ -161,7 +209,7 @@ const PackageDetailPopUp: React.FC<Props> = (props) => {
                     </>
                     <DialogFooter>
                         <DialogClose>
-                            <Button>Request Quotation</Button>
+                            <Button onClick={handleClick}>Request Quotation</Button>
                         </DialogClose>
                     </DialogFooter>
                 </DialogContent>}
