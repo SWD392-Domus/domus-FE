@@ -7,7 +7,7 @@ export const initialState = {
   name: "",
   estimatedPrice: 0,
   discount: 0,
-  services: [{ id: 0, name: "" }],
+  services: [{ id: 0, name: "", price: 0 }],
   productDetails: [
     { id: 0, displayPrice: 0, productName: "", images: [{ imageUrl: "" }] },
   ],

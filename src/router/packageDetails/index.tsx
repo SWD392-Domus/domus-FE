@@ -92,17 +92,17 @@ const PackageDetails: React.FC<Props> = () => {
               >
                 {name}
               </div>
-              <div className="font-semibold md:text-2xl flex flex-col">
+              {/* <div className="font-semibold md:text-2xl flex flex-col">
                 <span className="text-sm font-thin">Estimated price: </span>
                 {new Intl.NumberFormat("en-US", {
                   style: "currency",
                   currency: "VND",
                 }).format(estimatedPrice)}
-              </div>
-              <div className="font-semibold md:text-2xl flex flex-col">
+              </div> */}
+              {/* <div className="font-semibold md:text-2xl flex flex-col">
                 <span className="text-sm font-thin">Discount: </span>
                 {discount}%
-              </div>
+              </div> */}
               <div className="mt-2">
                 <RequestQuotationButton id={id}></RequestQuotationButton>
               </div>
@@ -165,16 +165,16 @@ const PackageDetails: React.FC<Props> = () => {
                               )}
                             </p>
                           </CardDescription> */}
-                        <CardTitle>
+                        {/* <CardTitle>
                           <p className="text-2xl truncate mb-1">
                             {new Intl.NumberFormat("en-US", {
                               style: "currency",
                               currency: "VND",
                             }).format(product.displayPrice * 1000)}
                           </p>
-                        </CardTitle>
+                        </CardTitle> */}
                         <CardTitle>
-                          <p className="truncate">
+                          <p className="truncate mt-2">
                             Quantity: <span className='text-red-600'>{product.quantity}</span>
                           </p>
                         </CardTitle>
