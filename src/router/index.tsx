@@ -32,6 +32,7 @@ import Auth from "./auth";
 import Staff from "./staff";
 import StaffProfile from "./profile";
 import CreateProduct from "./staffCreateProduct";
+import Error403Page from "./403";
 
 const RouterComponent: React.FC = () => {
     const publicRoute = [
@@ -164,6 +165,13 @@ const RouterComponent: React.FC = () => {
             exact: true,
             restrict: true,
         },
+        {
+            index: true,
+            path: "403",
+            component: <Error403Page />,
+            exact: true,
+            restrict: true,
+        },
     ];
     const staffRoute = [
         {
@@ -263,7 +271,7 @@ const RouterComponent: React.FC = () => {
             component: <ProductDetailsStaff />,
             exact: true,
             restrict: true,
-        }
+        },
     ];
     return (
         <BrowserRouter>
@@ -307,6 +315,7 @@ const RouterComponent: React.FC = () => {
                         ))}
                     </Route>
                 </Route>
+                {/* <Route path="/403" element={<Error403Page />} /> */}
                 {/* <Route element={<EmployeeRoute />}>
                     <Route element={<LayoutComponent />}>
                         {employeeRoute.map((route) => (
@@ -334,7 +343,7 @@ const RouterComponent: React.FC = () => {
                 {/* <Route path="/payment/result" element={<Payment />} />
 
                 <Route path="/404" element={<ErrorPage />} />
-                <Route path="/403" element={<Error403Page />} />
+                
                 <Route path="*" element={<ErrorPage />} /> */}
             </Routes>
         </BrowserRouter>
