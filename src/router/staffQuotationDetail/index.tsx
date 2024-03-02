@@ -6,6 +6,7 @@ import {
     PersonIcon,
     ChatBubbleIcon,
     Pencil1Icon,
+    ButtonIcon,
 } from "@radix-ui/react-icons";
 import { Textarea } from "@/components/ui/Textarea";
 import {

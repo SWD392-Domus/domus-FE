@@ -72,6 +72,9 @@ const slice = createSlice({
         setUser: (state: any, action: any) => {
             state.customer = action.payload;
         },
+        setStaff: (state: any, action: any) => {
+            state.staff = action.payload;
+        },
         setDate: (state: any, action: any) => {
             state.expireAt = action.payload;
         },
