@@ -53,14 +53,14 @@ const ProductCard: React.FC<Product> = ({ product }) => {
               )}
             </p>
           </CardDescription>
-          <CardTitle>
+          {/* <CardTitle>
             <p className="text-2xl truncate">
               {new Intl.NumberFormat("en-US", {
                 style: "currency",
                 currency: "VND",
               }).format(productPrice)}
             </p>
-          </CardTitle>
+          </CardTitle> */}
         </CardContent>
         <CardFooter className="">
           <div

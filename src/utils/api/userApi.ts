@@ -19,4 +19,7 @@ export const userApi = {
     getAllUser: (token: string) => {
         return get(allUserEndpoint, {}, { Authorization: ` Bearer ${token}` });
     },
+    getStaff: (token: string) => {
+        return get("/Users/staff", {}, { Authorization: ` Bearer ${token}` });
+    }
 };

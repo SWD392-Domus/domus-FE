@@ -214,7 +214,7 @@ const ProductDetails: React.FC = () => {
                         >
                             {product?.productName}
                         </div>
-                        <div className="font-semibold md:text-2xl flex flex-col">
+                        {/* <div className="font-semibold md:text-2xl flex flex-col">
                             <span className="text-sm font-thin">
                                 Estimated price:{" "}
                             </span>
@@ -222,7 +222,7 @@ const ProductDetails: React.FC = () => {
                                 style: "currency",
                                 currency: "VND",
                             }).format(product?.details[0]?.displayPrice * 1000)}
-                        </div>
+                        </div> */}
                         {fields.map((field) => (
                             <div className="flex flex-col gap-2">
                                 <div className="text-black font-thin">
