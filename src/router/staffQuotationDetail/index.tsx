@@ -6,6 +6,7 @@ import {
     PersonIcon,
     ChatBubbleIcon,
     Pencil1Icon,
+    TrashIcon,
 } from "@radix-ui/react-icons";
 import { Textarea } from "@/components/ui/Textarea";
 import {
@@ -39,6 +40,18 @@ import { toast } from "@/components/ui/Toast/use-toast";
 import { pushNegotitaionService } from "./service";
 import Negotiation from "./components/Neogitation";
 import { toastError } from "@/components/Toast";
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from "@/components/ui/AlertDialog";
+import { deleteQuotation } from "../staffQuotations/usecase";
 
 interface Props {
     // define your props here
@@ -50,6 +63,7 @@ export interface CellValues {
 }
 const QuotationDetail: React.FC<Props> = () => {
     const navigate = useNavigate();
+    const [isUpdate, setUpdate] = useState(false);
     const [isEditTable, setEditTable] = useState(false);
     const [isEditService, setEditService] = useState(false);
     const [isEdit, setEdit] = useState(false);
@@ -95,40 +109,48 @@ const QuotationDetail: React.FC<Props> = () => {
         const data = {
             customerId: customer.id,
             staffId: staff.id,
-            status: "Sent",
+            status: "Negotiating",
             ExpireAt: expireAt,
             productdetails: sentProducts,
             services: sentServices,
         };
-        const token = localStorage.getItem("Token");
-        const res = await editQuotation(id, token as string, data);
-        if (res.status != 200) {
-            toast({
-                variant: "destructive",
-                title: "Uh oh! Something went wrong.",
-                description: "Please Try again",
-            });
-        } else {
-            if (res.data.isSuccess) {
-                toast({
-                    variant: "success",
-                    title: "Update Successfully",
-                    description: "",
-                });
-                await pushNegotitaionService(id, token as string, {
-                    content:
-                        "Hi, I just updated the quotation , please feel free to discuss through this chat",
-                    isCustomerMessage: false,
-                });
-
-                window.location.replace(`/staff/quotations/${id}`);
-            } else {
+        if (isUpdate) {
+            const token = localStorage.getItem("Token");
+            const res = await editQuotation(id, token as string, data);
+            if (res.status != 200) {
                 toast({
                     variant: "destructive",
-                    title: `${res.data.messages[0].content}`,
-                    description: "",
+                    title: "Uh oh! Something went wrong.",
+                    description: "Please Try again",
                 });
+            } else {
+                if (res.data.isSuccess) {
+                    toast({
+                        variant: "success",
+                        title: "Update Successfully",
+                        description: "",
+                    });
+                    await pushNegotitaionService(id, token as string, {
+                        content:
+                            "Hi, I just updated the quotation , please feel free to discuss through this chat",
+                        isCustomerMessage: false,
+                    });
+
+                    window.location.replace(`/staff/quotations/${id}`);
+                } else {
+                    toast({
+                        variant: "destructive",
+                        title: `${res.data.messages[0].content}`,
+                        description: "",
+                    });
+                }
             }
+        } else {
+            toast({
+                variant: "destructive",
+                title: `It seem you haven't done any change `,
+                description: "Try to edit something before update",
+            });
         }
     };
     useEffect(() => {
@@ -196,16 +218,34 @@ const QuotationDetail: React.FC<Props> = () => {
         }
         if (validateCellValues(cellValues)) {
             const productsArray = Object.values(cellValues);
-
+            setUpdate(true);
             dispatch(actions.addProduct(productsArray as any));
             setEditTable(false);
         } else {
             toastError("1 or more fields are invalid");
         }
     };
+    const handleDelete = async () => {
+        const res = await deleteQuotation(id);
+        if (res == 200) {
+            toast({
+                variant: "success",
+                title: "Cancel Quotation Successfully",
+                description: "",
+            });
+            navigate("/staff/quotations");
+        } else {
+            toast({
+                variant: "destructive",
+                title: `Cancel Quotation Unsuccessfully`,
+                description: "There is something wrong, Please try again",
+            });
+        }
+    };
     const handleSaveService = () => {
         const servicesArray = Object.values(serviceCellValues);
         dispatch(actions.addService(servicesArray as any));
+        setUpdate(true);
         setEditService(false);
     };
     return (
@@ -320,6 +360,7 @@ const QuotationDetail: React.FC<Props> = () => {
                                         customer={customer}
                                         isEdit={isEdit}
                                         setEdit={setEdit}
+                                        setUpdate={setUpdate}
                                     />
                                 )}
 
@@ -443,14 +484,79 @@ const QuotationDetail: React.FC<Props> = () => {
                                 </div>
                             </div>
                             <div className="action-buttons mb-2 flex flex-row justify-center space-x-2">
-                                <Button
-                                    onClick={handleUpdate}
-                                    className="bg-variant text-black h-9 border-2 border-zinc-500 bg-zinc-50 rounded hover:text-white pl-2"
-                                >
-                                    <PencilIcon className="h-3.5 pr-2 my-auto"></PencilIcon>
-                                    Update
-                                </Button>
-                                <DeleteButton></DeleteButton>
+                                <AlertDialog>
+                                    <AlertDialogTrigger asChild>
+                                        <Button
+                                            variant="outline"
+                                            className="border-black"
+                                        >
+                                            <PencilIcon className="h-3.5 pr-2 my-auto"></PencilIcon>
+                                            Update
+                                        </Button>
+                                    </AlertDialogTrigger>
+                                    <AlertDialogContent>
+                                        <AlertDialogHeader>
+                                            <AlertDialogTitle>
+                                                Are you absolutely sure
+                                            </AlertDialogTitle>
+                                            <AlertDialogDescription>
+                                                This action cannot be undone.
+                                                This will permanently delete
+                                                your account and remove your
+                                                data from our servers.
+                                            </AlertDialogDescription>
+                                        </AlertDialogHeader>
+                                        <AlertDialogFooter>
+                                            <AlertDialogCancel>
+                                                Cancel
+                                            </AlertDialogCancel>
+                                            <AlertDialogAction
+                                                onClick={handleUpdate}
+                                            >
+                                                Continue
+                                            </AlertDialogAction>
+                                        </AlertDialogFooter>
+                                    </AlertDialogContent>
+                                </AlertDialog>
+
+                                <AlertDialog>
+                                    <AlertDialogTrigger asChild>
+                                        <Button
+                                            variant="outline"
+                                            className="border-black flex items-center"
+                                        >
+                                            <TrashIcon
+                                                className=" my-auto"
+                                                width={20}
+                                                height={20}
+                                            ></TrashIcon>
+                                            <h1> Cancel</h1>
+                                        </Button>
+                                    </AlertDialogTrigger>
+                                    <AlertDialogContent>
+                                        <AlertDialogHeader>
+                                            <AlertDialogTitle>
+                                                Are you absolutely sure
+                                            </AlertDialogTitle>
+                                            <AlertDialogDescription>
+                                                This action cannot be undone.
+                                                This will permanently delete
+                                                your account and remove your
+                                                data from our servers.
+                                            </AlertDialogDescription>
+                                        </AlertDialogHeader>
+                                        <AlertDialogFooter>
+                                            <AlertDialogCancel>
+                                                Cancel
+                                            </AlertDialogCancel>
+                                            <AlertDialogAction
+                                                onClick={handleDelete}
+                                            >
+                                                Continue
+                                            </AlertDialogAction>
+                                        </AlertDialogFooter>
+                                    </AlertDialogContent>
+                                </AlertDialog>
                                 <MakeContractButton></MakeContractButton>
                             </div>
                         </div>

@@ -3,7 +3,6 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import CustomerSettings from "./customerSettings";
 import CustomerCart from "./customerCart";
 import CustomerQuotations from "./customerQuotations";
-import CustomerQuotationDetail from "./customerQuotationDetail";
 import StaffProducts from "./staffProducts";
 import StaffPackages from "./staffPackages";
 import StaffQuotationNew from "./staffQuotationNew";
@@ -33,6 +32,7 @@ import Staff from "./staff";
 import StaffProfile from "./profile";
 import CreateProduct from "./staffCreateProduct";
 import Error403Page from "./403";
+import QuotationDetail from "./customerQuotationDetail";
 
 const RouterComponent: React.FC = () => {
     const publicRoute = [
@@ -161,7 +161,7 @@ const RouterComponent: React.FC = () => {
         {
             index: true,
             path: "customer/settings/quotations/:quotationId",
-            component: <CustomerQuotationDetail />,
+            component: <QuotationDetail />,
             exact: true,
             restrict: true,
         },

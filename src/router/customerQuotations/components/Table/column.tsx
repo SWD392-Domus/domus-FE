@@ -37,7 +37,6 @@ export const columns: ColumnDef<QuotationsProps>[] = [
         accessorKey: "quotationName",
         header: "Quotation Name",
         cell: ({ row }) => {
-            console.log(row);
             return <h4> Quotation {row.index + 1}</h4>;
         },
     },
@@ -107,7 +106,7 @@ export const columns: ColumnDef<QuotationsProps>[] = [
         id: "actions",
         enableHiding: false,
         cell: ({ row }) => {
-            return <CRUDDropdownMenu id={row.getValue("id")} />;
+            return <CRUDDropdownMenu id={row.original.id} />;
         },
     },
 ];

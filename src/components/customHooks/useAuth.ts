@@ -18,7 +18,7 @@ export const useAuth = () => {
     const checkTokenExpiration = useCallback(async () => {
         if (token) {
             const decoded = getJwtUser(token);
-            console.log(decoded);
+
             if (!decoded || typeof decoded.exp !== "number") {
                 setUserRoles(null);
                 setLoading(false); // Set loading to false when authentication check is done

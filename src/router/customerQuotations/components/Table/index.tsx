@@ -144,9 +144,10 @@ export function DataTable<TData, TValue>({
                                                         navigate(
                                                             `${
                                                                 location.pathname
-                                                            }/${row.getValue(
-                                                                "id"
-                                                            )}`
+                                                            }/${
+                                                                row.original
+                                                                    .id as any
+                                                            }`
                                                         )
                                                     }
                                                     className="cursor-pointer"

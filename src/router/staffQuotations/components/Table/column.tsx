@@ -82,7 +82,7 @@ export const columns: ColumnDef<QuotationsProps>[] = [
                         <div className="flex items-center gap-1 ">
                             <Avatar>
                                 <AvatarImage src={customerAva} />
-                                <AvatarFallback>S</AvatarFallback>
+                                <AvatarFallback>C</AvatarFallback>
                             </Avatar>
                             <div className="text-black">{customerName}</div>
                         </div>
@@ -91,19 +91,19 @@ export const columns: ColumnDef<QuotationsProps>[] = [
             );
         },
     },
-    // {
-    //     accessorKey: "totalPrice",
-    //     header: () => <div className="text-left">Total Price</div>,
-    //     cell: ({ row }) => {
-    //         const totalPrice = parseFloat(row.getValue("totalPrice")) * 1000
-    //         const formatted = new Intl.NumberFormat("en-US", {
-    //             style: "currency",
-    //             currency: "VND",
-    //         }).format(totalPrice)
+    {
+        accessorKey: "totalPrice",
+        header: () => <div className="text-left">Total Price</div>,
+        cell: ({ row }) => {
+            const totalPrice = parseFloat(row.getValue("totalPrice")) * 1000;
+            const formatted = new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "VND",
+            }).format(totalPrice);
 
-    //         return <div className="text-left font-medium">{formatted}</div>
-    //     },
-    // },
+            return <div className="text-left font-medium">{formatted}</div>;
+        },
+    },
     {
         accessorKey: "status",
         header: () => <div className="text-left">Status</div>,

@@ -40,6 +40,7 @@ const CustomerQuotations: React.FC<Props> = () => {
         if (res) {
             // setLoading(false);
             setQuotations(res.quotationsItems);
+
             setTotalPages(res.lastPage);
             setTotalItems(res.total);
         }

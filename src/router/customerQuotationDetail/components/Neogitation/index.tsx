@@ -10,13 +10,15 @@ import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChatBubbleIcon } from "@radix-ui/react-icons";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { pushNegotitaionService } from "../../service";
 import { useDispatch, useSelector } from "react-redux";
 import selector from "../../slice/selector";
 import { toast } from "@/components/ui/Toast/use-toast";
+import { actions } from "../../slice";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
     // define your props here
@@ -24,35 +26,14 @@ interface Props {
     negotiationLog: any;
     customer: any;
 }
-import { JwtPayload, jwtDecode } from "jwt-decode";
-
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
-interface customJWTPayload extends JwtPayload {
-    role: string[];
-    email: string;
-}
-const getJwtUser = (token: string): customJWTPayload => {
-    return jwtDecode(token);
-};
 
 const Negotiation: React.FC<Props> = ({ staff, negotiationLog, customer }) => {
     const id = useSelector(selector.id);
-    const [isAssigned, setAssigned] = useState(false);
 
-    useEffect(() => {
-        const token = localStorage.getItem("Token");
-        const user = getJwtUser(token as string);
-
-        if (user.email == staff.email) {
-            setAssigned(true);
-        } else {
-            setAssigned(false);
-        }
-    }, []);
     const dispatch = useDispatch();
     const formSchema = z.object({
-        message: z.string().min(10, {
-            message: "Message must be at least 10 characters.",
+        message: z.string().min(2, {
+            message: "message must be at least 2 characters.",
         }),
     });
     const form = useForm<z.infer<typeof formSchema>>({
@@ -70,7 +51,7 @@ const Negotiation: React.FC<Props> = ({ staff, negotiationLog, customer }) => {
             token as string,
             {
                 content: values.message,
-                isCustomerMessage: false,
+                isCustomerMessage: true,
             }
         );
         if ((res.status = 200)) {
@@ -98,49 +79,44 @@ const Negotiation: React.FC<Props> = ({ staff, negotiationLog, customer }) => {
                             </span>
                         </div>
                     </div>
-                    {isAssigned && (
-                        <div className="my-5">
-                            <div className="flex flex-row mb-2">
-                                <img
-                                    src={staff.profileImage}
-                                    alt=""
-                                    className="h-10 w-10 bg-gray-300 mr-2"
-                                />
-                                <FormField
-                                    control={form.control}
-                                    name="message"
-                                    render={({ field }) => (
-                                        <FormItem className="w-full">
-                                            <FormControl>
-                                                <Textarea
-                                                    placeholder="shadcn"
-                                                    {...field}
-                                                    className="text-black mb-4 w-full"
-                                                />
-                                            </FormControl>
+                    <div className="my-5">
+                        <div className="flex flex-row mb-2">
+                            <img
+                                src={staff.profileImage}
+                                alt=""
+                                className="h-10 w-10 bg-gray-300 mr-2"
+                            />
+                            <FormField
+                                control={form.control}
+                                name="message"
+                                render={({ field }) => (
+                                    <FormItem className="w-full">
+                                        <FormControl>
+                                            <Textarea
+                                                placeholder="shadcn"
+                                                {...field}
+                                                className="text-black mb-4 w-full"
+                                            />
+                                        </FormControl>
 
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
-                            </div>
-                            <div className="flex justify-end">
-                                <Button type="submit"> Send</Button>
-                            </div>
+                                        {/* <FormMessage /> */}
+                                    </FormItem>
+                                )}
+                            />
                         </div>
-                    )}
+                        <div className="flex justify-end">
+                            <Button type="submit"> Send</Button>
+                        </div>
+                    </div>
 
                     {negotiationLog?.messages?.map((nego: any) =>
                         nego.isCustomerMessage ? (
                             <div className="flex flex-row my-5">
-                                <Avatar className="mr-4">
-                                    <AvatarImage
-                                        src={customer.profileImage}
-                                        alt=""
-                                        className="h-10 w-10 bg-gray-300 mr-4"
-                                    />
-                                    <AvatarFallback>C</AvatarFallback>
-                                </Avatar>
+                                <img
+                                    src={customer.profileImage}
+                                    alt=""
+                                    className="h-10 w-10 bg-gray-300 mr-2"
+                                />
 
                                 <div className="nego-detail">
                                     <span className="my-auto font-medium">
@@ -148,13 +124,7 @@ const Negotiation: React.FC<Props> = ({ staff, negotiationLog, customer }) => {
                                     </span>
 
                                     <div className="date-info text-xs">
-                                        Published on{" "}
-                                        {new Date(
-                                            nego.sentAt
-                                        ).toLocaleDateString()}{" "}
-                                        {new Date(
-                                            nego.sentAt
-                                        ).toLocaleTimeString()}
+                                        Published on {nego.sentAt}
                                     </div>
 
                                     <div className="cmt-info text-sm">
@@ -164,13 +134,11 @@ const Negotiation: React.FC<Props> = ({ staff, negotiationLog, customer }) => {
                             </div>
                         ) : (
                             <div className="flex flex-row my-5">
-                                <Avatar className="mr-4">
-                                    <AvatarImage
-                                        src={staff.profileImage}
-                                        alt=""
-                                        className="h-10 w-10 bg-gray-300 mr-2"
-                                    />
-                                </Avatar>
+                                <img
+                                    src={staff.profileImage}
+                                    alt=""
+                                    className="h-10 w-10 bg-gray-300 mr-2"
+                                />
 
                                 <div className="nego-detail">
                                     <span className="my-auto font-medium">
@@ -178,13 +146,7 @@ const Negotiation: React.FC<Props> = ({ staff, negotiationLog, customer }) => {
                                     </span>
 
                                     <div className="date-info text-xs">
-                                        Published on{" "}
-                                        {new Date(
-                                            nego.sentAt
-                                        ).toLocaleDateString()}{" "}
-                                        {new Date(
-                                            nego.sentAt
-                                        ).toLocaleTimeString()}
+                                        Published on {nego.sentAt}
                                     </div>
 
                                     <div className="cmt-info text-sm">
