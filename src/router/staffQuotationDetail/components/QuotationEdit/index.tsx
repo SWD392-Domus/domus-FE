@@ -42,6 +42,7 @@ interface Props {
     customer: any;
     isEdit: boolean;
     setEdit: any;
+    setUpdate: any;
 }
 const FormSchema = z.object({
     expireDate: z.date({
@@ -53,6 +54,7 @@ const QuotationEdit: React.FC<Props> = ({
     customer,
     isEdit,
     setEdit,
+    setUpdate,
 }) => {
     const dispatch = useDispatch();
     const [open, setOpen] = React.useState(false);

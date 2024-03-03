@@ -3,7 +3,6 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import CustomerSettings from "./customerSettings";
 import CustomerCart from "./customerCart";
 import CustomerQuotations from "./customerQuotations";
-import CustomerQuotationDetail from "./customerQuotationDetail";
 import StaffProducts from "./staffProducts";
 import StaffPackages from "./staffPackages";
 import StaffQuotationNew from "./staffQuotationNew";
@@ -32,6 +31,8 @@ import Auth from "./auth";
 import Staff from "./staff";
 import StaffProfile from "./profile";
 import CreateProduct from "./staffCreateProduct";
+import Error403Page from "./403";
+import QuotationDetail from "./customerQuotationDetail";
 
 const RouterComponent: React.FC = () => {
     const publicRoute = [
@@ -160,7 +161,14 @@ const RouterComponent: React.FC = () => {
         {
             index: true,
             path: "customer/settings/quotations/:quotationId",
-            component: <CustomerQuotationDetail />,
+            component: <QuotationDetail />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "403",
+            component: <Error403Page />,
             exact: true,
             restrict: true,
         },
@@ -263,7 +271,7 @@ const RouterComponent: React.FC = () => {
             component: <ProductDetailsStaff />,
             exact: true,
             restrict: true,
-        }
+        },
     ];
     return (
         <BrowserRouter>
@@ -307,6 +315,7 @@ const RouterComponent: React.FC = () => {
                         ))}
                     </Route>
                 </Route>
+                {/* <Route path="/403" element={<Error403Page />} /> */}
                 {/* <Route element={<EmployeeRoute />}>
                     <Route element={<LayoutComponent />}>
                         {employeeRoute.map((route) => (
@@ -334,7 +343,7 @@ const RouterComponent: React.FC = () => {
                 {/* <Route path="/payment/result" element={<Payment />} />
 
                 <Route path="/404" element={<ErrorPage />} />
-                <Route path="/403" element={<Error403Page />} />
+                
                 <Route path="*" element={<ErrorPage />} /> */}
             </Routes>
         </BrowserRouter>
