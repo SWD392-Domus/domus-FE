@@ -273,7 +273,7 @@ const QuotationDetail: React.FC<Props> = () => {
                             {new Intl.NumberFormat("en-US", {
                                 style: "currency",
                                 currency: "VND",
-                            }).format(totalPrice * 1000)}
+                            }).format(totalPrice)}
                         </div>
                         <div className="my-4 flex ">
                             <Badge className="text-sm">{status}</Badge>
@@ -494,7 +494,7 @@ const QuotationDetail: React.FC<Props> = () => {
                                             {new Intl.NumberFormat("en-US", {
                                                 style: "currency",
                                                 currency: "VND",
-                                            }).format(totalPrice * 1000)}
+                                            }).format(totalPrice)}
                                         </div>
                                     </div>
                                 </div>

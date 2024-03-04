@@ -157,7 +157,7 @@ const ProductDetails: React.FC = () => {
             if (!productExists) {
                 cartArray.push({
                     id: productDetailIdPriceToAdd.id,
-                    price: productDetailIdPriceToAdd.price * 1000,
+                    price: productDetailIdPriceToAdd.price,
                     quantity: 1,
                 });
             }
@@ -232,7 +232,7 @@ const ProductDetails: React.FC = () => {
                             {new Intl.NumberFormat("en-US", {
                                 style: "currency",
                                 currency: "VND",
-                            }).format(product?.details[0]?.displayPrice * 1000)}
+                            }).format(product?.details[0]?.displayPrice )}
                         </div> */}
                         {fields.map((field) => (
                             <div className="flex flex-col gap-2">

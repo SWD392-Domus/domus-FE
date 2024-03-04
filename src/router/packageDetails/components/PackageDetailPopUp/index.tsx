@@ -191,7 +191,7 @@ const PackageDetailPopUp: React.FC<Props> = (props) => {
                                                         {new Intl.NumberFormat("en-US", {
                                                             style: "currency",
                                                             currency: "VND",
-                                                        }).format(productDetail?.displayPrice * 1000)}
+                                                        }).format(productDetail?.displayPrice )}
                                                     </h1> */}
                                                         <div className="flex justify-end items-center gap-4">
                                                             <Button

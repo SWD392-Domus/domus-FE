@@ -19,7 +19,7 @@ export const data: Payment[] = Array.from({ length: 20 }, (_, i) => ({
     date: `2022-01-0${(i % 9) + 1}`,
     client: `Client ${i + 1}`,
     staff: `Staff ${i + 1}`,
-    amount: (i + 1) * 100000,
+    amount: (i + 1),
     status: "success",
 }));
 export const columns: ColumnDef<Payment>[] = [
@@ -42,13 +42,13 @@ export const columns: ColumnDef<Payment>[] = [
             const client: string = row.getValue("client");
             return <div className=" text-right font-medium">{
                 <div className="flex items-center gap-1 ">
-                  <Avatar>
-                    <AvatarImage src="https://github.com/shadcn.png" />
-                    <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-                <div className="text-yellowCustom">{client}</div>  
+                    <Avatar>
+                        <AvatarImage src="https://github.com/shadcn.png" />
+                        <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                    <div className="text-yellowCustom">{client}</div>
                 </div>
-                
+
             }</div>
         }
     },
@@ -59,13 +59,13 @@ export const columns: ColumnDef<Payment>[] = [
             const staff: string = row.getValue("staff");
             return <div className=" text-right font-medium">{
                 <div className="flex items-center gap-1 ">
-                  <Avatar>
-                    <AvatarImage src="https://github.com/shadcn.png" />
-                    <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
-                <div className="text-destructive">{staff}</div>  
+                    <Avatar>
+                        <AvatarImage src="https://github.com/shadcn.png" />
+                        <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                    <div className="text-destructive">{staff}</div>
                 </div>
-                
+
             }</div>
         }
     },
@@ -88,9 +88,9 @@ export const columns: ColumnDef<Payment>[] = [
         cell: ({ row }) => {
             const value: string = (row.getValue("status") as string).toUpperCase()
             return (
-            <>
-                <Badge variant="success">{value}</Badge>
-            </>
+                <>
+                    <Badge variant="success">{value}</Badge>
+                </>
             )
         },
     },

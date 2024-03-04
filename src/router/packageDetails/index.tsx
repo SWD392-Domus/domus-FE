@@ -184,7 +184,7 @@ const PackageDetails: React.FC<Props> = () => {
                             {new Intl.NumberFormat("en-US", {
                               style: "currency",
                               currency: "VND",
-                            }).format(product.displayPrice * 1000)}
+                            }).format(product.displayPrice )}
                           </p>
                         </CardTitle> */}
                           <CardTitle>

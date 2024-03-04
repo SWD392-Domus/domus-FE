@@ -39,7 +39,7 @@ export const RemoveButton: React.FC<Props> = (props) => {
 
 
             if (!productExists) {
-                cartArray.push({ id: productIdQuan.id, price: productIdQuan.displayPrice * 1000, quantity: 1 });
+                cartArray.push({ id: productIdQuan.id, price: productIdQuan.displayPrice, quantity: 1 });
             }
         });
         localStorage.setItem("cart", JSON.stringify(cart));

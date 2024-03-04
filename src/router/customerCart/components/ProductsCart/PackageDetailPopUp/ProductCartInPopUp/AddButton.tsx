@@ -38,7 +38,7 @@ export const AddButton: React.FC<Props> = (props) => {
 
 
         if (!productExists) {
-            cartArray.push({ id: props.productIdQuan.id, price: props.productIdQuan.displayPrice * 1000, quantity: 1 });
+            cartArray.push({ id: props.productIdQuan.id, price: props.productIdQuan.displayPrice, quantity: 1 });
         }
 
         localStorage.setItem("cart", JSON.stringify(cart));

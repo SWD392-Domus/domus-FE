@@ -79,7 +79,7 @@ export const columns: ColumnDef<QuotationsProps>[] = [
         accessorKey: "totalPrice",
         header: () => <div className="text-left">Total Price</div>,
         cell: ({ row }) => {
-            const totalPrice = parseFloat(row.getValue("totalPrice")) * 1000;
+            const totalPrice = parseFloat(row.getValue("totalPrice"));
             const formatted = new Intl.NumberFormat("en-US", {
                 style: "currency",
                 currency: "VND",

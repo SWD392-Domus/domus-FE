@@ -20,7 +20,7 @@ const PackageCard: React.FC<Package> = ({ packageA }) => {
   const packageImage = packageA?.packageImages[0]?.imageUrl;
   const packageId = packageA?.id;
   const packageName = packageA?.name;
-  const packagePrice = packageA?.estimatedPrice * 1000;
+  const packagePrice = packageA?.estimatedPrice;
   // const packageDescription = package?.description;
   return (
     <Link to={`/package/${packageId}`}>
