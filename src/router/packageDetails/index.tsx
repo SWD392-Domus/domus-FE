@@ -25,6 +25,7 @@ import { useDispatch, useSelector } from "react-redux";
 import selector from "./slice/selector";
 import { actions } from "./slice";
 import { useNavigate, useLocation } from "react-router-dom"
+import HTMLReactParser from 'html-react-parser/lib/index';
 
 interface Props { }
 
@@ -70,7 +71,7 @@ const PackageDetails: React.FC<Props> = () => {
 
       {updated &&
         <>
-          <div className="my-7 text-2xl font-semibold">
+          <div className="my-7 font-semibold text-black text-xl md:text-4xl">
             Package - {packageA?.name}
           </div>
           <div className="">
@@ -133,6 +134,16 @@ const PackageDetails: React.FC<Props> = () => {
                 </div>
               </div>
             </div>
+            {packageA?.description &&
+              <div className="w-[61%] mx-auto mb-10 border-2 py-7 px-10 rounded-2xl">
+                <div>
+                  <p className="text-xl font-bold border-b-2 border-slate-400 w-fit mb-4">Description</p>
+                </div>
+                <div className='flex flex-col items-center justify-center gap-4'>
+                  {HTMLReactParser(packageA?.description)}
+                </div>
+              </div>
+            }
             <div className='flex justify-center items-center'>
               <div className="flex flex-col gap-8 justify-center items-center px-2 w-[80%] rounded-md">
                 <div>

@@ -16,7 +16,7 @@ export const ConfirmButton: React.FC<Props> = (props) => {
     const handleClick = async () => {
         try {
             const res = await createQuotation({
-                expireAt: "2024-09-24T06:54:12.762Z",
+                // expireAt: "2024-09-24T06:54:12.762Z",
                 packageId: props.id,
             });
             if (res === 200) {
