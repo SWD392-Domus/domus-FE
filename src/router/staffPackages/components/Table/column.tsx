@@ -35,12 +35,16 @@ export const columns: ColumnDef<PackagesProps>[] = [
     //     accessorKey: "id",
     //     header: "Id",
     // },
+    // {
+    //     accessorKey: "packageId",
+    //     header: "Package",
+    //     cell: ({ row }) => {
+    //         return <h4> Package {row.index + 1}</h4>;
+    //     },
+    // },
     {
-        accessorKey: "packageId",
-        header: "Package",
-        cell: ({ row }) => {
-            return <h4> Package {row.index + 1}</h4>;
-        },
+        accessorKey: "name",
+        header: "Name",
     },
     {
         accessorKey: "image",
@@ -56,10 +60,6 @@ export const columns: ColumnDef<PackagesProps>[] = [
                 </Avatar>
             );
         },
-    },
-    {
-        accessorKey: "name",
-        header: "Name",
     },
     // {
     //     accessorKey: "discount",

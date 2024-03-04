@@ -34,12 +34,16 @@ export const columns: ColumnDef<ProductsProps>[] = [
     //     accessorKey: "id",
     //     header: "Id",
     // },
+    // {
+    //     accessorKey: "productId",
+    //     header: "Product",
+    //     cell: ({ row }) => {
+    //         return <h4> Product {row.index + 1}</h4>;
+    //     },
+    // },
     {
-        accessorKey: "productId",
-        header: "Product",
-        cell: ({ row }) => {
-            return <h4> Product {row.index + 1}</h4>;
-        },
+        accessorKey: "productName",
+        header: "Name",
     },
     {
         accessorKey: "image",
@@ -52,10 +56,6 @@ export const columns: ColumnDef<ProductsProps>[] = [
                 </Avatar>
             );
         },
-    },
-    {
-        accessorKey: "productName",
-        header: "Name",
     },
     {
         accessorKey: "category",

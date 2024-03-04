@@ -33,13 +33,13 @@ export const columns: ColumnDef<QuotationsProps>[] = [
         enableSorting: false,
         enableHiding: false,
     },
-    {
-        accessorKey: "quotationName",
-        header: "Quotation Name",
-        cell: ({ row }) => {
-            return <h4> Quotation {row.index + 1}</h4>;
-        },
-    },
+    // {
+    //     accessorKey: "quotationName",
+    //     header: "Quotation Name",
+    //     cell: ({ row }) => {
+    //         return <h4> Quotation {row.index + 1}</h4>;
+    //     },
+    // },
     {
         accessorKey: "expireAt",
         header: "Expire At",
