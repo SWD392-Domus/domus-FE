@@ -113,4 +113,11 @@ export const quotationStaffApi = {
             { Authorization: `Bearer ${token}` }
         );
     },
+    getChangelog: (id: string, token: string) => {
+        return get(
+            `/Quotations/${id}/negotiations`,
+            {},
+            { Authorization: `Bearer ${token}` }
+        );
+    },
 };

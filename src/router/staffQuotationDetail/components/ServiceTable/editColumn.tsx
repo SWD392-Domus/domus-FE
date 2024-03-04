@@ -13,11 +13,6 @@ export const editServiceColumns: ColumnDef<ServiceData>[] = [
         accessorKey: "action",
         header: "Action",
     },
-    {
-        accessorKey: "serviceId",
-        header: "Service Id",
-        accessorFn: (row) => row.serviceId,
-    },
 
     {
         accessorKey: "name",

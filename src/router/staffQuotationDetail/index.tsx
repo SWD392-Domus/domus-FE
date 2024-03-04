@@ -52,6 +52,7 @@ import {
     AlertDialogTrigger,
 } from "@/components/ui/AlertDialog";
 import { deleteQuotation } from "../staffQuotations/usecase";
+import { quotationStaffApi } from "@/utils/api/QuotationApi";
 
 interface Props {
     // define your props here
@@ -80,6 +81,7 @@ const QuotationDetail: React.FC<Props> = () => {
     const services: any = useSelector(selector.services);
     const [updated, setUpdated] = useState(false);
     const initalValues: CellValues = {};
+    const [originalPrice, setOriginalPrice] = useState(totalPrice);
     const serviceInitialValues: CellValues = {};
     const [cellValues, setCellValues] = useState<CellValues>(initalValues);
     const [serviceCellValues, setserviceCellValues] =
@@ -133,11 +135,12 @@ const QuotationDetail: React.FC<Props> = () => {
                         title: "Update Successfully",
                         description: "",
                     });
-                    await pushNegotitaionService(id, token as string, {
-                        content:
-                            "Hi, I just updated the quotation , please feel free to discuss through this chat",
-                        isCustomerMessage: false,
-                    });
+                    if (totalPrice != originalPrice) {
+                        await pushNegotitaionService(id, token as string, {
+                            content: `${staff.email} have change the price from đ${originalPrice} to đ${totalPrice}`,
+                            isCustomerMessage: false,
+                        });
+                    }
 
                     window.location.replace(`/staff/quotations/${id}`);
                 } else {
@@ -166,6 +169,7 @@ const QuotationDetail: React.FC<Props> = () => {
 
                     if (response) {
                         dispatch(actions.setQuotation(response));
+                        setOriginalPrice(response.totalPrice);
                         dispatch(actions.getQuotationInfo());
                         setUpdated(true);
                         const fetchedProducts: ProductDetailProps[] =
@@ -188,6 +192,7 @@ const QuotationDetail: React.FC<Props> = () => {
                             serviceInitialValues[index.toString()] =
                                 serviceCellValues;
                         });
+
                         setCellValues(initalValues);
 
                         setserviceCellValues(serviceInitialValues);
@@ -223,6 +228,7 @@ const QuotationDetail: React.FC<Props> = () => {
         if (validateCellValues(cellValues)) {
             const productsArray = Object.values(cellValues);
             setUpdate(true);
+
             dispatch(actions.addProduct(productsArray as any));
             setEditTable(false);
         } else {
@@ -248,7 +254,6 @@ const QuotationDetail: React.FC<Props> = () => {
     };
     const handleSaveService = () => {
         const servicesArray = Object.values(serviceCellValues);
-        console.log(servicesArray);
         const fieldedServices = servicesArray.map((service: any) => {
             return {
                 ...service,

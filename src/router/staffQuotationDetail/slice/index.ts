@@ -12,6 +12,7 @@ export type QuotationDetailInfo = {
     priceSum: number;
 };
 export const initialState = {
+    originalPrice: 0,
     id: "",
     staff: {},
     customer: {},
@@ -59,11 +60,13 @@ const slice = createSlice({
         },
 
         setQuotation: (state: any, action: any) => {
+            console.log(action.payload);
             state.id = action.payload.id;
             state.customer = action.payload.customer;
             state.staff = action.payload.staff;
             state.status = action.payload.status;
             state.totalPrice = Number.parseFloat(action.payload.totalPrice);
+
             state.expireAt = action.payload.expireAt;
             state.products = action.payload.products;
             state.negotiationLog = action.payload.negotiationLog;

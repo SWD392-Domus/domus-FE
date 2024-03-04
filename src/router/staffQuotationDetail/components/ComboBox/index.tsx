@@ -56,7 +56,7 @@ const handleSelectDetail = (
     setSelectedStatus: any
 ) => {
     setSelectedStatus({
-        productDetailId: detail.id,
+        id: detail.id,
         productName: product.productName + " Variant " + index + 1,
         price: detail.displayPrice,
         monetaryUnit: "VND",

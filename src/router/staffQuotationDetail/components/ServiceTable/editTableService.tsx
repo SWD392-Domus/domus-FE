@@ -110,9 +110,17 @@ export function EditTableService<TData, TValue>({
         getCoreRowModel: getCoreRowModel(),
     });
 
-    const handleDeleteService = (id: string) => {
-        dispatch(actions.deleteServiceRow(id));
-        delete serviceCellValues[id];
+    const handleDeleteService = (index: string) => {
+        dispatch(actions.deleteServiceRow(index));
+        const updatedCellValues = { ...serviceCellValues };
+        delete updatedCellValues[index];
+        const reindexedValues = {};
+        let newIndex = 0;
+        for (const key in updatedCellValues) {
+            reindexedValues[newIndex++] = updatedCellValues[key];
+        }
+
+        setServiceCellValues(reindexedValues);
     };
 
     return (

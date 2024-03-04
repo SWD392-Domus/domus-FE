@@ -112,7 +112,15 @@ export function EditDataTable<TData, TValue>({
     });
     const handleDeleteProduct = (id: string) => {
         dispatch(actions.deleteRow(id));
-        delete cellValues[id];
+        const updatedCellValues = { ...cellValues };
+        delete updatedCellValues[id];
+        const reindexedValues = {};
+        let newIndex = 0;
+        for (const key in updatedCellValues) {
+            reindexedValues[newIndex++] = updatedCellValues[key];
+        }
+
+        setCellValues(reindexedValues);
     };
 
     return (

@@ -35,7 +35,7 @@ export const editColums: ColumnDef<QuotationDetailInfo>[] = [
         header: "Display Price",
         cell: ({ row }) => {
             const value: string = row.getValue("price");
-            console.log(value);
+
             return (
                 <div className="text-left font-medium">
                     {new Intl.NumberFormat("en-US", {

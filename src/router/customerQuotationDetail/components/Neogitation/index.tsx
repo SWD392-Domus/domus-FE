@@ -82,7 +82,7 @@ const Negotiation: React.FC<Props> = ({ staff, negotiationLog, customer }) => {
                     <div className="my-5">
                         <div className="flex flex-row mb-2">
                             <img
-                                src={staff.profileImage}
+                                src={customer.profileImage}
                                 alt=""
                                 className="h-10 w-10 bg-gray-300 mr-2"
                             />
