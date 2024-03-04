@@ -48,8 +48,10 @@ import ProductsList from "./components/ProductsList";
 import ServiceList from "./components/ServiceList";
 import { Label } from "@/components/ui/Label";
 // import { Label } from "@/components/ui/Label";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
-interface Props {}
+interface Props { }
 
 const StaffPackageDetailCreate: React.FC<Props> = () => {
     const [uploadedImages, setUploadedImages] = useState<File[]>([]);
@@ -57,6 +59,8 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
     const navigate = useNavigate();
     const id: string = useSelector(selector.id);
     const name: string = useSelector(selector.name);
+    const description: string = useSelector(selector.description);
+    const [desValue, setDesValue] = useState("");
     // const estimatedPrice: number = useSelector(selector.estimatedPrice);
     const discount: number = useSelector(selector.discount);
     const services: ServiceProps[] = useSelector(selector.services);
@@ -69,30 +73,30 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
     const [packageImages, setPackageImages] = useState<PackageImageProps[]>([]);
     useEffect(() => {
         if (packageImagesRedux) {
-          setPackageImages(packageImagesRedux);
+            setPackageImages(packageImagesRedux);
         }
-      }, [packageImagesRedux]);
+    }, [packageImagesRedux]);
 
     const { toast } = useToast();
 
     const handleAddImage = (event: React.ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files;
         if (files) {
-          const newFiles = Array.from(files);
-          setUploadedImages((prevImages) => [...prevImages, ...newFiles]);
-          const newImages = newFiles.map((file) => {
-            return {
-              imageUrl: URL.createObjectURL(file),
-              id: "",
-              width: 0,
-              height: 0,
-            };
-          });
-        //   dispatch(actions.updatePackageImages(newImages));
-        setPackageImages([...packageImages, ...newImages]);
+            const newFiles = Array.from(files);
+            setUploadedImages((prevImages) => [...prevImages, ...newFiles]);
+            const newImages = newFiles.map((file) => {
+                return {
+                    imageUrl: URL.createObjectURL(file),
+                    id: "",
+                    width: 0,
+                    height: 0,
+                };
+            });
+            //   dispatch(actions.updatePackageImages(newImages));
+            setPackageImages([...packageImages, ...newImages]);
         }
-      };
-   
+    };
+
     const formSchema = z.object({
         name: z.string().nonempty({ message: "Name is required" }),
         discount: z
@@ -123,6 +127,7 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
 
         formData.append("Name", values.name);
         formData.append("Discount", values.discount.toString());
+        formData.append("Description", desValue);
 
         services.map((item) => {
             return formData.append("ServiceIds", item.id);
@@ -310,6 +315,14 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
                                 </div>
                             </div>
                         </div>
+                        <div className="flex flex-col mb-10 gap-4">
+                            <div className="font-semibold text-xl">Description</div>
+                            <div className='w-full'>
+                                <ReactQuill className="" theme="snow" value={desValue} placeholder="Description..."
+                                    onChange={setDesValue}
+                                ></ReactQuill>
+                            </div>
+                        </div>
                         <div className="flex justify-center items-center">
                             <div className="flex flex-col gap-8 justify-center items-center px-2 w-[80%] rounded-md">
                                 <div className="flex gap-10">
@@ -357,7 +370,7 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
                                                                         imageUrl
                                                                     }
                                                                     className="w-[288px] object-contain"
-                                                                    // loading="lazy"
+                                                                // loading="lazy"
                                                                 />
                                                             </div>
                                                         </CardHeader>
@@ -391,7 +404,7 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
                                                                         }
                                                                     ).format(
                                                                         product.displayPrice *
-                                                                            1000
+                                                                        1000
                                                                     )}
                                                                 </p>
                                                             </CardTitle>

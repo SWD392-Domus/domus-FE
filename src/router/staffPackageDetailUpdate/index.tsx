@@ -46,15 +46,21 @@ import { Input } from "@/components/ui/Input";
 import { PencilIcon } from "lucide-react";
 import ProductsList from "./components/ProductsList";
 import ServiceList from "./components/ServiceList";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import { useNavigate } from "react-router-dom";
 
-interface Props {}
+interface Props { }
 
 const PackageDetails: React.FC<Props> = () => {
+    const navigate = useNavigate();
     const { packageId } = useParams();
     const dispatch = useDispatch();
     const id: string = useSelector(selector.id);
     const name: string = useSelector(selector.name);
+    const description: string = useSelector(selector.description);
     const [uploadedImages, setUploadedImages] = useState<File[]>([]);
+    const [desValue, setDesValue] = useState("");
     // const estimatedPrice: number = useSelector(selector.estimatedPrice);
     const discount: number = useSelector(selector.discount);
     const services: ServiceProps[] = useSelector(selector.services);
@@ -110,6 +116,7 @@ const PackageDetails: React.FC<Props> = () => {
                     dispatch(actions.getPackageInfo());
                     form.setValue("name", response.name);
                     form.setValue("discount", response.discount);
+                    setDesValue(response.description);
                     setUpdated(true);
                 }
             } catch (error) {
@@ -137,7 +144,6 @@ const PackageDetails: React.FC<Props> = () => {
             })
             .lte(100)
             .nonnegative(),
-
         // pictures: z.any(),
     });
 
@@ -156,7 +162,7 @@ const PackageDetails: React.FC<Props> = () => {
         });
         formData.append("Name", values.name);
         formData.append("Discount", values.discount.toString());
-
+        formData.append("Description", desValue);
         services.map((item) => {
             return formData.append("ServiceIds", item.id);
         });
@@ -172,7 +178,7 @@ const PackageDetails: React.FC<Props> = () => {
                 description: "A package was updated.",
                 action: <ToastAction altText="Close">Close</ToastAction>,
             });
-            // navigate(`/staff/packages/${packageId}`)
+            navigate(`/staff/packages/${packageId}`)
         } else {
             toast({
                 variant: "destructive",
@@ -361,6 +367,14 @@ const PackageDetails: React.FC<Props> = () => {
                                 </div>
                             </div>
                         </div>
+                        <div className="flex flex-col mb-10 gap-4">
+                            <div className="font-semibold text-xl">Description</div>
+                            <div className='w-full'>
+                                <ReactQuill className="" theme="snow" value={desValue} placeholder="Description..."
+                                    onChange={setDesValue}
+                                ></ReactQuill>
+                            </div>
+                        </div>
                         <div className="flex justify-center items-center">
                             <div className="flex flex-col gap-8 justify-center items-center px-2 w-[80%] rounded-md">
                                 <div className="flex gap-10">
@@ -408,7 +422,7 @@ const PackageDetails: React.FC<Props> = () => {
                                                                         imageUrl
                                                                     }
                                                                     className="w-[288px] object-contain"
-                                                                    // loading="lazy"
+                                                                // loading="lazy"
                                                                 />
                                                             </div>
                                                         </CardHeader>
@@ -442,7 +456,7 @@ const PackageDetails: React.FC<Props> = () => {
                                                                         }
                                                                     ).format(
                                                                         product.displayPrice *
-                                                                            1000
+                                                                        1000
                                                                     )}
                                                                 </p>
                                                             </CardTitle>

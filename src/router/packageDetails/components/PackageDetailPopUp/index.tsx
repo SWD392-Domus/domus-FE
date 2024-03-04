@@ -40,6 +40,8 @@ const PackageDetailPopUp: React.FC<Props> = (props) => {
     const { toast } = useToast();
     const navigate = useNavigate();
     const handleClick = async () => {
+        console.log("packageB: ", packageB);
+
         if (packageB?.productDetails?.length < 4) {
             toast({
                 variant: "destructive",
@@ -52,15 +54,19 @@ const PackageDetailPopUp: React.FC<Props> = (props) => {
         } else {
             try {
                 const res = await createQuotation({
-                    expireAt: "2024-09-24T06:54:12.762Z",
+                    // expireAt: "2024-09-24T06:54:12.762Z",
                     packageId: packageB.id,
                     services: packageB.services.map((ser: any) => {
-                        return ser.id
+                        return {
+                            serviceId: ser.id,
+                            price: ser.price,
+                        }
                     }),
                     productDetails: packageB.productDetails.map((productDetail: any) => {
                         return {
                             id: productDetail.id,
                             quantity: productDetail.quantity,
+                            price: productDetail.displayPrice,
                         }
                     })
                 });
@@ -73,7 +79,7 @@ const PackageDetailPopUp: React.FC<Props> = (props) => {
                     });
                     localStorage.removeItem("cart");
                     setTimeout(() => {
-                        window.location.reload();
+                        navigate("/customer/settings/quotations");
                     }, 2000);
                 } else {
                     toast({
@@ -86,7 +92,7 @@ const PackageDetailPopUp: React.FC<Props> = (props) => {
                     });
                 }
             } catch (err) {
-                navigate("/login");
+                // navigate("/login");
                 toastError("Please Login first");
             }
         }

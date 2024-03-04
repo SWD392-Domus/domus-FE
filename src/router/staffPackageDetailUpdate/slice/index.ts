@@ -6,6 +6,7 @@ import { PackageImageProps } from "../types";
 export const initialState = {
   id: "",
   name: "",
+  description: "",
   estimatedPrice: 0,
   discount: 0,
   services: [],
@@ -27,6 +28,7 @@ const slice = createSlice({
     setPackage: (state: any, action: any) => {
       state.id = action.payload.id;
       state.name = action.payload.name;
+      state.description = action.payload.description;
       state.estimatedPrice = action.payload.estimatedPrice;
       state.discount = action.payload.discount;
       state.services = action.payload.services;
@@ -39,6 +41,7 @@ const slice = createSlice({
         id: state.id,
         name: state.name,
         estimatedPrice: state.estimatedPrice,
+        description: state.description,
         discount: state.discount,
         services: state.services,
         productDetails: state.productDetails,
@@ -101,7 +104,10 @@ const slice = createSlice({
         }
       });
     },
-    updatePackageImages: (state, action: PayloadAction<PackageImageProps[]>) => {
+    updatePackageImages: (
+      state,
+      action: PayloadAction<PackageImageProps[]>
+    ) => {
       state.packageImages = [...state.packageImages, ...action.payload];
     },
   },

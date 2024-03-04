@@ -83,21 +83,21 @@ const info = [
 
 const Footer: React.FC = () => {
   return (
-    
-      <div className="w-full py-10 bg-darkCustom flex  max-[726px]:flex-col gap-12">
-        <div className="h-[80px] flex justify-center items-center min-[726px]:border-r-2 shrink">
-          <WebsiteName />
-        </div>
-        <div className="min-[981px]:flex lg:items-center lg:justify-between lg:gap-20 mr-4 gap-8">
-          {info.map((item: InfoItem, idx: number) => (
-            <div key={idx} className="flex gap-2 min-[981px]:justify-center items-center lg:flex-wrap lg:text-md">
-              <div className="">{item.icon}</div>
-              <div className="text-white">{item.text}</div>
-            </div>
-          ))}
-        </div>
+
+    <div className="w-full py-10 bg-darkCustom flex  max-[726px]:flex-col gap-12 mt-10">
+      <div className="h-[80px] flex justify-center items-center min-[726px]:border-r-2 shrink">
+        <WebsiteName />
       </div>
-    
+      <div className="min-[981px]:flex lg:items-center lg:justify-between lg:gap-20 mr-4 gap-8">
+        {info.map((item: InfoItem, idx: number) => (
+          <div key={idx} className="flex gap-2 min-[981px]:justify-center items-center lg:flex-wrap lg:text-md">
+            <div className="">{item.icon}</div>
+            <div className="text-white">{item.text}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+
   );
 };
 
