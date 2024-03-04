@@ -18,43 +18,43 @@ const components: {
     href: string;
     description: string;
 }[] = [
-    {
-        title: "Home",
-        icon: HomeIcon,
-        href: "/staff",
-        description: "Home",
-    },
-    {
-        title: "Quotation",
-        icon: FileTextIcon,
-        href: "/staff/quotations",
-        description: "Quotation Management",
-    },
-    {
-        title: "Product",
-        icon: TextAlignJustifyIcon,
-        href: "/staff/products",
-        description: "Product Management",
-    },
-    {
-        title: "Package",
-        icon: BackpackIcon,
-        href: "/staff/packages",
-        description: "Package Management",
-    },
-    {
-        title: "Settings",
-        icon: GearIcon,
-        href: "/staff/settings",
-        description: "Settings",
-    },
-    {
-        title: "Profile",
-        icon: PersonIcon,
-        href: "/staff/profile",
-        description: "Profile",
-    },
-];
+        {
+            title: "Home",
+            icon: HomeIcon,
+            href: "/staff",
+            description: "Home",
+        },
+        {
+            title: "Quotation",
+            icon: FileTextIcon,
+            href: "/staff/quotations",
+            description: "Quotation Management",
+        },
+        {
+            title: "Product",
+            icon: TextAlignJustifyIcon,
+            href: "/staff/products",
+            description: "Product Management",
+        },
+        {
+            title: "Package",
+            icon: BackpackIcon,
+            href: "/staff/packages",
+            description: "Package Management",
+        },
+        // {
+        //     title: "Settings",
+        //     icon: GearIcon,
+        //     href: "/staff/settings",
+        //     description: "Settings",
+        // },
+        {
+            title: "Profile",
+            icon: PersonIcon,
+            href: "/staff/profile",
+            description: "Profile",
+        },
+    ];
 
 export default function NavigationMenuDemo() {
     const location = useLocation();
@@ -65,11 +65,10 @@ export default function NavigationMenuDemo() {
                 {components.map((component) => (
                     <Link to={component.href}>
                         <div
-                            className={`flex text-sm font-medium p-3 hover:bg-slate-100 hover:text-black rounded ${
-                                location.pathname === component.href
+                            className={`flex text-sm font-medium p-3 hover:bg-slate-100 hover:text-black rounded ${location.pathname === component.href
                                     ? "bg-black text-white"
                                     : ""
-                            }`}
+                                }`}
                         >
                             <component.icon className="my-auto mr-2"></component.icon>
                             {component.title}
