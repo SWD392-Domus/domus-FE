@@ -59,14 +59,14 @@ const PackageDetailPopUp: React.FC<Props> = (props) => {
                     services: packageB.services.map((ser: any) => {
                         return {
                             serviceId: ser.id,
-                            price: ser.price,
+                            price: 0,
                         }
                     }),
                     productDetails: packageB.productDetails.map((productDetail: any) => {
                         return {
                             id: productDetail.id,
                             quantity: productDetail.quantity,
-                            price: productDetail.displayPrice,
+                            price: 0,
                         }
                     })
                 });
@@ -77,7 +77,7 @@ const PackageDetailPopUp: React.FC<Props> = (props) => {
                         description: "A request was sent.",
                         action: <ToastAction altText="Close">Close</ToastAction>,
                     });
-                    localStorage.removeItem("cart");
+                    // localStorage.removeItem("cart");
                     setTimeout(() => {
                         navigate("/customer/settings/quotations");
                     }, 2000);
@@ -133,10 +133,10 @@ const PackageDetailPopUp: React.FC<Props> = (props) => {
                                                                 {packageB?.services?.map((service: any) =>
                                                                     <div className="flex flex-row justify-between">
                                                                         <div className='font-semibold'>{service.name}</div>
-                                                                        <div>{new Intl.NumberFormat("en-US", {
+                                                                        {/* <div>{new Intl.NumberFormat("en-US", {
                                                                             style: "currency",
                                                                             currency: "VND",
-                                                                        }).format(service.price)}</div>
+                                                                        }).format(service.price)}</div> */}
                                                                     </div>)}
                                                             </div>
                                                         </AccordionContent>

@@ -139,12 +139,12 @@ const PackageList: React.FC = () => {
                         </div>
                     )}
                     {/* <div className="py-20 w-full flex justify-center items-center border-gray-200">
-            <PackagesPagination
-              totalPages={totalPages}
-              pageIndex={pageIndex}
-              setPageIndex={setPageIndex}
-            />
-          </div> */}
+                        <PackagesPagination
+                            totalPages={totalPages}
+                            pageIndex={pageIndex}
+                            setPageIndex={setPageIndex}
+                        />
+                    </div> */}
                 </div>
             </header>
         </>

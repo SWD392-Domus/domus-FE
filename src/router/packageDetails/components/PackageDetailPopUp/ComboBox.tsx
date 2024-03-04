@@ -168,7 +168,8 @@ function StatusList({
                                                             //     index,
                                                             //     setSelectedStatus
                                                             // );
-                                                            dispatch(actions.addProduct(detail));
+                                                            const detailWithProductName = { ...detail, productName: product.productName };
+                                                            dispatch(actions.addProduct(detailWithProductName));
                                                             setOpen(false);
                                                         }}
                                                     >

@@ -34,7 +34,7 @@ const PackageCard: React.FC<Package> = ({ packageA }) => {
             />
           </div>
         </CardHeader>
-        <CardContent className="overflow-hidden">
+        <CardContent className="">
           <CardTitle className="">
             <h2 className="truncate">{packageName}</h2>
           </CardTitle>
@@ -53,7 +53,7 @@ const PackageCard: React.FC<Package> = ({ packageA }) => {
               )}
             </p>
           </CardDescription> */}
-          {packagePrice ?
+          {/* {packagePrice ?
             <CardTitle>
               <p className="text-2xl truncate">
                 {new Intl.NumberFormat("en-US", {
@@ -61,7 +61,7 @@ const PackageCard: React.FC<Package> = ({ packageA }) => {
                   currency: "VND",
                 }).format(packagePrice)}
               </p>
-            </CardTitle> : null}
+            </CardTitle> : null} */}
         </CardContent>
         <CardFooter className="">
           <div

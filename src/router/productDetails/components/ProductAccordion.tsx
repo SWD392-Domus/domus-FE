@@ -17,7 +17,7 @@ const ProductAccordion: React.FC<Props> = ({
   // sizes,
 }) => {
   return (
-    <Accordion type="multiple">
+    <Accordion type="single" defaultValue="item-1" collapsible>
       <AccordionItem value="item-1">
         <AccordionTrigger>Product Description</AccordionTrigger>
         <AccordionContent>
