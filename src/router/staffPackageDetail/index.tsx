@@ -24,6 +24,7 @@ import { useDispatch, useSelector } from "react-redux";
 import selector from "./slice/selector";
 import { actions } from "./slice";
 import { useNavigate, useLocation } from "react-router-dom"
+import HTMLReactParser from 'html-react-parser/lib/index';
 
 interface Props { }
 
@@ -32,6 +33,7 @@ const PackageDetails: React.FC<Props> = () => {
   const dispatch = useDispatch();
   const id: string = useSelector(selector.id);
   const name: string = useSelector(selector.name);
+  const description: string = useSelector(selector.description);
   const estimatedPrice: number = useSelector(selector.estimatedPrice);
   const discount: number = useSelector(selector.discount);
   const services: ServiceProps[] = useSelector(selector.services);
@@ -47,6 +49,7 @@ const PackageDetails: React.FC<Props> = () => {
     if (packageId) {
       try {
         const response = await getPackageById(packageId);
+
         if (response) {
           dispatch(actions.setPackage(response))
           // console.log(response)
@@ -129,6 +132,16 @@ const PackageDetails: React.FC<Props> = () => {
               </div>
             </div>
           </div>
+          {description &&
+            <div className="w-[75%] mx-auto mb-10 border-2 py-7 px-10 rounded-2xl">
+              <div>
+                <p className="text-xl font-bold border-b-2 border-slate-400 w-fit mb-4">Description</p>
+              </div>
+              <div className='flex flex-col items-center justify-center gap-4'>
+                {HTMLReactParser(description)}
+              </div>
+            </div>
+          }
           <div className='flex justify-center items-center'>
             <div className="flex flex-col gap-8 justify-center items-center px-2 w-[80%] rounded-md">
               <div>

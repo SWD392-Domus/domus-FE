@@ -48,10 +48,12 @@ import ProductsList from "./components/ProductsList";
 import ServiceList from "./components/ServiceList";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { useNavigate } from "react-router-dom";
 
 interface Props { }
 
 const PackageDetails: React.FC<Props> = () => {
+    const navigate = useNavigate();
     const { packageId } = useParams();
     const dispatch = useDispatch();
     const id: string = useSelector(selector.id);
@@ -110,7 +112,7 @@ const PackageDetails: React.FC<Props> = () => {
                 const response = await getPackageById(packageId);
                 if (response) {
                     dispatch(actions.setPackage(response));
-                    console.log(response)
+                    // console.log(response)
                     dispatch(actions.getPackageInfo());
                     form.setValue("name", response.name);
                     form.setValue("discount", response.discount);
@@ -176,7 +178,7 @@ const PackageDetails: React.FC<Props> = () => {
                 description: "A package was updated.",
                 action: <ToastAction altText="Close">Close</ToastAction>,
             });
-            // navigate(`/staff/packages/${packageId}`)
+            navigate(`/staff/packages/${packageId}`)
         } else {
             toast({
                 variant: "destructive",
