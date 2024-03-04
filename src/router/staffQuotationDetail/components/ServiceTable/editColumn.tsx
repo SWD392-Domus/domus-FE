@@ -5,12 +5,18 @@ interface ServiceData {
     name: string;
     price: number;
     monetaryUnit: string;
+    serviceId: string;
 }
 
 export const editServiceColumns: ColumnDef<ServiceData>[] = [
     {
         accessorKey: "action",
         header: "Action",
+    },
+    {
+        accessorKey: "serviceId",
+        header: "Service Id",
+        accessorFn: (row) => row.serviceId,
     },
 
     {
@@ -34,11 +40,11 @@ export const editServiceColumns: ColumnDef<ServiceData>[] = [
             );
         },
     },
-    {
-        accessorKey: "monetaryUnit",
-        header: "Monetary Unit",
-        accessorFn: (row) => row.monetaryUnit,
-    },
+    // {
+    //     accessorKey: "monetaryUnit",
+    //     header: "Monetary Unit",
+    //     accessorFn: (row) => row.monetaryUnit,
+    // },
     {
         accessorKey: "delete",
         header: () => <div className="text-left">Delete</div>,

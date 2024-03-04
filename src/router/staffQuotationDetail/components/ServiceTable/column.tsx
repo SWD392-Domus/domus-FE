@@ -27,8 +27,8 @@ export const serviceColums: ColumnDef<ServiceProps>[] = [
             );
         },
     },
-    {
-        accessorKey: "monetaryUnit",
-        header: "Monetary Unit",
-    },
+    // {
+    //     accessorKey: "monetaryUnit",
+    //     header: "Monetary Unit",
+    // },
 ];

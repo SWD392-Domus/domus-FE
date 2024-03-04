@@ -95,7 +95,7 @@ const QuotationDetail: React.FC<Props> = () => {
         const sentProducts = products.map((product) => {
             const { price, monetaryUnit, quantity, quantityType } = product;
             return {
-                productDetailId: product.productDetailId,
+                productDetailId: product.id,
                 price: parseFloat(price),
                 monetaryUnit,
                 quantity: parseFloat(quantity),
@@ -103,7 +103,10 @@ const QuotationDetail: React.FC<Props> = () => {
             };
         });
         const sentServices = services.map((service: any) => {
-            return service.id;
+            return {
+                serviceId: service.serviceId,
+                price: parseFloat(service.price),
+            };
         });
 
         const data = {
@@ -186,6 +189,7 @@ const QuotationDetail: React.FC<Props> = () => {
                                 serviceCellValues;
                         });
                         setCellValues(initalValues);
+
                         setserviceCellValues(serviceInitialValues);
                     }
                 } catch (error) {
@@ -244,7 +248,14 @@ const QuotationDetail: React.FC<Props> = () => {
     };
     const handleSaveService = () => {
         const servicesArray = Object.values(serviceCellValues);
-        dispatch(actions.addService(servicesArray as any));
+        console.log(servicesArray);
+        const fieldedServices = servicesArray.map((service: any) => {
+            return {
+                ...service,
+                serviceId: service.serviceId || service.id,
+            };
+        });
+        dispatch(actions.addService(fieldedServices as any));
         setUpdate(true);
         setEditService(false);
     };
