@@ -212,7 +212,7 @@ const QuotationDetail: React.FC<Props> = () => {
                         <div className="border-solid border-b-2 border-zinc-400">
                             <div className="general-info flex flex-col items-center">
                                 <div className="my-7 text-2xl font-semibold w-full">
-                                    Quotation - {id}
+                                    Quotation
                                 </div>
                                 {!isEdit ? (
                                     <div className="flex flex-row flex-wrap w-full">

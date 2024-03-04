@@ -88,26 +88,26 @@ export function DataTable<TData, TValue>({
                                                 {header.isPlaceholder
                                                     ? null
                                                     : flexRender(
-                                                          header.column
-                                                              .columnDef.header,
-                                                          header.getContext()
-                                                      )}
+                                                        header.column
+                                                            .columnDef.header,
+                                                        header.getContext()
+                                                    )}
                                                 {[
                                                     "id",
                                                     "expireAt",
                                                     "totalPrice",
                                                     "status",
                                                 ].includes(headerId) && (
-                                                    <SortButton
-                                                        sortField={headerId}
-                                                        setSortField={
-                                                            setSortField
-                                                        }
-                                                        setDescending={
-                                                            setDescending
-                                                        }
-                                                    ></SortButton>
-                                                )}
+                                                        <SortButton
+                                                            sortField={headerId}
+                                                            setSortField={
+                                                                setSortField
+                                                            }
+                                                            setDescending={
+                                                                setDescending
+                                                            }
+                                                        ></SortButton>
+                                                    )}
                                             </div>
                                         </TableHead>
                                     );
@@ -146,11 +146,10 @@ export function DataTable<TData, TValue>({
                                                     key={cell.id}
                                                     onClick={() =>
                                                         navigate(
-                                                            `${
-                                                                location.pathname
-                                                            }/${row.getValue(
-                                                                "id"
-                                                            )}`
+                                                            `${location.pathname
+                                                            }/${row.original
+                                                                .id as any
+                                                            }`
                                                         )
                                                     }
                                                     className="cursor-pointer"

@@ -33,9 +33,16 @@ export const columns: ColumnDef<QuotationsProps>[] = [
         enableSorting: false,
         enableHiding: false,
     },
+    // {
+    //     accessorKey: "id",
+    //     header: "Id",
+    // },
     {
-        accessorKey: "id",
-        header: "Id",
+        accessorKey: "quotationId",
+        header: "Quotation",
+        cell: ({ row }) => {
+            return <h4> Quotation {row.index + 1}</h4>;
+        },
     },
     {
         accessorKey: "expireAt",
