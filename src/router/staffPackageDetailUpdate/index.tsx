@@ -115,7 +115,7 @@ const PackageDetails: React.FC<Props> = () => {
                     // console.log(response)
                     dispatch(actions.getPackageInfo());
                     form.setValue("name", response.name);
-                    form.setValue("discount", response.discount);
+                    // form.setValue("discount", response.discount);
                     setDesValue(response.description);
                     setUpdated(true);
                 }
@@ -136,23 +136,21 @@ const PackageDetails: React.FC<Props> = () => {
 
     const formSchema = z.object({
         name: z.string().nonempty({ message: "Name is required" }),
-        discount: z
-            .number({
-                required_error: "Discount is required",
-                invalid_type_error:
-                    "Discount must be a number between 0 and 100",
-            })
-            .lte(100)
-            .nonnegative(),
-        // pictures: z.any(),
+        // discount: z
+        //     .number({
+        //         required_error: "Discount is required",
+        //         invalid_type_error:
+        //             "Discount must be a number between 0 and 100",
+        //     })
+        //     .lte(100)
+        //     .nonnegative(),
     });
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: name,
-            discount: discount,
-            // pictures: undefined,
+            // discount: discount,
         },
     });
     async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -161,7 +159,7 @@ const PackageDetails: React.FC<Props> = () => {
             formData.append("Images", image);
         });
         formData.append("Name", values.name);
-        formData.append("Discount", values.discount.toString());
+        // formData.append("Discount", values.discount.toString());
         formData.append("Description", desValue);
         services.map((item) => {
             return formData.append("ServiceIds", item.id);
@@ -242,7 +240,7 @@ const PackageDetails: React.FC<Props> = () => {
                                 />
                                 {/* Package Name Input End*/}
                                 {/* Package Discount Input Start */}
-                                <FormField
+                                {/* <FormField
                                     control={form.control}
                                     name="discount"
                                     render={({ field }) => (
@@ -262,7 +260,7 @@ const PackageDetails: React.FC<Props> = () => {
                                             <FormMessage />
                                         </FormItem>
                                     )}
-                                />
+                                /> */}
                                 {/* Package Discount Input End*/}
                                 {/* Package Name Input Start */}
                                 {/* <FormField
@@ -287,7 +285,7 @@ const PackageDetails: React.FC<Props> = () => {
                   type="file"
                   onChange={(event) => onChange(event.target.files[0] || null)}
                 /> */}
-
+                                <div className="border-yellowCustom font-semibold text-xl text-black mt-2">Images</div>
                                 <Input
                                     className="mb-4"
                                     id="picture"
@@ -320,7 +318,7 @@ const PackageDetails: React.FC<Props> = () => {
                                                                                 service.name
                                                                             }
                                                                         </div>
-                                                                        <div>
+                                                                        {/* <div>
                                                                             {new Intl.NumberFormat(
                                                                                 "en-US",
                                                                                 {
@@ -331,7 +329,7 @@ const PackageDetails: React.FC<Props> = () => {
                                                                             ).format(
                                                                                 service.price
                                                                             )}
-                                                                        </div>
+                                                                        </div> */}
                                                                     </div>
                                                                 )
                                                             )}
@@ -435,17 +433,17 @@ const PackageDetails: React.FC<Props> = () => {
                                                                 </h2>
                                                             </CardTitle>
                                                             {/* <CardDescription className="pb-2 pt-1 shrink">
-                            <p className="truncate">
-                              {productDescription ? (
-                                productDescription
-                              ) : (
-                                <p className="truncate">
-                                  Materials
-                                </p>
-                              )}
-                            </p>
-                          </CardDescription> */}
-                                                            <CardTitle>
+                                                                <p className="truncate">
+                                                                    {productDescription ? (
+                                                                        productDescription
+                                                                    ) : (
+                                                                        <p className="truncate">
+                                                                            Materials
+                                                                        </p>
+                                                                    )}
+                                                                </p>
+                                                            </CardDescription> */}
+                                                            {/* <CardTitle>
                                                                 <p className="text-2xl truncate">
                                                                     {new Intl.NumberFormat(
                                                                         "en-US",
@@ -459,7 +457,7 @@ const PackageDetails: React.FC<Props> = () => {
                                                                         1000
                                                                     )}
                                                                 </p>
-                                                            </CardTitle>
+                                                            </CardTitle> */}
                                                         </CardContent>
                                                         <CardFooter className=""></CardFooter>
                                                     </Card>

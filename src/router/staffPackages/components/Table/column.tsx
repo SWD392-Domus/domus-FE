@@ -59,15 +59,15 @@ export const columns: ColumnDef<PackagesProps>[] = [
         accessorKey: "name",
         header: "Name",
     },
-    {
-        accessorKey: "discount",
-        header: "Discount",
-        cell: ({ row }) => {
-            return (
-                <div className="text-center">{row.getValue("discount")}%</div>
-            );
-        },
-    },
+    // {
+    //     accessorKey: "discount",
+    //     header: "Discount",
+    //     cell: ({ row }) => {
+    //         return (
+    //             <div className="text-center">{row.getValue("discount")}%</div>
+    //         );
+    //     },
+    // },
     {
         accessorKey: "serviceName",
         header: "Service",
