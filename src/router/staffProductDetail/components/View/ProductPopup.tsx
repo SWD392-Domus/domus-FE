@@ -22,8 +22,8 @@ interface DetailsProps {
   details: ProductDetailsProps;
   index: number;
 }
-const ProductPopup: React.FC<DetailsProps> = ({ 
-  details ,
+const ProductPopup: React.FC<DetailsProps> = ({
+  details,
   index
 }) => {
   const images = details.images.map((image: ImagesProps) => image.imageUrl);
@@ -37,7 +37,7 @@ const ProductPopup: React.FC<DetailsProps> = ({
           This is a detail dialog of a product.{" "}
         </DialogDescription>
         <div className="grid gap-4 py-4">
-        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4">
             <Label htmlFor="name" className="text-left font-bold w-auto text-2xl">
               {product?.productName} Variant {indexRender}
             </Label>
@@ -55,7 +55,7 @@ const ProductPopup: React.FC<DetailsProps> = ({
             <div className="col-span-5 font-openSans">
               {new Intl.NumberFormat("en-US", {
                 style: "currency",
-                currency: "USD",
+                currency: "VND",
               }).format(details.displayPrice)}{" "}
             </div>
           </div>
@@ -75,27 +75,27 @@ const ProductPopup: React.FC<DetailsProps> = ({
       <div className="w-full flex justify-center items-center h-auto">
         {images.length > 0 && (
           <Carousel className="w-full max-w-sm">
-          <CarouselContent className="-ml-1">
-            {images.map((image, index) => (
-              <CarouselItem key={index} className="">
-                <div className="p-1">
-                  <Card>
-                    <CardContent className="flex aspect-square items-center justify-center p-6">
-                      <img
-                        src={image}
-                        className="w-full h-full object-contain"
-                      />
-                    </CardContent>
-                  </Card>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
+            <CarouselContent className="-ml-1">
+              {images.map((image, index) => (
+                <CarouselItem key={index} className="">
+                  <div className="p-1">
+                    <Card>
+                      <CardContent className="flex aspect-square items-center justify-center p-6">
+                        <img
+                          src={image}
+                          className="w-full h-full object-contain"
+                        />
+                      </CardContent>
+                    </Card>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
         )}
-        
+
       </div>
     </div>
   );
