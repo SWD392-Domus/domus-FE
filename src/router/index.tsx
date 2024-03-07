@@ -33,6 +33,8 @@ import StaffProfile from "./profile";
 import CreateProduct from "./staffCreateProduct";
 import Error403Page from "./403";
 import QuotationDetail from "./customerQuotationDetail";
+import StaffContract from "./staffQuotations";
+import StaffContractCreate from "./StaffContractCreate";
 
 const RouterComponent: React.FC = () => {
     const publicRoute = [
@@ -211,6 +213,13 @@ const RouterComponent: React.FC = () => {
         },
         {
             index: true,
+            path: "staff/quotations/:quotationId/versions/:versionId",
+            component: <StaffQuotationDetail />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
             path: "staff/products",
             component: <StaffProducts />,
             exact: true,
@@ -269,6 +278,20 @@ const RouterComponent: React.FC = () => {
             index: true,
             path: "staff/products/create",
             component: <ProductDetailsStaff />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/contracts",
+            component: <StaffContract />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/contracts/new",
+            component: <StaffContractCreate />,
             exact: true,
             restrict: true,
         },

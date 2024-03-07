@@ -94,6 +94,28 @@ export const quotationStaffApi = {
             }
         );
     },
+    getQuotationVersions: (id: string, token: string) => {
+        return get(
+            `/Quotations/${id}/revisions`,
+            {},
+            {
+                Authorization: `Bearer ${token}`,
+            }
+        );
+    },
+    getQuotationDetailByVersion: (
+        quotationId: string,
+        versionId: string,
+        token: string
+    ) => {
+        return get(
+            `/Quotations/${quotationId}/revisions/${versionId}`,
+            {},
+            {
+                Authorization: `Bearer ${token}`,
+            }
+        );
+    },
     getAllQuotations: () => {
         return get(`/Quotations`);
     },

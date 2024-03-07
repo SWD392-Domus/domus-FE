@@ -9,7 +9,7 @@ interface Props {
     // define your props here
 }
 
-const StaffContract: React.FC<Props> = () => {
+const StaffQuotations: React.FC<Props> = () => {
     const [quotations, setQuotations] = useState<QuotationsProps[]>([]);
     // const [loading, setLoading] = useState(true);
     const [searchField, setSearchField] = useState("quotationName");
@@ -58,7 +58,7 @@ const StaffContract: React.FC<Props> = () => {
 
     return (
         <div className="">
-            <div className="text-xl font-bold py-5">Quotation List</div>
+            <div className="text-xl font-bold py-5">Contract List</div>
             <DataTable
                 columns={columns}
                 data={quotations}
@@ -68,7 +68,7 @@ const StaffContract: React.FC<Props> = () => {
                 setDescending={setDescending}
             />
             <div className="flex justify-between text-sm font-medium">
-                <div className="">{totalItems} Quotations</div>
+                <div className="">{totalItems} Contracts</div>
                 <QuotationsPagination
                     totalPages={totalPages}
                     totalItems={totalItems}
@@ -82,4 +82,4 @@ const StaffContract: React.FC<Props> = () => {
     );
 };
 
-export default StaffContract;
+export default StaffQuotations;

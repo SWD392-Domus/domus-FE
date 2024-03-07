@@ -54,6 +54,12 @@ const components: {
         href: "/staff/profile",
         description: "Profile",
     },
+    {
+        title: "Contracts",
+        icon: BackpackIcon,
+        href: "/staff/contracts",
+        description: "Contracts",
+    },
 ];
 
 export default function NavigationMenuDemo() {
