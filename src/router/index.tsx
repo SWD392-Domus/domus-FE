@@ -106,23 +106,8 @@ const RouterComponent: React.FC = () => {
         },
         {
             index: true,
-            path: "customizepackage",
-            component: <CustomizePackage />,
-            exact: true,
-            restrict: true,
-        },
-        {
-            index: true,
             path: "otp",
             component: <OTP />,
-            exact: true,
-            restrict: true,
-        },
-
-        {
-            index: true,
-            path: "login",
-            component: <Login />,
             exact: true,
             restrict: true,
         },
@@ -130,13 +115,6 @@ const RouterComponent: React.FC = () => {
             index: true,
             path: "package",
             component: <PackageDetails />,
-            exact: true,
-            restrict: true,
-        },
-        {
-            index: true,
-            path: "customizepackage",
-            component: <CustomizePackage />,
             exact: true,
             restrict: true,
         },
@@ -230,13 +208,6 @@ const RouterComponent: React.FC = () => {
         },
         {
             index: true,
-            path: "staff/products",
-            component: <StaffProducts />,
-            exact: true,
-            restrict: true,
-        },
-        {
-            index: true,
             path: "staff/packages",
             component: <StaffPackages />,
             exact: true,
@@ -270,13 +241,13 @@ const RouterComponent: React.FC = () => {
             exact: true,
             restrict: true,
         },
-        // {
-        //   index: true,
-        //   path: "staff/products",
-        //   component: <StaffProducts />,
-        //   exact: true,
-        //   restrict: true,
-        // },
+        {
+            index: true,
+            path: "staff/products",
+            component: <StaffProducts />,
+            exact: true,
+            restrict: true,
+        },
         {
             index: true,
             path: "staff/products/:id",

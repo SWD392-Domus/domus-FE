@@ -12,7 +12,7 @@ interface Props {
 const StaffContract: React.FC<Props> = () => {
     const [quotations, setQuotations] = useState<QuotationsProps[]>([]);
     // const [loading, setLoading] = useState(true);
-    const [searchField, setSearchField] = useState("quotationName");
+    const [searchField, setSearchField] = useState("id");
     const [searchValue, setSearchValue] = useState("");
     const [sortField, setSortField] = useState("");
     const [descending, setDescending] = useState(false);
