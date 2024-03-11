@@ -106,7 +106,7 @@ const ProductDetailsStaff: React.FC = () => {
           <div className="flex p-10 h-auto">
             <ProductCard />
           </div>
-          <div className="flex p-10">
+          <div className="flex p-10 h-auto">
             <ProductDetailsSection />
           </div>
         </>

@@ -37,6 +37,7 @@ import StaffContract from "./staffQuotations";
 import StaffContractCreate from "./StaffContractCreate";
 import OTP from "./otp";
 import StaffContractDetail from "./StaffContractDetail";
+import Storage from "./storage";
 
 const RouterComponent: React.FC = () => {
     const publicRoute = [
@@ -308,6 +309,14 @@ const RouterComponent: React.FC = () => {
             index: true,
             path: "staff/contracts/:contractId",
             component: <StaffContractDetail />,
+
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/storage",
+            component: <Storage />,
             exact: true,
             restrict: true,
         },

@@ -33,13 +33,13 @@ export const columns: ColumnDef<QuotationsProps>[] = [
         enableSorting: false,
         enableHiding: false,
     },
-    {
-        accessorKey: "quotationName",
-        header: "Quotation Name",
-        cell: ({ row }) => {
-            return <h4> Quotation {row.index + 1}</h4>;
-        },
-    },
+    // {
+    //     accessorKey: "quotationName",
+    //     header: "Quotation Name",
+    //     cell: ({ row }) => {
+    //         return <h4> Quotation {row.index + 1}</h4>;
+    //     },
+    // },
     {
         accessorKey: "expireAt",
         header: "Expire At",
@@ -79,7 +79,7 @@ export const columns: ColumnDef<QuotationsProps>[] = [
         accessorKey: "totalPrice",
         header: () => <div className="text-left">Total Price</div>,
         cell: ({ row }) => {
-            const totalPrice = parseFloat(row.getValue("totalPrice")) * 1000;
+            const totalPrice = parseFloat(row.getValue("totalPrice"));
             const formatted = new Intl.NumberFormat("en-US", {
                 style: "currency",
                 currency: "VND",

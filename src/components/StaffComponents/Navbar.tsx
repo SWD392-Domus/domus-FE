@@ -7,6 +7,7 @@ import {
     GearIcon,
     BackpackIcon,
     PersonIcon,
+    LayersIcon,
 } from "@radix-ui/react-icons";
 import { IconProps } from "@radix-ui/react-icons/dist/types";
 
@@ -18,12 +19,6 @@ const components: {
     href: string;
     description: string;
 }[] = [
-    {
-        title: "Home",
-        icon: HomeIcon,
-        href: "/staff",
-        description: "Home",
-    },
     {
         title: "Quotation",
         icon: FileTextIcon,
@@ -59,6 +54,12 @@ const components: {
         icon: BackpackIcon,
         href: "/staff/contracts",
         description: "Contracts",
+    },
+    {
+        title: "Storage",
+        icon: LayersIcon,
+        href: "/staff/storage",
+        description: "Storage",
     },
 ];
 

@@ -107,4 +107,26 @@ export const productStaffApi = {
   updateProduct: (id: string, product: any, token: string) => {
     return put(`/Products/${id}`, product, {}, { Authorization: token });
   },
+  getAllImportProducts: (pageSize: number, pageIndex: number, SearchField: string,
+    SearchValue: string,SortField:string ,Descending: boolean,token: string) => {
+    return get(
+      `/storage/products?PageSize=${pageSize}&PageIndex=${pageIndex}&SearchField=${SearchField}&SearchValue=${SearchValue}&SortField=${SortField}&Descending=${Descending}`,
+      {}, 
+      { Authorization: token }
+    );
+  },
+  getRecentImportProducts: (pageSize: number, 
+    pageIndex: number,
+    descending: boolean,
+    // SearchField: string,
+    // SearchValue: string,
+    SortField: string,
+    token: string) => {
+    return get(
+      `/storage/products/prices?PageSize=${pageSize}&PageIndex=${pageIndex}&Descending=${descending}&SortField=${SortField}`,{}, { Authorization: token }
+    );
+  },
+  importProducts: (products: any, token: string) => {
+    return post(`/storage/products`, products, {}, { Authorization: token });
+  }
 };

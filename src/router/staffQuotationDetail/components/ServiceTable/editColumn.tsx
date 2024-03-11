@@ -30,7 +30,7 @@ export const editServiceColumns: ColumnDef<ServiceData>[] = [
                     {new Intl.NumberFormat("en-US", {
                         style: "currency",
                         currency: "VND",
-                    }).format(value * 1000)}
+                    }).format(value)}
                 </div>
             );
         },

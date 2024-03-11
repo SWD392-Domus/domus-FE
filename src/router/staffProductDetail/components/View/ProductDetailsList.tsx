@@ -19,7 +19,7 @@ const ProductDetailsList: React.FC = () => {
     const { productName } = product;
     return (
         <div
-            className="pt-2 ring-1 ring-border h-[250px] overflow-scroll
+            className="pt-2 ring-1 ring-border h-[auto] overflow-scroll
     md:h-[320px]
     "
         >

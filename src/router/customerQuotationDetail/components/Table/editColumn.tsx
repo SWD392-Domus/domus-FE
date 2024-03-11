@@ -14,11 +14,11 @@ export const data: QuotationDetailInfo[] = Array.from(
     (_, i) => ({
         id: `${i + 1}`,
         productName: `Product ${i + 1}`,
-        price: (i + 1) * 100000,
+        price: (i + 1),
         monetaryUnit: "VND",
         quantity: i + 2,
         quantityType: "EA",
-        priceSum: (i + 1) * 100000 * (i + 2),
+        priceSum: (i + 1) * (i + 2),
     })
 );
 export const editColums: ColumnDef<QuotationDetailInfo>[] = [
@@ -41,7 +41,7 @@ export const editColums: ColumnDef<QuotationDetailInfo>[] = [
                     {new Intl.NumberFormat("en-US", {
                         style: "currency",
                         currency: "VND",
-                    }).format(Number.parseFloat(value) * 1000)}
+                    }).format(Number.parseFloat(value))}
                 </div>
             );
         },

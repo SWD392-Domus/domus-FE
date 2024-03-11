@@ -16,7 +16,7 @@ export function RecentSales() {
                         olivia.martin@email.com
                     </p>
                 </div>
-                <div className="ml-auto font-medium">+$1,999.00</div>
+                <div className="ml-auto font-medium">+đ1,999.00</div>
             </div>
             <div className="flex items-center">
                 <Avatar className="flex h-9 w-9 items-center justify-center space-y-0 border">
@@ -31,7 +31,7 @@ export function RecentSales() {
                         jackson.lee@email.com
                     </p>
                 </div>
-                <div className="ml-auto font-medium">+$39.00</div>
+                <div className="ml-auto font-medium">+đ39.00</div>
             </div>
             <div className="flex items-center">
                 <Avatar className="h-9 w-9">
@@ -46,7 +46,7 @@ export function RecentSales() {
                         isabella.nguyen@email.com
                     </p>
                 </div>
-                <div className="ml-auto font-medium">+$299.00</div>
+                <div className="ml-auto font-medium">+đ299.00</div>
             </div>
             <div className="flex items-center">
                 <Avatar className="h-9 w-9">
@@ -61,7 +61,7 @@ export function RecentSales() {
                         will@email.com
                     </p>
                 </div>
-                <div className="ml-auto font-medium">+$99.00</div>
+                <div className="ml-auto font-medium">+đ99.00</div>
             </div>
             <div className="flex items-center">
                 <Avatar className="h-9 w-9">
@@ -76,7 +76,7 @@ export function RecentSales() {
                         sofia.davis@email.com
                     </p>
                 </div>
-                <div className="ml-auto font-medium">+$39.00</div>
+                <div className="ml-auto font-medium">+đ39.00</div>
             </div>
         </div>
     );

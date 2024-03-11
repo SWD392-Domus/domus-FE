@@ -99,23 +99,21 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
 
     const formSchema = z.object({
         name: z.string().nonempty({ message: "Name is required" }),
-        discount: z
-            .number({
-                required_error: "Discount is required",
-                invalid_type_error:
-                    "Discount must be a number between 0 and 100",
-            })
-            .lte(100)
-            .nonnegative(),
-
-        // pictures: z.any(),
+        // discount: z
+        //     .number({
+        //         required_error: "Discount is required",
+        //         invalid_type_error:
+        //             "Discount must be a number between 0 and 100",
+        //     })
+        //     .lte(100)
+        //     .nonnegative(),
     });
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: name,
-            discount: discount,
+            // discount: discount,
         },
     });
     async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -126,7 +124,8 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
         // formData.append("Images", values.pictures[0]);
 
         formData.append("Name", values.name);
-        formData.append("Discount", values.discount.toString());
+        formData.append("Discount", "0");
+        // formData.append("Discount", values.discount.toString());
         formData.append("Description", desValue);
 
         services.map((item) => {
@@ -213,7 +212,7 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
                                 />
                                 {/* Package Name Input End*/}
                                 {/* Package Discount Input Start */}
-                                <FormField
+                                {/* <FormField
                                     control={form.control}
                                     name="discount"
                                     render={({ field }) => (
@@ -233,7 +232,7 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
                                             <FormMessage />
                                         </FormItem>
                                     )}
-                                />
+                                /> */}
                                 {/* Package Discount Input End*/}
                                 {/* Package Name Input Start */}
 

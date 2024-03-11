@@ -67,7 +67,7 @@ export const columns: ColumnDef<ProductDetailProps>[] = [
         accessorKey: "displayPrice",
         header: "Display Price",
         cell: ({ row }) => {
-            return <h4>${row.original.displayPrice} </h4>;
+            return <h4>đ{row.original.displayPrice} </h4>;
         },
     },
 
