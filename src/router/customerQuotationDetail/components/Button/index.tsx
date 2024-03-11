@@ -9,9 +9,16 @@ import {
     DialogTrigger,
 } from "@/components/ui/Dialog";
 import { CheckIcon, XIcon, PencilIcon, SendIcon } from "lucide-react";
-import { editQuotation } from "../../usecase/editQuotation";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/Tooltip";
 import { toast } from "@/components/ui/Toast/use-toast";
 import { useNavigate } from "react-router-dom";
+import { editStatusQuotation } from "../../usecase/editStatusQuotation";
+import { Quotationstatus } from "../../constants";
 function onUpdate() {}
 
 function onDelete() {}
@@ -30,20 +37,27 @@ export const UpdateButton = () => {
         </Button>
     );
 };
-export const MakeContractButton = ({ id }: { id: string }) => {
+export const MakeContractButton = ({
+    id,
+    status,
+}: {
+    id: string;
+    status: string;
+}) => {
+    const getToolTipMessage = (satus: string) => {
+        if ((status = "Confirmed")) {
+            return "This Quotation have already been confirmed, please wait for the contract being sent to you";
+        } else if (status == "Requested") {
+            return "This Quotation have been sent, please wait for out staff to reply";
+        } else {
+            return "Click for confirming the quotation";
+        }
+    };
     const navigate = useNavigate(); // Initialize useHistory hook
     async function onMakeContract(id: string) {
-        const token = localStorage.getItem("Token") as string;
-        const data = {
-            customerId: null,
-            staffId: null,
-            status: "Confirmed",
-            expireAt: null,
-            productdetails: null,
-            services: null,
-        };
+        const data = { status: "Confirmed" };
         try {
-            const res = await editQuotation(id, token, data);
+            const res = await editStatusQuotation(id, data);
             if (res.status == 200 && res.data.isSuccess) {
                 toast({
                     variant: "success",
@@ -72,10 +86,22 @@ export const MakeContractButton = ({ id }: { id: string }) => {
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button className=" pl-2 bg-yellowCustom text-black hover:text-white">
-                    <CheckIcon className="h-3.5 pr-2 my-auto"></CheckIcon>
-                    Accept Quotation
-                </Button>
+                <TooltipProvider>
+                    <Tooltip>
+                        <TooltipTrigger>
+                            <Button
+                                className=" pl-2 bg-yellowCustom text-black hover:text-white"
+                                disabled={status != Quotationstatus.Negotiating}
+                            >
+                                <CheckIcon className="h-3.5 pr-2 my-auto"></CheckIcon>
+                                Accept Quotation
+                            </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>{getToolTipMessage(status)}</p>
+                        </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[800px]">
                 <DialogHeader>

@@ -1,8 +1,5 @@
 import { changeProfileService } from "../services";
 
-export const changeProfile = (
-    token: string,
-    data: HTMLElement | null | undefined
-) => {
+export const changeProfile = (token: string, data: any) => {
     return changeProfileService(token, data);
 };

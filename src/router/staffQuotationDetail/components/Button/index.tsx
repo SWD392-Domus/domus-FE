@@ -12,7 +12,7 @@ import { CheckIcon, XIcon, PencilIcon, SendIcon } from "lucide-react";
 import { useSelector } from "react-redux";
 import selector from "../../slice/selector";
 import { ProductDetailProps } from "../../types";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function onUpdate() {}
 function onMakeContract() {}
@@ -32,9 +32,30 @@ export const UpdateButton = () => {
         </Button>
     );
 };
-export const MakeContractButton = () => {
+export const MakeContractButton = ({
+    status,
+    versions,
+}: {
+    status: string;
+    versions: any[];
+}) => {
+    const navigate = useNavigate();
+    let { quotationId, versionId } = useParams();
+    if (!versionId) {
+        versionId = versions[versions.length - 1].id;
+    }
+
     return (
-        <Button onClick={onMakeContract} className="bg-black pl-2">
+        <Button
+            onClick={() =>
+                navigate(
+                    `/staff/contract/new/${quotationId}/version/${versionId}`,
+                    { replace: true }
+                )
+            }
+            className="bg-black pl-2"
+            disabled={status != "Confirmed"}
+        >
             {" "}
             <CheckIcon className="h-3.5 pr-2 my-auto"></CheckIcon>Make Contract
         </Button>

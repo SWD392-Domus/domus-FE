@@ -24,7 +24,7 @@ import { Badge } from "@/components/ui/Badge";
 import QuotationEdit from "./components/QuotationEdit";
 
 import Negotiation from "./components/Neogitation";
-import { Quotationstatus } from "./constants";
+import Loading from "@/components/PublicComponents/Loading";
 
 interface Props {
     // define your props here
@@ -35,7 +35,6 @@ export interface CellValues {
     };
 }
 const QuotationDetail: React.FC<Props> = () => {
-    const navigate = useNavigate();
     const [isEdit, setEdit] = useState(false);
     const { quotationId } = useParams();
     const dispatch = useDispatch();
@@ -114,7 +113,10 @@ const QuotationDetail: React.FC<Props> = () => {
                             <Badge className="text-sm">{status}</Badge>
                         </div>
 
-                        <MakeContractButton id={id}></MakeContractButton>
+                        <MakeContractButton
+                            id={id}
+                            status={status}
+                        ></MakeContractButton>
                         <div className="staff-assigned-info my-7">
                             <div className="mb-2">Assigned Staff</div>
                             <div
@@ -248,11 +250,11 @@ const QuotationDetail: React.FC<Props> = () => {
                                 </div>
                             </div>
                             <div className="action-buttons mb-2 flex flex-row justify-center space-x-2">
-                                {status == Quotationstatus.Negotiating && (
-                                    <MakeContractButton
-                                        id={id}
-                                    ></MakeContractButton>
-                                )}
+                                <MakeContractButton
+                                    id={id}
+                                    status={status}
+                                ></MakeContractButton>
+
                                 <DeleteButton></DeleteButton>
                             </div>
                         </div>
@@ -264,6 +266,7 @@ const QuotationDetail: React.FC<Props> = () => {
                     </div>
                 </div>
             )}
+            {!updated && <Loading />}
         </>
     );
 };

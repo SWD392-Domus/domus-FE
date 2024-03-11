@@ -35,6 +35,8 @@ import Error403Page from "./403";
 import QuotationDetail from "./customerQuotationDetail";
 import StaffContract from "./staffQuotations";
 import StaffContractCreate from "./StaffContractCreate";
+import OTP from "./otp";
+import StaffContractDetail from "./StaffContractDetail";
 
 const RouterComponent: React.FC = () => {
     const publicRoute = [
@@ -105,6 +107,13 @@ const RouterComponent: React.FC = () => {
             index: true,
             path: "customizepackage",
             component: <CustomizePackage />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "otp",
+            component: <OTP />,
             exact: true,
             restrict: true,
         },
@@ -290,8 +299,15 @@ const RouterComponent: React.FC = () => {
         },
         {
             index: true,
-            path: "staff/contracts/new",
+            path: "staff/contract/new/:quotationId/version/:versionId",
             component: <StaffContractCreate />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/contracts/:contractId",
+            component: <StaffContractDetail />,
             exact: true,
             restrict: true,
         },

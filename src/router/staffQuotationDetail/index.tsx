@@ -81,7 +81,7 @@ export interface VersionType {
 const QuotationDetail: React.FC<Props> = () => {
     const [isLoading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const [verisons, setVersions] = useState<VersionType[]>([]);
+    const [versions, setVersions] = useState<VersionType[]>([]);
     const [isUpdate, setUpdate] = useState(false);
     const [isEditTable, setEditTable] = useState(false);
     const [isEditService, setEditService] = useState(false);
@@ -319,7 +319,12 @@ const QuotationDetail: React.FC<Props> = () => {
                             <Badge className="text-sm">{status}</Badge>
                         </div>
 
-                        <MakeContractButton></MakeContractButton>
+                        {versions && (
+                            <MakeContractButton
+                                versions={versions}
+                                status={status}
+                            ></MakeContractButton>
+                        )}
                         <div className="staff-assigned-info my-7">
                             <div className="mb-2">Assigned Staff</div>
                             <div
@@ -349,18 +354,18 @@ const QuotationDetail: React.FC<Props> = () => {
                                         <div>
                                             Last Update:{" "}
                                             {new Date(
-                                                verisons[
-                                                    verisons.length - 1
+                                                versions[
+                                                    versions.length - 1
                                                 ].createdAt
                                             ).toLocaleDateString()}{" "}
                                             {new Date(
-                                                verisons[
-                                                    verisons.length - 1
+                                                versions[
+                                                    versions.length - 1
                                                 ].createdAt
                                             ).toLocaleTimeString()}
                                         </div>
                                     </div>
-                                    {verisons && (
+                                    {versions && (
                                         <Select
                                             onValueChange={(value) => {
                                                 if (value != "back") {
@@ -376,6 +381,7 @@ const QuotationDetail: React.FC<Props> = () => {
                                                     );
                                                 }
                                             }}
+                                            defaultValue={versionId}
                                         >
                                             <SelectTrigger className="w-[180px]">
                                                 <SelectValue placeholder="Select a Version" />
@@ -389,7 +395,7 @@ const QuotationDetail: React.FC<Props> = () => {
                                                         Back to Negotiating
                                                         Quotation
                                                     </SelectItem>
-                                                    {verisons.map(
+                                                    {versions.map(
                                                         (
                                                             version: VersionType,
                                                             index: number
@@ -402,14 +408,14 @@ const QuotationDetail: React.FC<Props> = () => {
                                                                     version.createdAt
                                                                 ).toISOString() +
                                                                 new Date(
-                                                                    verisons[
-                                                                        verisons.length -
+                                                                    versions[
+                                                                        versions.length -
                                                                             1
                                                                     ].createdAt
                                                                 ).toLocaleTimeString();
                                                             if (
                                                                 index ==
-                                                                verisons.length -
+                                                                versions.length -
                                                                     1
                                                             ) {
                                                                 name =
@@ -419,8 +425,8 @@ const QuotationDetail: React.FC<Props> = () => {
                                                                         version.createdAt
                                                                     ).toISOString() +
                                                                     new Date(
-                                                                        verisons[
-                                                                            verisons.length -
+                                                                        versions[
+                                                                            versions.length -
                                                                                 1
                                                                         ].createdAt
                                                                     ).toLocaleTimeString();
@@ -522,7 +528,7 @@ const QuotationDetail: React.FC<Props> = () => {
                                     />
                                 )}
 
-                                {!isEdit && (
+                                {!isEdit && !versionId && (
                                     <Button
                                         variant={"default"}
                                         className="w-[80px]"
@@ -535,16 +541,19 @@ const QuotationDetail: React.FC<Props> = () => {
                             <div className="detail-table">
                                 <div className="mt-7 text-xl font-semibold flex items-center">
                                     <h1 className="mr-4">Details</h1>
-                                    <Button
-                                        variant={"default"}
-                                        onClick={() =>
-                                            setEditTable(!isEditTable)
-                                        }
-                                        className="mr-2"
-                                    >
-                                        {isEditTable ? "Cancel" : "Edit"}
-                                    </Button>
-                                    {isEditTable && (
+                                    {!versionId && (
+                                        <Button
+                                            variant={"default"}
+                                            onClick={() =>
+                                                setEditTable(!isEditTable)
+                                            }
+                                            className="mr-2"
+                                        >
+                                            {isEditTable ? "Cancel" : "Edit"}
+                                        </Button>
+                                    )}
+
+                                    {isEditTable && !versionId && (
                                         <Button
                                             variant={"default"}
                                             onClick={handleSave}
@@ -581,16 +590,18 @@ const QuotationDetail: React.FC<Props> = () => {
                             <div className="detail-table">
                                 <div className="mt-7 text-xl font-semibold  flex items-center">
                                     <h1 className="mr-4">Services</h1>
-                                    <Button
-                                        variant={"default"}
-                                        onClick={() =>
-                                            setEditService(!isEditService)
-                                        }
-                                        className="mr-2"
-                                    >
-                                        {isEditService ? "Cancel" : "Edit"}
-                                    </Button>
-                                    {isEditService && (
+                                    {!versionId && (
+                                        <Button
+                                            variant={"default"}
+                                            onClick={() =>
+                                                setEditService(!isEditService)
+                                            }
+                                            className="mr-2"
+                                        >
+                                            {isEditService ? "Cancel" : "Edit"}
+                                        </Button>
+                                    )}
+                                    {isEditService && !versionId && (
                                         <Button
                                             variant={"default"}
                                             onClick={handleSaveService}
@@ -715,7 +726,12 @@ const QuotationDetail: React.FC<Props> = () => {
                                         </AlertDialogFooter>
                                     </AlertDialogContent>
                                 </AlertDialog>
-                                <MakeContractButton></MakeContractButton>
+                                {versions && (
+                                    <MakeContractButton
+                                        versions={versions}
+                                        status={status}
+                                    ></MakeContractButton>
+                                )}
                             </div>
                         </div>
                         <Negotiation

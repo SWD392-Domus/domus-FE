@@ -41,14 +41,13 @@ interface Image {
 }
 const StaffProfile: React.FC<Props> = (props) => {
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values.fullName);
         const formData = new FormData();
         formData.append("FullName", values.fullName);
         formData.append("Gender", sex);
         formData.append("Address", values.address);
         formData.append("PhoneNumber", values.phoneNumber);
         if (uploadedImage?.isUpload) {
-            formData.append("ProfileImage", uploadedImage.file);
+            formData.append("ProfileImage", uploadedImage.file as any);
         }
         const token = localStorage.getItem("Token");
         const res = await changeProfile(token as string, formData);
@@ -75,13 +74,20 @@ const StaffProfile: React.FC<Props> = (props) => {
             toastError("Fail to fetch Information");
         } else {
             if (res.data.isSuccess) {
-                const { fullName, address, phoneNumber, email, profileImage } =
-                    res.data.data;
+                const {
+                    fullName,
+                    address,
+                    phoneNumber,
+                    email,
+                    profileImage,
+                    role,
+                } = res.data.data;
                 form.setValue("fullName", fullName);
                 form.setValue("address", address);
                 form.setValue("phoneNumber", phoneNumber);
                 form.setValue("email", email);
                 setProfile(res.data.data);
+                setRole(role);
                 setUploadedImage({
                     file: null,
                     imageUrl: profileImage,
@@ -126,7 +132,12 @@ const StaffProfile: React.FC<Props> = (props) => {
             address: "",
         },
     });
+    const { register, handleSubmit, watch } = form;
+    const watchedValues = watch(); // Watch all fields
 
+    useEffect(() => {
+        // This will run every time any watched value changes
+    }, [watchedValues]);
     return (
         <Form {...form}>
             <form
@@ -150,21 +161,23 @@ const StaffProfile: React.FC<Props> = (props) => {
                         </div>
                     </div>
 
-                    <h1 className="font-sans text-2xl mb-2">Nguyen Duc Bao</h1>
+                    <h1 className="font-sans text-2xl mb-2">
+                        {form.getValues("fullName")}
+                    </h1>
 
                     <h2 className="font-sans text-m mb-2">
-                        nguyenducbaodh3@gmail.com
+                        {form.getValues("email")}
                     </h2>
                     <div className="flex items-center  mb-2">
                         <Label className=" mr-2">Phone: </Label>
                         <p className="font-sans text-sm text-center">
-                            0838631706
+                            {form.getValues("phoneNumber")}
                         </p>
                     </div>
                     <div className="flex items-center  mb-2">
                         <Label className=" mr-2">Role: </Label>
                         <p className="font-sans text-sm text-center font-bold">
-                            Staff
+                            {role}
                         </p>
                     </div>
                     <Button type="submit">Edit</Button>

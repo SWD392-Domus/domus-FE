@@ -23,27 +23,22 @@ import {
     PaperPlaneIcon,
     PlusIcon,
 } from "@radix-ui/react-icons";
+
 import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+
 import { z } from "zod";
 import { DataTable } from "./components/ProductTable";
 import { column } from "./components/ProductTable/column";
+import { fakeData, serviceFakeData } from "./constants";
 import { serviceColums } from "./components/ServiceTable/column";
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/Dialog";
+
 interface Props {
     // define your props here
 }
 
 import UserList from "./components/UserList";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getQuotationById } from "./usecase/getQuotationById";
 import {
     ProductDetailProps,
@@ -51,7 +46,7 @@ import {
 } from "../staffQuotationDetail/types";
 import { QuotationDetailInfo } from "../staffQuotationDetail/slice";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
-import { createContract } from "./usecase/createContract";
+import { getContractDetail } from "./usecase/getContractDetail";
 import { toast } from "@/components/ui/Toast/use-toast";
 
 type User = {
@@ -65,30 +60,41 @@ type User = {
     profileImage: string;
 };
 
-const StaffContractCreate: React.FC<Props> = (props) => {
+const StaffContractDetail: React.FC<Props> = (props) => {
     const signatureRef = useRef(null);
     const [open, setOpen] = useState(false);
     const [products, setProducts] = useState<QuotationDetailInfo[]>([]);
     const [services, setServices] = useState<ServiceProps[]>([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const [selectedUser, setSelectedUser] = useState<User>();
-    const [contracter, setContracter] = useState<User>();
-    const { quotationId, versionId } = useParams();
-    const navigate = useNavigate();
+    const { contractId } = useParams();
 
     useEffect(() => {
-        const fetchData = async () => {
-            const res = await getQuotationById(
-                quotationId as string,
-                versionId as string
-            );
-            setProducts(res.data.data.products);
-            setServices(res.data.data.services);
-            setSelectedUser(res.data.data.customer);
-            setContracter(res.data.data.staff);
-            setTotalPrice(res.data.data.totalPrice);
+        // const fetchData = async () => {
+        //     const res = await getQuotationById(quotationId as string);
+        //     setProducts(res.data.data.products);
+        //     setServices(res.data.data.services);
+        //     setSelectedUser(res.data.data.customer);
+        //     setTotalPrice(res.data.data.totalPrice);
+        // };
+        // fetchData();
+        const fetchContract = async () => {
+            const res = await getContractDetail(contractId as string);
+
+            if (res.data.isSuccess) {
+                const { name, description } = res.data.data;
+                console.log(name);
+                form.setValue("contractName", name);
+                form.setValue("description", description);
+            } else {
+                toast({
+                    variant: "destructive",
+                    title: res.data.messages[0].content,
+                    description: "There was a problem with your request.",
+                });
+            }
         };
-        fetchData();
+        fetchContract();
     }, []);
     // const clearSignature = () => {
     //     signatureRef.current.clear();
@@ -125,45 +131,10 @@ const StaffContractCreate: React.FC<Props> = (props) => {
         return totalPrice;
     }
     let status = "create";
-    const onSubmit = async () => {
-        const data = {
-            name: form.getValues("contractName"),
-            description: form.getValues("description"),
-            startDate: new Date().toISOString(),
-            attachments: "",
-            clientId: selectedUser?.id,
-            contractorId: contracter?.id,
-            quotationRevisionId: versionId,
-            signature: "",
-        };
-        try {
-            const res = await createContract(data);
-            if (res.data.isSuccess) {
-                toast({
-                    variant: "success",
-                    title: "Create Contract Sucessfully",
-                    description: "Please try again later.",
-                });
-                navigate("/staff/contracts", { replace: true });
-            } else {
-                toast({
-                    variant: "destructive",
-                    title: res.data.messages[0],
-                    description: "Please try again later.",
-                });
-            }
-        } catch {
-            toast({
-                variant: "destructive",
-                title: "Action Unsucessfully.",
-                description: "Something was wrong please try again later.",
-            });
-        }
-    };
-
+    const onSubmit = () => {};
     return (
         <Card className="w-full flex flex-col justify-center items-center border mt-4">
-            <h1 className="text-4xl">Create Contract</h1>
+            <h1 className="text-4xl">Contract Detail</h1>
             <div className="mt-4 w-full justify-end flex">
                 <Tabs defaultValue="create" className="w-[400px]">
                     <TabsList>
@@ -498,44 +469,10 @@ const StaffContractCreate: React.FC<Props> = (props) => {
                         </div>
                     </div> */}
                     <div className="flex justify-center">
-                        <Dialog>
-                            <DialogTrigger asChild>
-                                <Button className="flex">
-                                    <PaperPlaneIcon className="mr-2" />
-                                    Send
-                                </Button>
-                            </DialogTrigger>
-                            <DialogContent className="sm:max-w-[800px]">
-                                <DialogHeader>
-                                    <DialogTitle>Contract Creation</DialogTitle>
-                                    <DialogDescription>
-                                        <h1 className="mt-4 mb-4 text-black">
-                                            Are you sure you want to create this
-                                            <strong> contract ?</strong>
-                                        </h1>
-                                        <h1 className="mt-4 mb-4 text-black">
-                                            This will sent a contract to the
-                                            client through the client through
-                                            this
-                                            <strong> app and Email.</strong>
-                                            Please contact the client to
-                                            fullfill the contract soon .
-                                        </h1>
-                                    </DialogDescription>
-                                </DialogHeader>
-                                <DialogFooter>
-                                    <Button className="bg-zinc-500">
-                                        Cancel
-                                    </Button>
-                                    <Button
-                                        onClick={onSubmit}
-                                        className="bg-yellowCustom text-black hover:text-white"
-                                    >
-                                        Confirm
-                                    </Button>
-                                </DialogFooter>
-                            </DialogContent>
-                        </Dialog>
+                        <Button className="flex">
+                            <PaperPlaneIcon className="mr-2" />
+                            Send
+                        </Button>
                     </div>
                 </form>
             </Form>
@@ -543,4 +480,4 @@ const StaffContractCreate: React.FC<Props> = (props) => {
     );
 };
 
-export default StaffContractCreate;
+export default StaffContractDetail;
