@@ -1,3 +1,4 @@
+import { stringify } from "querystring";
 import { get, post, put, remove } from "./ApiCaller";
 
 export const quotationStaffApi = {
@@ -90,12 +91,40 @@ export const quotationStaffApi = {
             `/Quotations/${id}`,
             {},
             {
-                Authorization: token,
+                Authorization: `Bearer ${token}`,
             }
         );
     },
-    getAllQuotations: () => {
-        return get(`/Quotations`);
+    getQuotationVersions: (id: string, token: string) => {
+        return get(
+            `/Quotations/${id}/revisions`,
+            {},
+            {
+                Authorization: `Bearer ${token}`,
+            }
+        );
+    },
+    getQuotationDetailByVersion: (
+        quotationId: string,
+        versionId: string,
+        token: string
+    ) => {
+        return get(
+            `/Quotations/${quotationId}/revisions/${versionId}`,
+            {},
+            {
+                Authorization: `Bearer ${token}`,
+            }
+        );
+    },
+    getAllQuotations: (token: string) => {
+        return get(
+            `/Quotations`,
+            {},
+            {
+                Authorization: `Bearer ${token}`,
+            }
+        );
     },
     editQuotation: (id: string, token: string, data: any) => {
         return put(
@@ -116,6 +145,14 @@ export const quotationStaffApi = {
     getChangelog: (id: string, token: string) => {
         return get(
             `/Quotations/${id}/negotiations`,
+            {},
+            { Authorization: `Bearer ${token}` }
+        );
+    },
+    editQuotationStatus: (id: string, data: any, token: string) => {
+        return put(
+            `/Quotations/${id}/status`,
+            data, // Wrap data in double quotes to match the provided cURL request
             {},
             { Authorization: `Bearer ${token}` }
         );

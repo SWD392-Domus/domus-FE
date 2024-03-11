@@ -69,7 +69,7 @@ export function RegisterForm({ className, ...props }: UserAuthFormProps) {
     });
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        const res = await loginApi.login(values.email, values.password);
+        const res = await loginApi.register(values.email, values.password);
         if (res.status !== 200) {
             toastError("Something Wrong");
         } else {
@@ -79,7 +79,7 @@ export function RegisterForm({ className, ...props }: UserAuthFormProps) {
                 console.log(data);
                 const token = data.data.accessToken;
                 localStorage.setItem("Token", token);
-                navigate("/home");
+                // navigate("/home");
             } else {
                 for (let mess of data.messages) {
                     toastError(mess.content);

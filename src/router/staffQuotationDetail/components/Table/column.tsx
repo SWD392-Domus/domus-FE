@@ -25,13 +25,24 @@ export const column: ColumnDef<QuotationDetailInfo>[] = [
     {
         accessorKey: "productName",
         header: "Product Name",
+        cell: ({ row }) => {
+            const value: string = row.getValue("productName");
+            const id: string = row.original.id;
+            console.log(id);
+
+            return (
+                <div className="text-left font-medium">
+                    {value} #{id.slice(0, 3)}
+                </div>
+            );
+        },
     },
     {
         accessorKey: "price",
         header: "Display Price",
         cell: ({ row }) => {
             const value: string = row.getValue("price");
-            console.log(value);
+
             return (
                 <div className="text-left font-medium">
                     {new Intl.NumberFormat("en-US", {

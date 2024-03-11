@@ -9,7 +9,7 @@ interface Props {
     // define your props here
 }
 
-const StaffQuotations: React.FC<Props> = () => {
+const StaffContract: React.FC<Props> = () => {
     const [quotations, setQuotations] = useState<QuotationsProps[]>([]);
     // const [loading, setLoading] = useState(true);
     const [searchField, setSearchField] = useState("quotationName");
@@ -82,4 +82,4 @@ const StaffQuotations: React.FC<Props> = () => {
     );
 };
 
-export default StaffQuotations;
+export default StaffContract;

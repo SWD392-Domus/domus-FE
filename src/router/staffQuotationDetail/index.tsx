@@ -52,8 +52,19 @@ import {
     AlertDialogTrigger,
 } from "@/components/ui/AlertDialog";
 import { deleteQuotation } from "../staffQuotations/usecase";
-import { quotationStaffApi } from "@/utils/api/QuotationApi";
 
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/Select";
+import { getQuotationRevisions } from "./service/getQuotationRevisions";
+import { getQuotationDetailByVersionService } from "./service/getQuotationByVersionService";
+import Loading from "@/components/PublicComponents/Loading";
 interface Props {
     // define your props here
 }
@@ -62,14 +73,22 @@ export interface CellValues {
         [key: string]: string;
     };
 }
+export interface VersionType {
+    id: string;
+    version: number;
+    createdAt: string;
+}
 const QuotationDetail: React.FC<Props> = () => {
+    const [isLoading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const [versions, setVersions] = useState<VersionType[]>([]);
     const [isUpdate, setUpdate] = useState(false);
     const [isEditTable, setEditTable] = useState(false);
     const [isEditService, setEditService] = useState(false);
     const [isEdit, setEdit] = useState(false);
-    const { quotationId } = useParams();
+    const { quotationId, versionId } = useParams();
     const dispatch = useDispatch();
+
     const id: string = useSelector(selector.id);
     const customer: any = useSelector(selector.customer);
     const staff: any = useSelector(selector.staff);
@@ -161,17 +180,28 @@ const QuotationDetail: React.FC<Props> = () => {
     };
     useEffect(() => {
         let isMounted = true;
-
+        setUpdated(false);
         const fetchDataAndUpdateCellValues = async () => {
             if (quotationId && isMounted) {
+                const token = localStorage.getItem("Token");
                 try {
-                    const response = await getQuotationById(quotationId);
+                    var response;
+                    if (versionId) {
+                        response = await getQuotationDetailByVersionService(
+                            quotationId,
+                            versionId,
+                            token as string
+                        );
+                    } else {
+                        response = await getQuotationById(quotationId);
+                    }
 
                     if (response) {
                         dispatch(actions.setQuotation(response));
                         setOriginalPrice(response.totalPrice);
                         dispatch(actions.getQuotationInfo());
                         setUpdated(true);
+                        setLoading(false);
                         const fetchedProducts: ProductDetailProps[] =
                             response.products;
                         const fetchedServices: ServiceProps[] =
@@ -202,6 +232,16 @@ const QuotationDetail: React.FC<Props> = () => {
                 }
             }
         };
+        const fetchVersions = async () => {
+            const token = localStorage.getItem("Token");
+            const res = await getQuotationRevisions(
+                quotationId as string,
+                token as string
+            );
+
+            setVersions(res.data.data);
+        };
+        fetchVersions();
 
         fetchDataAndUpdateCellValues();
 
@@ -209,7 +249,7 @@ const QuotationDetail: React.FC<Props> = () => {
         return () => {
             isMounted = false;
         };
-    }, [quotationId]);
+    }, [quotationId, versionId]);
     const handleSave = () => {
         function validateCellValues(cellValues: CellValues): boolean {
             for (let key in cellValues) {
@@ -279,7 +319,12 @@ const QuotationDetail: React.FC<Props> = () => {
                             <Badge className="text-sm">{status}</Badge>
                         </div>
 
-                        <MakeContractButton></MakeContractButton>
+                        {versions && (
+                            <MakeContractButton
+                                versions={versions}
+                                status={status}
+                            ></MakeContractButton>
+                        )}
                         <div className="staff-assigned-info my-7">
                             <div className="mb-2">Assigned Staff</div>
                             <div
@@ -287,7 +332,7 @@ const QuotationDetail: React.FC<Props> = () => {
                             "
                             >
                                 <Avatar className="mr-2">
-                                    <AvatarImage src={staff.profileImage} />
+                                    {/* <AvatarImage src={staff.profileImage} /> */}
                                     <AvatarFallback>Staff</AvatarFallback>
                                 </Avatar>
 
@@ -300,9 +345,112 @@ const QuotationDetail: React.FC<Props> = () => {
                     <div className="right-side-2 basis-2/3">
                         <div className="border-solid border-b-2 border-zinc-400">
                             <div className="general-info flex flex-col items-center">
-                                <div className="my-7 text-2xl font-semibold w-full">
-                                    Quotation - {id}
+                                <div className="flex justify-between items-center w-full p-5">
+                                    {" "}
+                                    <div>
+                                        <div className="my-7 text-2xl font-semibold w-full">
+                                            Quotation #{id.slice(0, 3)}
+                                        </div>
+                                        <div>
+                                            Last Update:{" "}
+                                            {new Date(
+                                                versions[
+                                                    versions.length - 1
+                                                ].createdAt
+                                            ).toLocaleDateString()}{" "}
+                                            {new Date(
+                                                versions[
+                                                    versions.length - 1
+                                                ].createdAt
+                                            ).toLocaleTimeString()}
+                                        </div>
+                                    </div>
+                                    {versions && (
+                                        <Select
+                                            onValueChange={(value) => {
+                                                if (value != "back") {
+                                                    navigate(
+                                                        `/staff/quotations/${quotationId}/versions/${value}`,
+                                                        {
+                                                            replace: true,
+                                                        }
+                                                    );
+                                                } else {
+                                                    navigate(
+                                                        `/staff/quotations/${quotationId}`
+                                                    );
+                                                }
+                                            }}
+                                            defaultValue={versionId}
+                                        >
+                                            <SelectTrigger className="w-[180px]">
+                                                <SelectValue placeholder="Select a Version" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectGroup>
+                                                    <SelectLabel>
+                                                        Versions
+                                                    </SelectLabel>
+                                                    <SelectItem value={"back"}>
+                                                        Back to Negotiating
+                                                        Quotation
+                                                    </SelectItem>
+                                                    {versions.map(
+                                                        (
+                                                            version: VersionType,
+                                                            index: number
+                                                        ) => {
+                                                            let name =
+                                                                "Version " +
+                                                                version.version +
+                                                                " " +
+                                                                new Date(
+                                                                    version.createdAt
+                                                                ).toISOString() +
+                                                                new Date(
+                                                                    versions[
+                                                                        versions.length -
+                                                                            1
+                                                                    ].createdAt
+                                                                ).toLocaleTimeString();
+                                                            if (
+                                                                index ==
+                                                                versions.length -
+                                                                    1
+                                                            ) {
+                                                                name =
+                                                                    "Current version " +
+                                                                    " " +
+                                                                    new Date(
+                                                                        version.createdAt
+                                                                    ).toISOString() +
+                                                                    new Date(
+                                                                        versions[
+                                                                            versions.length -
+                                                                                1
+                                                                        ].createdAt
+                                                                    ).toLocaleTimeString();
+                                                            }
+                                                            return (
+                                                                <SelectItem
+                                                                    key={
+                                                                        version.id
+                                                                    }
+                                                                    value={
+                                                                        version.id
+                                                                    }
+                                                                >
+                                                                    {name}
+                                                                </SelectItem>
+                                                            );
+                                                        }
+                                                    )}
+                                                </SelectGroup>
+                                            </SelectContent>
+                                        </Select>
+                                    )}
                                 </div>
+
                                 {!isEdit ? (
                                     <div className="flex flex-row flex-wrap w-full">
                                         <div className="left-side-3 basis-1/3 ">
@@ -380,7 +528,7 @@ const QuotationDetail: React.FC<Props> = () => {
                                     />
                                 )}
 
-                                {!isEdit && (
+                                {!isEdit && !versionId && (
                                     <Button
                                         variant={"default"}
                                         className="w-[80px]"
@@ -393,16 +541,19 @@ const QuotationDetail: React.FC<Props> = () => {
                             <div className="detail-table">
                                 <div className="mt-7 text-xl font-semibold flex items-center">
                                     <h1 className="mr-4">Details</h1>
-                                    <Button
-                                        variant={"default"}
-                                        onClick={() =>
-                                            setEditTable(!isEditTable)
-                                        }
-                                        className="mr-2"
-                                    >
-                                        {isEditTable ? "Cancel" : "Edit"}
-                                    </Button>
-                                    {isEditTable && (
+                                    {!versionId && (
+                                        <Button
+                                            variant={"default"}
+                                            onClick={() =>
+                                                setEditTable(!isEditTable)
+                                            }
+                                            className="mr-2"
+                                        >
+                                            {isEditTable ? "Cancel" : "Edit"}
+                                        </Button>
+                                    )}
+
+                                    {isEditTable && !versionId && (
                                         <Button
                                             variant={"default"}
                                             onClick={handleSave}
@@ -439,16 +590,18 @@ const QuotationDetail: React.FC<Props> = () => {
                             <div className="detail-table">
                                 <div className="mt-7 text-xl font-semibold  flex items-center">
                                     <h1 className="mr-4">Services</h1>
-                                    <Button
-                                        variant={"default"}
-                                        onClick={() =>
-                                            setEditService(!isEditService)
-                                        }
-                                        className="mr-2"
-                                    >
-                                        {isEditService ? "Cancel" : "Edit"}
-                                    </Button>
-                                    {isEditService && (
+                                    {!versionId && (
+                                        <Button
+                                            variant={"default"}
+                                            onClick={() =>
+                                                setEditService(!isEditService)
+                                            }
+                                            className="mr-2"
+                                        >
+                                            {isEditService ? "Cancel" : "Edit"}
+                                        </Button>
+                                    )}
+                                    {isEditService && !versionId && (
                                         <Button
                                             variant={"default"}
                                             onClick={handleSaveService}
@@ -573,7 +726,12 @@ const QuotationDetail: React.FC<Props> = () => {
                                         </AlertDialogFooter>
                                     </AlertDialogContent>
                                 </AlertDialog>
-                                <MakeContractButton></MakeContractButton>
+                                {versions && (
+                                    <MakeContractButton
+                                        versions={versions}
+                                        status={status}
+                                    ></MakeContractButton>
+                                )}
                             </div>
                         </div>
                         <Negotiation
@@ -584,6 +742,8 @@ const QuotationDetail: React.FC<Props> = () => {
                     </div>
                 </div>
             )}
+
+            {!updated && <Loading />}
         </>
     );
 };

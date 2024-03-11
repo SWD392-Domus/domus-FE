@@ -1,11 +1,7 @@
-import { EditDataTable } from "./components/Table";
-import { editColums } from "./components/Table/editColumn";
 import {
     EnvelopeClosedIcon,
     HomeIcon,
     PersonIcon,
-    ChatBubbleIcon,
-    Pencil1Icon,
 } from "@radix-ui/react-icons";
 
 import { DeleteButton, MakeContractButton } from "./components/Button";
@@ -18,22 +14,17 @@ import selector from "./slice/selector";
 import { actions } from "./slice";
 import { Avatar, AvatarFallback } from "@/components/ui/Avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
-
-import { Button } from "@/components/ui/Button/Button";
 import { DataTable } from "./components/ServiceTable";
 import { column } from "./components/Table/column";
-import { EditTableService } from "./components/ServiceTable/editTableService";
+
 import { serviceColums } from "./components/ServiceTable/column";
-import { editServiceColumns } from "./components/ServiceTable/editColumn";
+
 import { ProductDetailProps, ServiceProps } from "./types";
 import { Badge } from "@/components/ui/Badge";
 import QuotationEdit from "./components/QuotationEdit";
-import { editQuotation } from "./usecase/editQuotation";
-import { PencilIcon } from "lucide-react";
-import { toast } from "@/components/ui/Toast/use-toast";
-import { pushNegotitaionService } from "./service";
+
 import Negotiation from "./components/Neogitation";
-import { toastError } from "@/components/Toast";
+import Loading from "@/components/PublicComponents/Loading";
 
 interface Props {
     // define your props here
@@ -44,9 +35,6 @@ export interface CellValues {
     };
 }
 const QuotationDetail: React.FC<Props> = () => {
-    const navigate = useNavigate();
-    const [isEditTable, setEditTable] = useState(false);
-    const [isEditService, setEditService] = useState(false);
     const [isEdit, setEdit] = useState(false);
     const { quotationId } = useParams();
     const dispatch = useDispatch();
@@ -62,70 +50,7 @@ const QuotationDetail: React.FC<Props> = () => {
     const [updated, setUpdated] = useState(false);
     const initalValues: CellValues = {};
     const serviceInitialValues: CellValues = {};
-    const [cellValues, setCellValues] = useState<CellValues>(initalValues);
-    const [serviceCellValues, setserviceCellValues] =
-        useState<CellValues>(services);
 
-    const handleAddProduct = () => {
-        dispatch(actions.addRow());
-    };
-    const handleAddSerive = () => {
-        dispatch(actions.addRowService());
-    };
-    const handleUpdate = async () => {
-        const sentProducts = products.map((product) => {
-            const { price, monetaryUnit, quantity, quantityType } = product;
-            return {
-                productDetailId: product.productDetailId,
-                price: parseFloat(price),
-                monetaryUnit,
-                quantity: parseFloat(quantity),
-                quantityType,
-            };
-        });
-        const sentServices = services.map((service: any) => {
-            return service.id;
-        });
-
-        const data = {
-            customerId: customer.id,
-            staffId: staff.id,
-            status: "Sent",
-            ExpireAt: expireAt,
-            productdetails: sentProducts,
-            services: sentServices,
-        };
-        const token = localStorage.getItem("Token");
-        const res = await editQuotation(id, token as string, data);
-        if (res.status != 200) {
-            toast({
-                variant: "destructive",
-                title: "Uh oh! Something went wrong.",
-                description: "Please Try again",
-            });
-        } else {
-            if (res.data.isSuccess) {
-                toast({
-                    variant: "success",
-                    title: "Update Successfully",
-                    description: "",
-                });
-                await pushNegotitaionService(id, token as string, {
-                    content:
-                        "Hi, I just updated the quotation , please feel free to discuss through this chat",
-                    isCustomerMessage: false,
-                });
-
-                window.location.replace(`/staff/quotations/${id}`);
-            } else {
-                toast({
-                    variant: "destructive",
-                    title: `${res.data.messages[0].content}`,
-                    description: "",
-                });
-            }
-        }
-    };
     useEffect(() => {
         let isMounted = true;
 
@@ -158,8 +83,6 @@ const QuotationDetail: React.FC<Props> = () => {
                             serviceInitialValues[index.toString()] =
                                 serviceCellValues;
                         });
-                        setCellValues(initalValues);
-                        setserviceCellValues(serviceInitialValues);
                     }
                 } catch (error) {
                     console.error(error);
@@ -190,7 +113,10 @@ const QuotationDetail: React.FC<Props> = () => {
                             <Badge className="text-sm">{status}</Badge>
                         </div>
 
-                        <MakeContractButton></MakeContractButton>
+                        <MakeContractButton
+                            id={id}
+                            status={status}
+                        ></MakeContractButton>
                         <div className="staff-assigned-info my-7">
                             <div className="mb-2">Assigned Staff</div>
                             <div
@@ -324,7 +250,11 @@ const QuotationDetail: React.FC<Props> = () => {
                                 </div>
                             </div>
                             <div className="action-buttons mb-2 flex flex-row justify-center space-x-2">
-                                <MakeContractButton></MakeContractButton>
+                                <MakeContractButton
+                                    id={id}
+                                    status={status}
+                                ></MakeContractButton>
+
                                 <DeleteButton></DeleteButton>
                             </div>
                         </div>
@@ -336,6 +266,7 @@ const QuotationDetail: React.FC<Props> = () => {
                     </div>
                 </div>
             )}
+            {!updated && <Loading />}
         </>
     );
 };

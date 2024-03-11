@@ -67,3 +67,9 @@ export const negoList = [
         content: "Here is the comment!",
     },
 ];
+
+export const Quotationstatus = {
+    Negotiating: "Negotiating",
+    confirmed: "Confirmed",
+    request: "Request",
+};

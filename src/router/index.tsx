@@ -33,6 +33,10 @@ import StaffProfile from "./profile";
 import CreateProduct from "./staffCreateProduct";
 import Error403Page from "./403";
 import QuotationDetail from "./customerQuotationDetail";
+import StaffContract from "./staffQuotations";
+import StaffContractCreate from "./StaffContractCreate";
+import OTP from "./otp";
+import StaffContractDetail from "./StaffContractDetail";
 import Storage from "./storage";
 
 const RouterComponent: React.FC = () => {
@@ -104,6 +108,13 @@ const RouterComponent: React.FC = () => {
             index: true,
             path: "customizepackage",
             component: <CustomizePackage />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "otp",
+            component: <OTP />,
             exact: true,
             restrict: true,
         },
@@ -212,6 +223,13 @@ const RouterComponent: React.FC = () => {
         },
         {
             index: true,
+            path: "staff/quotations/:quotationId/versions/:versionId",
+            component: <StaffQuotationDetail />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
             path: "staff/products",
             component: <StaffProducts />,
             exact: true,
@@ -270,6 +288,28 @@ const RouterComponent: React.FC = () => {
             index: true,
             path: "staff/products/create",
             component: <ProductDetailsStaff />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/contracts",
+            component: <StaffContract />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/contract/new/:quotationId/version/:versionId",
+            component: <StaffContractCreate />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/contracts/:contractId",
+            component: <StaffContractDetail />,
+
             exact: true,
             restrict: true,
         },
