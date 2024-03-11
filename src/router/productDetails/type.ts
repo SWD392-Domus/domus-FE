@@ -11,11 +11,18 @@ export interface SingleProductProps{
     "details": ProductDetailsProps[];
 }
 
+export interface pricesProps{
+    id: string;
+    price: number;
+    quantity: number;
+    createdAt: Date;
+}
 export interface ProductDetailsProps{
     "id": string;
     "displayPrice":number;
     "attributes"?: AttributesProps[];
     "images": ImagesProps[];
+    "prices": pricesProps[];
 }
 
 export interface AttributesProps{

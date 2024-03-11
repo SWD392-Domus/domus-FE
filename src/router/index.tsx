@@ -33,6 +33,7 @@ import StaffProfile from "./profile";
 import CreateProduct from "./staffCreateProduct";
 import Error403Page from "./403";
 import QuotationDetail from "./customerQuotationDetail";
+import Storage from "./storage";
 
 const RouterComponent: React.FC = () => {
     const publicRoute = [
@@ -269,6 +270,13 @@ const RouterComponent: React.FC = () => {
             index: true,
             path: "staff/products/create",
             component: <ProductDetailsStaff />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/storage",
+            component: <Storage />,
             exact: true,
             restrict: true,
         },
