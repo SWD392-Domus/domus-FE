@@ -1,6 +1,12 @@
-import { get, post } from "./ApiCaller";
+import { get, post, remove } from "./ApiCaller";
 
 export const contractStaffApi = {
+  deleteContract: (id: string, token: string) => {
+    return remove(`/Contract/${id}`, {}, {}, { Authorization: token });
+  },
+  deleteManyContracts: (ids: string[], token: string) => {
+    return remove(`/Contract/multiple`, ids, {}, { Authorization: token });
+  },
   getContractsPaging: (
     searchField: string,
     searchValue: string,

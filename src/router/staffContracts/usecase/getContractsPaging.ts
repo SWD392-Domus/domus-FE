@@ -24,22 +24,24 @@ export const getContractsPaging = async (
     const contractsItems = contractsData?.items?.map(
       (item: {
         id: string;
-        expireAt: string;
-        staff: { profileImage: string; userName: string };
-        customer: { profileImage: string; userName: string };
-        totalPrice: number;
-        status: string;
+        name: string;
+        signedAt: string;
+        client: { userName: string; profileImage: string };
+        contractor: { userName: string; profileImage: string };
+        status: number;
+        signature: string;
       }) => ({
         id: item?.id,
-        expireAt: item?.expireAt,
+        name: item?.name,
+        signedAt: item?.signedAt,
         // staffAva: item?.staff?.profileImage,
         // staffName: item?.staff?.userName,
-        staffName: item?.staff,
+        staffName: item?.contractor,
         // customerAva: item?.customer?.profileImage,
         // customerName: item?.customer?.userName,
-        customerName: item?.customer,
-        totalPrice: item?.totalPrice,
+        customerName: item?.client,
         status: item?.status,
+        signature: item?.signature,
       })
     );
     const lastPage = contractsData?.lastPage;

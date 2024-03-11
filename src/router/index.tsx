@@ -24,7 +24,6 @@ import ProductList from "./products";
 import PackageList from "./packages";
 import ProductDetails from "./productDetails";
 import PackageDetails from "./packageDetails";
-import CustomizePackage from "./customizePackage";
 import ProductDetailsStaff from "./staffProductDetail";
 import Login from "./login";
 import Auth from "./auth";
@@ -33,7 +32,7 @@ import StaffProfile from "./profile";
 import CreateProduct from "./staffCreateProduct";
 import Error403Page from "./403";
 import QuotationDetail from "./customerQuotationDetail";
-import StaffContract from "./staffQuotations";
+import StaffContractList from "./staffContracts";
 import StaffContractCreate from "./StaffContractCreate";
 import OTP from "./otp";
 import StaffContractDetail from "./StaffContractDetail";
@@ -265,7 +264,7 @@ const RouterComponent: React.FC = () => {
         {
             index: true,
             path: "staff/contracts",
-            component: <StaffContract />,
+            component: <StaffContractList />,
             exact: true,
             restrict: true,
         },

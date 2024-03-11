@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { DataTable } from "./components/Table/index.tsx";
 import { columns } from "./components/Table/column.tsx";
-import { ContractsProps } from "./types/index.ts";
+// import { ContractsProps } from "./types/index.ts";
 import { getContractsPaging } from "./usecase";
 import ContractsPagination from "./components/ContractsPagination";
 
@@ -10,9 +10,9 @@ interface Props {
 }
 
 const StaffContract: React.FC<Props> = () => {
-    const [contracts, setContracts] = useState<ContractsProps[]>([]);
+    const [contracts, setContracts] = useState<any[]>([]);
     // const [loading, setLoading] = useState(true);
-    const [searchField, setSearchField] = useState("id");
+    const [searchField, setSearchField] = useState("name");
     const [searchValue, setSearchValue] = useState("");
     const [sortField, setSortField] = useState("");
     const [descending, setDescending] = useState(false);

@@ -49,8 +49,12 @@ export const columns: ColumnDef<ContractsProps>[] = [
     //     },
     // },
     {
-        accessorKey: "expireAt",
-        header: "Expire At",
+        accessorKey: "name",
+        header: "Name",
+    },
+    {
+        accessorKey: "signedAt",
+        header: "Signed At",
     },
     {
         accessorKey: "staffName",
@@ -103,28 +107,28 @@ export const columns: ColumnDef<ContractsProps>[] = [
         },
     },
     {
-        accessorKey: "totalPrice",
-        header: () => <div className="text-left">Total Price</div>,
-        cell: ({ row }) => {
-            const totalPrice = parseFloat(row.getValue("totalPrice"));
-            const formatted = new Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: "VND",
-            }).format(totalPrice);
-
-            return <div className="text-left font-medium">{formatted}</div>;
-        },
-    },
-    {
         accessorKey: "status",
         header: () => <div className="text-left">Status</div>,
         cell: ({ row }) => {
-            const value: string = (
-                row.getValue("status") as string
-            ).toUpperCase();
+            const value: string =
+                row.getValue("status") as string || "Pending"
             return (
                 <div className="text-left">
                     <Badge variant="outline">{value}</Badge>
+                </div>
+            );
+        },
+    },
+    {
+        accessorKey: "signature",
+        header: () => <div className="text-left">Signature</div>,
+        cell: ({ row }) => {
+            const value: string = (
+                row.getValue("signature") as string || "Unsigned"
+            ).toUpperCase();
+            return (
+                <div className="text-left">
+                    <Badge variant="outline" className="max-w-20 overflow-hidden">{value}</Badge>
                 </div>
             );
         },
