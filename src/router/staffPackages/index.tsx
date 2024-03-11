@@ -12,7 +12,7 @@ interface Props {
 const StaffPackages: React.FC<Props> = () => {
     const [packages, setPackages] = useState<PackagesProps[]>([]);
     // const [loading, setLoading] = useState(true);
-    const [searchField, setSearchField] = useState("packageName");
+    const [searchField, setSearchField] = useState("name");
     const [searchValue, setSearchValue] = useState("");
     const [sortField, setSortField] = useState("");
     const [descending, setDescending] = useState(false);

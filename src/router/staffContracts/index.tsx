@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { DataTable } from "./components/Table/index.tsx";
 import { columns } from "./components/Table/column.tsx";
-import { QuotationsProps } from "./types/index.ts";
-import { getQuotationsPaging } from "./usecase";
-import QuotationsPagination from "./components/QuotationsPagination";
+// import { ContractsProps } from "./types/index.ts";
+import { getContractsPaging } from "./usecase";
+import ContractsPagination from "./components/ContractsPagination";
 
 interface Props {
     // define your props here
 }
 
 const StaffContract: React.FC<Props> = () => {
-    const [quotations, setQuotations] = useState<QuotationsProps[]>([]);
+    const [contracts, setContracts] = useState<any[]>([]);
     // const [loading, setLoading] = useState(true);
-    const [searchField, setSearchField] = useState("id");
+    const [searchField, setSearchField] = useState("name");
     const [searchValue, setSearchValue] = useState("");
     const [sortField, setSortField] = useState("");
     const [descending, setDescending] = useState(false);
@@ -21,7 +21,7 @@ const StaffContract: React.FC<Props> = () => {
     const [pageSize, setPageSize] = useState(5);
     const [pageIndex, setPageIndex] = useState(1);
 
-    async function getQuotationsService(
+    async function getContractsService(
         searchField: string,
         searchValue: string,
         sortField: string,
@@ -29,7 +29,7 @@ const StaffContract: React.FC<Props> = () => {
         pageSize: number,
         pageIndex: number
     ) {
-        const res = await getQuotationsPaging(
+        const res = await getContractsPaging(
             searchField,
             searchValue,
             sortField,
@@ -39,14 +39,14 @@ const StaffContract: React.FC<Props> = () => {
         );
         if (res) {
             // setLoading(false);
-            setQuotations(res.quotationsItems);
+            setContracts(res.contractsItems);
             setTotalPages(res.lastPage);
             setTotalItems(res.total);
         }
     }
 
     useEffect(() => {
-        getQuotationsService(
+        getContractsService(
             searchField,
             searchValue,
             sortField,
@@ -58,18 +58,18 @@ const StaffContract: React.FC<Props> = () => {
 
     return (
         <div className="">
-            <div className="text-xl font-bold py-5">Quotation List</div>
+            <div className="text-xl font-bold py-5">Contract List</div>
             <DataTable
                 columns={columns}
-                data={quotations}
+                data={contracts}
                 setSearchField={setSearchField}
                 setSearchValue={setSearchValue}
                 setSortField={setSortField}
                 setDescending={setDescending}
             />
             <div className="flex justify-between text-sm font-medium">
-                <div className="">{totalItems} Quotations</div>
-                <QuotationsPagination
+                <div className="">{totalItems} Contracts</div>
+                <ContractsPagination
                     totalPages={totalPages}
                     totalItems={totalItems}
                     pageIndex={pageIndex}

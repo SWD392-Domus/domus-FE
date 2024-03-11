@@ -1,6 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "@/components/ui/Checkbox/checkbox";
-import { QuotationsProps } from "../../types";
+import { ContractsProps } from "../../types";
 import { CRUDDropdownMenu } from "../DropdownMenu/CRUD";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import { Badge } from "@/components/ui/Badge";
@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/Badge";
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 
-export const columns: ColumnDef<QuotationsProps>[] = [
+export const columns: ColumnDef<ContractsProps>[] = [
     {
         id: "select",
         header: ({ table }) => (
@@ -42,15 +42,19 @@ export const columns: ColumnDef<QuotationsProps>[] = [
         },
     },
     // {
-    //     accessorKey: "quotationId",
-    //     header: "Quotation",
+    //     accessorKey: "contractId",
+    //     header: "Contract",
     //     cell: ({ row }) => {
-    //         return <h4> Quotation {row.index + 1}</h4>;
+    //         return <h4> Contract {row.index + 1}</h4>;
     //     },
     // },
     {
-        accessorKey: "expireAt",
-        header: "Expire At",
+        accessorKey: "name",
+        header: "Name",
+    },
+    {
+        accessorKey: "signedAt",
+        header: "Signed At",
     },
     {
         accessorKey: "staffName",
@@ -103,28 +107,28 @@ export const columns: ColumnDef<QuotationsProps>[] = [
         },
     },
     {
-        accessorKey: "totalPrice",
-        header: () => <div className="text-left">Total Price</div>,
-        cell: ({ row }) => {
-            const totalPrice = parseFloat(row.getValue("totalPrice"));
-            const formatted = new Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: "VND",
-            }).format(totalPrice);
-
-            return <div className="text-left font-medium">{formatted}</div>;
-        },
-    },
-    {
         accessorKey: "status",
         header: () => <div className="text-left">Status</div>,
         cell: ({ row }) => {
-            const value: string = (
-                row.getValue("status") as string
-            ).toUpperCase();
+            const value: string =
+                row.getValue("status") as string || "Pending"
             return (
                 <div className="text-left">
                     <Badge variant="outline">{value}</Badge>
+                </div>
+            );
+        },
+    },
+    {
+        accessorKey: "signature",
+        header: () => <div className="text-left">Signature</div>,
+        cell: ({ row }) => {
+            const value: string = (
+                row.getValue("signature") as string || "Unsigned"
+            ).toUpperCase();
+            return (
+                <div className="text-left">
+                    <Badge variant="outline" className="max-w-20 overflow-hidden">{value}</Badge>
                 </div>
             );
         },
