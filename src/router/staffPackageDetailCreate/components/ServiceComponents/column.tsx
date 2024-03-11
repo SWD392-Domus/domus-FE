@@ -42,17 +42,17 @@ export const columns: ColumnDef<ServiceProps>[] = [
         accessorKey: "name",
         header: "Name",
     },
-    {
-        accessorKey: "price",
-        header: "Price",
-        cell: ({ row }) => {
-            return <h4>VNĐ {row.original.price} </h4>;
-        },
-    },
-    {
-        accessorKey: "monetaryUnit",
-        header: "Monetary Unit",
-    },
+    // {
+    //     accessorKey: "price",
+    //     header: "Price",
+    //     cell: ({ row }) => {
+    //         return <h4>VNĐ {row.original.price} </h4>;
+    //     },
+    // },
+    // {
+    //     accessorKey: "monetaryUnit",
+    //     header: "Monetary Unit",
+    // },
     {
         header: "Action",
         id: "actions",

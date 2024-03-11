@@ -184,7 +184,7 @@ const QuotationDetail: React.FC<Props> = () => {
                             {new Intl.NumberFormat("en-US", {
                                 style: "currency",
                                 currency: "VND",
-                            }).format(totalPrice * 1000)}
+                            }).format(totalPrice)}
                         </div>
                         <div className="my-4 flex ">
                             <Badge className="text-sm">{status}</Badge>
@@ -212,7 +212,7 @@ const QuotationDetail: React.FC<Props> = () => {
                         <div className="border-solid border-b-2 border-zinc-400">
                             <div className="general-info flex flex-col items-center">
                                 <div className="my-7 text-2xl font-semibold w-full">
-                                    Quotation - {id}
+                                    Quotation
                                 </div>
                                 {!isEdit ? (
                                     <div className="flex flex-row flex-wrap w-full">
@@ -318,7 +318,7 @@ const QuotationDetail: React.FC<Props> = () => {
                                             {new Intl.NumberFormat("en-US", {
                                                 style: "currency",
                                                 currency: "VND",
-                                            }).format(totalPrice * 1000)}
+                                            }).format(totalPrice)}
                                         </div>
                                     </div>
                                 </div>

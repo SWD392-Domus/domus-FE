@@ -20,7 +20,7 @@ const ProductCard: React.FC<Product> = ({ product }) => {
   const productImage = product.details[0]?.images[0]?.imageUrl;
   const productId = product?.id;
   const productName = product?.productName;
-  const productPrice = product?.details[0]?.displayPrice * 1000;
+  // const productPrice = product?.details[0]?.displayPrice ;
   const productDescription = product?.description;
   return (
     <Link to={`/product/${productId}`}>
@@ -53,14 +53,14 @@ const ProductCard: React.FC<Product> = ({ product }) => {
               )}
             </p>
           </CardDescription>
-          <CardTitle>
+          {/* <CardTitle>
             <p className="text-2xl truncate">
               {new Intl.NumberFormat("en-US", {
                 style: "currency",
                 currency: "VND",
               }).format(productPrice)}
             </p>
-          </CardTitle>
+          </CardTitle> */}
         </CardContent>
         <CardFooter className="">
           <div

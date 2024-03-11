@@ -18,9 +18,9 @@ import {
   FormMessage,
 } from "@/components/ui/Form";
 import {
-    DialogClose,
-  } from "@/components/ui/Dialog"
-  
+  DialogClose,
+} from "@/components/ui/Dialog"
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -32,12 +32,12 @@ import {
   ProductDetailsPropsForCreate,
 } from "../type";
 interface DetailsProps {
-    addDetail: (detail: ProductDetailsPropsForCreate) => void;
+  addDetail: (detail: ProductDetailsPropsForCreate) => void;
 }
 const CreatePopup: React.FC<DetailsProps> = ({ addDetail }) => {
   const { toast } = useToast();
   const [attributes, setAttributes] = useState<AttributesPropsForCreate[]>([]);
-  
+
 
   const form2 = useForm<z.infer<typeof createDetailsSchema>>({
     resolver: zodResolver(createDetailsSchema),
@@ -53,13 +53,13 @@ const CreatePopup: React.FC<DetailsProps> = ({ addDetail }) => {
       value: "",
     },
   });
-const handleAddDetails = (values: z.infer<typeof createDetailsSchema>) => {
+  const handleAddDetails = (values: z.infer<typeof createDetailsSchema>) => {
     addDetail({
-        displayPrice: Number(values.price),
-        attributes: attributes,
-        monetaryUnit: "usd",
+      displayPrice: Number(values.price),
+      attributes: attributes,
+      monetaryUnit: "VND",
     });
-};
+  };
   const handleAddAttribute = (values: z.infer<typeof formSchema>) => {
     // Check if an attribute with the same name already exists
     const isDuplicate = attributes.some(
@@ -100,86 +100,86 @@ const handleAddDetails = (values: z.infer<typeof createDetailsSchema>) => {
         </span>
       </div>
       <div className="">
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <Button
-                      className="w-auto flex justify-center items-center"
-                      variant={"default"}
-                    >
-                      Add more attribute
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-80 ml-4">
-                    <Form {...form}>
-                      <form
-                        id="attributeForm" 
-                        onSubmit={form.handleSubmit(handleAddAttribute)}
-                        className="grid gap-4"
-                      >
-                        <div className="space-y-2">
-                          <h4 className="font-medium leading-none">Details</h4>
-                          <p className="text-sm text-muted-foreground">
-                            Set the details for the product.
-                          </p>
-                        </div>
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              className="w-auto flex justify-center items-center"
+              variant={"default"}
+            >
+              Add more attribute
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-80 ml-4">
+            <Form {...form}>
+              <form
+                id="attributeForm"
+                onSubmit={form.handleSubmit(handleAddAttribute)}
+                className="grid gap-4"
+              >
+                <div className="space-y-2">
+                  <h4 className="font-medium leading-none">Details</h4>
+                  <p className="text-sm text-muted-foreground">
+                    Set the details for the product.
+                  </p>
+                </div>
 
-                        <FormField
-                          control={form.control}
-                          name="name"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Name</FormLabel>
-                              <FormControl>
-                                <Input placeholder="name" {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        <FormField
-                          control={form.control}
-                          name="value"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Value</FormLabel>
-                              <FormControl>
-                                <Input placeholder="value" {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        <Button
-                            type="submit"
-                            className="w-full"
-                            variant={"default"}
-                        >
-                            Add
-                        </Button>
-                      </form>
-                    </Form>
-                  </PopoverContent>
-                </Popover>
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="name" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="value"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Value</FormLabel>
+                      <FormControl>
+                        <Input placeholder="value" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button
+                  type="submit"
+                  className="w-full"
+                  variant={"default"}
+                >
+                  Add
+                </Button>
+              </form>
+            </Form>
+          </PopoverContent>
+        </Popover>
+      </div>
+      <div className="flex flex-wrap justify-between gap-5">
+        <div className="flex flex-col gap-2">
+          {attributes &&
+            attributes.map((attribute, index) => (
+              <div className="grid grid-cols-8 items-center gap-4">
+                <Label className="pr-4 truncate col-span-2">
+                  {attribute.name}
+                </Label>
+                <div className="flex justify-center items-center gap-4 col-span-6">
+                  <Input defaultValue={attribute.value} />
+                  <BsBackspace
+                    className="text-xl cursor-pointer"
+                    onClick={() => handleRemoveAttribute(index)}
+                  />
+                </div>
               </div>
-              <div className="flex flex-wrap justify-between gap-5">
-            <div className="flex flex-col gap-2">
-              {attributes &&
-                attributes.map((attribute, index) => (
-                  <div className="grid grid-cols-8 items-center gap-4">
-                    <Label className="pr-4 truncate col-span-2">
-                      {attribute.name}
-                    </Label>
-                    <div className="flex justify-center items-center gap-4 col-span-6">
-                      <Input defaultValue={attribute.value} />
-                      <BsBackspace
-                        className="text-xl cursor-pointer"
-                        onClick={() => handleRemoveAttribute(index)}
-                      />
-                    </div>
-                  </div>
-                ))}
-            </div>
-          </div>
+            ))}
+        </div>
+      </div>
       <Form {...form2}>
         <form
           onSubmit={form2.handleSubmit(handleAddDetails)}
@@ -205,7 +205,7 @@ const handleAddDetails = (values: z.infer<typeof createDetailsSchema>) => {
           <DialogClose asChild>
             <Button type="submit">Submit</Button>
           </DialogClose>
-          
+
         </form>
       </Form>
     </div>

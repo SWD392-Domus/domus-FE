@@ -8,27 +8,27 @@ function BreadCrumbHeader() {
         '/customer': 'Customer',
         '/customer/settings': 'Settings',
         '/customer/settings/quotations': 'Quotations',
-        '/customer/settings/quotations/:quotationId': `Quotation ${quotationId} `,
+        // '/customer/settings/quotations/:quotationId': `Quotation ${quotationId} `,
         '/staff': 'Staff',
         '/staff/quotations': 'Quotations',
         '/staff/quotations/newQuotation': 'New Quotation',
-        '/staff/quotations/:quotationId': `Quotation ${quotationId} `,
+        // '/staff/quotations/:quotationId': `Quotation ${quotationId} `,
         '/staff/packages': `Packages`,
         '/staff/packages/newPackage': `New Package`,
-        '/staff/packages/:packageId': `Package ${packageId} `,
+        // '/staff/packages/:packageId': `Package ${packageId} `,
         '/staff/products': 'Products',
     };
 
-    if (quotationId !== undefined) {
-        breadcrumbNameMap[`/customer/settings/quotations/${quotationId}`] = `Quotation ${quotationId} `;
-        breadcrumbNameMap[`/staff/quotations/${quotationId}`] = `Quotation ${quotationId} `;
-    }
-    if (productId !== undefined) {
-        breadcrumbNameMap[`/staff/products/${productId}`] = `Product ${productId} `;
-    }
-    if (packageId !== undefined) {
-        breadcrumbNameMap[`/staff/packages/${packageId}`] = `Package ${packageId} `;
-    }
+    // if (quotationId !== undefined) {
+    //     breadcrumbNameMap[`/customer/settings/quotations/${quotationId}`] = `Quotation ${quotationId} `;
+    //     breadcrumbNameMap[`/staff/quotations/${quotationId}`] = `Quotation ${quotationId} `;
+    // }
+    // if (productId !== undefined) {
+    //     breadcrumbNameMap[`/staff/products/${productId}`] = `Product ${productId} `;
+    // }
+    // if (packageId !== undefined) {
+    //     breadcrumbNameMap[`/staff/packages/${packageId}`] = `Package ${packageId} `;
+    // }
 
     const location = useLocation();
 

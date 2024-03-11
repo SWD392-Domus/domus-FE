@@ -25,14 +25,16 @@ export const ConfirmButton: React.FC<Props> = (props) => {
                 services: packageA.services.map((ser: any) => {
                     return {
                         serviceId: ser.id,
-                        price: ser.price,
+                        // price: ser.price,
+                        price: 0,
                     }
                 }),
                 productDetails: packageA.productDetails.map((productDetail: any) => {
                     return {
                         id: productDetail.id,
                         quantity: productDetail.quantity,
-                        price: productDetail.displayPrice,
+                        // price: productDetail.displayPrice,
+                        price: 0,
                     }
                 })
             });
@@ -43,7 +45,7 @@ export const ConfirmButton: React.FC<Props> = (props) => {
                     description: "A request was sent.",
                     action: <ToastAction altText="Close">Close</ToastAction>,
                 });
-                localStorage.removeItem("cart");
+                // localStorage.removeItem("cart");
                 setTimeout(() => {
                     navigate("/customer/settings/quotations");
                 }, 2000);

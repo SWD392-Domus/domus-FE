@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/Button/Button";
 // import ColorToggle from "./components/ColorToggle";
 // import MaterialToggle from "./components/MaterialToggle";
 import ProductAccordion from "./components/ProductAccordion";
-import Suggestion from "./components/Suggestion";
+// import Suggestion from "./components/Suggestion";
 import Slider from "@/components/PublicComponents/Slider";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -16,8 +16,8 @@ import selector from "./sliceForCart/selector";
 import { actions as actionsCart } from "@/router/customerCart/slice";
 // import { selector as selectorCart } from "@/router/customerCart/slice/selector"
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/ToggleGroup";
-// import { ToastAction } from "@/components/ui/Toast/toast"
-// import { useToast } from "@/components/ui/Toast/use-toast"
+import { ToastAction } from "@/components/ui/Toast/toast"
+import { useToast } from "@/components/ui/Toast/use-toast"
 import { useNavigate } from "react-router-dom";
 
 type RouteParams = {
@@ -25,7 +25,7 @@ type RouteParams = {
 };
 
 const ProductDetails: React.FC = () => {
-    // const toast = useToast();
+    const { toast } = useToast();
     const navigate = useNavigate();
     const { id } = useParams<RouteParams>();
     const dispatch = useDispatch();
@@ -126,50 +126,61 @@ const ProductDetails: React.FC = () => {
     }
 
     const handleAddToCart = async () => {
-        const cart = localStorage.getItem("cart")
-            ? JSON.parse(localStorage.getItem("cart") as string)
-            : { productDetails: [] };
-        // const productDetailIdToAdd: any = isCheckedIds[0];
-        let productDetailIdPriceToAdd: any;
-        fields.some((field: any) => {
-            const foundValue = field.values.find(
-                (value: any) => value.ids.length > 0 && value.isChecked === true
-            );
-            const sendValue = foundValue.ids.find((idAndPrice: any) =>
-                isCheckedIds.includes(idAndPrice.id)
-            );
-            if (foundValue) {
-                productDetailIdPriceToAdd = sendValue;
-                return true;
-            }
-        });
-        const cartArray = cart.productDetails ? cart.productDetails : [];
-
-        const productExists = cartArray.some((cartObject: any) => {
-            if (cartObject.id == productDetailIdPriceToAdd.id) {
-                cartObject.quantity += 1;
-                return true;
-            }
-            return false;
-        });
-
-        if (!productExists) {
-            cartArray.push({
-                id: productDetailIdPriceToAdd.id,
-                price: productDetailIdPriceToAdd.price * 1000,
-                quantity: 1,
+        try {
+            const cart = localStorage.getItem("cart")
+                ? JSON.parse(localStorage.getItem("cart") as string)
+                : { productDetails: [] };
+            // const productDetailIdToAdd: any = isCheckedIds[0];
+            let productDetailIdPriceToAdd: any;
+            fields.some((field: any) => {
+                const foundValue = field.values.find(
+                    (value: any) => value.ids.length > 0 && value.isChecked === true
+                );
+                const sendValue = foundValue.ids.find((idAndPrice: any) =>
+                    isCheckedIds.includes(idAndPrice.id)
+                );
+                if (foundValue) {
+                    productDetailIdPriceToAdd = sendValue;
+                    return true;
+                }
             });
-        }
+            const cartArray = cart.productDetails ? cart.productDetails : [];
 
-        localStorage.setItem("cart", JSON.stringify(cart));
-        const cartNumber: any = JSON.parse(
-            localStorage.getItem("cart") as string
-        ).productDetails
-            ? JSON.parse(localStorage.getItem("cart") as string).productDetails
-                  .length
-            : 0;
-        dispatch(actionsCart.setCartNumber(cartNumber));
-        navigate("/customer/settings/cart");
+            const productExists = cartArray.some((cartObject: any) => {
+                if (cartObject.id == productDetailIdPriceToAdd.id) {
+                    cartObject.quantity += 1;
+                    return true;
+                }
+                return false;
+            });
+
+            if (!productExists) {
+                cartArray.push({
+                    id: productDetailIdPriceToAdd.id,
+                    price: productDetailIdPriceToAdd.price,
+                    quantity: 1,
+                });
+            }
+
+            localStorage.setItem("cart", JSON.stringify(cart));
+            const cartNumber: any = JSON.parse(localStorage.getItem("cart") as string).productDetails
+                ? JSON.parse(localStorage.getItem("cart") as string).productDetails.length
+                : 0;
+            dispatch(actionsCart.setCartNumber(cartNumber));
+            navigate("/customer/settings/cart");
+        } catch (error) {
+            toast({
+                variant: "destructive",
+                title: "Select at least one attribute!",
+                description:
+                    "There was a problem with your request.",
+                action: (
+                    <ToastAction altText="Try again">
+                        Try again
+                    </ToastAction>
+                ),
+            })
+        }
     };
 
     return (
@@ -214,15 +225,15 @@ const ProductDetails: React.FC = () => {
                         >
                             {product?.productName}
                         </div>
-                        <div className="font-semibold md:text-2xl flex flex-col">
+                        {/* <div className="font-semibold md:text-2xl flex flex-col">
                             <span className="text-sm font-thin">
                                 Estimated price:{" "}
                             </span>
                             {new Intl.NumberFormat("en-US", {
                                 style: "currency",
                                 currency: "VND",
-                            }).format(product?.details[0]?.displayPrice * 1000)}
-                        </div>
+                            }).format(product?.details[0]?.displayPrice )}
+                        </div> */}
                         {fields.map((field) => (
                             <div className="flex flex-col gap-2">
                                 <div className="text-black font-thin">
@@ -232,10 +243,10 @@ const ProductDetails: React.FC = () => {
                                     <ToggleGroup
                                         type="single"
                                         variant="outline"
-                                        // onValueChange={(e) => {
-                                        // dispatch(actions.hideValueBasedOnIds({ ids: e, name: field.name }));
-                                        // console.log(e);
-                                        // }}
+                                    // onValueChange={(e) => {
+                                    // dispatch(actions.hideValueBasedOnIds({ ids: e, name: field.name }));
+                                    // console.log(e);
+                                    // }}
                                     >
                                         {field.values.map((value) => (
                                             <ToggleGroupItem
@@ -274,11 +285,11 @@ const ProductDetails: React.FC = () => {
                             <ProductAccordion title={product?.description} />
                         </div>
                     </div>
-                    <div className="flex justify-center items-center py-20">
+                    {/* <div className="flex justify-center items-center py-20">
                         <div className="max-md:hidden w-screen h-[300px] ">
                             <Suggestion />
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             ) : (
                 <Loading />

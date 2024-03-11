@@ -30,14 +30,20 @@ export const columns: ColumnDef<ProductsProps>[] = [
         enableSorting: false,
         enableHiding: false,
     },
+    // {
+    //     accessorKey: "id",
+    //     header: "Id",
+    // },
+    // {
+    //     accessorKey: "productId",
+    //     header: "Product",
+    //     cell: ({ row }) => {
+    //         return <h4> Product {row.index + 1}</h4>;
+    //     },
+    // },
     {
-        accessorKey: "id",
-        header: "Id",
-        // header: () => {
-        //     return (
-        //         // <>Id</>
-        //     )
-        // },
+        accessorKey: "productName",
+        header: "Name",
     },
     {
         accessorKey: "image",
@@ -50,10 +56,6 @@ export const columns: ColumnDef<ProductsProps>[] = [
                 </Avatar>
             );
         },
-    },
-    {
-        accessorKey: "productName",
-        header: "Name",
     },
     {
         accessorKey: "category",

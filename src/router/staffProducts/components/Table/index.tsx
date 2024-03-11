@@ -109,7 +109,12 @@ export function DataTable<TData, TValue>({
                     !cell.id.includes("select") && !cell.id.includes("actions") &&
                     <TableCell
                       key={cell.id}
-                      onClick={() => navigate(`${location.pathname}/${row.getValue('id')}`)}
+                      onClick={() => navigate(
+                        `${location.pathname
+                        }/${row.original
+                          .id as any
+                        }`
+                      )}
                       className="cursor-pointer"
                     >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}

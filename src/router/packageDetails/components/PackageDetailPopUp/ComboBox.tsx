@@ -67,7 +67,7 @@ const handleSelectDetail = (
         priceSum: new Intl.NumberFormat("en-US", {
             style: "currency",
             currency: "VND",
-        }).format(detail.displayPrice * 1000),
+        }).format(detail.displayPrice),
     });
 };
 interface Props {
@@ -168,7 +168,8 @@ function StatusList({
                                                             //     index,
                                                             //     setSelectedStatus
                                                             // );
-                                                            dispatch(actions.addProduct(detail));
+                                                            const detailWithProductName = { ...detail, productName: product.productName };
+                                                            dispatch(actions.addProduct(detailWithProductName));
                                                             setOpen(false);
                                                         }}
                                                     >

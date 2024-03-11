@@ -33,12 +33,12 @@ const PackageCombo: React.FC = () => {
                                         <div className="font-semibold">
                                             {service.name}
                                         </div>
-                                        <div>
+                                        {/* <div>
                                             {new Intl.NumberFormat("en-US", {
                                                 style: "currency",
                                                 currency: "VND",
                                             }).format(service.price)}
-                                        </div>
+                                        </div> */}
                                     </div>
                                 ))}
                             </div>

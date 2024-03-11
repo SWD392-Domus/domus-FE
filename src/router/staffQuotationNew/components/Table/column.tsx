@@ -13,11 +13,11 @@ export const data: QuotationDetailInfo[] = Array.from({ length: 2 }, (_, i) => (
 
     id: `${i + 1}`,
     productName: `Product ${i + 1}`,
-    price: (i + 1) * 100000,
+    price: (i + 1),
     monetaryUnit: "VND",
     quantity: i + 2,
     quantityType: "EA",
-    priceSum: (i + 1) * 100000 * (i + 2),
+    priceSum: (i + 1) * (i + 2),
 }));
 export const columns: ColumnDef<QuotationDetailInfo>[] = [
     {

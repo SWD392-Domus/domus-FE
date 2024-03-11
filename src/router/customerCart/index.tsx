@@ -25,7 +25,7 @@ const CustomerCart: React.FC = () => {
   //   dispatch(actions.calculateTotalPrice());
   // }, []);
   const handleClick = async () => {
-    if ((packageA && packageA.id) || (productDetails && productDetails.length > 0)) {
+    if ((packageA && packageA.id) || (productDetails && productDetails.length >= 4)) {
 
       const res = await createQuotation(
         {
@@ -36,14 +36,14 @@ const CustomerCart: React.FC = () => {
           services: services.map((ser: any) => {
             return {
               serviceId: ser.id,
-              price: ser.price,
+              price: 0,
             }
           }),
           productDetails: productDetails.map((productDetail: any) => {
             return {
               id: productDetail.id,
               quantity: productDetail.quantity,
-              price: productDetail.displayPrice,
+              price: 0,
             }
           })
         }
@@ -70,7 +70,7 @@ const CustomerCart: React.FC = () => {
     } else {
       toast({
         variant: "destructive",
-        title: "Select at least one PACKAGE or PRODUCT.",
+        title: "Select at least 4 Products.",
         description: "Failed to request.",
         action: (
           <ToastAction altText="Close">Close</ToastAction>
@@ -88,7 +88,7 @@ const CustomerCart: React.FC = () => {
       <div className="flex flex-row items-center justify-between">
         <ServiceCombo></ServiceCombo>
         <div className='flex flex-col text-xl'>
-          <div className='flex gap-2'>
+          {/* <div className='flex gap-2'>
             <div className='font-semibold'>Total Price:</div>
             <div className='font-semibold text-red-600'>
               {new Intl.NumberFormat("en-US", {
@@ -96,7 +96,7 @@ const CustomerCart: React.FC = () => {
                 currency: "VND",
               }).format(totalPrice)}
             </div>
-          </div>
+          </div> */}
           {/* <div>Discount: {discount}%</div> */}
         </div>
         <Button

@@ -94,17 +94,17 @@ const PackageDetails: React.FC<Props> = () => {
               >
                 {name}
               </div>
-              <div className="font-semibold md:text-2xl flex flex-col">
+              {/* <div className="font-semibold md:text-2xl flex flex-col">
                 <span className="text-sm font-thin">Estimated price: </span>
                 {new Intl.NumberFormat("en-US", {
                   style: "currency",
                   currency: "VND",
                 }).format(estimatedPrice)}
-              </div>
-              <div className="font-semibold md:text-2xl flex flex-col">
+              </div> */}
+              {/* <div className="font-semibold md:text-2xl flex flex-col">
                 <span className="text-sm font-thin">Discount: </span>
                 {discount}%
-              </div>
+              </div> */}
               <div className="mt-2">
                 <DeleteButton id={id}></DeleteButton>
               </div>
@@ -120,10 +120,10 @@ const PackageDetails: React.FC<Props> = () => {
                         {services.map((service: ServiceProps) =>
                           <div className="flex flex-row justify-between">
                             <div className='font-semibold'>{service.name}</div>
-                            <div>{new Intl.NumberFormat("en-US", {
+                            {/* <div>{new Intl.NumberFormat("en-US", {
                               style: "currency",
                               currency: "VND",
-                            }).format(service.price)}</div>
+                            }).format(service.price)}</div> */}
                           </div>)}
                       </div>
                     </AccordionContent>
@@ -177,14 +177,14 @@ const PackageDetails: React.FC<Props> = () => {
                               )}
                             </p>
                           </CardDescription> */}
-                        <CardTitle>
+                        {/* <CardTitle>
                           <p className="text-2xl truncate">
                             {new Intl.NumberFormat("en-US", {
                               style: "currency",
                               currency: "VND",
-                            }).format(product.displayPrice * 1000)}
+                            }).format(product.displayPrice)}
                           </p>
-                        </CardTitle>
+                        </CardTitle> */}
                       </CardContent>
                       {/* <CardFooter className="">
                         <div

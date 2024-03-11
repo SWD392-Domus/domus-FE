@@ -122,10 +122,10 @@ const PackageDetails: React.FC<Props> = () => {
                           {packageA?.services.map((service: ServiceProps) =>
                             <div className="flex flex-row justify-between">
                               <div className='font-semibold'>{service.name}</div>
-                              <div>{new Intl.NumberFormat("en-US", {
+                              {/* <div>{new Intl.NumberFormat("en-US", {
                                 style: "currency",
                                 currency: "VND",
-                              }).format(service.price)}</div>
+                              }).format(service.price)}</div> */}
                             </div>)}
                         </div>
                       </AccordionContent>
@@ -184,7 +184,7 @@ const PackageDetails: React.FC<Props> = () => {
                             {new Intl.NumberFormat("en-US", {
                               style: "currency",
                               currency: "VND",
-                            }).format(product.displayPrice * 1000)}
+                            }).format(product.displayPrice )}
                           </p>
                         </CardTitle> */}
                           <CardTitle>
