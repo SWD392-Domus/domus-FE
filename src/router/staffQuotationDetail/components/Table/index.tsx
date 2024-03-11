@@ -15,7 +15,6 @@ import {
 } from "@/components/ui/Table/table";
 import { Input } from "../Input";
 import { useState } from "react";
-
 import { ComboBoxResponsive } from "../ComboBox";
 import { Button } from "@/components/ui/Button/Button";
 import { TrashIcon } from "@radix-ui/react-icons";
@@ -51,6 +50,7 @@ interface CellValues {
         [key: string]: string;
     };
 }
+
 export function EditDataTable<TData, TValue>({
     columns,
     data,
