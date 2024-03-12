@@ -24,7 +24,7 @@ interface Props {
   setPageSize: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const ProductsPagination: React.FC<Props> = ({
+const ArticlesPagination: React.FC<Props> = ({
   totalPages,
   totalItems,
   pageIndex,
@@ -121,4 +121,4 @@ const ProductsPagination: React.FC<Props> = ({
   );
 };
 
-export default ProductsPagination;
+export default ArticlesPagination;

@@ -5,7 +5,7 @@ export const contractStaffApi = {
     return remove(`/Contract/${id}`, {}, {}, { Authorization: token });
   },
   deleteManyContracts: (ids: string[], token: string) => {
-    return remove(`/Contract/multiple`, ids, {}, { Authorization: token });
+    return remove(`/Contract/many`, ids, {}, { Authorization: token });
   },
   getContractsPaging: (
     searchField: string,

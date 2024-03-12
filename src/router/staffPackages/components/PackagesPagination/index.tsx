@@ -82,7 +82,7 @@ const PackagesPagination: React.FC<Props> = ({
             }}
           >
             <SelectTrigger className="h-8 w-[70px]">
-              <SelectValue placeholder={pageSize} />
+              <div className="mx-auto">{pageSize}</div>
             </SelectTrigger>
             <SelectContent side="top">
               {[5, 10, 15, 20, totalItems].map((pageSize) => (
