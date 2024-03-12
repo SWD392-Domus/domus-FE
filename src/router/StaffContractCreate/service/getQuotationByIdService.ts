@@ -1,9 +1,14 @@
 import { quotationStaffApi } from "@/utils/api/QuotationApi";
 
-export const getQuotationDetail = (
+export const getQuotationDetail = async (
     id: string,
     versionId: string,
     token: string
 ) => {
-    return quotationStaffApi.getQuotationDetailByVersion(id, versionId, token);
+    const res = await quotationStaffApi.getQuotationDetailByVersion(
+        id,
+        versionId,
+        token
+    );
+    return res;
 };

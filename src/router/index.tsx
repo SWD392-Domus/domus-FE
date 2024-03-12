@@ -38,6 +38,7 @@ import StaffContractCreate from "./StaffContractCreate";
 import OTP from "./otp";
 import StaffContractDetail from "./StaffContractDetail";
 import Storage from "./storage";
+import CustomerContractDetail from "./customerContractDetail";
 
 const RouterComponent: React.FC = () => {
     const publicRoute = [
@@ -160,6 +161,13 @@ const RouterComponent: React.FC = () => {
             index: true,
             path: "customer/settings/cart",
             component: <CustomerCart />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "customer/settings/contract/:contractId",
+            component: <CustomerContractDetail />,
             exact: true,
             restrict: true,
         },
