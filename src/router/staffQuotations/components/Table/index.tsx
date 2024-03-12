@@ -95,7 +95,7 @@ export function DataTable<TData, TValue>({
                                                 {[
                                                     "id",
                                                     "expireAt",
-                                                    "totalPrice",
+                                                    // "totalPrice",
                                                     "status",
                                                 ].includes(headerId) && (
                                                         <SortButton

@@ -30,10 +30,14 @@ export const columns: ColumnDef<ProductsProps>[] = [
         enableSorting: false,
         enableHiding: false,
     },
-    // {
-    //     accessorKey: "id",
-    //     header: "Id",
-    // },
+    {
+        accessorKey: "id",
+        header: "Id",
+        cell: ({ row }) => {
+            const id: string = row.getValue("id") as string;
+            return <h4> {id.slice(0, 3)}..</h4>;
+        },
+    },
     // {
     //     accessorKey: "productId",
     //     header: "Product",

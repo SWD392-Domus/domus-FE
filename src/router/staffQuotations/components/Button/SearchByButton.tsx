@@ -24,7 +24,7 @@ export const SearchByButton: React.FC<Props> = (props) => {
         [
             { name: "Id", value: "id" },
             { name: "Expire At", value: "expireAt" },
-            { name: "Total Price", value: "totalPrice" },
+            // { name: "Total Price", value: "totalPrice" },
             { name: "Status", value: "status" },
         ]
     return (
