@@ -38,8 +38,8 @@ import OTP from "./otp";
 import StaffContractDetail from "./StaffContractDetail";
 import Storage from "./storage";
 import CustomerContractDetail from "./customerContractDetail";
+import CreateUser from "./adminCreateUser";
 import UserDetails from "./adminUserDetails";
-import CreateUser from "./adminUserDetails/components/CreateUser";
 
 const RouterComponent: React.FC = () => {
     const publicRoute = [
@@ -302,7 +302,7 @@ const RouterComponent: React.FC = () => {
         },
         {
             index: true,
-            path: "staff/user",
+            path: "staff/user/:id",
             component: <UserDetails />,
             exact: true,
             restrict: true,
