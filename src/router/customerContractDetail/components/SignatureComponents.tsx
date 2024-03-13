@@ -24,7 +24,10 @@ function blobToFile(blob: Blob, fileName: string): File {
 }
 
 import SignatureCanvas from "react-signature-canvas";
+import { signContract } from "../usecase/signContract";
+import { useParams } from "react-router-dom";
 const SignatureComponents: React.FC<Props> = (props) => {
+    const { contractId } = useParams();
     const [fullName, setFullName] = useState("");
     const signatureRef = useRef<SignatureCanvas>(null);
     const clearSignature = () => {
@@ -33,7 +36,7 @@ const SignatureComponents: React.FC<Props> = (props) => {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setFullName(e.target.value);
     };
-    const saveSignature = () => {
+    const saveSignature = async () => {
         const signatureData = signatureRef?.current?.toDataURL();
         if (!signatureData && !fullName.trim()) {
             toast({
@@ -65,9 +68,33 @@ const SignatureComponents: React.FC<Props> = (props) => {
         const blob = base64ToBlob(base64Data, "image/png"); // Adjust content type as per your base64 string
         const file = blobToFile(blob, "filename.png"); // Provide a filename for the file
         // Both signature and full name are not empty, proceed with saving
-        console.log(file);
-        console.log("Full Name:", fullName);
+        const formData = new FormData();
+        formData.append("FullName", fullName);
+        formData.append("Signature", file);
+        try {
+            const res = await signContract(contractId as string, formData);
+            if (res.data.isSuccess) {
+                toast({
+                    variant: "success",
+                    title: `Sign Contract Sucessfully`,
+                    description: "",
+                });
+            } else {
+                toast({
+                    variant: "destructive",
+                    title: `${res.data.messages[0].content}`,
+                    description: "There was a problem with your request.",
+                });
+            }
+        } catch {
+            toast({
+                variant: "destructive",
+                title: "There is something wrong, please try again",
+                description: "There was a problem with your request.",
+            });
+        }
     };
+
     return (
         <div className="flex flex-col items-center w-full">
             <SignatureCanvas
@@ -101,7 +128,7 @@ const SignatureComponents: React.FC<Props> = (props) => {
                     onClick={saveSignature}
                     className="text-black"
                 >
-                    Save
+                    Confirm
                 </Button>
             </div>
         </div>
