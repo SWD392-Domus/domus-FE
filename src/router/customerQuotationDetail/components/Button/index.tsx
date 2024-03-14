@@ -44,8 +44,8 @@ export const MakeContractButton = ({
     id: string;
     status: string;
 }) => {
-    const getToolTipMessage = (satus: string) => {
-        if ((status = "Confirmed")) {
+    const getToolTipMessage = () => {
+        if (status == "Confirmed") {
             return "This Quotation have already been confirmed, please wait for the contract being sent to you";
         } else if (status == "Requested") {
             return "This Quotation have been sent, please wait for out staff to reply";
@@ -85,7 +85,7 @@ export const MakeContractButton = ({
     }
     return (
         <Dialog>
-            <DialogTrigger asChild>
+            <DialogTrigger>
                 <TooltipProvider>
                     <Tooltip>
                         <TooltipTrigger>
@@ -98,7 +98,7 @@ export const MakeContractButton = ({
                             </Button>
                         </TooltipTrigger>
                         <TooltipContent>
-                            <p>{getToolTipMessage(status)}</p>
+                            <p>{getToolTipMessage()}</p>
                         </TooltipContent>
                     </Tooltip>
                 </TooltipProvider>
