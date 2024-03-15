@@ -33,6 +33,9 @@ import CreateProduct from "./staffCreateProduct";
 import Error403Page from "./403";
 import QuotationDetail from "./customerQuotationDetail";
 import StaffContractList from "./staffContracts";
+import StaffArticleList from "./staffArticles";
+import AdminUsersList from "./adminUsersList";
+import StaffArticleDetailCreate from "./staffArticleDetailCreate";
 import StaffContractCreate from "./StaffContractCreate";
 import OTP from "./otp";
 import StaffContractDetail from "./StaffContractDetail";
@@ -296,6 +299,27 @@ const RouterComponent: React.FC = () => {
             path: "staff/contracts/:contractId",
             component: <StaffContractDetail />,
 
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/articles",
+            component: <StaffArticleList />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/users",
+            component: <AdminUsersList />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/articles/newArticle",
+            component: <StaffArticleDetailCreate />,
             exact: true,
             restrict: true,
         },

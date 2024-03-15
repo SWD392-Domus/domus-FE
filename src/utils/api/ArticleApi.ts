@@ -20,7 +20,7 @@ export const articleApi = {
 };
 
 export const articleStaffApi = {
-  createArticle: (formData: HTMLElement | null | undefined, token: string) => {
+  createArticle: (formData: any, token: string) => {
     return post(
       `/Articles`,
       formData,

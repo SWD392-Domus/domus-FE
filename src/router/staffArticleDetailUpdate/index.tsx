@@ -1,24 +1,4 @@
 import { Button } from "@/components/ui/Button/Button";
-import {
-    Dialog,
-    DialogContent,
-    DialogFooter,
-    DialogHeader,
-    DialogTrigger,
-} from "@/components/ui/Dialog";
-import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from "@/components/ui/Accordion/Accordion";
-import {
-    Card,
-    CardContent,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/Card";
 // import { FaDeleteLeft } from "react-icons/fa6";
 import React, { useEffect, useState } from "react";
 import { getArticleById } from "./usecase";
@@ -41,7 +21,6 @@ import { updateArticle } from "./usecase";
 import { useToast } from "@/components/ui/Toast/use-toast";
 import { ToastAction } from "@/components/ui/Toast/toast";
 import { Input } from "@/components/ui/Input";
-import { PencilIcon } from "lucide-react";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useNavigate } from "react-router-dom";

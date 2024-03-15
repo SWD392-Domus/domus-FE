@@ -1,12 +1,10 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Avatar, AvatarImage } from "@/components/ui/Avatar";
 import { Checkbox } from "@/components/ui/Checkbox/checkbox";
-import { ArticlesProps } from "../../types";
+import { UsersProps } from "../../types";
 import { CRUDDropdownMenu } from "../DropdownMenu/CRUD";
-// import { TooltipDes } from "../Tooltip"
-import articlePlaceholder from "@/assets/image/package-placeholder.png";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 
-export const columns: ColumnDef<ArticlesProps>[] = [
+export const columns: ColumnDef<UsersProps>[] = [
     {
         id: "select",
         header: ({ table }) => (
@@ -40,24 +38,49 @@ export const columns: ColumnDef<ArticlesProps>[] = [
         },
     },
     {
-        accessorKey: "articleImages",
-        header: "Image",
+        accessorKey: "userName",
+        header: "User Name",
+    },
+    {
+        accessorKey: "fullName",
+        header: "Full Name",
         cell: ({ row }) => {
-            const images: any = row.original.articleImages;
-            const image: any = images[0]
-            const haveImg = image && image.imageUrl;
+            const customerName: string =
+                (row.getValue("fullName") as { fullName?: string })
+                    ?.fullName || "";
+            const customerAva: string =
+                (row.getValue("fullName") as { profileImage?: string })
+                    ?.profileImage || "";
             return (
-                <Avatar>
-                    <AvatarImage
-                        src={haveImg ? image.imageUrl : articlePlaceholder}
-                    />
-                </Avatar>
+                <div className=" text-right font-medium">
+                    {
+                        <div className="flex items-center gap-1 ">
+                            <Avatar>
+                                <AvatarImage src={customerAva} />
+                                <AvatarFallback>C</AvatarFallback>
+                            </Avatar>
+                            <div className="text-black">{customerName}</div>
+                        </div>
+                    }
+                </div>
             );
         },
     },
     {
-        accessorKey: "title",
-        header: "Title",
+        accessorKey: "gender",
+        header: "Gender",
+    },
+    {
+        accessorKey: "email",
+        header: "Email",
+    },
+    {
+        accessorKey: "phoneNumber",
+        header: "Phone",
+    },
+    {
+        accessorKey: "address",
+        header: "Address",
     },
     {
         id: "actions",

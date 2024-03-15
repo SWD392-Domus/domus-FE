@@ -3,7 +3,6 @@ import generateActions from "./generateActions";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 export const initialState = {
-  id: "",
   name: "",
   description: "",
 };
@@ -20,18 +19,15 @@ const slice = createSlice({
       state.modal.confirm = action.payload;
     },
     setArticle: (state: any, action: any) => {
-      state.id = action.payload.id;
       state.name = action.payload.name;
       state.description = action.payload.description;
     },
     resetArticle: (state: any) => {
-      state.id = "";
       state.name = "";
       state.description = "";
     },
     getArticleInfo: (state: any) => {
       state.info = {
-        id: state.id,
         name: state.name,
         description: state.description,
       };
