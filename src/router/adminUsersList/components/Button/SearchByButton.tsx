@@ -23,8 +23,11 @@ export const SearchByButton: React.FC<Props> = (props) => {
     const searchFields: Field[] =
         [
             { name: "Id", value: "id" },
-            { name: "Name", value: "name" },
-            { name: "Signed At", value: "signedAt" },
+            { name: "User Name", value: "userName" },
+            { name: "Full Name", value: "fullName" },
+            { name: "Gender", value: "gender" },
+            { name: "Email", value: "email" },
+            { name: "Address", value: "address" },
         ]
     return (
         <Select onValueChange={(value) => handleClick(value)}>

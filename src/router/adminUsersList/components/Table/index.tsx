@@ -94,8 +94,10 @@ export function DataTable<TData, TValue>({
                                                     )}
                                                 {[
                                                     "id",
-                                                    "name",
-                                                    "signedAt",
+                                                    "userName",
+                                                    "fullName",
+                                                    "gender",
+                                                    "email",
                                                 ].includes(headerId) && (
                                                         <SortButton
                                                             sortField={headerId}
