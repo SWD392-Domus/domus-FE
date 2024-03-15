@@ -34,6 +34,7 @@ import Error403Page from "./403";
 import QuotationDetail from "./customerQuotationDetail";
 import StaffContractList from "./staffContracts";
 import StaffArticleList from "./staffArticles";
+import StaffArticleDetail from "./staffArticleDetail";
 import StaffServiceList from "./staffServices";
 import AdminUsersList from "./adminUsersList";
 import StaffArticleDetailCreate from "./staffArticleDetailCreate";
@@ -223,6 +224,13 @@ const RouterComponent: React.FC = () => {
             index: true,
             path: "staff/quotations/:quotationId",
             component: <StaffQuotationDetail />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/articles/:articleId",
+            component: <StaffArticleDetail />,
             exact: true,
             restrict: true,
         },

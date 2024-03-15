@@ -34,7 +34,6 @@ const ArticleDetails: React.FC<Props> = () => {
     const id: string = useSelector(selector.id);
     const name: string = useSelector(selector.title);
     const description: string = useSelector(selector.content);
-    const [desValue, setDesValue] = useState("");
     const [updated, setUpdated] = useState(false);
     const { toast } = useToast();
 
@@ -47,7 +46,6 @@ const ArticleDetails: React.FC<Props> = () => {
                     // console.log(response)
                     // dispatch(actions.getArticleInfo());
                     form.setValue("name", response.title);
-                    setDesValue(response.content);
                     form.setValue("description", response.content);
                     setUpdated(true);
                 }
@@ -74,7 +72,7 @@ const ArticleDetails: React.FC<Props> = () => {
         },
     });
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        const res = await updateArticle(id, { title: values.name, content: desValue });
+        const res = await updateArticle(id, { title: values.name, content: values.description });
         if (res === 200) {
             toast({
                 variant: "success",

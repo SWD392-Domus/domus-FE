@@ -13,6 +13,7 @@ import {
 } from "../styled";
 import type { ArticleItem } from "../types";
 import { slideInFromTop } from "@/utils/motion";
+import domusLogo from "@/assets/image/domusLogo.png";
 
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 interface ItemProps {
@@ -24,15 +25,15 @@ const ArticleItem: React.FC<ItemProps> = (props) => {
         <Item variants={slideInFromTop}>
             <StyledLink to={`/article/${props.item.id}`}>
                 <ThumbnailContainer>
-                    <Thumbnail src={props.item.images[0]} />
-                    <CategoryCard>{props.item.category}</CategoryCard>
+                    <Thumbnail src={domusLogo} />
+                    <CategoryCard>{props.item.articleCategory.name}</CategoryCard>
                 </ThumbnailContainer>
                 <TitleContainer>
                     <ArticleTitle>{props.item.title}</ArticleTitle>
-                    <Author>by {props.item.author}</Author>
-                    <DateTime>
+                    {/* <Author>by {props.item.author}</Author> */}
+                    {/* <DateTime>
                         {new Date(props.item.createdAt).toDateString()}
-                    </DateTime>
+                    </DateTime> */}
                 </TitleContainer>
 
                 <Arrow to={`/article/${props.item.id}`}>
