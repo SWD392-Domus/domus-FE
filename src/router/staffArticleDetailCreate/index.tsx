@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/Button/Button";
-import React, { useState } from "react";
+import React from "react";
 import { createArticle } from "./usecase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,9 +20,6 @@ import { z } from "zod";
 import { useToast } from "@/components/ui/Toast/use-toast";
 import { ToastAction } from "@/components/ui/Toast/toast";
 import { Input } from "@/components/ui/Input";
-// import { PencilIcon } from "lucide-react";
-// import { Label } from "@/components/ui/Label";
-// import { Label } from "@/components/ui/Label";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
@@ -33,7 +30,6 @@ const StaffArticleDetailCreate: React.FC<Props> = () => {
     const navigate = useNavigate();
     const name: string = useSelector(selector.name);
     const description: string = useSelector(selector.description);
-    const [desValue, setDesValue] = useState("");
 
     const { toast } = useToast();
 
@@ -54,7 +50,7 @@ const StaffArticleDetailCreate: React.FC<Props> = () => {
         const res = await createArticle({
             articleCategoryId: "F3EE89E5-F0C0-4854-A29B-B67EAB41CAC3",
             title: values.name,
-            content: desValue
+            content: values.description
         });
         if (res === 200) {
             toast({
@@ -101,7 +97,6 @@ const StaffArticleDetailCreate: React.FC<Props> = () => {
                                                 <Input
                                                     placeholder={"Title..."}
                                                     {...field}
-                                                    className=""
                                                 />
                                             </FormControl>
 
@@ -125,9 +120,24 @@ const StaffArticleDetailCreate: React.FC<Props> = () => {
                                     </div>
                                 </div>
                                 <div className='w-full'>
-                                    <ReactQuill className="" theme="snow" value={desValue} placeholder="Content..."
-                                        onChange={setDesValue}
-                                    ></ReactQuill>
+                                    <FormField
+                                        control={form.control}
+                                        name="description"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormControl>
+                                                    <ReactQuill
+                                                        theme="snow"
+                                                        placeholder="Content..."
+                                                        {...field}
+                                                    ></ReactQuill>
+                                                </FormControl>
+
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+
                                 </div>
                             </div>
                         </div>
