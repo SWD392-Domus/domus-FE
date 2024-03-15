@@ -2,24 +2,25 @@ import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 import {
     DropdownMenu,
     DropdownMenuContent,
-    DropdownMenuItem,
+    // DropdownMenuItem,
     DropdownMenuLabel,
-    DropdownMenuSeparator,
+    // DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/Dropdown-menu";
 import {
     Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-    DialogClose,
+    // DialogContent,
+    // DialogDescription,
+    // DialogFooter,
+    // DialogHeader,
+    // DialogTitle,
+    // DialogTrigger,
+    // DialogClose,
 } from "@/components/ui/Dialog";
 import { Button } from "@/components/ui/Button/Button";
-import { ConfirmDeleteButton } from "../Button/ConfirmDeleteButton";
+// import { ConfirmDeleteButton } from "../Button/ConfirmDeleteButton";
 import { ViewButton } from "../Button/ViewButton";
+// import { UpdateButton } from "../Button/UpdateButton";
 
 interface Props {
     // define your props here
@@ -39,16 +40,16 @@ export const CRUDDropdownMenu: React.FC<Props> = (props) => {
                 <DropdownMenuContent align="end">
                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
                     <ViewButton id={props.id}></ViewButton>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem>Update</DropdownMenuItem>
+                    {/* <DropdownMenuSeparator />
+                    <UpdateButton id={props.id}></UpdateButton>
                     <DropdownMenuItem>
                         <DialogTrigger className="w-full text-left">
                             Delete
                         </DialogTrigger>
-                    </DropdownMenuItem>
+                    </DropdownMenuItem> */}
                 </DropdownMenuContent>
             </DropdownMenu>
-            <DialogContent className="sm:max-w-[425px]">
+            {/* <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
                     <DialogTitle>Delete?</DialogTitle>
                     <DialogDescription>
@@ -63,7 +64,7 @@ export const CRUDDropdownMenu: React.FC<Props> = (props) => {
                         ></ConfirmDeleteButton>
                     </DialogClose>
                 </DialogFooter>
-            </DialogContent>
+            </DialogContent> */}
         </Dialog>
     );
 };

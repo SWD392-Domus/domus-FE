@@ -2,28 +2,28 @@ import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuTrigger,
-    DropdownMenuItem,
+    // DropdownMenuItem,
     DropdownMenuLabel,
-    DropdownMenuSeparator,
+    // DropdownMenuSeparator,
     // DropdownMenuCheckboxItem,
 } from "@/components/ui/Dropdown-menu"
 import {
     Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-    DialogClose
+    // DialogContent,
+    // DialogDescription,
+    // DialogFooter,
+    // DialogHeader,
+    // DialogTitle,
+    // DialogTrigger,
+    // DialogClose
 } from "@/components/ui/Dialog";
 import {
     GearIcon
 } from "@radix-ui/react-icons"
 import { Button } from "@/components/ui/Button/Button"
-import { ConfirmDeleteManyButton } from "../Button/ConfirmDeleteManyButton";
+// import { ConfirmDeleteManyButton } from "../Button/ConfirmDeleteManyButton";
 import { ViewButton } from "../Button/ViewButton";
-import { UpdateButton } from "../Button/UpdateButton";
+// import { UpdateButton } from "../Button/UpdateButton";
 
 interface Props {
     // define your props here
@@ -49,18 +49,18 @@ export const ActionsDropdownMenu: React.FC<Props> = (props) => {
                                 <>
                                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
                                     <ViewButton id={props.ids[0]}></ViewButton>
-                                    <DropdownMenuSeparator />
-                                    <UpdateButton id={props.ids[0]}></UpdateButton>
+                                    {/* <DropdownMenuSeparator />
+                                    <UpdateButton id={props.ids[0]}></UpdateButton> */}
                                 </>
                             }
-                            <DropdownMenuItem>
+                            {/* <DropdownMenuItem>
                                 <DialogTrigger className="w-full text-left">Delete</DialogTrigger>
-                            </DropdownMenuItem>
+                            </DropdownMenuItem> */}
                         </>
                     }
                 </DropdownMenuContent>
             </DropdownMenu>
-            <DialogContent className="sm:max-w-[425px]">
+            {/* <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
                     <DialogTitle>Delete?</DialogTitle>
                     <DialogDescription>
@@ -73,7 +73,7 @@ export const ActionsDropdownMenu: React.FC<Props> = (props) => {
                         <ConfirmDeleteManyButton ids={props.ids}></ConfirmDeleteManyButton>
                     </DialogClose>
                 </DialogFooter>
-            </DialogContent>
+            </DialogContent> */}
         </Dialog >
     )
 }

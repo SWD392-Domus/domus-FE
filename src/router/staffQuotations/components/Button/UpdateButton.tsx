@@ -11,6 +11,6 @@ export const UpdateButton: React.FC<Props> = (props) => {
     const location = useLocation();
     const navigate = useNavigate();
     return (
-        <DropdownMenuItem onClick={() => navigate(`${location.pathname}/${props.id}/update`)}>Update</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => navigate(`${location.pathname}/${props.id}`)}>Update</DropdownMenuItem>
     )
 }

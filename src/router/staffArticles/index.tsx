@@ -12,7 +12,7 @@ interface Props {
 const StaffArticles: React.FC<Props> = () => {
     const [articles, setArticles] = useState<ArticlesProps[]>([]);
     // const [loading, setLoading] = useState(true);
-    const [searchField, setSearchField] = useState("name");
+    const [searchField, setSearchField] = useState("title");
     const [searchValue, setSearchValue] = useState("");
     const [sortField, setSortField] = useState("");
     const [descending, setDescending] = useState(false);
