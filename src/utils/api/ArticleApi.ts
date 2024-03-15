@@ -106,10 +106,15 @@ export const articleStaffApi = {
     sortField: string,
     descending: boolean,
     pageSize: number,
-    pageIndex: number
+    pageIndex: number,
+    token: string
   ) => {
     return get(
-      `/Articles/search?SearchField=${searchField}&SearchValue=${searchValue}&SortField=${sortField}&Descending=${descending}&PageSize=${pageSize}&PageIndex=${pageIndex}`
+      `/Articles/search?SearchField=${searchField}&SearchValue=${searchValue}&SortField=${sortField}&Descending=${descending}&PageSize=${pageSize}&PageIndex=${pageIndex}`,
+      {},
+      {
+        Authorization: token,
+      }
     );
   },
   getArticleById: (id: string) => {

@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { DataTable } from "./components/Table/index.tsx";
-import { columns } from "./components/Table/column.tsx";
-// import { UsersProps } from "./types/index.ts";
-import { getUsersPaging } from "./usecase";
-import UsersPagination from "./components/UsersPagination";
+import { columns } from './components/Table/column.tsx'
+import { ServicesProps } from "./types/index.ts";
+import { getServicesPaging } from "./usecase";
+import ServicesPagination from "./components/ServicesPagination"
 
 interface Props {
     // define your props here
 }
 
-const StaffUser: React.FC<Props> = () => {
-    const [users, setUsers] = useState<any[]>([]);
+const StaffServices: React.FC<Props> = () => {
+    const [services, setServices] = useState<ServicesProps[]>([]);
     // const [loading, setLoading] = useState(true);
-    const [searchField, setSearchField] = useState("userName");
+    const [searchField, setSearchField] = useState("name");
     const [searchValue, setSearchValue] = useState("");
     const [sortField, setSortField] = useState("");
     const [descending, setDescending] = useState(false);
@@ -21,15 +21,14 @@ const StaffUser: React.FC<Props> = () => {
     const [pageSize, setPageSize] = useState(5);
     const [pageIndex, setPageIndex] = useState(1);
 
-    async function getUsersService(
+    async function getServicesService(
         searchField: string,
         searchValue: string,
         sortField: string,
         descending: boolean,
         pageSize: number,
-        pageIndex: number
-    ) {
-        const res = await getUsersPaging(
+        pageIndex: number) {
+        const res = await getServicesPaging(
             searchField,
             searchValue,
             sortField,
@@ -39,37 +38,41 @@ const StaffUser: React.FC<Props> = () => {
         );
         if (res) {
             // setLoading(false);
-            setUsers(res.usersItems);
+            setServices(res.servicesItems);
             setTotalPages(res.lastPage);
             setTotalItems(res.total);
         }
     }
 
     useEffect(() => {
-        getUsersService(
+        getServicesService(
             searchField,
             searchValue,
             sortField,
             descending,
             pageSize,
-            pageIndex
-        );
-    }, [searchField, searchValue, sortField, descending, pageSize, pageIndex]);
+            pageIndex);
+    }, [searchField,
+        searchValue,
+        sortField,
+        descending,
+        pageSize,
+        pageIndex]);
 
     return (
         <div className="">
-            <div className="text-xl font-bold py-5">User List</div>
+            <div className="text-xl font-bold py-5">Service List</div>
             <DataTable
                 columns={columns}
-                data={users}
+                data={services}
                 setSearchField={setSearchField}
                 setSearchValue={setSearchValue}
                 setSortField={setSortField}
                 setDescending={setDescending}
             />
             <div className="flex justify-between text-sm font-medium">
-                <div className="">{totalItems} Users</div>
-                <UsersPagination
+                <div className="">{totalItems} Services</div>
+                <ServicesPagination
                     totalPages={totalPages}
                     totalItems={totalItems}
                     pageIndex={pageIndex}
@@ -79,7 +82,7 @@ const StaffUser: React.FC<Props> = () => {
                 />
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default StaffUser;
+export default StaffServices

@@ -9,7 +9,8 @@ import {
     PersonIcon,
     LayersIcon,
     FileIcon,
-    CrumpledPaperIcon
+    CrumpledPaperIcon,
+    IdCardIcon
 } from "@radix-ui/react-icons";
 import { IconProps } from "@radix-ui/react-icons/dist/types";
 
@@ -40,6 +41,12 @@ const components: {
             description: "Product Management",
         },
         {
+            title: "Service",
+            icon: CrumpledPaperIcon,
+            href: "/staff/services",
+            description: "Service Management",
+        },
+        {
             title: "Package",
             icon: BackpackIcon,
             href: "/staff/packages",
@@ -59,7 +66,7 @@ const components: {
         },
         {
             title: "User",
-            icon: CrumpledPaperIcon,
+            icon: IdCardIcon,
             href: "/staff/users",
             description: "User Management",
         },

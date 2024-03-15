@@ -1,6 +1,6 @@
-import { articleStaffApi } from "@/utils/api/ArticleApi";
+import { serviceStaffApi } from "@/utils/api/ServiceApi";
 
-export const getArticlesPagingService = async (
+export const getServicesPagingService = async (
   searchField: string,
   searchValue: string,
   sortField: string,
@@ -9,7 +9,7 @@ export const getArticlesPagingService = async (
   pageIndex: number,
   token: string
 ) => {
-  return articleStaffApi.getArticlesPaging(
+  return serviceStaffApi.getServicesPaging(
     searchField,
     searchValue,
     sortField,
