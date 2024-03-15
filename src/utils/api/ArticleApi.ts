@@ -23,17 +23,8 @@ export const articleStaffApi = {
   createArticle: (formData: any, token: string) => {
     return post(`/Articles`, formData, {}, { Authorization: token });
   },
-  updateArticle: (
-    id: string,
-    formData: HTMLElement | null | undefined,
-    token: string
-  ) => {
-    return put(
-      `/Articles?id=${id}`,
-      formData,
-      {},
-      { Authorization: token, "Content-Type": "multipart/form-data" }
-    );
+  updateArticle: (id: string, formData: any, token: string) => {
+    return put(`/Articles/${id}`, formData, {}, { Authorization: token });
   },
 
   deleteArticle: (id: string, token: string) => {

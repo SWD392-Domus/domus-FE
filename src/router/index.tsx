@@ -37,6 +37,7 @@ import StaffArticleList from "./staffArticles";
 import StaffServiceList from "./staffServices";
 import AdminUsersList from "./adminUsersList";
 import StaffArticleDetailCreate from "./staffArticleDetailCreate";
+import StaffArticleDetailUpdate from "./staffArticleDetailUpdate";
 import StaffContractCreate from "./StaffContractCreate";
 import OTP from "./otp";
 import StaffContractDetail from "./StaffContractDetail";
@@ -328,6 +329,20 @@ const RouterComponent: React.FC = () => {
             index: true,
             path: "staff/articles/newArticle",
             component: <StaffArticleDetailCreate />,
+            exact: true,
+            restrict: true,
+        },
+        // {
+        //     index: true,
+        //     path: "staff/articles/:articleId",
+        //     component: <StaffArticleDetail />,
+        //     exact: true,
+        //     restrict: true,
+        // },
+        {
+            index: true,
+            path: "staff/articles/:articleId/update",
+            component: <StaffArticleDetailUpdate />,
             exact: true,
             restrict: true,
         },
