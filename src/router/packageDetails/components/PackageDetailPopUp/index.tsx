@@ -26,7 +26,7 @@ import { useNavigate } from "react-router-dom";
 interface Props {
 }
 
-const PackageDetailPopUp: React.FC<Props> = (props) => {
+const PackageDetailPopUp: React.FC<Props> = () => {
     const [updated, setUpdated] = useState(false);
 
     const packageA: any = useSelector(selector.packageA);

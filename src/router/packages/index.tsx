@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/Input";
 import PackageSkeleton from "./components/PackageSkeleton";
 import PackagesPagination from "./components/PackagesPagination";
 import { searchPackages } from "./usecases";
-import { PackageProps } from "@/router/packages/type";
+// import { PackageProps } from "@/router/packages/type";
 // import { toast } from "@/components/ui/Toast/use-toast";
 // import CategorySelection from "./components/CategorySelection";
 

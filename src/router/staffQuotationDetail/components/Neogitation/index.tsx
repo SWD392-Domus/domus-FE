@@ -6,7 +6,7 @@ import {
     FormItem,
     FormMessage,
 } from "@/components/ui/Form";
-import { Input } from "@/components/ui/Input";
+// import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChatBubbleIcon } from "@radix-ui/react-icons";
@@ -49,7 +49,7 @@ const Negotiation: React.FC<Props> = ({ staff, negotiationLog, customer }) => {
             setAssigned(false);
         }
     }, []);
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const formSchema = z.object({
         message: z.string().min(10, {
             message: "Message must be at least 10 characters.",

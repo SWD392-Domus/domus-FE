@@ -7,7 +7,7 @@ interface Props {
     // define your props here
 }
 
-const Error403Page: React.FC<Props> = (props) => {
+const Error403Page: React.FC<Props> = () => {
     const navigate = useNavigate();
     const handleNavigate = () => {
         navigate("/");

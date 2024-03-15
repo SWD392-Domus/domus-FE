@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
-import QuantityInput from "./QuantityInput.tsx";
-import { TooltipDes } from '../Tooltip/index.tsx';
-// import { getProductDetailById } from "../../usecase/index.ts";
-// import { actions } from "../../slice/index.ts";
-import { useDispatch } from "react-redux";
-import { Button } from "@/components/ui/Button/Button.tsx";
+import React from "react";
+// import QuantityInput from "./QuantityInput.tsx";
+// import { TooltipDes } from '../Tooltip/index.tsx';
+// // import { getProductDetailById } from "../../usecase/index.ts";
+// // import { actions } from "../../slice/index.ts";
+// import { useDispatch } from "react-redux";
+// import { Button } from "@/components/ui/Button/Button.tsx";
 import { FaPencil } from "react-icons/fa6";
 import {
     Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
+    // DialogContent,
+    // DialogDescription,
+    // DialogFooter,
+    // DialogHeader,
+    // DialogTitle,
     DialogTrigger,
-    DialogClose
+    // DialogClose
 } from "@/components/ui/Dialog";
 import PackageDetailPopUp from "./PackageDetailPopUp/index.tsx";
 

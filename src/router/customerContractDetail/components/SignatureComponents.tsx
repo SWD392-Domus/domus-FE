@@ -26,7 +26,7 @@ function blobToFile(blob: Blob, fileName: string): File {
 import SignatureCanvas from "react-signature-canvas";
 import { signContract } from "../usecase/signContract";
 import { useParams } from "react-router-dom";
-const SignatureComponents: React.FC<Props> = (props) => {
+const SignatureComponents: React.FC<Props> = () => {
     const { contractId } = useParams();
     const [fullName, setFullName] = useState("");
     const signatureRef = useRef<SignatureCanvas>(null);

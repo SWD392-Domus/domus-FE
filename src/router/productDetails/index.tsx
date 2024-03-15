@@ -234,7 +234,7 @@ const ProductDetails: React.FC = () => {
                                 currency: "VND",
                             }).format(product?.details[0]?.displayPrice )}
                         </div> */}
-                        {fields.map((field) => (
+                        {fields.map((field: any) => (
                             <div className="flex flex-col gap-2">
                                 <div className="text-black font-thin">
                                     {field.name}
@@ -248,7 +248,7 @@ const ProductDetails: React.FC = () => {
                                     // console.log(e);
                                     // }}
                                     >
-                                        {field.values.map((value) => (
+                                        {field.values.map((value: any) => (
                                             <ToggleGroupItem
                                                 value={value}
                                                 aria-label="Toggle bold"

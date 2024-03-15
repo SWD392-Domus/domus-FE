@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "@/components/ui/Button/Button";
 import {
   Command,
   CommandEmpty,
@@ -32,9 +31,9 @@ type Props = {
   setSelectedProduct: React.Dispatch<React.SetStateAction<ChooseDetailsProductsProps[]>>;
 };
 
-function handleSelectDetail(){
+// function handleSelectDetail(){
     
-}
+// }
 
 const DetailsList: React.FC<Props> = ({
   setOpen,
@@ -55,8 +54,8 @@ const DetailsList: React.FC<Props> = ({
             );
           } else {
             // If not selected, add it to the selected list
-            const detail = products.flatMap((product) => product.details).find(
-              (detail) => detail.id === detailId
+            const detail = products.flatMap((product:any) => product.details).find(
+              (detail:any) => detail.id === detailId
             );
             if (!detail) return prevSelectedProducts;
     
@@ -79,7 +78,7 @@ const DetailsList: React.FC<Props> = ({
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup>
           {products &&
-            products.map((product) => (
+            products.map((product: any) => (
               <CommandItem key={product.id} value={product.id}>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -90,7 +89,7 @@ const DetailsList: React.FC<Props> = ({
                       Select Product Details
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    {product.details?.map((detail, index) => {
+                    {product.details?.map((detail:any, index: any) => {
                       const imageUrl =
                         detail && detail.images && detail?.images[0]?.imageUrl;
 

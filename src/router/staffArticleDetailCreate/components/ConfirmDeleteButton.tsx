@@ -13,7 +13,7 @@ export const ConfirmDeleteButton: React.FC<Props> = (props) => {
         <Button
             onClick={() =>
                 deleteArticle(props.id)
-                    .then((res) => {
+                    .then((res: any) => {
                         if (res === 200) {
                             toast({
                                 variant: "success",

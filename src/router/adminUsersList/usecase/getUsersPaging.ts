@@ -1,4 +1,4 @@
-import { profile } from "console";
+// import { profile } from "console";
 import { getUsersPagingService } from "../service";
 
 export const getUsersPaging = async (

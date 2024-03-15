@@ -51,31 +51,31 @@ type Status = {
     details?: ProductDetails[];
     price?: string;
 };
-const handleSelectDetail = (
-    detail: ProductDetails,
-    product: Status,
-    index: number,
-    setSelectedStatus: any
-) => {
-    setSelectedStatus({
-        productDetailId: detail.id,
-        productName: product.productName + " Variant " + index + 1,
-        price: detail.displayPrice,
-        monetaryUnit: "VND",
-        quantity: 1,
-        quantityType: "Unit",
-        priceSum: new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "VND",
-        }).format(detail.displayPrice),
-    });
-};
-interface Props {
-    // selectedStatus: Status;
-    // setSelectedStatus: (value: Status | null) => void;
-    // value: string;
-}
-export function ComboBoxResponsive(props: Props) {
+// const handleSelectDetail = (
+//     detail: ProductDetails,
+//     product: Status,
+//     index: number,
+//     setSelectedStatus: any
+// ) => {
+//     setSelectedStatus({
+//         productDetailId: detail.id,
+//         productName: product.productName + " Variant " + index + 1,
+//         price: detail.displayPrice,
+//         monetaryUnit: "VND",
+//         quantity: 1,
+//         quantityType: "Unit",
+//         priceSum: new Intl.NumberFormat("en-US", {
+//             style: "currency",
+//             currency: "VND",
+//         }).format(detail.displayPrice),
+//     });
+// };
+// interface Props {
+//     selectedStatus: Status;
+//     setSelectedStatus: (value: Status | null) => void;
+//     value: string;
+// }
+export function ComboBoxResponsive() {
     const [products, setProducts] = useState<Status[]>();
     const fetchData = async () => {
         const res = await getAllProducts();
@@ -122,11 +122,11 @@ export function ComboBoxResponsive(props: Props) {
 
 function StatusList({
     setOpen,
-    setSelectedStatus,
+    // setSelectedStatus,
     products,
 }: {
     setOpen: (open: boolean) => void;
-    setSelectedStatus: (status: Status | null) => void;
+    // setSelectedStatus: (status: Status | null) => void;
     products: Status[];
 }) {
     const dispatch = useDispatch();

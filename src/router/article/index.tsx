@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Body, InfoContainer, NextButton } from "./styled";
+import { Body, InfoContainer,  } from "./styled";
 import CustomerHeader from "@/components/CustomerHeader";
-import { articleData, headerTitle } from "./constants";
+import { headerTitle } from "./constants";
 import List from "./components/List";
 import { ArticleItem } from "./types/index.ts";
 import { getArticlesPaging } from "./usecase/getArticlesPaging.ts";
 
 const ArticleList: React.FC = () => {
     const [articles, setArticles] = useState<ArticleItem[]>([]);
-    const [searchField, setSearchField] = useState("title");
-    const [searchValue, setSearchValue] = useState("");
-    const [sortField, setSortField] = useState("");
-    const [descending, setDescending] = useState(false);
-    const [totalPages, setTotalPages] = useState(0);
-    const [totalItems, setTotalItems] = useState(0);
-    const [pageSize, setPageSize] = useState(100);
-    const [pageIndex, setPageIndex] = useState(1);
+    const [searchField, ] = useState("title");
+    const [searchValue, ] = useState("");
+    const [sortField, ] = useState("");
+    const [descending, ] = useState(false);
+    const [, setTotalPages] = useState(0);
+    const [, setTotalItems] = useState(0);
+    const [pageSize, ] = useState(100);
+    const [pageIndex, ] = useState(1);
 
     async function getArticlesService(
         searchField: string,

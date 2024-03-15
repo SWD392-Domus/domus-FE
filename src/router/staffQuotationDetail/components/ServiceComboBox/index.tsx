@@ -15,8 +15,8 @@ import {
     PopoverTrigger,
 } from "@/components/ui/Popover";
 import { useEffect, useState } from "react";
-import { getAllProducts } from "../../usecase";
-import { ProductProps } from "@/router/products/type";
+// import { getAllProducts } from "../../usecase";
+// import { ProductProps } from "@/router/products/type";
 import { getAllService } from "../../usecase/getAllService";
 import { ServiceProps } from "../../types";
 

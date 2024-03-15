@@ -2,9 +2,7 @@ import React from "react";
 import {
     Arrow,
     ArticleTitle,
-    Author,
     CategoryCard,
-    DateTime,
     Item,
     StyledLink,
     Thumbnail,

@@ -1,7 +1,7 @@
 import { injectReducer } from "@/store";
 import generateActions from "./generateActions";
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ArticleImageProps } from "../types";
+import { createSlice } from "@reduxjs/toolkit";
+// import { ArticleImageProps } from "../types";
 
 export const initialState = {
   id: "",

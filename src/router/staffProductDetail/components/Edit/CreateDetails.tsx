@@ -43,7 +43,7 @@ const CreateDetailsPopup: React.FC = () => {
     resolver: zodResolver(createDetailsSchema),
     defaultValues: {
       price: "1",
-      quantity: "1",
+      // quantity: "1",
     },
   });
 
@@ -56,7 +56,7 @@ const CreateDetailsPopup: React.FC = () => {
   });
   const handleAddDetails = (values: z.infer<typeof createDetailsSchema>) => {
     dispatch(addProductDetails({
-      quantity: Number(values.quantity),
+      // quantity: Number(values.quantity),
       displayPrice: Number(values.price),
       attributes: attributes,
       monetaryUnit: "VND",
@@ -204,7 +204,7 @@ const CreateDetailsPopup: React.FC = () => {
               </FormItem>
             )}
           />
-          <FormField
+          {/* <FormField
             control={form2.control}
             name="quantity"
             render={({ field }) => (
@@ -219,7 +219,7 @@ const CreateDetailsPopup: React.FC = () => {
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
           <DialogClose asChild>
             <Button type="submit">Submit</Button>
           </DialogClose>

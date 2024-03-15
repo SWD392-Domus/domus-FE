@@ -2,15 +2,15 @@ import * as React from "react";
 
 // import { useMediaQuery } from "@/hooks/use-media-query"
 import { Button } from "@/components/ui/Button/Button";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/Command";
-import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/Drawer";
+// import {
+//   Command,
+//   CommandEmpty,
+//   CommandGroup,
+//   CommandInput,
+//   CommandItem,
+//   CommandList,
+// } from "@/components/ui/Command";
+// import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/Drawer";
 import {
   Popover,
   PopoverContent,
@@ -18,31 +18,31 @@ import {
 } from "@/components/ui/Popover";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/Dropdown-menu";
+// import {
+//   DropdownMenu,
+//   DropdownMenuContent,
+//   DropdownMenuItem,
+//   DropdownMenuLabel,
+//   DropdownMenuSeparator,
+//   DropdownMenuTrigger,
+// } from "@/components/ui/Dropdown-menu";
 
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/Form";
+// import {
+//   Form,
+//   FormControl,
+//   FormDescription,
+//   FormField,
+//   FormItem,
+//   FormLabel,
+//   FormMessage,
+// } from "@/components/ui/Form";
 
 import { getAllProducts } from "@/router/staffQuotationDetail/usecase";
 import DetailsList from "./DetailsList";
 import { Input } from "@/components/ui/Input";
-import { z } from "zod";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+// import { z } from "zod";
+// import { SubmitHandler, useForm } from "react-hook-form";
+// import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "@/components/ui/Toast/use-toast";
 import { importStorage } from "../usecase";
 export interface ProductDetails {
@@ -94,7 +94,7 @@ export function ComboBoxResponsive() {
   const [selectedProducts, setSelectedProducts] = React.useState<
     ChooseDetailsProductsProps[]
   >([]);
-  const [selectedProductToSend, setSelectedProductToSend] = React.useState([]);
+  // const [selectedProductToSend, setSelectedProductToSend] = React.useState([]);
   // const [quantity, setQuantity] = React.useState(0);
   // const [price, setPrice] = React.useState(0);
   const [errors, setErrors] = React.useState<{ [key: string]: string }>({});

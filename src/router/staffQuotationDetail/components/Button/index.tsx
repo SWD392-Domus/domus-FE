@@ -20,7 +20,7 @@ import {
 import { Quotationstatus } from "@/router/customerQuotationDetail/constants";
 import { CheckIcon, PencilIcon, SendIcon, XIcon } from "lucide-react";
 function onUpdate() {}
-function onMakeContract() {}
+// function onMakeContract() {}
 function onDelete() {}
 
 function onCancle() {}

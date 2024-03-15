@@ -34,8 +34,8 @@ const PackageDetails: React.FC<Props> = () => {
   const id: string = useSelector(selector.id);
   const name: string = useSelector(selector.name);
   const description: string = useSelector(selector.description);
-  const estimatedPrice: number = useSelector(selector.estimatedPrice);
-  const discount: number = useSelector(selector.discount);
+  // const estimatedPrice: number = useSelector(selector.estimatedPrice);
+  // const discount: number = useSelector(selector.discount);
   const services: ServiceProps[] = useSelector(selector.services);
   const productDetails: ProductDetailProps[] = useSelector(selector.productDetails);
   const packageImages: PackageImageProps[] = useSelector(selector.packageImages);

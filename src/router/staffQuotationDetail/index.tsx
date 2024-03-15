@@ -4,15 +4,15 @@ import {
     EnvelopeClosedIcon,
     HomeIcon,
     PersonIcon,
-    ChatBubbleIcon,
-    Pencil1Icon,
+    // ChatBubbleIcon,
+    // Pencil1Icon,
     TrashIcon,
 } from "@radix-ui/react-icons";
-import { Textarea } from "@/components/ui/Textarea";
+// import { Textarea } from "@/components/ui/Textarea";
 import {
-    SendButton,
-    UpdateButton,
-    DeleteButton,
+    // SendButton,
+    // UpdateButton,
+    // DeleteButton,
     MakeContractButton,
 } from "./components/Button";
 
@@ -79,7 +79,7 @@ export interface VersionType {
     createdAt: string;
 }
 const QuotationDetail: React.FC<Props> = () => {
-    const [isLoading, setLoading] = useState(false);
+    // const [isLoading, setLoading] = useState(false);
     const navigate = useNavigate();
     const [versions, setVersions] = useState<VersionType[]>([]);
     const [isUpdate, setUpdate] = useState(false);
@@ -201,7 +201,7 @@ const QuotationDetail: React.FC<Props> = () => {
                         setOriginalPrice(response.totalPrice);
                         dispatch(actions.getQuotationInfo());
                         setUpdated(true);
-                        setLoading(false);
+                        // setLoading(false);
                         const fetchedProducts: ProductDetailProps[] =
                             response.products;
                         const fetchedServices: ServiceProps[] =

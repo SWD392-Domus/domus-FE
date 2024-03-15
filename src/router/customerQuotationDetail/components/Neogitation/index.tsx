@@ -4,9 +4,8 @@ import {
     FormControl,
     FormField,
     FormItem,
-    FormMessage,
 } from "@/components/ui/Form";
-import { Input } from "@/components/ui/Input";
+// import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ChatBubbleIcon } from "@radix-ui/react-icons";
@@ -14,11 +13,11 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { pushNegotitaionService } from "../../service";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import selector from "../../slice/selector";
 import { toast } from "@/components/ui/Toast/use-toast";
-import { actions } from "../../slice";
-import { useNavigate } from "react-router-dom";
+// import { actions } from "../../slice";
+// import { useNavigate } from "react-router-dom";
 
 interface Props {
     // define your props here
@@ -30,7 +29,7 @@ interface Props {
 const Negotiation: React.FC<Props> = ({ staff, negotiationLog, customer }) => {
     const id = useSelector(selector.id);
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const formSchema = z.object({
         message: z.string().min(2, {
             message: "message must be at least 2 characters.",

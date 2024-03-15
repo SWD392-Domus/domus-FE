@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import QuantityInput from "./QuantityInput";
 
-interface Products {
-    products: ProductProps[];
-}
 interface ProductProps {
     id: number;
     name: string;
@@ -11,7 +8,7 @@ interface ProductProps {
     src: string;
 }
 
-const ProductComponents: React.FC<Products> = ({ products }) => {
+const ProductComponents: React.FC<{ products: ProductProps[] }> = ({ products }) => {
     const [productList, setProductList] = useState<ProductProps[]>([]);
 
     useEffect(() => {

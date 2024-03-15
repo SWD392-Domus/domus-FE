@@ -29,11 +29,10 @@ import {
     EnvelopeClosedIcon,
     HomeIcon,
     MobileIcon,
-    PaperPlaneIcon,
     PlusIcon,
 } from "@radix-ui/react-icons";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { z } from "zod";
@@ -45,10 +44,9 @@ interface Props {
     // define your props here
 }
 
-import UserList from "./components/UserList";
+// import UserList from "./components/UserList";
 import { useParams } from "react-router-dom";
 import {
-    ProductDetailProps,
     ServiceProps,
 } from "../staffQuotationDetail/types";
 import { QuotationDetailInfo } from "../staffQuotationDetail/slice";
@@ -68,13 +66,13 @@ type User = {
     profileImage: string;
 };
 
-const CustomerContractDetail: React.FC<Props> = (props) => {
-    const [open, setOpen] = useState(false);
+const CustomerContractDetail: React.FC<Props> = () => {
+    // const [open, setOpen] = useState(false);
     const [products, setProducts] = useState<QuotationDetailInfo[]>([]);
     const [services, setServices] = useState<ServiceProps[]>([]);
-    const [totalPrice, setTotalPrice] = useState(0);
+    const [totalPrice, ] = useState(0);
     const [selectedUser, setSelectedUser] = useState<User>();
-    const [selectedContractor, setSelectedContractor] = useState<User>();
+    const [, setSelectedContractor] = useState<User>();
     const [signature, setSignature] = useState(null);
     const [fullName, setFullname] = useState(null);
     const [status, setStatus] = useState("");

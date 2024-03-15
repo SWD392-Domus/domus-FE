@@ -1,33 +1,28 @@
 import React from "react";
 import {
-    Dialog,
     DialogContent,
-    DialogDescription,
     DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
     DialogClose
 } from "@/components/ui/Dialog";
 import Slider from './ImagesPackageSlider';
-import { ProductDetailProps, PackageImageProps, ServiceProps } from './types';
+import {  PackageImageProps, ServiceProps } from './types';
 import {
     Accordion,
     AccordionContent,
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/Accordion/Accordion";
-import {
-    Card,
-    CardContent,
-    // CardDescription,
-    // CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/Card";
+// import {
+//     Card,
+//     CardContent,
+//     // CardDescription,
+//     // CardFooter,
+//     CardHeader,
+//     CardTitle,
+// } from "@/components/ui/Card";
 // import { FaCartArrowDown } from "react-icons/fa6";
 import selector from "@/router/customerCart/slice/selector";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import ProductCartInPopUp from "./ProductCartInPopUp";
 
 interface Props {
@@ -36,7 +31,7 @@ interface Props {
     // setUpdatedS: any;
 }
 
-const PackageDetailPopUp: React.FC<Props> = (props) => {
+const PackageDetailPopUp: React.FC<Props> = () => {
     const packageA: any = useSelector(selector.package);
     // const [updated, setUpdated] = useState(false);
     // const [product, setProduct] = useState<any>({});

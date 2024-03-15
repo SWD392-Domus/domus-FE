@@ -16,7 +16,7 @@ import {
     TableRow,
 } from "./table";
 import { SearchField } from "../Input/SearchField";
-import { PrintButton, CreateButton } from "../Button";
+// import { PrintButton, CreateButton } from "../Button";
 import { ActionsDropdownMenu } from "../DropdownMenu/Actions";
 import { SortButton } from "../Button/SortButton";
 

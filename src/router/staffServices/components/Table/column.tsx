@@ -1,10 +1,10 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Avatar, AvatarImage } from "@/components/ui/Avatar";
+// import { Avatar, AvatarImage } from "@/components/ui/Avatar";
 import { Checkbox } from "@/components/ui/Checkbox/checkbox";
 import { ServicesProps } from "../../types";
 import { CRUDDropdownMenu } from "../DropdownMenu/CRUD";
 // import { TooltipDes } from "../Tooltip"
-import servicePlaceholder from "@/assets/image/package-placeholder.png";
+// import servicePlaceholder from "@/assets/image/package-placeholder.png";
 
 export const columns: ColumnDef<ServicesProps>[] = [
     {
