@@ -4,7 +4,7 @@ import { Checkbox } from "@/components/ui/Checkbox/checkbox";
 import { ArticlesProps } from "../../types";
 import { CRUDDropdownMenu } from "../DropdownMenu/CRUD";
 // import { TooltipDes } from "../Tooltip"
-import articlePlaceholder from "@/assets/image/package-placeholder.png";
+import articlePlaceholder from "@/assets/image/article-placeholder.png";
 
 export const columns: ColumnDef<ArticlesProps>[] = [
     {

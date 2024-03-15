@@ -21,12 +21,7 @@ export const articleApi = {
 
 export const articleStaffApi = {
   createArticle: (formData: any, token: string) => {
-    return post(
-      `/Articles`,
-      formData,
-      {},
-      { Authorization: token, "Content-Type": "multipart/form-data" }
-    );
+    return post(`/Articles`, formData, {}, { Authorization: token });
   },
   updateArticle: (
     id: string,
@@ -42,7 +37,7 @@ export const articleStaffApi = {
   },
 
   deleteArticle: (id: string, token: string) => {
-    return remove(`/Articles?id=${id}`, {}, {}, { Authorization: token });
+    return remove(`/Articles/${id}`, {}, {}, { Authorization: token });
   },
   deleteManyArticles: (ids: string[], token: string) => {
     return remove(`/Articles/many`, ids, {}, { Authorization: token });

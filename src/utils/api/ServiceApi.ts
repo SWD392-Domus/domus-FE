@@ -27,7 +27,7 @@ export const serviceStaffApi = {
   },
 
   deleteService: (id: string, token: string) => {
-    return remove(`/Services?id=${id}`, {}, {}, { Authorization: token });
+    return remove(`/Services/${id}`, {}, {}, { Authorization: token });
   },
   deleteManyServices: (ids: string[], token: string) => {
     return remove(`/Services/many`, ids, {}, { Authorization: token });
