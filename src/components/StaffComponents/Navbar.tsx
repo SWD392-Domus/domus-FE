@@ -8,6 +8,9 @@ import {
     BackpackIcon,
     PersonIcon,
     LayersIcon,
+    FileIcon,
+    CrumpledPaperIcon,
+    IdCardIcon
 } from "@radix-ui/react-icons";
 import { IconProps } from "@radix-ui/react-icons/dist/types";
 
@@ -38,6 +41,12 @@ const components: {
             description: "Product Management",
         },
         {
+            title: "Service",
+            icon: CrumpledPaperIcon,
+            href: "/staff/services",
+            description: "Service Management",
+        },
+        {
             title: "Package",
             icon: BackpackIcon,
             href: "/staff/packages",
@@ -48,6 +57,18 @@ const components: {
             icon: LayersIcon,
             href: "/staff/contracts",
             description: "Contract Management",
+        },
+        {
+            title: "Article",
+            icon: FileIcon,
+            href: "/staff/articles",
+            description: "Article Management",
+        },
+        {
+            title: "User",
+            icon: IdCardIcon,
+            href: "/staff/users",
+            description: "User Management",
         },
         // {
         //     title: "Storage",

@@ -392,7 +392,7 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
                               )}
                             </p>
                           </CardDescription> */}
-                                                            <CardTitle>
+                                                            {/* <CardTitle>
                                                                 <p className="text-2xl truncate">
                                                                     {new Intl.NumberFormat(
                                                                         "en-US",
@@ -406,7 +406,7 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
                                                                         1000
                                                                     )}
                                                                 </p>
-                                                            </CardTitle>
+                                                            </CardTitle> */}
                                                         </CardContent>
                                                         <CardFooter className=""></CardFooter>
                                                     </Card>

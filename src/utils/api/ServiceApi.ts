@@ -27,10 +27,10 @@ export const serviceStaffApi = {
   },
 
   deleteService: (id: string, token: string) => {
-    return remove(`/Services?id=${id}`, {}, {}, { Authorization: token });
+    return remove(`/Services/${id}`, {}, {}, { Authorization: token });
   },
   deleteManyServices: (ids: string[], token: string) => {
-    return remove(`/Services/multiple`, ids, {}, { Authorization: token });
+    return remove(`/Services/many`, ids, {}, { Authorization: token });
   },
   searchServices: (
     pageSize: number,
@@ -91,10 +91,15 @@ export const serviceStaffApi = {
     sortField: string,
     descending: boolean,
     pageSize: number,
-    pageIndex: number
+    pageIndex: number,
+    token: string
   ) => {
     return get(
-      `/Services/search?SearchField=${searchField}&SearchValue=${searchValue}&SortField=${sortField}&Descending=${descending}&PageSize=${pageSize}&PageIndex=${pageIndex}`
+      `/Services/search?SearchField=${searchField}&SearchValue=${searchValue}&SortField=${sortField}&Descending=${descending}&PageSize=${pageSize}&PageIndex=${pageIndex}`,
+      {},
+      {
+        Authorization: token,
+      }
     );
   },
   getServiceById: (id: string) => {

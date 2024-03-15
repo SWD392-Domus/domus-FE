@@ -1,14 +1,14 @@
 export interface TitleProps {
-    title: string;
+  title: string;
 }
 export interface ArticleItem {
-    id: number;
-    category: string;
-    title: string;
-    createdAt: string;
-    author: string;
-    images: string[];
+  id: string;
+  articleCategory: { name: string };
+  title: string;
+  content: string;
+  articleImages: [];
 }
+
 export interface ListProps {
-    data: ArticleItem[];
+  data: ArticleItem[];
 }

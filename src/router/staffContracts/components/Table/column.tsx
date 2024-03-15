@@ -42,21 +42,21 @@ export const columns: ColumnDef<ContractsProps>[] = [
         enableSorting: false,
         enableHiding: false,
     },
-
-    // {
-    //     accessorKey: "contractId",
-    //     header: "Contract",
-    //     cell: ({ row }) => {
-    //         return <h4> Contract {row.index + 1}</h4>;
-    //     },
-    // },
+    {
+        accessorKey: "id",
+        header: "Id",
+        cell: ({ row }) => {
+            const id: string = row.getValue("id") as string;
+            return <h4> {id.slice(0, 3)}..</h4>;
+        },
+    },
     {
         accessorKey: "name",
         header: "Name",
     },
     {
         accessorKey: "signedAt",
-        header: "Signed At",
+        header: "Created At",
     },
     {
         accessorKey: "staffName",

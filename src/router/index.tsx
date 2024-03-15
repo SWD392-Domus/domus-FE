@@ -33,6 +33,12 @@ import CreateProduct from "./staffCreateProduct";
 import Error403Page from "./403";
 import QuotationDetail from "./customerQuotationDetail";
 import StaffContractList from "./staffContracts";
+import StaffArticleList from "./staffArticles";
+import StaffArticleDetail from "./staffArticleDetail";
+import StaffServiceList from "./staffServices";
+import AdminUsersList from "./adminUsersList";
+import StaffArticleDetailCreate from "./staffArticleDetailCreate";
+import StaffArticleDetailUpdate from "./staffArticleDetailUpdate";
 import StaffContractCreate from "./StaffContractCreate";
 import OTP from "./otp";
 import StaffContractDetail from "./StaffContractDetail";
@@ -209,8 +215,22 @@ const RouterComponent: React.FC = () => {
         },
         {
             index: true,
+            path: "staff/services",
+            component: <StaffServiceList />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
             path: "staff/quotations/:quotationId",
             component: <StaffQuotationDetail />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/articles/:articleId",
+            component: <StaffArticleDetail />,
             exact: true,
             restrict: true,
         },
@@ -296,6 +316,41 @@ const RouterComponent: React.FC = () => {
             path: "staff/contracts/:contractId",
             component: <StaffContractDetail />,
 
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/articles",
+            component: <StaffArticleList />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/users",
+            component: <AdminUsersList />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/articles/newArticle",
+            component: <StaffArticleDetailCreate />,
+            exact: true,
+            restrict: true,
+        },
+        // {
+        //     index: true,
+        //     path: "staff/articles/:articleId",
+        //     component: <StaffArticleDetail />,
+        //     exact: true,
+        //     restrict: true,
+        // },
+        {
+            index: true,
+            path: "staff/articles/:articleId/update",
+            component: <StaffArticleDetailUpdate />,
             exact: true,
             restrict: true,
         },

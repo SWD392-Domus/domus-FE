@@ -82,7 +82,7 @@ export function DataTable<TData, TValue>({
                             header.getContext()
                           )
                         }
-                        {["id", "name", "discount"].includes(headerId) &&
+                        {["id", "title"].includes(headerId) &&
                           <SortButton sortField={headerId} setSortField={setSortField} setDescending={setDescending}></SortButton>
                         }
                       </div>
