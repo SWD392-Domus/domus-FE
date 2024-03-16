@@ -36,7 +36,7 @@ const ProductsPagination: React.FC<Props> = ({
   };
 
   const renderPageLinks = () => {
-    const pageLinks = [];
+    const pageLinks: any[] = [];
     const maxVisiblePages = 2;
     let ellipsisAdded: boolean = false;
 
