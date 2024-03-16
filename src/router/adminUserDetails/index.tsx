@@ -1,6 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import { Button } from "@/components/ui/Button/Button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+import { Card } from "@/components/ui/Card";
 import {
   Form,
   FormControl,
@@ -54,9 +54,9 @@ interface Image {
   imageUrl: string | null;
   isUpload: boolean;
 }
-const UserDetails: React.FC<Props> = (props) => {
+const UserDetails: React.FC<Props> = () => {
   const { id } = useParams<string>();
-  const [isUpdate, setIsUpdate] = useState(false);
+  // const [isUpdate, setIsUpdate] = useState(false);
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       const formData = new FormData();
@@ -84,7 +84,7 @@ const UserDetails: React.FC<Props> = (props) => {
     }
   }
   const [uploadedImage, setUploadedImage] = useState<Image | null>(null);
-  const [user, setUser] = useState<any | null>(null);
+  const [, setUser] = useState<any | null>(null);
   const fetchData = async () => {
     const res = await getUserById(id ?? "");
     if (res.status != 200) {
@@ -143,7 +143,9 @@ const UserDetails: React.FC<Props> = (props) => {
       address: "",
     },
   });
-  const { register, handleSubmit, watch } = form;
+  const {
+    // register, 
+    handleSubmit, watch } = form;
   const watchedValues = watch(); // Watch all fields
 
   useEffect(() => {
@@ -352,7 +354,7 @@ const UserDetails: React.FC<Props> = (props) => {
                   <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
                     <AlertDialogAction onClick={() => handleSubmit(onSubmit)()}>
-                    Continue
+                      Continue
                     </AlertDialogAction>
                   </AlertDialogFooter>
                 </AlertDialogContent>
