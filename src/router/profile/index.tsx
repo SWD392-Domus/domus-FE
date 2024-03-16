@@ -39,7 +39,7 @@ interface Image {
     imageUrl: string | null;
     isUpload: boolean;
 }
-const StaffProfile: React.FC<Props> = (props) => {
+const StaffProfile: React.FC<Props> = () => {
     async function onSubmit(values: z.infer<typeof formSchema>) {
         const formData = new FormData();
         formData.append("FullName", values.fullName);
@@ -66,7 +66,7 @@ const StaffProfile: React.FC<Props> = (props) => {
         }
     }
     const [uploadedImage, setUploadedImage] = useState<Image | null>(null);
-    const [profile, setProfile] = useState<any | null>(null);
+    // const [profile, setProfile] = useState<any | null>(null);
     const fetchProfile = async () => {
         const token = localStorage.getItem("Token") as string;
         const res = await getOwnProfile(token as string);
@@ -86,7 +86,7 @@ const StaffProfile: React.FC<Props> = (props) => {
                 form.setValue("address", address);
                 form.setValue("phoneNumber", phoneNumber);
                 form.setValue("email", email);
-                setProfile(res.data.data);
+                // setProfile(res.data.data);
                 setRole(role);
                 setUploadedImage({
                     file: null,
@@ -132,7 +132,7 @@ const StaffProfile: React.FC<Props> = (props) => {
             address: "",
         },
     });
-    const { register, handleSubmit, watch } = form;
+    const { watch } = form;
     const watchedValues = watch(); // Watch all fields
 
     useEffect(() => {

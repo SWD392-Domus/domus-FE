@@ -7,7 +7,16 @@ import { Badge } from "@/components/ui/Badge";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-
+const getStatusByNumber = (status: number) => {
+    switch (status) {
+        case 0:
+            return "Sent";
+        case 1:
+            return "Signed";
+        case 2:
+            return "Canceled";
+    }
+};
 export const columns: ColumnDef<ContractsProps>[] = [
     {
         id: "select",
@@ -41,20 +50,13 @@ export const columns: ColumnDef<ContractsProps>[] = [
             return <h4> {id.slice(0, 3)}..</h4>;
         },
     },
-    // {
-    //     accessorKey: "contractId",
-    //     header: "Contract",
-    //     cell: ({ row }) => {
-    //         return <h4> Contract {row.index + 1}</h4>;
-    //     },
-    // },
     {
         accessorKey: "name",
         header: "Name",
     },
     {
         accessorKey: "signedAt",
-        header: "Signed At",
+        header: "Created At",
     },
     {
         accessorKey: "staffName",
@@ -111,7 +113,8 @@ export const columns: ColumnDef<ContractsProps>[] = [
         header: () => <div className="text-left">Status</div>,
         cell: ({ row }) => {
             const value: string =
-                row.getValue("status") as string || "Pending"
+                (getStatusByNumber(row.getValue("status")) as string) ||
+                "Pending";
             return (
                 <div className="text-left">
                     <Badge variant="outline">{value}</Badge>
@@ -119,20 +122,7 @@ export const columns: ColumnDef<ContractsProps>[] = [
             );
         },
     },
-    {
-        accessorKey: "signature",
-        header: () => <div className="text-left">Signature</div>,
-        cell: ({ row }) => {
-            const value: string = (
-                row.getValue("signature") as string || "Unsigned"
-            ).toUpperCase();
-            return (
-                <div className="text-left">
-                    <Badge variant="outline" className="max-w-20 overflow-hidden">{value}</Badge>
-                </div>
-            );
-        },
-    },
+
     {
         id: "actions",
         enableHiding: false,

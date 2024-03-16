@@ -16,7 +16,7 @@ interface Props {
     id: string
 }
 
-export const CustomizePackageButton: React.FC<Props> = (props) => {
+export const CustomizePackageButton: React.FC<Props> = () => {
     return (
         // <Dialog>
         //     <DialogTrigger>

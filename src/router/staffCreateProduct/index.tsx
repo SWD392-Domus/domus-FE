@@ -163,7 +163,7 @@ const CreateProduct: React.FC = () => {
               >
                 {details &&
                   details.map(
-                    (product: ProductDetailsPropsForCreate, index) => (
+                    (_product: ProductDetailsPropsForCreate, index) => (
                       <>
                         <Dialog>
                           <div className="flex justify-center h-1/6 items-center gap-1">
@@ -182,7 +182,7 @@ const CreateProduct: React.FC = () => {
                           </DialogContent>
                         </Dialog>
                       </>
-                    )
+                  )
                   )}
                 <Dialog>
                   <DialogTrigger asChild>

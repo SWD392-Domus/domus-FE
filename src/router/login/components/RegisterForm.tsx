@@ -16,13 +16,13 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { loginApi } from "@/utils/api/loginApi";
 import { toastError, toastSuccess } from "@/components/Toast";
-import { redirect, useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { devEnvGoogleAuth } from "../constants";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function RegisterForm({ className, ...props }: UserAuthFormProps) {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const handleGoogleLogin = () => {
         window.location.replace(devEnvGoogleAuth);
     };

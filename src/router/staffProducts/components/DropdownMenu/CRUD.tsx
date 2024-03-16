@@ -20,6 +20,8 @@ import {
 import { Button } from "@/components/ui/Button/Button";
 import { ConfirmDeleteButton } from "../Button/ConfirmDeleteButton";
 import { ViewButton } from "../Button/ViewButton";
+import { UpdateButton } from "../Button/UpdateButton";
+
 
 interface Props {
     // define your props here
@@ -40,7 +42,7 @@ export const CRUDDropdownMenu: React.FC<Props> = (props) => {
                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
                     <ViewButton id={props.id}></ViewButton>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem>Update</DropdownMenuItem>
+                    <UpdateButton id={props.id}></UpdateButton>
                     <DropdownMenuItem>
                         <DialogTrigger className="w-full text-left">
                             Delete

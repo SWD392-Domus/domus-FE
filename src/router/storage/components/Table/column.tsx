@@ -1,12 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { ImagesProps, PriceProps, ProductsStorage } from "../../types/type";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
-import { Button } from "@/components/ui/Button/Button";
-import { ArrowUpDown } from "lucide-react";
 
-interface Props {
-    
-}
 export const columns: ColumnDef<ProductsStorage>[] = [
 
   {

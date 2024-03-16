@@ -1,24 +1,4 @@
 import { Button } from "@/components/ui/Button/Button";
-import {
-    Dialog,
-    DialogContent,
-    DialogFooter,
-    DialogHeader,
-    DialogTrigger,
-} from "@/components/ui/Dialog";
-import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from "@/components/ui/Accordion/Accordion";
-import {
-    Card,
-    CardContent,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/Card";
 // import { FaDeleteLeft } from "react-icons/fa6";
 import React, { useEffect, useState } from "react";
 import { getArticleById } from "./usecase";
@@ -41,7 +21,6 @@ import { updateArticle } from "./usecase";
 import { useToast } from "@/components/ui/Toast/use-toast";
 import { ToastAction } from "@/components/ui/Toast/toast";
 import { Input } from "@/components/ui/Input";
-import { PencilIcon } from "lucide-react";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useNavigate } from "react-router-dom";
@@ -53,9 +32,8 @@ const ArticleDetails: React.FC<Props> = () => {
     const { articleId } = useParams();
     const dispatch = useDispatch();
     const id: string = useSelector(selector.id);
-    const name: string = useSelector(selector.name);
-    const description: string = useSelector(selector.description);
-    const [desValue, setDesValue] = useState("");
+    const name: string = useSelector(selector.title);
+    const description: string = useSelector(selector.content);
     const [updated, setUpdated] = useState(false);
     const { toast } = useToast();
 
@@ -66,9 +44,9 @@ const ArticleDetails: React.FC<Props> = () => {
                 if (response) {
                     dispatch(actions.setArticle(response));
                     // console.log(response)
-                    dispatch(actions.getArticleInfo());
+                    // dispatch(actions.getArticleInfo());
                     form.setValue("name", response.title);
-                    setDesValue(response.content);
+                    form.setValue("description", response.content);
                     setUpdated(true);
                 }
             } catch (error) {
@@ -94,7 +72,7 @@ const ArticleDetails: React.FC<Props> = () => {
         },
     });
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        const res = await updateArticle(id, { title: values.name, content: desValue });
+        const res = await updateArticle(id, { title: values.name, content: values.description });
         if (res === 200) {
             toast({
                 variant: "success",
@@ -118,30 +96,26 @@ const ArticleDetails: React.FC<Props> = () => {
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
-                <div className="my-7 text-2xl font-semibold">
-                    Update Article - {name}
-                </div>
                 {updated && (
-                    <div className="">
-                        <div className="flex flex-row justify-between gap-10 min-h-[550px]">
-                            <div className="lg:w-[30%] flex flex-col gap-2 pl-4">
-                                <div className="mb-7 font-semibold text-black text-xl md:text-4xl">
-                                    Update {name}
-                                </div>
-                                {/* Article Name Input Start */}
+                    <div className="min-h-[550px]">
+                        <div className="flex flex-col gap-2 pl-4">
+                            <div className="mt-7 mb-5 text-2xl font-semibold">
+                                Update Article - {name}
+                            </div>
+                            {/* Article Name Input Start */}
+                            <div className="max-w-96 mb-7">
                                 <FormField
                                     control={form.control}
                                     name="name"
                                     render={({ field }) => (
                                         <FormItem>
-                                            <FormLabel className="border-yellowCustom text-xl text-black mb-2">
+                                            <FormLabel className="border-yellowCustom text-xl text-black">
                                                 Article Title
                                             </FormLabel>
                                             <FormControl>
                                                 <Input
-                                                    placeholder={name}
+                                                    placeholder={"Title..."}
                                                     {...field}
-                                                    className="mb-4"
                                                 />
                                             </FormControl>
 
@@ -149,24 +123,41 @@ const ArticleDetails: React.FC<Props> = () => {
                                         </FormItem>
                                     )}
                                 />
-                                {/* Article Name Input End*/}
-                                <div className="mt-2">
-                                    <Button
-                                        variant={"yellowCustom"}
-                                        className="cursor-pointer w-40"
-                                        type="submit"
-                                    >
-                                        Save
-                                    </Button>
-                                </div>
                             </div>
-                        </div>
-                        <div className="flex flex-col mb-10 gap-4">
-                            <div className="font-semibold text-xl">Content</div>
-                            <div className='w-full'>
-                                <ReactQuill className="" theme="snow" value={desValue} placeholder="Content..."
-                                    onChange={setDesValue}
-                                ></ReactQuill>
+                            {/* Article Name Input End*/}
+                            <div className="flex flex-col mb-4 gap-4">
+                                <div className="flex justify-between">
+                                    <div className="font-semibold text-xl">Content</div>
+                                    <div className="">
+                                        <Button
+                                            variant={"yellowCustom"}
+                                            className="cursor-pointer w-40"
+                                            type="submit"
+                                        >
+                                            Update
+                                        </Button>
+                                    </div>
+                                </div>
+                                <div className='w-full'>
+                                    <FormField
+                                        control={form.control}
+                                        name="description"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormControl>
+                                                    <ReactQuill
+                                                        theme="snow"
+                                                        placeholder="Content..."
+                                                        {...field}
+                                                    ></ReactQuill>
+                                                </FormControl>
+
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+
+                                </div>
                             </div>
                         </div>
                     </div>

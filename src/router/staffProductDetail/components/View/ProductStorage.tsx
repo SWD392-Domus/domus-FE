@@ -7,7 +7,7 @@ import { ProductDetailsProps } from '@/router/productDetails/type'
 
 interface Props {}
 
-const ProductStorage: React.FC<Props> = (props: Props) => {
+const ProductStorage: React.FC<Props> = () => {
   const { product } = useSelector(productSelector);
     const { details } = product;
     const detailsList = details.map((detail: ProductDetailsProps) =>{

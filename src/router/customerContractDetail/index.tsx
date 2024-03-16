@@ -29,11 +29,10 @@ import {
     EnvelopeClosedIcon,
     HomeIcon,
     MobileIcon,
-    PaperPlaneIcon,
     PlusIcon,
 } from "@radix-ui/react-icons";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { z } from "zod";
@@ -45,10 +44,9 @@ interface Props {
     // define your props here
 }
 
-import UserList from "./components/UserList";
+// import UserList from "./components/UserList";
 import { useParams } from "react-router-dom";
 import {
-    ProductDetailProps,
     ServiceProps,
 } from "../staffQuotationDetail/types";
 import { QuotationDetailInfo } from "../staffQuotationDetail/slice";
@@ -68,15 +66,16 @@ type User = {
     profileImage: string;
 };
 
-const CustomerContractDetail: React.FC<Props> = (props) => {
-    const [open, setOpen] = useState(false);
+const CustomerContractDetail: React.FC<Props> = () => {
+    // const [open, setOpen] = useState(false);
     const [products, setProducts] = useState<QuotationDetailInfo[]>([]);
     const [services, setServices] = useState<ServiceProps[]>([]);
-    const [totalPrice, setTotalPrice] = useState(0);
+    const [totalPrice, ] = useState(0);
     const [selectedUser, setSelectedUser] = useState<User>();
-    const [selectedContractor, setSelectedContractor] = useState<User>();
+    const [, setSelectedContractor] = useState<User>();
     const [signature, setSignature] = useState(null);
-    const [status, setStatus] = useState("0");
+    const [fullName, setFullname] = useState(null);
+    const [status, setStatus] = useState("");
     const { contractId } = useParams();
 
     useEffect(() => {
@@ -100,6 +99,8 @@ const CustomerContractDetail: React.FC<Props> = (props) => {
                     quotationRevision,
                     status,
                     serviceQuotations,
+                    signature,
+                    fullName,
                 } = res.data.data;
 
                 form.setValue("contractName", name);
@@ -108,6 +109,8 @@ const CustomerContractDetail: React.FC<Props> = (props) => {
                 setSelectedUser(client);
                 setProducts(quotationRevision.productDetailQuotationRevisions);
                 setServices(serviceQuotations);
+                setSignature(signature);
+                setFullname(fullName);
                 setStatus(`${status}`);
             } else {
                 toast({
@@ -151,19 +154,21 @@ const CustomerContractDetail: React.FC<Props> = (props) => {
         <Card className="w-full flex flex-col justify-center items-center border mt-4">
             <h1 className="text-4xl font-medium">Contract Detail</h1>
             <div className="mt-4 w-full justify-end flex">
-                <Tabs defaultValue="0" className="w-[400px]">
-                    <TabsList>
-                        <TabsTrigger value={"0"} disabled={status != "0"}>
-                            Create
-                        </TabsTrigger>
-                        <TabsTrigger value="1" disabled>
-                            Sent
-                        </TabsTrigger>
-                        <TabsTrigger value="2" disabled>
-                            Signned
-                        </TabsTrigger>
-                    </TabsList>
-                </Tabs>
+                {status && (
+                    <Tabs defaultValue={status} className="w-[400px]">
+                        <TabsList>
+                            <TabsTrigger value={"0"} disabled={status != "0"}>
+                                Sent
+                            </TabsTrigger>
+                            <TabsTrigger value={"1"} disabled={status != "1"}>
+                                Signed
+                            </TabsTrigger>
+                            <TabsTrigger value={"2"} disabled={status != "2"}>
+                                Canceled
+                            </TabsTrigger>
+                        </TabsList>
+                    </Tabs>
+                )}
             </div>
 
             <Form {...form}>
@@ -223,16 +228,7 @@ const CustomerContractDetail: React.FC<Props> = (props) => {
                         </div>
                     </div>
                     <div className="flex w-full justify-between mt-0">
-                        <UserList
-                            open={open}
-                            setOpen={setOpen}
-                            setSelectedUser={setSelectedUser}
-                            selectedUser={selectedUser as User}
-                        />
-                        <Card
-                            className="w-[48%] border h-[200px] flex justify-center items-center hover:bg-slate-100 hover:text-black cursor-pointer"
-                            onClick={() => setOpen(true)}
-                        >
+                        <Card className="w-[48%] border h-[200px] flex justify-center items-center hover:bg-slate-100 hover:text-black cursor-pointer">
                             {!selectedUser ? (
                                 <PlusIcon width={100} height={100} />
                             ) : (
@@ -481,6 +477,19 @@ const CustomerContractDetail: React.FC<Props> = (props) => {
                                         </DialogFooter>
                                     </DialogContent>
                                 </Dialog>
+                            )}
+                            {signature && (
+                                <>
+                                    {" "}
+                                    <img
+                                        src={signature}
+                                        alt="signature"
+                                        className="w-[60%]"
+                                    />
+                                    <h1 className="font-dancingScirpt font-medium text-2xl">
+                                        {fullName}
+                                    </h1>
+                                </>
                             )}
                         </div>
                     </div>

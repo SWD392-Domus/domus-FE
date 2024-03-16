@@ -261,6 +261,59 @@ const ProductDetails: React.FC = () => {
             </div>
           </div>
           {/* <div className="flex justify-center items-center py-20">
+                        {fields.map((field: any) => (
+                            <div className="flex flex-col gap-2">
+                                <div className="text-black font-thin">
+                                    {field.name}
+                                </div>
+                                <div className="flex justify-start">
+                                    <ToggleGroup
+                                        type="single"
+                                        variant="outline"
+                                    // onValueChange={(e) => {
+                                    // dispatch(actions.hideValueBasedOnIds({ ids: e, name: field.name }));
+                                    // console.log(e);
+                                    // }}
+                                    >
+                                        {field.values.map((value: any) => (
+                                            <ToggleGroupItem
+                                                value={value}
+                                                aria-label="Toggle bold"
+                                                disabled={value.isDisabled}
+                                                data-state={
+                                                    value.isChecked
+                                                        ? "on"
+                                                        : "off"
+                                                }
+                                                onClick={() => {
+                                                    dispatch(
+                                                        actions.onClickCheck(
+                                                            value
+                                                        )
+                                                    );
+                                                }}
+                                            >
+                                                {value.value}
+                                            </ToggleGroupItem>
+                                        ))}
+                                    </ToggleGroup>
+                                </div>
+                            </div>
+                        ))}
+                        <div className="mt-10">
+                            <Button
+                                onClick={handleAddToCart}
+                                className="cursor-pointer"
+                            >
+                                Add To Cart
+                            </Button>
+                        </div>
+                        <div className="h-auto pr-2">
+                            <ProductAccordion title={product?.description} />
+                        </div>
+                    </div>
+                    {/* <div className="flex justify-center items-center py-20">
+
                         <div className="max-md:hidden w-screen h-[300px] ">
                             <Suggestion />
                         </div>

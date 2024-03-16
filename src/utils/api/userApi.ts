@@ -1,4 +1,5 @@
-import { get, post, put } from "./ApiCaller";
+import { get, post, put, remove } from "./ApiCaller";
+
 let ownProfileURL = `/Users/self-profile`;
 let allUserEndpoint = `/Users/all`;
 let UserEndpoint = `/Users`;
@@ -30,5 +31,31 @@ export const userApi = {
         return post(UserEndpoint, data,{},{
             Authorization: token
         })
-    }
+    },
+}
+
+export const userAdminApi = {
+  deleteUser: (id: string, token: string) => {
+    return remove(`/Users/${id}`, {}, {}, { Authorization: token });
+  },
+  deleteManyUsers: (ids: string[], token: string) => {
+    return remove(`/Users/many`, ids, {}, { Authorization: token });
+  },
+  getUsersPaging: (
+    searchField: string,
+    searchValue: string,
+    sortField: string,
+    descending: boolean,
+    pageSize: number,
+    pageIndex: number,
+    token: string
+  ) => {
+    return get(
+      `/Users/search?SearchField=${searchField}&SearchValue=${searchValue}&SortField=${sortField}&Descending=${descending}&PageSize=${pageSize}&PageIndex=${pageIndex}`,
+      {},
+      {
+        Authorization: token,
+      }
+    );
+  },
 };

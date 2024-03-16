@@ -1,6 +1,4 @@
 import { Avatar, AvatarImage } from "@/components/ui/Avatar";
-import { Button } from "@/components/ui/Button/Button";
-
 import { Card } from "@/components/ui/Card";
 import {
     Form,
@@ -20,17 +18,16 @@ import {
     EnvelopeClosedIcon,
     HomeIcon,
     MobileIcon,
-    PaperPlaneIcon,
     PlusIcon,
 } from "@radix-ui/react-icons";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { z } from "zod";
 import { DataTable } from "./components/ProductTable";
 import { column } from "./components/ProductTable/column";
-import { fakeData, serviceFakeData } from "./constants";
+// import { fakeData, serviceFakeData } from "./constants";
 import { serviceColums } from "./components/ServiceTable/column";
 
 interface Props {
@@ -39,9 +36,9 @@ interface Props {
 
 import UserList from "./components/UserList";
 import { useParams } from "react-router-dom";
-import { getQuotationById } from "./usecase/getQuotationById";
+// import { getQuotationById } from "./usecase/getQuotationById";
 import {
-    ProductDetailProps,
+    // ProductDetailProps,
     ServiceProps,
 } from "../staffQuotationDetail/types";
 import { QuotationDetailInfo } from "../staffQuotationDetail/slice";
@@ -60,13 +57,17 @@ type User = {
     profileImage: string;
 };
 
-const StaffContractDetail: React.FC<Props> = (props) => {
-    const signatureRef = useRef(null);
+const StaffContractDetail: React.FC<Props> = () => {
+    // const signatureRef = useRef(null);
     const [open, setOpen] = useState(false);
     const [products, setProducts] = useState<QuotationDetailInfo[]>([]);
     const [services, setServices] = useState<ServiceProps[]>([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const [selectedUser, setSelectedUser] = useState<User>();
+    // const [selectedContractor, setSelectedContractor] = useState<User>();
+    const [signature, setSignature] = useState(null);
+    const [fullName, setFullName] = useState(null);
+    const [status, setStatus] = useState("");
     const { contractId } = useParams();
 
     useEffect(() => {
@@ -82,10 +83,27 @@ const StaffContractDetail: React.FC<Props> = (props) => {
             const res = await getContractDetail(contractId as string);
 
             if (res.data.isSuccess) {
-                const { name, description } = res.data.data;
-                console.log(name);
+                const {
+                    name,
+                    description,
+                    client,
+                    // contractor,
+                    quotationRevision,
+                    status,
+                    serviceQuotations,
+                    signature,
+                    fullName,
+                } = res.data.data;
                 form.setValue("contractName", name);
                 form.setValue("description", description);
+                // setSelectedContractor(contractor);
+                setSelectedUser(client);
+                setProducts(quotationRevision.productDetailQuotationRevisions);
+                setServices(serviceQuotations);
+                setStatus(`${status}`);
+                setTotalPrice(quotationRevision.totalPrice);
+                setSignature(signature);
+                setFullName(fullName);
             } else {
                 toast({
                     variant: "destructive",
@@ -96,15 +114,7 @@ const StaffContractDetail: React.FC<Props> = (props) => {
         };
         fetchContract();
     }, []);
-    // const clearSignature = () => {
-    //     signatureRef.current.clear();
-    // };
 
-    // const saveSignature = () => {
-    //     const signatureData = signatureRef.current.toDataURL();
-    //     // You can save or process the signature data here
-    //     console.log(signatureData);
-    // };
     const formSchema = z.object({
         contractName: z.string().nonempty({
             message: "Contract Name is Required",
@@ -130,28 +140,27 @@ const StaffContractDetail: React.FC<Props> = (props) => {
 
         return totalPrice;
     }
-    let status = "create";
+
     const onSubmit = () => {};
     return (
         <Card className="w-full flex flex-col justify-center items-center border mt-4">
-            <h1 className="text-4xl">Contract Detail</h1>
+            <h1 className="text-4xl font-medium">Contract Detail</h1>
             <div className="mt-4 w-full justify-end flex">
-                <Tabs defaultValue="create" className="w-[400px]">
-                    <TabsList>
-                        <TabsTrigger
-                            value="create"
-                            disabled={status != "create"}
-                        >
-                            Create
-                        </TabsTrigger>
-                        <TabsTrigger value="Sent" disabled>
-                            Sent
-                        </TabsTrigger>
-                        <TabsTrigger value="Signned" disabled>
-                            Signned
-                        </TabsTrigger>
-                    </TabsList>
-                </Tabs>
+                {status && (
+                    <Tabs defaultValue={status} className="w-[400px]">
+                        <TabsList>
+                            <TabsTrigger value={"0"} disabled={status != "0"}>
+                                Sent
+                            </TabsTrigger>
+                            <TabsTrigger value={"1"} disabled={status != "1"}>
+                                Signed
+                            </TabsTrigger>
+                            <TabsTrigger value={"2"} disabled={status != "2"}>
+                                Canceled
+                            </TabsTrigger>
+                        </TabsList>
+                    </Tabs>
+                )}
             </div>
 
             <Form {...form}>
@@ -241,7 +250,7 @@ const StaffContractDetail: React.FC<Props> = (props) => {
                                                 height={20}
                                                 className="mr-2"
                                             />{" "}
-                                            {selectedUser.email}
+                                            {selectedUser.email || "N/A"}
                                         </div>
                                         <div className="text-md flex items-center mb-2">
                                             <MobileIcon
@@ -249,7 +258,7 @@ const StaffContractDetail: React.FC<Props> = (props) => {
                                                 height={20}
                                                 className="mr-2"
                                             />
-                                            {selectedUser.phoneNumber}
+                                            {selectedUser.phoneNumber || "N/A"}
                                         </div>
                                         <div className="text-md flex items-center">
                                             <HomeIcon
@@ -257,7 +266,7 @@ const StaffContractDetail: React.FC<Props> = (props) => {
                                                 height={20}
                                                 className="mr-2"
                                             />
-                                            {selectedUser.address}
+                                            {selectedUser.address || "N/A"}
                                         </div>
                                     </div>
                                 </div>
@@ -440,39 +449,20 @@ const StaffContractDetail: React.FC<Props> = (props) => {
                     <div className="w-full flex justify-end">
                         <div className="flex flex-col items-center">
                             <h1 className="text-2xl">Signature</h1>
-                            <img src="https://signaturely.com/wp-content/uploads/2020/04/unreadable-letters-signaturely.svg" />
-                            <h1 className="font-dancingScirpt text-2xl">
-                                Nguyen Duc Bao
-                            </h1>
+                            {signature && (
+                                <>
+                                    {" "}
+                                    <img
+                                        src={signature}
+                                        alt="signature"
+                                        className="w-[60%]"
+                                    />
+                                    <h1 className="font-dancingScirpt font-medium text-2xl">
+                                        {fullName}
+                                    </h1>
+                                </>
+                            )}
                         </div>
-                    </div>
-                    {/* <div className="flex flex-col items-center">
-                        <SignatureCanvas
-                            ref={signatureRef}
-                            canvasProps={{
-                                className: "border border-gray-400 mt-4",
-                            }}
-                        />
-                        <div className="flex mt-4">
-                            <button
-                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-4 rounded"
-                                onClick={clearSignature}
-                            >
-                                Clear
-                            </button>
-                            <button
-                                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-                                onClick={saveSignature}
-                            >
-                                Save
-                            </button>
-                        </div>
-                    </div> */}
-                    <div className="flex justify-center">
-                        <Button className="flex">
-                            <PaperPlaneIcon className="mr-2" />
-                            Send
-                        </Button>
                     </div>
                 </form>
             </Form>

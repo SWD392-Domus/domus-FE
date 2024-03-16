@@ -7,14 +7,14 @@ import { ProductsProps } from "../../types/index.ts";
 const Suggestion: React.FC = () => {
     const [products, setProducts] = useState<ProductsProps[]>([]);
     // const [loading, setLoading] = useState(true);
-    const [searchField, setSearchField] = useState("productName");
+    const [searchField, ] = useState("productName");
     const [searchValue, setSearchValue] = useState("");
-    const [sortField, setSortField] = useState("");
-    const [descending, setDescending] = useState(false);
-    const [totalPages, setTotalPages] = useState(0);
-    const [totalItems, setTotalItems] = useState(0);
-    const [pageSize, setPageSize] = useState(100);
-    const [pageIndex, setPageIndex] = useState(1);
+    const [sortField, ] = useState("");
+    const [descending, ] = useState(false);
+    const [, setTotalPages] = useState(0);
+    const [, setTotalItems] = useState(0);
+    const [pageSize, ] = useState(100);
+    const [pageIndex, ] = useState(1);
 
     async function getProductsService(
         searchField: string,

@@ -1,5 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Checkbox } from "@/components/ui/Checkbox/checkbox";
+// import { Checkbox } from "@/components/ui/Checkbox/checkbox";
 
 import { ServiceProps } from "../../types";
 export interface ImagesProps {

@@ -32,7 +32,7 @@ export const areaInfo = [
             "Quotations: keep track , negotiate on your requested Quotation",
     },
     {
-        link: "quotations1",
+        link: "contracts",
         src: Bill,
         alt: "Bill",
         name: "Contracts",

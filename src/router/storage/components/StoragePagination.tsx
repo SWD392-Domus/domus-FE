@@ -9,13 +9,13 @@ import {
   PaginationPrevious,
 } from "@/components/ui/Pagination";
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/Select";
+// import {
+//   Select,
+//   SelectContent,
+//   SelectItem,
+//   SelectTrigger,
+//   SelectValue,
+// } from "@/components/ui/Select";
 
 interface Props {
   totalPages: number;
@@ -29,17 +29,17 @@ interface Props {
 const StoragePagination: React.FC<Props> = ({
   totalPages,
   pageIndex,
-  pageSize,
-  totalItems,
+  // pageSize,
+  // totalItems,
   setPageIndex,
-  setPageSize,
+  // setPageSize,
 }) => {
   const handlePageChange = (newPageIndex: number) => {
     setPageIndex(newPageIndex);
   };
 
   const renderPageLinks = () => {
-    const pageLinks = [];
+    const pageLinks: any[] = [];
     const maxVisiblePages = 2;
     let ellipsisAdded: boolean = false;
 

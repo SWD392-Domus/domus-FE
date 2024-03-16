@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/Button/Button';
 import { RequestQuotationButton } from './components/Button/RequestQuotationButton';
 import { CustomizePackageButton } from './components/Button/CustomizePackageButton';
 import Slider from './components/ImagesPackageSlider';
@@ -24,7 +23,7 @@ import { useParams } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import selector from "./slice/selector";
 import { actions } from "./slice";
-import { useNavigate, useLocation } from "react-router-dom"
+// import { useNavigate, useLocation } from "react-router-dom"
 import HTMLReactParser from 'html-react-parser/lib/index';
 
 interface Props { }
@@ -43,8 +42,8 @@ const PackageDetails: React.FC<Props> = () => {
 
   const [updated, setUpdated] = useState(false);
 
-  const location = useLocation();
-  const navigate = useNavigate();
+  // const location = useLocation();
+  // const navigate = useNavigate();
 
   async function fetchData() {
     if (packageId) {
