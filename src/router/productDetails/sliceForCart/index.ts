@@ -29,7 +29,7 @@ const slice = createSlice({
     decreaseCartNumber: (state: any, action: any) => {
       state.cartNumber -= action.payload;
     },
-    resetCartNumber: (state: any, action: any) => {
+    resetCartNumber: (state: any) => {
       state.cartNumber = 0;
     },
     setProduct: (state: any, action: any) => {

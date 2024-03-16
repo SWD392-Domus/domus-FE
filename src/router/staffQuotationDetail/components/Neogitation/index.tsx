@@ -14,7 +14,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { pushNegotitaionService } from "../../service";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import selector from "../../slice/selector";
 import { toast } from "@/components/ui/Toast/use-toast";
 

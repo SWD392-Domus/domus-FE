@@ -5,7 +5,7 @@ import {
     DialogClose
 } from "@/components/ui/Dialog";
 import Slider from './ImagesPackageSlider';
-import {  PackageImageProps, ServiceProps } from './types';
+// import {  PackageImageProps, ServiceProps } from './types';
 import {
     Accordion,
     AccordionContent,
@@ -22,7 +22,7 @@ import {
 // } from "@/components/ui/Card";
 // import { FaCartArrowDown } from "react-icons/fa6";
 import selector from "@/router/customerCart/slice/selector";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import ProductCartInPopUp from "./ProductCartInPopUp";
 
 interface Props {
@@ -91,7 +91,7 @@ const PackageDetailPopUp: React.FC<Props> = () => {
                                                 <AccordionTrigger className='text-xl'>Services</AccordionTrigger>
                                                 <AccordionContent>
                                                     <div className="flex flex-col gap-2 shrink">
-                                                        {packageA?.services?.map((service: ServiceProps) =>
+                                                        {packageA?.services?.map((service: any) =>
                                                             <div className="flex flex-row justify-between">
                                                                 <div className='font-semibold'>{service.name}</div>
                                                                 <div>{new Intl.NumberFormat("en-US", {
@@ -109,7 +109,7 @@ const PackageDetailPopUp: React.FC<Props> = () => {
                             <div
                                 className="w-[300px]"
                             >
-                                <Slider images={packageA?.packageImages?.map((item: PackageImageProps) => item?.imageUrl)} />
+                                <Slider images={packageA?.packageImages?.map((item: any) => item?.imageUrl)} />
                             </div>
                         </div>
                         <ProductCartInPopUp></ProductCartInPopUp>

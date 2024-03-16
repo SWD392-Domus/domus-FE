@@ -13,7 +13,7 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
+  // SelectValue,
 } from "@/components/ui/Select"
 interface Props {
   totalPages: number;
