@@ -1,0 +1,1 @@
+export { getUserById } from "./getUserById";
