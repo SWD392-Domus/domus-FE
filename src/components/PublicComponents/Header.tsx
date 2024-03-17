@@ -4,7 +4,7 @@ import { FaInstagram } from "react-icons/fa";
 import WebsiteName from "./WebsiteName";
 import NavigationTab from "./NavigationTab";
 import { AnimatePresence, motion } from "framer-motion";
-import { FaArrowRightArrowLeft, FaCartShopping } from "react-icons/fa6";
+import { FaCartShopping } from "react-icons/fa6";
 import { useSelector, useDispatch } from "react-redux";
 import selector from "@/router/customerCart/slice/selector";
 import { actions } from "@/router/customerCart/slice";
@@ -26,9 +26,9 @@ const Header: React.FC = () => {
     useEffect(() => {
         const cartNumber: any =
             localStorage.getItem("cart") &&
-            JSON.parse(localStorage.getItem("cart") as string).productDetails
+                JSON.parse(localStorage.getItem("cart") as string).productDetails
                 ? JSON.parse(localStorage.getItem("cart") as string)
-                      .productDetails.length
+                    .productDetails.length
                 : 0;
         dispatch(actions.setCartNumber(cartNumber));
         // When the NavigationTab is open, prevent scrolling
@@ -83,23 +83,20 @@ const Header: React.FC = () => {
                         >
                             <AnimatePresence>
                                 <div
-                                    className={`${genericHamburgerLine} ${
-                                        open
+                                    className={`${genericHamburgerLine} ${open
                                             ? "rotate-45 translate-y-[7.1px] opacity-100"
                                             : "opacity-100"
-                                    }`}
+                                        }`}
                                 />
                                 <div
-                                    className={`${genericHamburgerLine} ${
-                                        open ? "opacity-0" : "opacity-100 "
-                                    }`}
+                                    className={`${genericHamburgerLine} ${open ? "opacity-0" : "opacity-100 "
+                                        }`}
                                 />
                                 <div
-                                    className={`${genericHamburgerLine} ${
-                                        open
+                                    className={`${genericHamburgerLine} ${open
                                             ? "-rotate-45 -translate-y-[7.1px] opacity-100 "
                                             : "opacity-100"
-                                    }`}
+                                        }`}
                                 />
                             </AnimatePresence>
                         </motion.div>
