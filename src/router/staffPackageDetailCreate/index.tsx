@@ -25,9 +25,9 @@ import {
 import React, { useEffect, useState } from "react";
 import { createPackage, } from "./usecase";
 import { useNavigate, } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import selector from "./slice/selector";
-import { actions } from "./slice";
+// import { actions } from "./slice";
 import {
     Form,
     FormControl,
@@ -55,7 +55,7 @@ interface Props { }
 
 const StaffPackageDetailCreate: React.FC<Props> = () => {
     const [uploadedImages, setUploadedImages] = useState<File[]>([]);
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const navigate = useNavigate();
     // const id: string = useSelector(selector.id);
     const name: string = useSelector(selector.name);
