@@ -239,6 +239,13 @@ const RouterComponent: React.FC = () => {
         },
         {
             index: true,
+            path: "staff/quotations/:quotationId/versions",
+            component: <StaffQuotationDetail />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
             path: "staff/articles/:articleId",
             component: <StaffArticleDetail />,
             exact: true,
@@ -325,7 +332,13 @@ const RouterComponent: React.FC = () => {
             index: true,
             path: "staff/contracts/:contractId",
             component: <StaffContractDetail />,
-
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/contracts/:contractId/versions",
+            component: <StaffContractDetail />,
             exact: true,
             restrict: true,
         },

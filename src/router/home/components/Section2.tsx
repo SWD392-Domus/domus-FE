@@ -10,9 +10,9 @@ import { useToast } from "@/components/ui/Toast/use-toast";
 const data = {
   title: "Our DNA",
   description:
-    "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
+    "Interior design is not just about arranging furniture in a room; it's an art that transforms spaces into aesthetically pleasing and functional environments.",
   description2:
-    "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud",
+    "In today's fast-paced world, where our surroundings significantly impact our mood and productivity, interior design has become more important than ever.",
   button: {
     text: "Read More",
     link: "/about",
@@ -20,7 +20,7 @@ const data = {
 };
 
 const Section2: React.FC = () => {
-  const {toast} = useToast();
+  const { toast } = useToast();
   return (
     <div className="flex justify-center bg-white z-0">
       <motion.div

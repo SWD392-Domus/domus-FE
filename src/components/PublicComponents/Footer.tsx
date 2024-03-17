@@ -29,7 +29,7 @@ const info = [
         </defs>
       </svg>
     ),
-    text: "willie.jennings@example.com",
+    text: "domusinterior@domus.com",
   },
   {
     icon: (
@@ -53,7 +53,7 @@ const info = [
         </defs>
       </svg>
     ),
-    text: "(603) 555-0123",
+    text: "(+84) 901-273-457",
   },
   {
     icon: (
@@ -77,7 +77,7 @@ const info = [
         </defs>
       </svg>
     ),
-    text: "8502 Preston Rd. Inglewood, Maine 98380",
+    text: "S102 Nguyen Xien St., HCMC 1000",
   },
 ];
 

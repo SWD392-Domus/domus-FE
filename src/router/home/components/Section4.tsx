@@ -7,7 +7,7 @@ import { leaf, tools, icon24h } from "@/assets/image/home";
 const data = {
     title: "Why Us",
     description:
-        "Amet eu facilisi posuere ut at cras non ipsum proin nunc purus tellus ultricies velit elementum ut dui sed augue ultrices phasellus ullamcorper condimentum ut suspendisse viverra ornare sit venenatis",
+        "In today's fast-paced world, where our surroundings significantly impact our mood and productivity, interior design has become more important than ever. Whether it's a cozy living room, a productive workspace, or a serene bedroom, thoughtful interior design can enhance the quality of our lives.",
 };
 
 const box = [

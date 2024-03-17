@@ -2,12 +2,14 @@ import { deletePackage } from "../usecase"
 import { Button } from "@/components/ui/Button/Button"
 import { ToastAction } from "@/components/ui/Toast/toast"
 import { useToast } from "@/components/ui/Toast/use-toast"
+import { useNavigate } from "react-router-dom";
 
 interface Props {
     id: string
 }
 
 export const ConfirmDeleteButton: React.FC<Props> = (props) => {
+    const navigate = useNavigate();
     const { toast } = useToast()
     return (
         <Button onClick={() => deletePackage(props.id)
@@ -19,6 +21,7 @@ export const ConfirmDeleteButton: React.FC<Props> = (props) => {
                         description: "A package was deleted.",
                         action: <ToastAction altText="Close">Close</ToastAction>,
                     })
+                    navigate("/staff/packages");
                 }
             })
             .catch(() =>
