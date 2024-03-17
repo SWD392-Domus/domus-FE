@@ -365,14 +365,14 @@ const RouterComponent: React.FC = () => {
         },
         {
             index: true,
-            path: "staff/user/:id",
+            path: "staff/users/:id",
             component: <UserDetails />,
             exact: true,
             restrict: true,
         },
         {
             index: true,
-            path: "staff/user/create",
+            path: "staff/users/create",
             component: <CreateUser />,
             exact: true,
             restrict: true,

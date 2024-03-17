@@ -1,5 +1,4 @@
 import { Input } from "@/components/ui/Input";
-import { Label } from "@/components/ui/Label";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import {
   Select,
@@ -13,10 +12,8 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/Form";
 
@@ -78,7 +75,7 @@ const createUserSchema = z.object({
 type Props = {};
 
 type Gender = "Male" | "Female" | "Others" | "";
-const CreateUser: React.FC = (props: Props) => {
+const CreateUser: React.FC = () => {
     const [uploadedImage, setUploadedImage] = useState<Image | null>(null);
   const [gender, setGender] = useState<Gender>("");
 

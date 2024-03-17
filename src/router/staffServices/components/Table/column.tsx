@@ -58,4 +58,11 @@ export const columns: ColumnDef<ServicesProps>[] = [
             return <CRUDDropdownMenu id={row.getValue("id")} />;
         },
     },
+    // {
+    //     id: "details",
+    //     enableHiding: false,
+    //     cell: ({ row }) => {
+    //         return <ServiceDetails id={row.getValue("id")} />;
+    //     },
+    // },
 ];

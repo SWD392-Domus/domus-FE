@@ -5,3 +5,4 @@ export { deleteServiceService } from "./deleteServiceService";
 export { deleteManyServicesService } from "./deleteManyServicesService";
 export { searchServicesService } from "./searchServicesService";
 export { sortServicesService } from "./sortServicesService";
+export { CreateServiceService } from "./createService";

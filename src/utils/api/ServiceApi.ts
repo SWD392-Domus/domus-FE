@@ -105,4 +105,10 @@ export const serviceStaffApi = {
   getServiceById: (id: string) => {
     return get(`/Services/${id}`);
   },
+  creaetService: (data: any, token: string) => {
+    return post(`/Services`, data, {}, { Authorization: token });
+  },
+  editService: (id: string,data: any, token: string) => {
+    return put(`/Services/${id}`, data, {}, { Authorization: token });
+  },
 };
