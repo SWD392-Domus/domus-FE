@@ -56,7 +56,6 @@ interface Image {
 }
 const UserDetails: React.FC<Props> = () => {
   const { id } = useParams<string>();
-  // const [isUpdate, setIsUpdate] = useState(false);
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       const formData = new FormData();
@@ -84,7 +83,6 @@ const UserDetails: React.FC<Props> = () => {
     }
   }
   const [uploadedImage, setUploadedImage] = useState<Image | null>(null);
-  const [, setUser] = useState<any | null>(null);
   const fetchData = async () => {
     const res = await getUserById(id ?? "");
     if (res.status != 200) {
@@ -97,7 +95,7 @@ const UserDetails: React.FC<Props> = () => {
         form.setValue("address", address);
         form.setValue("phoneNumber", phoneNumber);
         form.setValue("email", email);
-        setUser(res.data.data);
+        // setUser(res.data.data);
         setRole(role);
         setUploadedImage({
           file: null,
@@ -143,9 +141,8 @@ const UserDetails: React.FC<Props> = () => {
       address: "",
     },
   });
-  const {
-    // register, 
-    handleSubmit, watch } = form;
+  const { handleSubmit, watch } = form;
+
   const watchedValues = watch(); // Watch all fields
 
   useEffect(() => {
