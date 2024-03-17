@@ -59,8 +59,7 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
     const navigate = useNavigate();
     // const id: string = useSelector(selector.id);
     const name: string = useSelector(selector.name);
-    // const description: string = useSelector(selector.description);
-    const [desValue, setDesValue] = useState("");
+    const description: string = useSelector(selector.description);
     // const estimatedPrice: number = useSelector(selector.estimatedPrice);
     // const discount: number = useSelector(selector.discount);
     const services: ServiceProps[] = useSelector(selector.services);
@@ -99,6 +98,7 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
 
     const formSchema = z.object({
         name: z.string().nonempty({ message: "Name is required" }),
+        description: z.string().nonempty({ message: "Description is required" }),
         // discount: z
         //     .number({
         //         required_error: "Discount is required",
@@ -113,20 +113,20 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: name,
+            description: description,
             // discount: discount,
         },
     });
     async function onSubmit(values: z.infer<typeof formSchema>) {
         const formData = new FormData();
-        // values.pictures.map((picture: string) =>
-        //   formData.append("Images", picture)
-        // )
-        // formData.append("Images", values.pictures[0]);
+        uploadedImages.forEach((image) => {
+            formData.append("Images", image);
+        });
 
         formData.append("Name", values.name);
         formData.append("Discount", "0");
         // formData.append("Discount", values.discount.toString());
-        formData.append("Description", desValue);
+        formData.append("Description", values.description);
 
         services.map((item) => {
             return formData.append("ServiceIds", item.id);
@@ -136,19 +136,16 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
                 formData.append("ProductDetailIds", item.id);
             }
         });
-        uploadedImages.forEach((image) => {
-            formData.append("Images", image);
-        });
 
         const res = await createPackage(formData);
         if (res === 200) {
             toast({
                 variant: "success",
-                title: "Update Successfully.",
-                description: "A package was updated.",
+                title: "Create Successfully.",
+                description: "A package was created.",
                 action: <ToastAction altText="Close">Close</ToastAction>,
             });
-            dispatch(actions.resetPackage());
+            // dispatch(actions.resetPackage());
             navigate(`/staff/packages`);
         } else {
             toast({
@@ -159,7 +156,6 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
                     <ToastAction altText="Try again">Try again</ToastAction>
                 ),
             });
-            dispatch(actions.resetPackage());
         }
     }
 
@@ -212,31 +208,6 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
                                         </FormItem>
                                     )}
                                 />
-                                {/* Package Name Input End*/}
-                                {/* Package Discount Input Start */}
-                                {/* <FormField
-                                    control={form.control}
-                                    name="discount"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel className="border-yellowCustom text-xl text-black mb-2">
-                                                Discount
-                                            </FormLabel>
-                                            <FormControl>
-                                                <Input
-                                                    // placeholder={discount}
-                                                    {...field}
-                                                    className="mb-4"
-                                                    type="number"
-                                                />
-                                            </FormControl>
-
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                /> */}
-                                {/* Package Discount Input End*/}
-                                {/* Package Name Input Start */}
 
                                 <Label className="border-yellowCustom text-xl text-black mb-2">
                                     Package Images
@@ -272,7 +243,7 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
                                                                             service.name
                                                                         }
                                                                     </div>
-                                                                    <div>
+                                                                    {/* <div>
                                                                         {new Intl.NumberFormat(
                                                                             "en-US",
                                                                             {
@@ -283,7 +254,7 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
                                                                         ).format(
                                                                             service.price
                                                                         )}
-                                                                    </div>
+                                                                    </div> */}
                                                                 </div>
                                                             )
                                                         )}
@@ -319,9 +290,23 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
                         <div className="flex flex-col mb-10 gap-4">
                             <div className="font-semibold text-xl">Description</div>
                             <div className='w-full'>
-                                <ReactQuill className="" theme="snow" value={desValue} placeholder="Description..."
-                                    onChange={setDesValue}
-                                ></ReactQuill>
+                                <FormField
+                                    control={form.control}
+                                    name="description"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormControl>
+                                                <ReactQuill
+                                                    theme="snow"
+                                                    placeholder="Description..."
+                                                    {...field}
+                                                ></ReactQuill>
+                                            </FormControl>
+
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
                             </div>
                         </div>
                         <div className="flex justify-center items-center">
@@ -348,8 +333,6 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
                                                 data={productDetails}
                                             />
                                             <DialogFooter>
-                                                {/* <Button onClick={onCancle} className="bg-zinc-500" >Cancle</Button>
-                        <Button onClick={onDelete} className="bg-red-600" >Delete</Button> */}
                                             </DialogFooter>
                                         </DialogContent>
                                     </Dialog>

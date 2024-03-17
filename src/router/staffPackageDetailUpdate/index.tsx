@@ -58,9 +58,8 @@ const PackageDetails: React.FC<Props> = () => {
     const dispatch = useDispatch();
     const id: string = useSelector(selector.id);
     const name: string = useSelector(selector.name);
-    // const description: string = useSelector(selector.description);
+    const description: string = useSelector(selector.description);
     const [uploadedImages, setUploadedImages] = useState<File[]>([]);
-    const [desValue, setDesValue] = useState("");
     // const estimatedPrice: number = useSelector(selector.estimatedPrice);
     // const discount: number = useSelector(selector.discount);
     const services: ServiceProps[] = useSelector(selector.services);
@@ -115,8 +114,8 @@ const PackageDetails: React.FC<Props> = () => {
                     // console.log(response)
                     dispatch(actions.getPackageInfo());
                     form.setValue("name", response.name);
+                    form.setValue("description", response.description);
                     // form.setValue("discount", response.discount);
-                    setDesValue(response.description);
                     setUpdated(true);
                 }
             } catch (error) {
@@ -136,6 +135,7 @@ const PackageDetails: React.FC<Props> = () => {
 
     const formSchema = z.object({
         name: z.string().nonempty({ message: "Name is required" }),
+        description: z.string().nonempty({ message: "Description is required" }),
         // discount: z
         //     .number({
         //         required_error: "Discount is required",
@@ -150,6 +150,7 @@ const PackageDetails: React.FC<Props> = () => {
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: name,
+            description: description,
             // discount: discount,
         },
     });
@@ -160,7 +161,7 @@ const PackageDetails: React.FC<Props> = () => {
         });
         formData.append("Name", values.name);
         // formData.append("Discount", values.discount.toString());
-        formData.append("Description", desValue);
+        formData.append("Description", values.description);
         services.map((item) => {
             return formData.append("ServiceIds", item.id);
         });
@@ -370,9 +371,23 @@ const PackageDetails: React.FC<Props> = () => {
                         <div className="flex flex-col mb-10 gap-4">
                             <div className="font-semibold text-xl">Description</div>
                             <div className='w-full'>
-                                <ReactQuill className="" theme="snow" value={desValue} placeholder="Description..."
-                                    onChange={setDesValue}
-                                ></ReactQuill>
+                                <FormField
+                                    control={form.control}
+                                    name="description"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormControl>
+                                                <ReactQuill
+                                                    theme="snow"
+                                                    placeholder="Description..."
+                                                    {...field}
+                                                ></ReactQuill>
+                                            </FormControl>
+
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
                             </div>
                         </div>
                         <div className="flex justify-center items-center">
