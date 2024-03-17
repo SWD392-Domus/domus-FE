@@ -50,7 +50,7 @@ export function DataTable<TData, TValue>({
         <div className="my-auto px-2 h-8 border-2 border-zinc-500 bg-zinc-50 rounded pointer-events-none">
           {table.getFilteredSelectedRowModel().rows.length} Selected
         </div>
-        <PrintButton></PrintButton>
+        //<PrintButton></PrintButton>
         <ActionsDropdownMenu
           ids={table
             .getSelectedRowModel()
@@ -83,9 +83,9 @@ export function DataTable<TData, TValue>({
                         {header.isPlaceholder
                           ? null
                           : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                         {["id", "name", "price"].includes(headerId) && (
                           <SortButton
                             sortField={headerId}
@@ -125,13 +125,13 @@ export function DataTable<TData, TValue>({
                       !cell.id.includes("select") &&
                       !cell.id.includes("actions") &&
                       !cell.id.includes("details") && (
-                        <TableCell 
-                        key={cell.id} 
-                        className="">
-                              {flexRender(
-                                cell.column.columnDef.cell,
-                                cell.getContext()
-                              )}
+                        <TableCell
+                          key={cell.id}
+                          className="">
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
                         </TableCell>
                       )
                   )}
