@@ -9,8 +9,12 @@ function BreadCrumbHeader() {
         "/customer/settings": "Settings",
         "/customer/settings/quotations": "Quotations",
         "/customer/settings/quotations/:quotationId": `Quotation ${quotationId} `,
+        "/customer/settings/contracts": "Contracts",
+        "/customer/settings/contracts/:contractId": `Contract ${contractId} `,
 
         "/staff": "Staff",
+
+        "/staff/profile": "Profile",
 
         "/staff/packages": `Packages`,
         "/staff/packages/newPackage": `New Package`,
@@ -72,6 +76,9 @@ function BreadCrumbHeader() {
         ] = `Article ${articleId?.slice(0, 3)}... `;
     }
     if (contractId !== undefined) {
+        breadcrumbNameMap[
+            `/customer/settings/contracts/${contractId}`
+        ] = `Contract ${contractId?.slice(0, 3)}... `;
         breadcrumbNameMap[
             `/staff/contracts/${contractId}`
         ] = `Contract ${contractId?.slice(0, 3)}... `;
