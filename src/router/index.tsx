@@ -39,6 +39,7 @@ import StaffContractDetail from "./StaffContractDetail";
 import Storage from "./storage";
 import CustomerContractDetail from "./customerContractDetail";
 import CustomerContract from "./customerContracts";
+import Notification from "./notifications";
 
 const RouterComponent: React.FC = () => {
     const publicRoute = [
@@ -174,6 +175,13 @@ const RouterComponent: React.FC = () => {
             index: true,
             path: "403",
             component: <Error403Page />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "notification",
+            component: <Notification />,
             exact: true,
             restrict: true,
         },

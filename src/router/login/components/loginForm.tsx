@@ -21,10 +21,13 @@ import { loginApi } from "@/utils/api/loginApi";
 import { toastError, toastSuccess } from "@/components/Toast";
 import { useNavigate } from "react-router-dom";
 import { devEnvGoogleAuth } from "../constants";
+import { useDispatch } from "react-redux";
+import { actions } from "../slice";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function LoginForm({ className, ...props }: UserAuthFormProps) {
+    const dispatch = useDispatch();
     // const [userName, setUserName] = React.useState("");
     const navigate = useNavigate();
     const handleGoogleLogin = () => {
@@ -66,9 +69,13 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
         try {
             const res = await loginApi.login(values.email, values.password);
             if (res.status === 200) {
-                localStorage.setItem("Token", res.data.data.token.accessToken);
+                localStorage.setItem(
+                    "Token",
+                    res.data.data.token.token.accessToken
+                );
 
                 toastSuccess("Login Successfully");
+
                 const roles: string[] = res.data.data.roles;
                 if (roles.includes("Staff")) {
                     navigate("/staff");

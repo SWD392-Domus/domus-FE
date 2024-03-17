@@ -43,6 +43,7 @@ interface ProfileType {
 const NavigationTab: React.FC<Props> = (props) => {
     const [profile, setProfile] = useState<ProfileType>();
     const [isLogin, SetLogin] = useState<boolean>();
+    const [isRender, setRender] = useState<boolean>();
     const handleCloseMenu = () => {
         props.setOpen(false);
     };
@@ -54,7 +55,7 @@ const NavigationTab: React.FC<Props> = (props) => {
         if (token) {
             const res = await userApi.getOwnProfile(token);
             if (res.data.isSuccess) {
-                console.log(res.data.data);
+                setRender(true);
                 setProfile(res.data.data);
                 SetLogin(true);
             }
@@ -66,110 +67,112 @@ const NavigationTab: React.FC<Props> = (props) => {
         getProfile();
     }, []);
     return (
-        <motion.div
-            variants={menuVars}
-            initial="initial"
-            animate="animate"
-            exit="exit"
-            className="bg-darkCustom z-50 w-screen h-full
-             origin-top fixed left-0"
-        >
-            {isLogin && (
-                <div className="w-full flex justify-end mt-10 text-center items-center">
-                    <h1 className="text-white cursor-pointer font-playfair max-md:text-xl mr-2 ">
-                        {profile?.userName}
-                    </h1>
-
-                    <Avatar className=" mr-20">
-                        <AvatarImage
-                            src={
-                                profile?.profileImage
-                                    ? profile?.profileImage
-                                    : `https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=740&t=st=1708278601~exp=1708279201~hmac=1aa24ff6087733cedf6f8e1a5b3a4494c2cd07599ae7f026027cea653cbb8151`
-                            }
-                        />
-                        <AvatarFallback>CN</AvatarFallback>
-                    </Avatar>
-                </div>
-            )}
+        <>
             <motion.div
-                variants={containerVars}
+                variants={menuVars}
                 initial="initial"
-                animate="open"
-                exit="initial"
-                className="h-full w-screen flex flex-col gap-2 mt-20 justify-start"
+                animate="animate"
+                exit="exit"
+                className="bg-darkCustom z-50 w-screen h-full
+             origin-top fixed left-0"
             >
-                {navLinks.map((link, index) => (
-                    <div className="overflow-hidden">
-                        <motion.ul
-                            variants={menuLinksVars}
-                            className="list-disc h-[58px] ml-20"
-                        >
-                            <li
-                                key={index}
-                                className="text-white inline-block max-md:text-3xl text-2xl 
-                            cursor-pointer font-openSans tracking-tighter font-bold hover:text-yellowCustom"
+                {isLogin && isRender && (
+                    <div className="w-full flex justify-end mt-10 text-center items-center">
+                        <h1 className="text-white cursor-pointer font-playfair max-md:text-xl mr-2 ">
+                            {profile?.userName}
+                        </h1>
+
+                        <Avatar className=" mr-20">
+                            <AvatarImage
+                                src={
+                                    profile?.profileImage
+                                        ? profile?.profileImage
+                                        : `https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?w=740&t=st=1708278601~exp=1708279201~hmac=1aa24ff6087733cedf6f8e1a5b3a4494c2cd07599ae7f026027cea653cbb8151`
+                                }
+                            />
+                            <AvatarFallback>CN</AvatarFallback>
+                        </Avatar>
+                    </div>
+                )}
+                <motion.div
+                    variants={containerVars}
+                    initial="initial"
+                    animate="open"
+                    exit="initial"
+                    className="h-full w-screen flex flex-col gap-2 mt-20 justify-start"
+                >
+                    {navLinks.map((link, index) => (
+                        <div className="overflow-hidden">
+                            <motion.ul
+                                variants={menuLinksVars}
+                                className="list-disc h-[58px] ml-20"
                             >
-                                <Link
+                                <li
                                     key={index}
-                                    to={link.href}
+                                    className="text-white inline-block max-md:text-3xl text-2xl 
+                            cursor-pointer font-openSans tracking-tighter font-bold hover:text-yellowCustom"
+                                >
+                                    <Link
+                                        key={index}
+                                        to={link.href}
+                                        onClick={handleCloseMenu}
+                                    >
+                                        {link.title}
+                                    </Link>
+                                </li>
+                            </motion.ul>
+                        </div>
+                    ))}
+                    {!isLogin ? (
+                        <motion.div
+                            variants={menuLinksVars}
+                            className="flex justify-center items-center gap-10"
+                        >
+                            <Button size={"lg"} variant={"yellowCustom"}>
+                                <Link
+                                    to={signinLinks.href}
                                     onClick={handleCloseMenu}
                                 >
-                                    {link.title}
+                                    <p className="text-xl font-bold tracking-tighter font-openSans">
+                                        {signinLinks.title}
+                                    </p>
                                 </Link>
-                            </li>
-                        </motion.ul>
-                    </div>
-                ))}
-                {!isLogin ? (
-                    <motion.div
-                        variants={menuLinksVars}
-                        className="flex justify-center items-center gap-10"
-                    >
-                        <Button size={"lg"} variant={"yellowCustom"}>
-                            <Link
-                                to={signinLinks.href}
-                                onClick={handleCloseMenu}
-                            >
-                                <p className="text-xl font-bold tracking-tighter font-openSans">
-                                    {signinLinks.title}
-                                </p>
-                            </Link>
-                        </Button>
-                        <Button size={"lg"} variant={"yellowCustom"}>
-                            <Link
-                                to={signUpLinks.href}
-                                onClick={handleCloseMenu}
-                            >
-                                <p className="text-xl font-bold tracking-tighter font-openSans">
-                                    {signUpLinks.title}
-                                </p>
-                            </Link>
-                        </Button>
-                    </motion.div>
-                ) : (
-                    <motion.div
-                        variants={menuLinksVars}
-                        className="flex justify-center items-center gap-10"
-                    >
-                        <Button
-                            size={"lg"}
-                            variant={"yellowCustom"}
-                            onClick={handleLogout}
+                            </Button>
+                            <Button size={"lg"} variant={"yellowCustom"}>
+                                <Link
+                                    to={signUpLinks.href}
+                                    onClick={handleCloseMenu}
+                                >
+                                    <p className="text-xl font-bold tracking-tighter font-openSans">
+                                        {signUpLinks.title}
+                                    </p>
+                                </Link>
+                            </Button>
+                        </motion.div>
+                    ) : (
+                        <motion.div
+                            variants={menuLinksVars}
+                            className="flex justify-center items-center gap-10"
                         >
-                            <Link
-                                to={logOutLinks.href}
-                                onClick={handleCloseMenu}
+                            <Button
+                                size={"lg"}
+                                variant={"yellowCustom"}
+                                onClick={handleLogout}
                             >
-                                <p className="text-xl font-bold tracking-tighter font-openSans">
-                                    {logOutLinks.title}
-                                </p>
-                            </Link>
-                        </Button>
-                    </motion.div>
-                )}
+                                <Link
+                                    to={logOutLinks.href}
+                                    onClick={handleCloseMenu}
+                                >
+                                    <p className="text-xl font-bold tracking-tighter font-openSans">
+                                        {logOutLinks.title}
+                                    </p>
+                                </Link>
+                            </Button>
+                        </motion.div>
+                    )}
+                </motion.div>
             </motion.div>
-        </motion.div>
+        </>
     );
 };
 

@@ -20,7 +20,10 @@ const Auth: React.FC<Props> = (props) => {
         } else {
             if (res.data.isSuccess) {
                 toastSuccess("Login Successfully");
-                localStorage.setItem("Token", res.data.data.token.accessToken);
+                localStorage.setItem(
+                    "Token",
+                    res.data.data.token.token.accessToken
+                );
                 navigate("/home");
             } else {
                 toastError("Login Unccesfully, please try again");
