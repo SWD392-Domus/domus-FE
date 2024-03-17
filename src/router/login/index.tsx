@@ -75,7 +75,7 @@ const Login: React.FC<Props> = () => {
                                     </h1>
                                 </div>
                                 <LoginForm />
-                                <p className="px-8 text-center text-sm text-muted-foreground">
+                                {/* <p className="px-8 text-center text-sm text-muted-foreground">
                                     By clicking continue, you agree to our{" "}
                                     <Link
                                         to="/terms"
@@ -101,7 +101,7 @@ const Login: React.FC<Props> = () => {
                                         Signup
                                     </Link>
                                     .
-                                </p>
+                                </p> */}
                             </div>
                         </TabsContent>
                         <TabsContent value="password">
@@ -112,7 +112,7 @@ const Login: React.FC<Props> = () => {
                                     </h1>
                                 </div>
                                 <RegisterForm />
-                                <p className="px-8 text-center text-sm text-muted-foreground">
+                                {/* <p className="px-8 text-center text-sm text-muted-foreground">
                                     By clicking continue, you agree to our{" "}
                                     <Link
                                         to="/terms"
@@ -138,7 +138,7 @@ const Login: React.FC<Props> = () => {
                                         Signup
                                     </Link>
                                     .
-                                </p>
+                                </p> */}
                             </div>
                         </TabsContent>
                     </Tabs>

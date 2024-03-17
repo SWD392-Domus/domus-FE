@@ -25,16 +25,14 @@ export const ConfirmButton: React.FC<Props> = (props) => {
                 services: packageA.services.map((ser: any) => {
                     return {
                         serviceId: ser.id,
-                        // price: ser.price,
-                        price: 0,
+                        price: ser.price,
                     }
                 }),
                 productDetails: packageA.productDetails.map((productDetail: any) => {
                     return {
                         id: productDetail.id,
                         quantity: productDetail.quantity,
-                        // price: productDetail.displayPrice,
-                        price: 0,
+                        price: productDetail.displayPrice,
                     }
                 })
             });

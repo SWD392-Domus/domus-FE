@@ -37,10 +37,10 @@ const logOutLinks = {
     href: "/login",
 };
 
-const signUpLinks = {
-    title: "Sign Up",
-    href: "/",
-};
+// const signUpLinks = {
+//     title: "Sign Up",
+//     href: "/",
+// };
 interface Props {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -191,7 +191,7 @@ const NavigationTab: React.FC<Props> = (props) => {
                                     </p>
                                 </Link>
                             </Button>
-                            <Button size={"lg"} variant={"yellowCustom"}>
+                            {/* <Button size={"lg"} variant={"yellowCustom"}>
                                 <Link
                                     to={signUpLinks.href}
                                     onClick={handleCloseMenu}
@@ -200,7 +200,7 @@ const NavigationTab: React.FC<Props> = (props) => {
                                         {signUpLinks.title}
                                     </p>
                                 </Link>
-                            </Button>
+                            </Button> */}
                         </motion.div>
                     ) : (
                         <motion.div
