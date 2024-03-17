@@ -38,6 +38,10 @@ export const columns: ColumnDef<ProductDetailProps>[] = [
     {
         accessorKey: "id",
         header: "Id",
+        cell: ({ row }) => {
+            const id: string = row.getValue("id") as string;
+            return <h4> {id.slice(0, 3)}..</h4>;
+        },
     },
     {
         accessorKey: "images",
@@ -70,6 +74,13 @@ export const columns: ColumnDef<ProductDetailProps>[] = [
     //         return <h4>đ{row.original.displayPrice} </h4>;
     //     },
     // },
+    {
+        accessorKey: "quantity",
+        header: "Quantity",
+        cell: ({ row }) => {
+            return <h4>{row.original.quantity} </h4>;
+        },
+    },
 
     {
         header: "Action",

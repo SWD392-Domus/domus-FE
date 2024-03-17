@@ -92,7 +92,7 @@ const PackageDetails: React.FC<Props> = () => {
         const files = event.target.files;
         if (files) {
             const newFiles = Array.from(files);
-            setUploadedImages((prevImages) => [...prevImages, ...newFiles]);
+            setUploadedImages(newFiles);
             const newImages = newFiles.map((file) => {
                 return {
                     imageUrl: URL.createObjectURL(file),
@@ -102,7 +102,7 @@ const PackageDetails: React.FC<Props> = () => {
                 };
             });
             //   dispatch(actions.updatePackageImages(newImages));
-            setPackageImages([...packageImages, ...newImages]);
+            setPackageImages(newImages);
         }
     };
 
@@ -165,7 +165,9 @@ const PackageDetails: React.FC<Props> = () => {
             return formData.append("ServiceIds", item.id);
         });
         productDetails.map((item) => {
-            formData.append("ProductDetailIds", item.id);
+            for (let i = 0; i < item.quantity; i++) {
+                formData.append("ProductDetailIds", item.id);
+            }
         });
 
         const res = await updatePackage(id, formData);
@@ -458,6 +460,11 @@ const PackageDetails: React.FC<Props> = () => {
                                                                     )}
                                                                 </p>
                                                             </CardTitle> */}
+                                                            <CardTitle>
+                                                                <p className="truncate mt-2">
+                                                                    Quantity: <span className='text-red-600'>{product.quantity}</span>
+                                                                </p>
+                                                            </CardTitle>
                                                         </CardContent>
                                                         <CardFooter className=""></CardFooter>
                                                     </Card>

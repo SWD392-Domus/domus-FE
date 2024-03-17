@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { LoginContainer } from "./style";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { picture1 } from "@/assets/image/home";
 import { LoginForm } from "./components/loginForm";
 import { Tabs, TabsContent, TabsList } from "@/components/ui/Tabs";
