@@ -14,6 +14,8 @@ import {
   FormControl,
   FormField,
   FormItem,
+  FormField,
+  FormItem,
   FormMessage,
 } from "@/components/ui/Form";
 
@@ -27,9 +29,9 @@ import { CreateUserByAdmin } from "./usecases";
 import { toast } from "@/components/ui/Toast/use-toast";
 
 interface Image {
-    file: File | null;
-    imageUrl: string | null;
-    isUpload: boolean;
+  file: File | null;
+  imageUrl: string | null;
+  isUpload: boolean;
 }
 
 const createUserSchema = z.object({
@@ -72,11 +74,10 @@ const createUserSchema = z.object({
       message: "Address must be at most 100 characters",
     }),
 });
-type Props = {};
 
 type Gender = "Male" | "Female" | "Others" | "";
 const CreateUser: React.FC = () => {
-    const [uploadedImage, setUploadedImage] = useState<Image | null>(null);
+  const [uploadedImage, setUploadedImage] = useState<Image | null>(null);
   const [gender, setGender] = useState<Gender>("");
 
   const form = useForm<z.infer<typeof createUserSchema>>({
@@ -91,37 +92,37 @@ const CreateUser: React.FC = () => {
   });
   async function onSubmit(values: z.infer<typeof createUserSchema>) {
     const dataSent = {
-        ...values,
-        profileImage: uploadedImage?.imageUrl,
-        userName: values.email,
-        gender: gender
+      ...values,
+      profileImage: uploadedImage?.imageUrl,
+      userName: values.email,
+      gender: gender
     }
     console.log(dataSent)
     try {
-       const res = await CreateUserByAdmin(dataSent); 
-       console.log(res.data.statusCode)
-       if(res.data.isSuccess){
-            toast({
-                variant:"success",
-                title: "Create Successfully",
-                description:"Create Successfully"
-            })
-       }
-       if(res.data.statusCode === 409){
+      const res = await CreateUserByAdmin(dataSent);
+      console.log(res.data.statusCode)
+      if (res.data.isSuccess) {
         toast({
-            variant:"destructive",
-            title: "Error",
-            description:`${res.data.messages[0].content}`
+          variant: "success",
+          title: "Create Successfully",
+          description: "Create Successfully"
         })
-       }
+      }
+      if (res.data.statusCode === 409) {
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: `${res.data.messages[0].content}`
+        })
+      }
     } catch (error) {
-        toast({
-            variant:"destructive",
-            title: "Error",
-            description:"Something went wrong"
-        })
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Something went wrong"
+      })
     }
-    
+
   }
   const handleGenderChange = (selectedGender: Gender) => {
     setGender(selectedGender);

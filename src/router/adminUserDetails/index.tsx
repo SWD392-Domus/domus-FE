@@ -83,7 +83,6 @@ const UserDetails: React.FC<Props> = () => {
     }
   }
   const [uploadedImage, setUploadedImage] = useState<Image | null>(null);
-  // const [user, setUser] = useState<any | null>(null);
   const fetchData = async () => {
     const res = await getUserById(id ?? "");
     if (res.status != 200) {
@@ -143,6 +142,7 @@ const UserDetails: React.FC<Props> = () => {
     },
   });
   const { handleSubmit, watch } = form;
+
   const watchedValues = watch(); // Watch all fields
 
   useEffect(() => {
@@ -351,7 +351,7 @@ const UserDetails: React.FC<Props> = () => {
                   <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
                     <AlertDialogAction onClick={() => handleSubmit(onSubmit)()}>
-                    Continue
+                      Continue
                     </AlertDialogAction>
                   </AlertDialogFooter>
                 </AlertDialogContent>
