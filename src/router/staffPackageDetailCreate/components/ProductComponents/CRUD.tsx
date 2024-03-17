@@ -45,7 +45,7 @@ export const CRUDDropdownMenu: React.FC<Props> = (props) => {
                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem>Update</DropdownMenuItem>
+                    {/* <DropdownMenuItem>Update</DropdownMenuItem> */}
                     <DropdownMenuItem>
                         <DialogTrigger className="w-full text-left">
                             Delete

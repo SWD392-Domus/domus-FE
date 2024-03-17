@@ -23,8 +23,8 @@ import {
 } from "@/components/ui/Card";
 // import { FaDeleteLeft } from "react-icons/fa6";
 import React, { useEffect, useState } from "react";
-import { createPackage,  } from "./usecase";
-import { useNavigate,  } from "react-router-dom";
+import { createPackage, } from "./usecase";
+import { useNavigate, } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import selector from "./slice/selector";
 import { actions } from "./slice";
@@ -83,7 +83,7 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
         const files = event.target.files;
         if (files) {
             const newFiles = Array.from(files);
-            setUploadedImages((prevImages) => [...prevImages, ...newFiles]);
+            setUploadedImages(newFiles);
             const newImages = newFiles.map((file) => {
                 return {
                     imageUrl: URL.createObjectURL(file),
@@ -93,7 +93,7 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
                 };
             });
             //   dispatch(actions.updatePackageImages(newImages));
-            setPackageImages([...packageImages, ...newImages]);
+            setPackageImages(newImages);
         }
     };
 
@@ -132,7 +132,9 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
             return formData.append("ServiceIds", item.id);
         });
         productDetails.map((item) => {
-            formData.append("ProductDetailIds", item.id);
+            for (let i = 0; i < item.quantity; i++) {
+                formData.append("ProductDetailIds", item.id);
+            }
         });
         uploadedImages.forEach((image) => {
             formData.append("Images", image);
@@ -407,6 +409,11 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
                                                                     )}
                                                                 </p>
                                                             </CardTitle> */}
+                                                            <CardTitle>
+                                                                <p className="truncate mt-2">
+                                                                    Quantity: <span className='text-red-600'>{product.quantity}</span>
+                                                                </p>
+                                                            </CardTitle>
                                                         </CardContent>
                                                         <CardFooter className=""></CardFooter>
                                                     </Card>

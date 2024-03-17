@@ -3,8 +3,8 @@ import {
     DropdownMenuContent,
     DropdownMenuTrigger,
     DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
+    // DropdownMenuLabel,
+    // DropdownMenuSeparator,
     // DropdownMenuCheckboxItem,
 } from "@/components/ui/Dropdown-menu";
 import {
@@ -21,7 +21,7 @@ import { GearIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/Button/Button";
 import { useDispatch } from "react-redux";
 import { actions } from "../../slice";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 interface Props {
     // define your props here
@@ -49,7 +49,7 @@ export const ActionsDropdownMenu: React.FC<Props> = (props) => {
                         </div>
                     ) : (
                         <>
-                            {props.ids.length == 1 && (
+                            {/* {props.ids.length == 1 && (
                                 <>
                                     <DropdownMenuLabel>
                                         Actions
@@ -66,7 +66,7 @@ export const ActionsDropdownMenu: React.FC<Props> = (props) => {
                                         Update
                                     </Link>
                                 </>
-                            )}
+                            )} */}
                             <DropdownMenuItem>
                                 <DialogTrigger className="w-full text-left">
                                     Delete

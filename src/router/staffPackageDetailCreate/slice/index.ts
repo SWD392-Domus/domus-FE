@@ -66,12 +66,26 @@ const slice = createSlice({
       };
     },
     addProduct: (state: any, action: any | null) => {
+      for (let i = 0; i < state.productDetails.length; i++) {
+        const productDetail = state.productDetails[i];
+        if (productDetail.id == action.payload.details[0].id) {
+          productDetail.quantity += action.payload.quantity;
+          return;
+        }
+      }
       state.productDetails.push({
         ...action.payload.details[0],
         productName: action.payload.productName,
+        quantity: action.payload.quantity,
       });
     },
     addService: (state: any, action: any | null) => {
+      for (let i = 0; i < state.services.length; i++) {
+        const service = state.services[i];
+        if (service.id == action.payload.id) {
+          return;
+        }
+      }
       state.services.push(action.payload);
     },
     deleteProduct: (state: any, action: PayloadAction<string>) => {
