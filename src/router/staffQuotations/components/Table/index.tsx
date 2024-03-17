@@ -51,7 +51,7 @@ export function DataTable<TData, TValue>({
                 <div className="my-auto px-2 h-8 border-2 border-zinc-500 bg-zinc-50 rounded pointer-events-none">
                     {table.getFilteredSelectedRowModel().rows.length} Selected
                 </div>
-                <PrintButton></PrintButton>
+                //<PrintButton></PrintButton>
                 <ActionsDropdownMenu
                     ids={table
                         .getSelectedRowModel()

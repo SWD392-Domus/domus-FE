@@ -24,7 +24,7 @@ export type NotificationType = {
     status: number;
 };
 
-const Notification: React.FC<Props> = (props) => {
+const Notification: React.FC<Props> = () => {
     const navigate = useNavigate();
     const [notifcations, setNotifications] = useState<NotificationType[]>([]);
     useEffect(() => {
