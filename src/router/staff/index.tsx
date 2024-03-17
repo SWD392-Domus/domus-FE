@@ -21,7 +21,7 @@ interface Props {
     // define your props here
 }
 
-const Staff: React.FC<Props> = (props) => {
+const Staff: React.FC<Props> = () => {
     return (
         <>
             <div className="md:hidden">

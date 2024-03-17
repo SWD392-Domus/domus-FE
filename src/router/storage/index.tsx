@@ -23,17 +23,17 @@ interface Props {
   // define your props here
 }
 
-const Storage: React.FC<Props> = (props) => {
+const Storage: React.FC<Props> = () => {
   const [PageSize, setPageSize] = useState(10);
   const [PageIndex, setPageIndex] = useState(1);
   const [products, setProducts] = useState<ProductsStorage[]>([]);
   const [totalPages, setTotalPages] = useState(0);
-  const [searchField, setSearchField] = useState("productName");
+  const [searchField, ] = useState("productName");
   const [searchValue, setSearchValue] = useState("");
   const [sortField, setSortField] = useState("");
   const [descending, setDescending] = useState(false);
   const [totalItems, setTotalItems] = useState(0);
-  const [sortedProducts, setSortedProducts] = useState(false);
+  const [sortedProducts, ] = useState(false);
   const fetchProductsDataInStorage = async () => {
     try {
       const res = await getStorage(PageSize, PageIndex, searchField, searchValue, sortField, descending);

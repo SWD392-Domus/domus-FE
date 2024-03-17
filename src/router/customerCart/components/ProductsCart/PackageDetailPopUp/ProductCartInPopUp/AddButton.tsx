@@ -9,9 +9,9 @@ import {
     DialogClose
 } from "@/components/ui/Dialog";
 import { Button } from '@/components/ui/Button/Button';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, } from "react-redux";
 import { actions as actionsCart } from "@/router/customerCart/slice"
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 interface Props {
     productIdQuan: any
@@ -21,7 +21,7 @@ interface Props {
 
 export const AddButton: React.FC<Props> = (props) => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     function handleAdd() {
         const cart = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart") as string) : { productDetails: [] };

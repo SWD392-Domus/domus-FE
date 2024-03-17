@@ -58,11 +58,11 @@ const PackageDetails: React.FC<Props> = () => {
     const dispatch = useDispatch();
     const id: string = useSelector(selector.id);
     const name: string = useSelector(selector.name);
-    const description: string = useSelector(selector.description);
+    // const description: string = useSelector(selector.description);
     const [uploadedImages, setUploadedImages] = useState<File[]>([]);
     const [desValue, setDesValue] = useState("");
     // const estimatedPrice: number = useSelector(selector.estimatedPrice);
-    const discount: number = useSelector(selector.discount);
+    // const discount: number = useSelector(selector.discount);
     const services: ServiceProps[] = useSelector(selector.services);
     const productDetails: ProductDetailProps[] = useSelector(
         selector.productDetails

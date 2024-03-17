@@ -20,29 +20,15 @@ export const articleApi = {
 };
 
 export const articleStaffApi = {
-  createArticle: (formData: HTMLElement | null | undefined, token: string) => {
-    return post(
-      `/Articles`,
-      formData,
-      {},
-      { Authorization: token, "Content-Type": "multipart/form-data" }
-    );
+  createArticle: (formData: any, token: string) => {
+    return post(`/Articles`, formData, {}, { Authorization: token });
   },
-  updateArticle: (
-    id: string,
-    formData: HTMLElement | null | undefined,
-    token: string
-  ) => {
-    return put(
-      `/Articles?id=${id}`,
-      formData,
-      {},
-      { Authorization: token, "Content-Type": "multipart/form-data" }
-    );
+  updateArticle: (id: string, formData: any, token: string) => {
+    return put(`/Articles/${id}`, formData, {}, { Authorization: token });
   },
 
   deleteArticle: (id: string, token: string) => {
-    return remove(`/Articles?id=${id}`, {}, {}, { Authorization: token });
+    return remove(`/Articles/${id}`, {}, {}, { Authorization: token });
   },
   deleteManyArticles: (ids: string[], token: string) => {
     return remove(`/Articles/many`, ids, {}, { Authorization: token });
@@ -106,10 +92,15 @@ export const articleStaffApi = {
     sortField: string,
     descending: boolean,
     pageSize: number,
-    pageIndex: number
+    pageIndex: number,
+    token: string
   ) => {
     return get(
-      `/Articles/search?SearchField=${searchField}&SearchValue=${searchValue}&SortField=${sortField}&Descending=${descending}&PageSize=${pageSize}&PageIndex=${pageIndex}`
+      `/Articles/search?SearchField=${searchField}&SearchValue=${searchValue}&SortField=${sortField}&Descending=${descending}&PageSize=${pageSize}&PageIndex=${pageIndex}`,
+      {},
+      {
+        Authorization: token,
+      }
     );
   },
   getArticleById: (id: string) => {

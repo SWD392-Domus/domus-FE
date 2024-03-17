@@ -23,7 +23,7 @@ import {
     PaperPlaneIcon,
     PlusIcon,
 } from "@radix-ui/react-icons";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { DataTable } from "./components/ProductTable";
@@ -46,7 +46,6 @@ import UserList from "./components/UserList";
 import { useNavigate, useParams } from "react-router-dom";
 import { getQuotationById } from "./usecase/getQuotationById";
 import {
-    ProductDetailProps,
     ServiceProps,
 } from "../staffQuotationDetail/types";
 import { QuotationDetailInfo } from "../staffQuotationDetail/slice";
@@ -66,8 +65,8 @@ type User = {
     profileImage: string;
 };
 
-const StaffContractCreate: React.FC<Props> = (props) => {
-    const signatureRef = useRef(null);
+const StaffContractCreate: React.FC<Props> = () => {
+    // const signatureRef = useRef(null);
     const [open, setOpen] = useState(false);
     const [isUpdated, SetUpdated] = useState(false);
     const [products, setProducts] = useState<QuotationDetailInfo[]>([]);

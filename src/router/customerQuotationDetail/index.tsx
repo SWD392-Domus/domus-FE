@@ -8,7 +8,7 @@ import { DeleteButton, MakeContractButton } from "./components/Button";
 
 import React, { useEffect, useState } from "react";
 import { getQuotationById } from "./usecase";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import selector from "./slice/selector";
 import { actions } from "./slice";

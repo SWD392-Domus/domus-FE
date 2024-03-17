@@ -82,7 +82,7 @@ export function DataTable<TData, TValue>({
                             header.getContext()
                           )
                         }
-                        {["id", "name", "discount"].includes(headerId) &&
+                        {["id", "title"].includes(headerId) &&
                           <SortButton sortField={headerId} setSortField={setSortField} setDescending={setDescending}></SortButton>
                         }
                       </div>
@@ -110,9 +110,7 @@ export function DataTable<TData, TValue>({
                     <TableCell
                       key={cell.id}
                       onClick={() => navigate(
-                        `${location.pathname
-                        }/${row.original.id as any
-                        }`
+                        `${location.pathname}/${(row.original as { id: string }).id}`
                       )}
                       className="cursor-pointer"
                     >

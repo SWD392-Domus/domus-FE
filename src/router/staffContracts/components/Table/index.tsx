@@ -145,10 +145,7 @@ export function DataTable<TData, TValue>({
                                                     key={cell.id}
                                                     onClick={() =>
                                                         navigate(
-                                                            `${location.pathname
-                                                            }/${row.original
-                                                                .id as any
-                                                            }`
+                                                            `${location.pathname}/${(row.original as { id: string }).id}`
                                                         )
                                                     }
                                                     className="cursor-pointer"

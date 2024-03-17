@@ -8,15 +8,15 @@ import { ProductsProps } from "../../types/index.ts";
 import { TooltipDes } from '../Tooltip/index.tsx';
 import { FaCartArrowDown } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import { useSelector } from 'react-redux';
-import selector from '../../slice/selector.ts';
+// import { useSelector } from 'react-redux';
+// import selector from '../../slice/selector.ts';
 
 interface Props {
     products: ProductsProps[];
 }
 
 const ProductCard: React.FC<Props> = (props) => {
-    const packageA: any = useSelector(selector.package);
+    // const packageA: any = useSelector(selector.package);
     return (
         <div className={`h-[528px] w-[500px] overflow-scroll pr-5`}>
             {props.products?.length ? props.products?.map((product: ProductsProps, index) => (

@@ -8,13 +8,15 @@ export const getArticlesPaging = async (
   pageSize: number,
   pageIndex: number
 ) => {
+  const token = ("Bearer " + localStorage.getItem("Token")) as string;
   const response = await getArticlesPagingService(
     searchField,
     searchValue,
     sortField,
     descending,
     pageSize,
-    pageIndex
+    pageIndex,
+    token
   );
 
   if (response.status === 200) {
@@ -22,16 +24,13 @@ export const getArticlesPaging = async (
     const articlesItems = articlesData?.items?.map(
       (item: {
         id: string;
-        name: string;
-        discount: number;
-        services: { name: string }[];
-        articleImages: string[];
+        title: string;
+        articleImages: [];
+        // description: number;
       }) => ({
         id: item?.id,
-        image: item?.articleImages[0],
-        name: item?.name,
-        discount: item?.discount,
-        serviceName: item?.services[0]?.name,
+        title: item?.title,
+        articleImages: item?.articleImages,
       })
     );
     const lastPage = articlesData?.lastPage;

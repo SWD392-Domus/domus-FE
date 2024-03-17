@@ -20,7 +20,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/Table/table";
-import { Button } from "@/components/ui/Button/Button";
 import { useState } from "react";
 import { Input } from "@/components/ui/Input";
 import { SortButton } from "./SortButton";

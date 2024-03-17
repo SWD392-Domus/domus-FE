@@ -13,7 +13,6 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
 } from "@/components/ui/Select"
 interface Props {
   totalPages: number;
@@ -37,7 +36,7 @@ const ArticlesPagination: React.FC<Props> = ({
   };
 
   const renderPageLinks = () => {
-    const pageLinks = [];
+    const pageLinks: any[] = [];
     const maxVisiblePages = 2;
     let ellipsisAdded: boolean = false;
 

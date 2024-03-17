@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import ProductsCart from './components/ProductsCart'
 import ProductsSuggestion from './components/ProductsSuggestion/Suggestion'
 import ServiceCombo from './components/ServiceCombo'
 import { Button } from "@/components/ui/Button/Button";
 import { ArrowRight } from 'lucide-react';
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import selector from "./slice/selector";
-import { actions } from "./slice";
-import { ServiceProps, ProductDetailProps } from "./types";
+// import { actions } from "./slice";
+import { ServiceProps } from "./types";
 import { createQuotation } from './usecase/createQuotation';
 import { useToast } from "@/components/ui/Toast/use-toast";
 import { ToastAction } from "@/components/ui/Toast/toast";
@@ -15,12 +15,12 @@ import { ToastAction } from "@/components/ui/Toast/toast";
 
 const CustomerCart: React.FC = () => {
   const { toast } = useToast();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const services: ServiceProps[] = useSelector(selector.services);
   const packageA: any = useSelector(selector.package);
   const productDetails: any[] = useSelector(selector.productDetails);
-  const totalPrice: number = useSelector(selector.totalPrice);
-  const discount: number = useSelector(selector.discount);
+  // const totalPrice: number = useSelector(selector.totalPrice);
+  // const discount: number = useSelector(selector.discount);
   // useEffect(() => {
   //   dispatch(actions.calculateTotalPrice());
   // }, []);

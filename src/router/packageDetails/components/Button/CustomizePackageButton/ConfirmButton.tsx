@@ -1,9 +1,9 @@
-import { deletePackage } from "../../../usecase"
+// import { deletePackage } from "../../../usecase"
 import { Button } from "@/components/ui/Button/Button"
-import { ToastAction } from "@/components/ui/Toast/toast"
-import { useToast } from "@/components/ui/Toast/use-toast"
-import { actions as actionsCart } from "@/router/customerCart/slice"
-import { useDispatch, useSelector } from "react-redux";
+// import { ToastAction } from "@/components/ui/Toast/toast"
+// import { useToast } from "@/components/ui/Toast/use-toast"
+// import { actions as actionsCart } from "@/router/customerCart/slice"
+import { useSelector } from "react-redux";
 import selector from "@/router/packageDetails/slice/selector";
 import { useNavigate } from "react-router-dom"
 
@@ -11,8 +11,8 @@ interface Props {
     id: string
 }
 
-export const ConfirmButton: React.FC<Props> = (props) => {
-    const { toast } = useToast()
+export const ConfirmButton: React.FC<Props> = () => {
+    // const { toast } = useToast()
     const navigate = useNavigate()
     const id = useSelector(selector.id);
     const name = useSelector(selector.name);

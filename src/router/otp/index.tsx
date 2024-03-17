@@ -4,7 +4,7 @@ interface Props {
     // define your props here
 }
 
-const OTP: React.FC<Props> = (props) => {
+const OTP: React.FC<Props> = () => {
     const inputRefs = useRef<(HTMLInputElement | null)[]>(Array(4).fill(null));
     const [otp, setOTP] = useState<string>("");
 

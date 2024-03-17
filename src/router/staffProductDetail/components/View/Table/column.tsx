@@ -3,9 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import { Button } from "@/components/ui/Button/Button";
 import { ArrowUpDown } from "lucide-react";
 import {
-  ImagesProps,
   ProductDetailsProps,
-  pricesProps,
 } from "@/router/productDetails/type";
 
 export const columns: ColumnDef<ProductDetailsProps>[] = [

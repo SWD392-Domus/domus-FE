@@ -66,7 +66,7 @@ export function EditTableService<TData, TValue>({
         value: string | Status | null,
         fromComboBox: boolean = false
     ) => {
-        let newCellValues = null;
+        let newCellValues = {};
         if (fromComboBox) {
             newCellValues = {
                 ...serviceCellValues,
@@ -86,8 +86,8 @@ export function EditTableService<TData, TValue>({
                     currency: "VND",
                 }).format(
                     parseFloat(newCellValues[rowId].quantity as string) *
-                        parseFloat(newCellValues[rowId].price as string) *
-                        1000
+                    parseFloat(newCellValues[rowId].price as string) *
+                    1000
                 );
             }
         }
@@ -127,10 +127,10 @@ export function EditTableService<TData, TValue>({
                                         {header.isPlaceholder
                                             ? null
                                             : flexRender(
-                                                  header.column.columnDef
-                                                      .header,
-                                                  header.getContext()
-                                              )}
+                                                header.column.columnDef
+                                                    .header,
+                                                header.getContext()
+                                            )}
                                     </TableHead>
                                 );
                             })}
@@ -148,7 +148,7 @@ export function EditTableService<TData, TValue>({
                                     const cellValue =
                                         serviceCellValues[row.id] &&
                                         serviceCellValues[row.id][
-                                            cell.column.id
+                                        cell.column.id
                                         ];
 
                                     return (
@@ -170,8 +170,8 @@ export function EditTableService<TData, TValue>({
                                                     />
                                                 </Button>
                                             ) : !(
-                                                  cell.column.id == "action"
-                                              ) ? (
+                                                cell.column.id == "action"
+                                            ) ? (
                                                 <Input
                                                     value={cellValue || ""}
                                                     onChange={(e) =>

@@ -1,7 +1,7 @@
 import { injectReducer } from "@/store";
 import generateActions from "./generateActions";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ProductDetailProps, ServiceProps } from "../types";
+import { ServiceProps } from "../types";
 export type QuotationDetailInfo = {
     id: string;
     productName: string;
@@ -22,16 +22,16 @@ export const initialState = {
     negotiationLog: {},
     services: [],
 };
-type User = {
-    id: string;
-    email: string;
-    userName: string;
-    fullName: string | null;
-    gender: string | null;
-    address: string | null;
-    phoneNumber: string | null;
-    profileImage: string;
-};
+// type User = {
+//     id: string;
+//     email: string;
+//     userName: string;
+//     fullName: string | null;
+//     gender: string | null;
+//     address: string | null;
+//     phoneNumber: string | null;
+//     profileImage: string;
+// };
 export const name = "viewQuotation";
 const recalculateTotalPrice = (
     products: QuotationDetailInfo[],

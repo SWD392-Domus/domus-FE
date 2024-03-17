@@ -1,15 +1,4 @@
 import { Avatar, AvatarImage } from "@/components/ui/Avatar";
-import { Button } from "@/components/ui/Button/Button";
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/Dialog";
-
 import { Card } from "@/components/ui/Card";
 import {
     Form,
@@ -29,17 +18,16 @@ import {
     EnvelopeClosedIcon,
     HomeIcon,
     MobileIcon,
-    PaperPlaneIcon,
     PlusIcon,
 } from "@radix-ui/react-icons";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { z } from "zod";
 import { DataTable } from "./components/ProductTable";
 import { column } from "./components/ProductTable/column";
-import { fakeData, serviceFakeData } from "./constants";
+// import { fakeData, serviceFakeData } from "./constants";
 import { serviceColums } from "./components/ServiceTable/column";
 
 interface Props {
@@ -48,9 +36,9 @@ interface Props {
 
 import UserList from "./components/UserList";
 import { useParams } from "react-router-dom";
-import { getQuotationById } from "./usecase/getQuotationById";
+// import { getQuotationById } from "./usecase/getQuotationById";
 import {
-    ProductDetailProps,
+    // ProductDetailProps,
     ServiceProps,
 } from "../staffQuotationDetail/types";
 import { QuotationDetailInfo } from "../staffQuotationDetail/slice";
@@ -69,14 +57,14 @@ type User = {
     profileImage: string;
 };
 
-const StaffContractDetail: React.FC<Props> = (props) => {
-    const signatureRef = useRef(null);
+const StaffContractDetail: React.FC<Props> = () => {
+    // const signatureRef = useRef(null);
     const [open, setOpen] = useState(false);
     const [products, setProducts] = useState<QuotationDetailInfo[]>([]);
     const [services, setServices] = useState<ServiceProps[]>([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const [selectedUser, setSelectedUser] = useState<User>();
-    const [selectedContractor, setSelectedContractor] = useState<User>();
+    // const [selectedContractor, setSelectedContractor] = useState<User>();
     const [signature, setSignature] = useState(null);
     const [fullName, setFullName] = useState(null);
     const [status, setStatus] = useState("");
@@ -99,7 +87,7 @@ const StaffContractDetail: React.FC<Props> = (props) => {
                     name,
                     description,
                     client,
-                    contractor,
+                    // contractor,
                     quotationRevision,
                     status,
                     serviceQuotations,
@@ -108,7 +96,7 @@ const StaffContractDetail: React.FC<Props> = (props) => {
                 } = res.data.data;
                 form.setValue("contractName", name);
                 form.setValue("description", description);
-                setSelectedContractor(contractor);
+                // setSelectedContractor(contractor);
                 setSelectedUser(client);
                 setProducts(quotationRevision.productDetailQuotationRevisions);
                 setServices(serviceQuotations);

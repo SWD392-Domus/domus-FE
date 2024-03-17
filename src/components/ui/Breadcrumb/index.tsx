@@ -18,6 +18,7 @@ function BreadCrumbHeader() {
         "/staff/packages/:packageId": `Package ${packageId} `,
         "/staff/products": "Products",
         "/staff/contracts": "Contracts",
+        "/staff/articles": "Articles",
     };
 
     if (quotationId !== undefined) {

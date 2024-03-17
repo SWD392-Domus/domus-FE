@@ -1,4 +1,4 @@
-import { contractApi, contractStaffApi } from "@/utils/api/contractApi";
+import { contractApi } from "@/utils/api/contractApi";
 
 export const getContractsPagingService = async (
     searchField: string,

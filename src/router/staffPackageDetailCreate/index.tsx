@@ -21,10 +21,10 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/Card";
-import { FaDeleteLeft } from "react-icons/fa6";
+// import { FaDeleteLeft } from "react-icons/fa6";
 import React, { useEffect, useState } from "react";
-import { createPackage, getPackageById } from "./usecase";
-import { useNavigate, useParams } from "react-router-dom";
+import { createPackage,  } from "./usecase";
+import { useNavigate,  } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import selector from "./slice/selector";
 import { actions } from "./slice";
@@ -57,12 +57,12 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
     const [uploadedImages, setUploadedImages] = useState<File[]>([]);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const id: string = useSelector(selector.id);
+    // const id: string = useSelector(selector.id);
     const name: string = useSelector(selector.name);
-    const description: string = useSelector(selector.description);
+    // const description: string = useSelector(selector.description);
     const [desValue, setDesValue] = useState("");
     // const estimatedPrice: number = useSelector(selector.estimatedPrice);
-    const discount: number = useSelector(selector.discount);
+    // const discount: number = useSelector(selector.discount);
     const services: ServiceProps[] = useSelector(selector.services);
     const productDetails: ProductDetailProps[] = useSelector(
         selector.productDetails
@@ -131,7 +131,7 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
         services.map((item) => {
             return formData.append("ServiceIds", item.id);
         });
-        productDetails.map((item, index) => {
+        productDetails.map((item) => {
             formData.append("ProductDetailIds", item.id);
         });
         uploadedImages.forEach((image) => {
@@ -392,7 +392,7 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
                               )}
                             </p>
                           </CardDescription> */}
-                                                            <CardTitle>
+                                                            {/* <CardTitle>
                                                                 <p className="text-2xl truncate">
                                                                     {new Intl.NumberFormat(
                                                                         "en-US",
@@ -406,7 +406,7 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
                                                                         1000
                                                                     )}
                                                                 </p>
-                                                            </CardTitle>
+                                                            </CardTitle> */}
                                                         </CardContent>
                                                         <CardFooter className=""></CardFooter>
                                                     </Card>

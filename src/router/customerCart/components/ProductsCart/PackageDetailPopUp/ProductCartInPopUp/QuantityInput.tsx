@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
-import { actions } from '../../slice/index.ts';
+import { actions } from '@/router/customerCart/slice';
 
 interface Props {
   productIdQuan: any;
