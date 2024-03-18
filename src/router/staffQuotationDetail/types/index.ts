@@ -50,3 +50,14 @@ export type ProductImageProps = {
   width: number;
   height: number;
 };
+
+export type StaffProps={
+  id: string;
+  email: string;
+  username: string;
+  fullName: string;
+  gender: string;
+  phoneNumber: string;
+  address: string;
+  profileImage: string;
+}

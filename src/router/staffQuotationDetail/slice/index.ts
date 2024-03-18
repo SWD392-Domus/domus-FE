@@ -66,7 +66,6 @@ const slice = createSlice({
       state.staff = action.payload.staff;
       state.status = action.payload.status;
       state.totalPrice = Number.parseFloat(action.payload.totalPrice);
-
       state.expireAt = action.payload.expireAt;
       state.products = action.payload.products;
       state.negotiationLog = action.payload.negotiationLog;

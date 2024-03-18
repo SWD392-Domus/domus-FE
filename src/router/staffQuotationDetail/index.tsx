@@ -40,6 +40,7 @@ import { toast } from "@/components/ui/Toast/use-toast";
 import { pushNegotitaionService } from "./service";
 import Negotiation from "./components/Neogitation";
 import { toastError } from "@/components/Toast";
+
 import {
     AlertDialog,
     AlertDialogAction,
@@ -66,12 +67,12 @@ import { getQuotationRevisions } from "./service/getQuotationRevisions";
 import { getQuotationDetailByVersionService } from "./service/getQuotationByVersionService";
 import Loading from "@/components/PublicComponents/Loading";
 interface Props {
-    // define your props here
+  // define your props here
 }
 export interface CellValues {
-    [key: string]: {
-        [key: string]: string;
-    };
+  [key: string]: {
+    [key: string]: string;
+  };
 }
 export interface VersionType {
     id: string;
@@ -106,12 +107,36 @@ const QuotationDetail: React.FC<Props> = () => {
     const [serviceCellValues, setserviceCellValues] =
         useState<CellValues>(services);
 
-    const handleAddProduct = () => {
-        dispatch(actions.addRow());
+  const handleAddProduct = () => {
+    dispatch(actions.addRow());
+  };
+  const handleAddSerive = () => {
+    dispatch(actions.addRowService());
+  };
+  const handleUpdate = async () => {
+    const sentProducts = products.map((product) => {
+      const { price, monetaryUnit, quantity, quantityType } = product;
+      return {
+        productDetailId: product.productDetailId,
+        price: parseFloat(price),
+        monetaryUnit,
+        quantity: parseFloat(quantity),
+        quantityType,
+      };
+    });
+    const sentServices = services.map((service: any) => {
+      return service.id;
+    });
+
+    const data = {
+      customerId: customer.id,
+      staffId: staff.id,
+      status: "Sent",
+      ExpireAt: expireAt,
+      productdetails: sentProducts,
+      services: sentServices,
     };
-    const handleAddSerive = () => {
-        dispatch(actions.addRowService());
-    };
+
     const handleUpdate = async () => {
         const sentProducts = products.map((product) => {
             const { price, monetaryUnit, quantity, quantityType } = product;
@@ -176,8 +201,11 @@ const QuotationDetail: React.FC<Props> = () => {
                 title: `It seem you haven't done any change `,
                 description: "Try to edit something before update",
             });
+
         }
+      }
     };
+
     useEffect(() => {
         let isMounted = true;
         setUpdated(false);
@@ -243,7 +271,19 @@ const QuotationDetail: React.FC<Props> = () => {
         };
         fetchVersions();
 
-        fetchDataAndUpdateCellValues();
+
+            <MakeContractButton></MakeContractButton>
+            <div className="staff-assigned-info my-7">
+              <div className="flex justify-between items center w-[70%] pb-4">
+                <div className="mb-2 text-xl font-semibold">Assigned Staff</div>
+                <Button
+                  variant={"default"}
+                  className="w-[80px]"
+                  onClick={() => setEditStaff(!isEditStaff)}
+                >
+                  Edit
+                </Button>
+              </div>
 
         // Cleanup function to prevent memory leaks
         return () => {
@@ -314,9 +354,32 @@ const QuotationDetail: React.FC<Props> = () => {
                                 style: "currency",
                                 currency: "VND",
                             }).format(totalPrice)}
+
                         </div>
-                        <div className="my-4 flex ">
-                            <Badge className="text-sm">{status}</Badge>
+                      </div>
+                    </div>
+                    <div className="right-side-3 basis-2/3 font-sans text-md">
+                      <div className="text-md font-semibold mr-5 mb-1 pb-1 border-solid border-b-2 border-zinc-400">
+                        Customer Information
+                      </div>
+                      <div className=" flex flex-row mb-1">
+                        <Avatar className="mr-2">
+                          <AvatarImage
+                            className=""
+                            src={customer.profileImage}
+                          />
+                          <AvatarFallback>C</AvatarFallback>
+                        </Avatar>
+                        <span className="my-auto font-medium font-sans text-md">
+                          {customer.fullName}
+                        </span>
+                      </div>
+                      <div className="user-info-body text-md">
+                        <div className="mail-info flex flex-row mb-1">
+                          <HomeIcon className="my-auto mr-2" />
+                          <span className="font-sans text-md">
+                            {customer.address ? customer.address : "N/A"}
+                          </span>
                         </div>
 
                         {versions && (
@@ -341,6 +404,7 @@ const QuotationDetail: React.FC<Props> = () => {
                                 </h2>
                             </div>
                         </div>
+                      </div>
                     </div>
                     <div className="right-side-2 basis-2/3">
                         <div className="border-solid border-b-2 border-zinc-400">
@@ -740,6 +804,7 @@ const QuotationDetail: React.FC<Props> = () => {
                             customer={customer}
                         />
                     </div>
+                  </div>
                 </div>
             )}
 
