@@ -1,5 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { Checkbox } from "@/components/ui/Checkbox/checkbox";
+// import { Checkbox } from "@/components/ui/Checkbox/checkbox";
 
 import { ServiceProps } from "../../types";
 export interface ImagesProps {
@@ -22,13 +22,13 @@ export const serviceColums: ColumnDef<ServiceProps>[] = [
                     {new Intl.NumberFormat("en-US", {
                         style: "currency",
                         currency: "VND",
-                    }).format(Number.parseFloat(value) * 1000)}
+                    }).format(Number.parseFloat(value))}
                 </div>
             );
         },
     },
-    {
-        accessorKey: "monetaryUnit",
-        header: "Monetary Unit",
-    },
+    // {
+    //     accessorKey: "monetaryUnit",
+    //     header: "Monetary Unit",
+    // },
 ];

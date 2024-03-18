@@ -15,7 +15,6 @@ import {
 } from "@/components/ui/Table/table";
 import { Input } from "../Input";
 import { useState } from "react";
-
 import { ComboBoxResponsive } from "../ComboBox";
 import { Button } from "@/components/ui/Button/Button";
 import { TrashIcon } from "@radix-ui/react-icons";
@@ -51,6 +50,7 @@ interface CellValues {
         [key: string]: string;
     };
 }
+
 export function EditDataTable<TData, TValue>({
     columns,
     data,
@@ -67,7 +67,7 @@ export function EditDataTable<TData, TValue>({
         value: string | Status | null,
         fromComboBox: boolean = false
     ) => {
-        let newCellValues = null;
+        let newCellValues = {};
         if (fromComboBox) {
             newCellValues = {
                 ...cellValues,
@@ -87,8 +87,8 @@ export function EditDataTable<TData, TValue>({
                     currency: "VND",
                 }).format(
                     parseFloat(newCellValues[rowId].quantity as string) *
-                        parseFloat(newCellValues[rowId].price as string) *
-                        1000
+                    parseFloat(newCellValues[rowId].price as string) *
+                    1000
                 );
             }
         }
@@ -112,7 +112,15 @@ export function EditDataTable<TData, TValue>({
     });
     const handleDeleteProduct = (id: string) => {
         dispatch(actions.deleteRow(id));
-        delete cellValues[id];
+        const updatedCellValues = { ...cellValues };
+        delete updatedCellValues[id];
+        const reindexedValues = {};
+        let newIndex = 0;
+        for (const key in updatedCellValues) {
+            reindexedValues[newIndex++] = updatedCellValues[key];
+        }
+
+        setCellValues(reindexedValues);
     };
 
     return (
@@ -127,10 +135,10 @@ export function EditDataTable<TData, TValue>({
                                         {header.isPlaceholder
                                             ? null
                                             : flexRender(
-                                                  header.column.columnDef
-                                                      .header,
-                                                  header.getContext()
-                                              )}
+                                                header.column.columnDef
+                                                    .header,
+                                                header.getContext()
+                                            )}
                                     </TableHead>
                                 );
                             })}
@@ -168,10 +176,10 @@ export function EditDataTable<TData, TValue>({
                                                     />
                                                 </Button>
                                             ) : !(
-                                                  cell.column.id == "action"
-                                              ) ? (
+                                                cell.column.id == "action"
+                                            ) ? (
                                                 cell.column.id == "price" ||
-                                                cell.column.id == "quantity" ? (
+                                                    cell.column.id == "quantity" ? (
                                                     <Input
                                                         value={cellValue || ""}
                                                         type="number"

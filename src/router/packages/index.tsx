@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/Input";
 import PackageSkeleton from "./components/PackageSkeleton";
 import PackagesPagination from "./components/PackagesPagination";
 import { searchPackages } from "./usecases";
-import { PackageProps } from "@/router/packages/type";
+// import { PackageProps } from "@/router/packages/type";
 // import { toast } from "@/components/ui/Toast/use-toast";
 // import CategorySelection from "./components/CategorySelection";
 
@@ -139,12 +139,12 @@ const PackageList: React.FC = () => {
                         </div>
                     )}
                     {/* <div className="py-20 w-full flex justify-center items-center border-gray-200">
-            <PackagesPagination
-              totalPages={totalPages}
-              pageIndex={pageIndex}
-              setPageIndex={setPageIndex}
-            />
-          </div> */}
+                        <PackagesPagination
+                            totalPages={totalPages}
+                            pageIndex={pageIndex}
+                            setPageIndex={setPageIndex}
+                        />
+                    </div> */}
                 </div>
             </header>
         </>

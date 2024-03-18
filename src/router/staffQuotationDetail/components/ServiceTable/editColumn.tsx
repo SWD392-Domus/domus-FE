@@ -5,6 +5,7 @@ interface ServiceData {
     name: string;
     price: number;
     monetaryUnit: string;
+    serviceId: string;
 }
 
 export const editServiceColumns: ColumnDef<ServiceData>[] = [
@@ -29,16 +30,16 @@ export const editServiceColumns: ColumnDef<ServiceData>[] = [
                     {new Intl.NumberFormat("en-US", {
                         style: "currency",
                         currency: "VND",
-                    }).format(value * 1000)}
+                    }).format(value)}
                 </div>
             );
         },
     },
-    {
-        accessorKey: "monetaryUnit",
-        header: "Monetary Unit",
-        accessorFn: (row) => row.monetaryUnit,
-    },
+    // {
+    //     accessorKey: "monetaryUnit",
+    //     header: "Monetary Unit",
+    //     accessorFn: (row) => row.monetaryUnit,
+    // },
     {
         accessorKey: "delete",
         header: () => <div className="text-left">Delete</div>,

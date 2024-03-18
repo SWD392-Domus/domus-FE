@@ -33,11 +33,21 @@ export const columns: ColumnDef<ProductsProps>[] = [
     {
         accessorKey: "id",
         header: "Id",
-        // header: () => {
-        //     return (
-        //         // <>Id</>
-        //     )
-        // },
+        cell: ({ row }) => {
+            const id: string = row.getValue("id") as string;
+            return <h4> {id.slice(0, 3)}..</h4>;
+        },
+    },
+    // {
+    //     accessorKey: "productId",
+    //     header: "Product",
+    //     cell: ({ row }) => {
+    //         return <h4> Product {row.index + 1}</h4>;
+    //     },
+    // },
+    {
+        accessorKey: "productName",
+        header: "Name",
     },
     {
         accessorKey: "image",
@@ -50,10 +60,6 @@ export const columns: ColumnDef<ProductsProps>[] = [
                 </Avatar>
             );
         },
-    },
-    {
-        accessorKey: "productName",
-        header: "Name",
     },
     {
         accessorKey: "category",

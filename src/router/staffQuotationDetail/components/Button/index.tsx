@@ -8,14 +8,19 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/Dialog";
-import { CheckIcon, XIcon, PencilIcon, SendIcon } from "lucide-react";
-import { useSelector } from "react-redux";
-import selector from "../../slice/selector";
-import { ProductDetailProps } from "../../types";
-import { useParams } from "react-router-dom";
 
+import { useNavigate, useParams } from "react-router-dom";
+
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/Tooltip";
+import { Quotationstatus } from "@/router/customerQuotationDetail/constants";
+import { CheckIcon, PencilIcon, SendIcon, XIcon } from "lucide-react";
 function onUpdate() {}
-function onMakeContract() {}
+// function onMakeContract() {}
 function onDelete() {}
 
 function onCancle() {}
@@ -32,12 +37,84 @@ export const UpdateButton = () => {
         </Button>
     );
 };
-export const MakeContractButton = () => {
+export const MakeContractButton = ({
+    status,
+    versions,
+}: {
+    status: string;
+    versions: any[];
+}) => {
+    const navigate = useNavigate();
+    let { quotationId, versionId } = useParams();
+    if (!versionId) {
+        versionId = versions[versions.length - 1].id;
+    }
+    const getToolTipMessage = () => {
+        if (status == "Confirmed") {
+            return "This Quotation have already been confirmed, please wait for the contract being sent to you";
+        } else if (status == "Requested") {
+            return "This Quotation have been sent, please wait for out staff to reply";
+        } else {
+            return "Click for confirming the quotation";
+        }
+    };
     return (
-        <Button onClick={onMakeContract} className="bg-black pl-2">
-            {" "}
-            <CheckIcon className="h-3.5 pr-2 my-auto"></CheckIcon>Make Contract
-        </Button>
+        <Dialog>
+            <DialogTrigger>
+                <TooltipProvider>
+                    <Tooltip>
+                        <TooltipTrigger>
+                            <Button
+                                className=" pl-2 "
+                                disabled={status != Quotationstatus.confirmed}
+                            >
+                                <CheckIcon className="h-3.5 pr-2 my-auto"></CheckIcon>
+                                Make Contract
+                            </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>{getToolTipMessage()}</p>
+                        </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[800px]">
+                <DialogHeader>
+                    <DialogTitle>Create Contract</DialogTitle>
+                    <DialogDescription>
+                        <h1 className="mt-4 mb-4 text-black">
+                            Are you sure you want to change this quoation to
+                            become a contract. Remember to ask the client to
+                            help the signing contract happen successfully.
+                        </h1>
+                        <h1 className="mt-4 mb-4 text-black">
+                            This will navigate you to the contract create page
+                            with the{" "}
+                            <strong className="text-blue-900">
+                                Quotation{" "}
+                            </strong>
+                            selected
+                        </h1>
+                    </DialogDescription>
+                </DialogHeader>
+                <DialogFooter>
+                    <Button onClick={onCancle} className="bg-zinc-500">
+                        Cancel
+                    </Button>
+                    <Button
+                        onClick={() =>
+                            navigate(
+                                `/staff/contract/new/${quotationId}/version/${versionId}`,
+                                { replace: true }
+                            )
+                        }
+                        className="bg-black pl-2"
+                    >
+                        Confirm
+                    </Button>
+                </DialogFooter>
+            </DialogContent>
+        </Dialog>
     );
 };
 export const DeleteButton = () => {

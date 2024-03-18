@@ -34,11 +34,21 @@ export const columns: ColumnDef<PackagesProps>[] = [
     {
         accessorKey: "id",
         header: "Id",
-        // header: () => {
-        //     return (
-        //         // <>Id</>
-        //     )
-        // },
+        cell: ({ row }) => {
+            const id: string = row.getValue("id") as string;
+            return <h4> {id.slice(0, 3)}..</h4>;
+        },
+    },
+    // {
+    //     accessorKey: "packageId",
+    //     header: "Package",
+    //     cell: ({ row }) => {
+    //         return <h4> Package {row.index + 1}</h4>;
+    //     },
+    // },
+    {
+        accessorKey: "name",
+        header: "Name",
     },
     {
         accessorKey: "image",
@@ -55,19 +65,15 @@ export const columns: ColumnDef<PackagesProps>[] = [
             );
         },
     },
-    {
-        accessorKey: "name",
-        header: "Name",
-    },
-    {
-        accessorKey: "discount",
-        header: "Discount",
-        cell: ({ row }) => {
-            return (
-                <div className="text-center">{row.getValue("discount")}%</div>
-            );
-        },
-    },
+    // {
+    //     accessorKey: "discount",
+    //     header: "Discount",
+    //     cell: ({ row }) => {
+    //         return (
+    //             <div className="text-center">{row.getValue("discount")}%</div>
+    //         );
+    //     },
+    // },
     {
         accessorKey: "serviceName",
         header: "Service",

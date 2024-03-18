@@ -14,30 +14,41 @@ export const data: QuotationDetailInfo[] = Array.from(
     (_, i) => ({
         id: `${i + 1}`,
         productName: `Product ${i + 1}`,
-        price: (i + 1) * 100000,
+        price: (i + 1),
         monetaryUnit: "VND",
         quantity: i + 2,
         quantityType: "EA",
-        priceSum: (i + 1) * 100000 * (i + 2),
+        priceSum: (i + 1) * (i + 2),
     })
 );
 export const column: ColumnDef<QuotationDetailInfo>[] = [
     {
         accessorKey: "productName",
         header: "Product Name",
+        cell: ({ row }) => {
+            const value: string = row.getValue("productName");
+            const id: string = row.original.id;
+            console.log(id);
+
+            return (
+                <div className="text-left font-medium">
+                    {value} #{id.slice(0, 3)}
+                </div>
+            );
+        },
     },
     {
         accessorKey: "price",
         header: "Display Price",
         cell: ({ row }) => {
             const value: string = row.getValue("price");
-            console.log(value);
+
             return (
                 <div className="text-left font-medium">
                     {new Intl.NumberFormat("en-US", {
                         style: "currency",
                         currency: "VND",
-                    }).format(Number.parseFloat(value) * 1000)}
+                    }).format(Number.parseFloat(value))}
                 </div>
             );
         },
@@ -67,8 +78,7 @@ export const column: ColumnDef<QuotationDetailInfo>[] = [
                         currency: "VND",
                     }).format(
                         Number.parseFloat(price) *
-                            Number.parseFloat(quantity) *
-                            1000
+                        Number.parseFloat(quantity)
                     )}
                 </div>
             );

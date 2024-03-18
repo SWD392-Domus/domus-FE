@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/Dialog";
 import { Button } from "@/components/ui/Button/Button";
 import { useDispatch } from "react-redux";
-import { ProductDetailProps } from "../../types";
+// import { ProductDetailProps } from "../../types";
 import { actions } from "../../slice";
 
 interface Props {
@@ -45,7 +45,7 @@ export const CRUDDropdownMenu: React.FC<Props> = (props) => {
                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem>Update</DropdownMenuItem>
+                    {/* <DropdownMenuItem>Update</DropdownMenuItem> */}
                     <DropdownMenuItem>
                         <DialogTrigger className="w-full text-left">
                             Delete

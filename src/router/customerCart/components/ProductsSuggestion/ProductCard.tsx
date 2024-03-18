@@ -8,15 +8,15 @@ import { ProductsProps } from "../../types/index.ts";
 import { TooltipDes } from '../Tooltip/index.tsx';
 import { FaCartArrowDown } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import { useSelector } from 'react-redux';
-import selector from '../../slice/selector.ts';
+// import { useSelector } from 'react-redux';
+// import selector from '../../slice/selector.ts';
 
 interface Props {
     products: ProductsProps[];
 }
 
 const ProductCard: React.FC<Props> = (props) => {
-    const packageA: any = useSelector(selector.package);
+    // const packageA: any = useSelector(selector.package);
     return (
         <div className={`h-[528px] w-[500px] overflow-scroll pr-5`}>
             {props.products?.length ? props.products?.map((product: ProductsProps, index) => (
@@ -28,10 +28,10 @@ const ProductCard: React.FC<Props> = (props) => {
                         <h1 className="font-semibold text-lg">{product.productName}</h1>
                         <TooltipDes description={product.description}></TooltipDes>
                         <div className="flex justify-between">
-                            <h1 className="font-semibold">{new Intl.NumberFormat("en-US", {
+                            {/* <h1 className="font-semibold">{new Intl.NumberFormat("en-US", {
                                 style: "currency",
                                 currency: "VND",
-                            }).format(product.displayPrice * 1000)}</h1>
+                            }).format(product.displayPrice )}</h1> */}
                             <Link to={`/product/${product.id}`}>
                                 <div
                                     className="w-10 h-10 bg-yellowCustom flex justify-center items-center 

@@ -46,17 +46,22 @@ import { Input } from "@/components/ui/Input";
 import { PencilIcon } from "lucide-react";
 import ProductsList from "./components/ProductsList";
 import ServiceList from "./components/ServiceList";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import { useNavigate } from "react-router-dom";
 
-interface Props {}
+interface Props { }
 
 const PackageDetails: React.FC<Props> = () => {
+    const navigate = useNavigate();
     const { packageId } = useParams();
     const dispatch = useDispatch();
     const id: string = useSelector(selector.id);
     const name: string = useSelector(selector.name);
+    const description: string = useSelector(selector.description);
     const [uploadedImages, setUploadedImages] = useState<File[]>([]);
     // const estimatedPrice: number = useSelector(selector.estimatedPrice);
-    const discount: number = useSelector(selector.discount);
+    // const discount: number = useSelector(selector.discount);
     const services: ServiceProps[] = useSelector(selector.services);
     const productDetails: ProductDetailProps[] = useSelector(
         selector.productDetails
@@ -86,7 +91,7 @@ const PackageDetails: React.FC<Props> = () => {
         const files = event.target.files;
         if (files) {
             const newFiles = Array.from(files);
-            setUploadedImages((prevImages) => [...prevImages, ...newFiles]);
+            setUploadedImages(newFiles);
             const newImages = newFiles.map((file) => {
                 return {
                     imageUrl: URL.createObjectURL(file),
@@ -96,7 +101,7 @@ const PackageDetails: React.FC<Props> = () => {
                 };
             });
             //   dispatch(actions.updatePackageImages(newImages));
-            setPackageImages([...packageImages, ...newImages]);
+            setPackageImages(newImages);
         }
     };
 
@@ -109,7 +114,8 @@ const PackageDetails: React.FC<Props> = () => {
                     // console.log(response)
                     dispatch(actions.getPackageInfo());
                     form.setValue("name", response.name);
-                    form.setValue("discount", response.discount);
+                    form.setValue("description", response.description);
+                    // form.setValue("discount", response.discount);
                     setUpdated(true);
                 }
             } catch (error) {
@@ -129,24 +135,23 @@ const PackageDetails: React.FC<Props> = () => {
 
     const formSchema = z.object({
         name: z.string().nonempty({ message: "Name is required" }),
-        discount: z
-            .number({
-                required_error: "Discount is required",
-                invalid_type_error:
-                    "Discount must be a number between 0 and 100",
-            })
-            .lte(100)
-            .nonnegative(),
-
-        // pictures: z.any(),
+        description: z.string().nonempty({ message: "Description is required" }),
+        // discount: z
+        //     .number({
+        //         required_error: "Discount is required",
+        //         invalid_type_error:
+        //             "Discount must be a number between 0 and 100",
+        //     })
+        //     .lte(100)
+        //     .nonnegative(),
     });
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: name,
-            discount: discount,
-            // pictures: undefined,
+            description: description,
+            // discount: discount,
         },
     });
     async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -155,13 +160,15 @@ const PackageDetails: React.FC<Props> = () => {
             formData.append("Images", image);
         });
         formData.append("Name", values.name);
-        formData.append("Discount", values.discount.toString());
-
+        // formData.append("Discount", values.discount.toString());
+        formData.append("Description", values.description);
         services.map((item) => {
             return formData.append("ServiceIds", item.id);
         });
         productDetails.map((item) => {
-            formData.append("ProductDetailIds", item.id);
+            for (let i = 0; i < item.quantity; i++) {
+                formData.append("ProductDetailIds", item.id);
+            }
         });
 
         const res = await updatePackage(id, formData);
@@ -172,7 +179,7 @@ const PackageDetails: React.FC<Props> = () => {
                 description: "A package was updated.",
                 action: <ToastAction altText="Close">Close</ToastAction>,
             });
-            // navigate(`/staff/packages/${packageId}`)
+            navigate(`/staff/packages/${packageId}`)
         } else {
             toast({
                 variant: "destructive",
@@ -236,7 +243,7 @@ const PackageDetails: React.FC<Props> = () => {
                                 />
                                 {/* Package Name Input End*/}
                                 {/* Package Discount Input Start */}
-                                <FormField
+                                {/* <FormField
                                     control={form.control}
                                     name="discount"
                                     render={({ field }) => (
@@ -256,7 +263,7 @@ const PackageDetails: React.FC<Props> = () => {
                                             <FormMessage />
                                         </FormItem>
                                     )}
-                                />
+                                /> */}
                                 {/* Package Discount Input End*/}
                                 {/* Package Name Input Start */}
                                 {/* <FormField
@@ -281,7 +288,7 @@ const PackageDetails: React.FC<Props> = () => {
                   type="file"
                   onChange={(event) => onChange(event.target.files[0] || null)}
                 /> */}
-
+                                <div className="border-yellowCustom font-semibold text-xl text-black mt-2">Images</div>
                                 <Input
                                     className="mb-4"
                                     id="picture"
@@ -314,7 +321,7 @@ const PackageDetails: React.FC<Props> = () => {
                                                                                 service.name
                                                                             }
                                                                         </div>
-                                                                        <div>
+                                                                        {/* <div>
                                                                             {new Intl.NumberFormat(
                                                                                 "en-US",
                                                                                 {
@@ -325,7 +332,7 @@ const PackageDetails: React.FC<Props> = () => {
                                                                             ).format(
                                                                                 service.price
                                                                             )}
-                                                                        </div>
+                                                                        </div> */}
                                                                     </div>
                                                                 )
                                                             )}
@@ -359,6 +366,28 @@ const PackageDetails: React.FC<Props> = () => {
                                         Save
                                     </Button>
                                 </div>
+                            </div>
+                        </div>
+                        <div className="flex flex-col mb-10 gap-4">
+                            <div className="font-semibold text-xl">Description</div>
+                            <div className='w-full'>
+                                <FormField
+                                    control={form.control}
+                                    name="description"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormControl>
+                                                <ReactQuill
+                                                    theme="snow"
+                                                    placeholder="Description..."
+                                                    {...field}
+                                                ></ReactQuill>
+                                            </FormControl>
+
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
                             </div>
                         </div>
                         <div className="flex justify-center items-center">
@@ -408,7 +437,7 @@ const PackageDetails: React.FC<Props> = () => {
                                                                         imageUrl
                                                                     }
                                                                     className="w-[288px] object-contain"
-                                                                    // loading="lazy"
+                                                                // loading="lazy"
                                                                 />
                                                             </div>
                                                         </CardHeader>
@@ -421,17 +450,17 @@ const PackageDetails: React.FC<Props> = () => {
                                                                 </h2>
                                                             </CardTitle>
                                                             {/* <CardDescription className="pb-2 pt-1 shrink">
-                            <p className="truncate">
-                              {productDescription ? (
-                                productDescription
-                              ) : (
-                                <p className="truncate">
-                                  Materials
-                                </p>
-                              )}
-                            </p>
-                          </CardDescription> */}
-                                                            <CardTitle>
+                                                                <p className="truncate">
+                                                                    {productDescription ? (
+                                                                        productDescription
+                                                                    ) : (
+                                                                        <p className="truncate">
+                                                                            Materials
+                                                                        </p>
+                                                                    )}
+                                                                </p>
+                                                            </CardDescription> */}
+                                                            {/* <CardTitle>
                                                                 <p className="text-2xl truncate">
                                                                     {new Intl.NumberFormat(
                                                                         "en-US",
@@ -442,8 +471,13 @@ const PackageDetails: React.FC<Props> = () => {
                                                                         }
                                                                     ).format(
                                                                         product.displayPrice *
-                                                                            1000
+                                                                        1000
                                                                     )}
+                                                                </p>
+                                                            </CardTitle> */}
+                                                            <CardTitle>
+                                                                <p className="truncate mt-2">
+                                                                    Quantity: <span className='text-red-600'>{product.quantity}</span>
                                                                 </p>
                                                             </CardTitle>
                                                         </CardContent>

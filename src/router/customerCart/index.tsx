@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import ProductsCart from './components/ProductsCart'
 import ProductsSuggestion from './components/ProductsSuggestion/Suggestion'
 import ServiceCombo from './components/ServiceCombo'
 import { Button } from "@/components/ui/Button/Button";
 import { ArrowRight } from 'lucide-react';
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import selector from "./slice/selector";
-import { actions } from "./slice";
-import { ServiceProps, ProductDetailProps } from "./types";
+// import { actions } from "./slice";
+import { ServiceProps } from "./types";
 import { createQuotation } from './usecase/createQuotation';
 import { useToast } from "@/components/ui/Toast/use-toast";
 import { ToastAction } from "@/components/ui/Toast/toast";
@@ -15,30 +15,35 @@ import { ToastAction } from "@/components/ui/Toast/toast";
 
 const CustomerCart: React.FC = () => {
   const { toast } = useToast();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const services: ServiceProps[] = useSelector(selector.services);
   const packageA: any = useSelector(selector.package);
   const productDetails: any[] = useSelector(selector.productDetails);
-  const totalPrice: number = useSelector(selector.totalPrice);
-  const discount: number = useSelector(selector.discount);
+  // const totalPrice: number = useSelector(selector.totalPrice);
+  // const discount: number = useSelector(selector.discount);
   // useEffect(() => {
   //   dispatch(actions.calculateTotalPrice());
   // }, []);
   const handleClick = async () => {
-    if ((packageA && packageA.id) || (productDetails && productDetails.length > 0)) {
-      const servicesIds = services.map((service) => service.id)
+    if ((packageA && packageA.id) || (productDetails && productDetails.length >= 4)) {
 
       const res = await createQuotation(
         {
           // customerId: "e403c308-274e-42f5-b5df-36ec234d6ee1",
           // staffId: "c713aacc-3582-4598-8670-22590d837179",
-          expireAt: "2024-09-24T06:54:12.762Z",
-          packageId: (packageA && packageA.id && packageA.id !== undefined) ? packageA.id : "0a755084-c616-4a0f-250a-08dc38ce79fc",
-          services: servicesIds,
+          // expireAt: "2024-09-24T06:54:12.762Z",
+          // packageId: (packageA && packageA.id && packageA.id !== undefined) ? packageA.id : "",
+          services: services.map((ser: any) => {
+            return {
+              serviceId: ser.id,
+              price: 0,
+            }
+          }),
           productDetails: productDetails.map((productDetail: any) => {
             return {
               id: productDetail.id,
               quantity: productDetail.quantity,
+              price: 0,
             }
           })
         }
@@ -65,7 +70,7 @@ const CustomerCart: React.FC = () => {
     } else {
       toast({
         variant: "destructive",
-        title: "Select at least one PACKAGE or PRODUCT.",
+        title: "Select at least 4 Products.",
         description: "Failed to request.",
         action: (
           <ToastAction altText="Close">Close</ToastAction>
@@ -83,7 +88,7 @@ const CustomerCart: React.FC = () => {
       <div className="flex flex-row items-center justify-between">
         <ServiceCombo></ServiceCombo>
         <div className='flex flex-col text-xl'>
-          <div className='flex gap-2'>
+          {/* <div className='flex gap-2'>
             <div className='font-semibold'>Total Price:</div>
             <div className='font-semibold text-red-600'>
               {new Intl.NumberFormat("en-US", {
@@ -91,7 +96,7 @@ const CustomerCart: React.FC = () => {
                 currency: "VND",
               }).format(totalPrice)}
             </div>
-          </div>
+          </div> */}
           {/* <div>Discount: {discount}%</div> */}
         </div>
         <Button

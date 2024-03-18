@@ -4,7 +4,7 @@ export const packages = Array.from({ length: 9 }, (_, index) => ({
   description: `This is package This is produnPackage abdcjfdiajfPackage abdcjfdiajfPackage abdcjfdiajfPackage abdcjfdiajfPackage abdcjfdiajf${
     index + 1
   }`,
-  price: (index + 1) * 1000000000,
+  price: index + 1,
 }));
 
 export const packageList = [

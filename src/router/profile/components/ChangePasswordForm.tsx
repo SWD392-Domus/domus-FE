@@ -9,7 +9,6 @@ import {
     DialogFooter,
 } from "@/components/ui/Dialog";
 import { Button } from "@/components/ui/Button/Button";
-import { Label } from "@/components/ui/Label";
 import { Input } from "@/components/ui/Input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -26,7 +25,7 @@ interface Props {
     // define your props here
 }
 
-const ChangePasswordForm: React.FC<Props> = (props) => {
+const ChangePasswordForm: React.FC<Props> = () => {
     const formSchema = z.object({
         password: z
             .string()

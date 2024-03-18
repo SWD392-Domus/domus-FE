@@ -2,13 +2,13 @@ import Loading from "@/components/PublicComponents/Loading";
 import { toastError, toastSuccess } from "@/components/Toast";
 import { loginApi } from "@/utils/api/loginApi";
 import React, { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate,  } from "react-router-dom";
 
 interface Props {
     // define your props here
 }
 
-const Auth: React.FC<Props> = (props) => {
+const Auth: React.FC<Props> = () => {
     const navigate = useNavigate();
     const getGoogleAuthentication = async () => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -20,7 +20,10 @@ const Auth: React.FC<Props> = (props) => {
         } else {
             if (res.data.isSuccess) {
                 toastSuccess("Login Successfully");
-                localStorage.setItem("Token", res.data.data.token.accessToken);
+                localStorage.setItem(
+                    "Token",
+                    res.data.data.token.token.accessToken
+                );
                 navigate("/home");
             } else {
                 toastError("Login Unccesfully, please try again");

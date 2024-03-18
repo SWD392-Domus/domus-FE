@@ -5,16 +5,15 @@ import { createSlice } from "@reduxjs/toolkit";
 export const initialState = {
   id: "",
   name: "",
+  description: "",
   estimatedPrice: 0,
   discount: 0,
-  services: [{ id: 0, name: "" }],
-  productDetails: [
-    { id: 0, displayPrice: 0, productName: "", images: [{ imageUrl: "" }] },
-  ],
-  packageImages: [{ id: 0, imageUrl: "" }],
+  services: [],
+  productDetails: [],
+  packageImages: [],
 };
 
-export const name = "ViewPackage";
+export const name = "ViewPackageStaff";
 
 const slice = createSlice({
   name,
@@ -28,6 +27,7 @@ const slice = createSlice({
     setPackage: (state: any, action: any) => {
       state.id = action.payload.id;
       state.name = action.payload.name;
+      state.description = action.payload.description;
       state.estimatedPrice = action.payload.estimatedPrice;
       state.discount = action.payload.discount;
       state.services = action.payload.services;
@@ -39,6 +39,7 @@ const slice = createSlice({
       state.info = {
         id: state.id,
         name: state.name,
+        description: state.description,
         estimatedPrice: state.estimatedPrice,
         discount: state.discount,
         services: state.services,

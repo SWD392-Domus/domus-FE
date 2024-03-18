@@ -1,14 +1,14 @@
 import OneProductDetail from "./OneProductDetail";
 import React, { useState } from "react";
-import { actions as actionsCart } from "@/router/customerCart/slice"
+// import { actions as actionsCart } from "@/router/customerCart/slice"
 import selector from "@/router/customerCart/slice/selector"
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 interface Props {
   // productIdQuans: any;
 }
 
-const ProductComponents: React.FC<Props> = (props) => {
+const ProductComponents: React.FC<Props> = () => {
   const [updatedS, setUpdatedS] = useState(0);
   const packageA: any = useSelector(selector.package);
   const productIdQuans = packageA.productDetails;

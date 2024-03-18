@@ -4,14 +4,14 @@ import ProductComponents from "./ProductComponents";
 import { actions as actionsCart } from "@/router/customerCart/slice";
 import selector from "@/router/customerCart/slice/selector";
 import { useSelector, useDispatch } from "react-redux";
-import PackagePopUpTrigger from "./PackagePopUpTrigger";
+// import PackagePopUpTrigger from "./PackagePopUpTrigger";
 
 const Cart: React.FC = () => {
     const [updated, setUpdated] = useState(false);
-    const [packageUpdated, setPackageUpdated] = useState(false);
+    const [, setPackageUpdated] = useState(false);
     const dispatch = useDispatch();
     const productIdQuans = useSelector(selector.productDetails);
-    const packageA = useSelector(selector.package);
+    // const packageA = useSelector(selector.package);
     const loadCartProductDetails = async () => {
         const cart = localStorage.getItem("cart")
             ? JSON.parse(localStorage.getItem("cart") as string)
@@ -37,11 +37,11 @@ const Cart: React.FC = () => {
     return (
         <>
             <div className="flex flex-col gap-5">
-                {packageUpdated && (
+                {/* {packageUpdated && (
                     <PackagePopUpTrigger
                         packageA={packageA}
                     ></PackagePopUpTrigger>
-                )}
+                )} */}
                 <div className="font-semibold text-3xl py-4">
                     Single Products
                 </div>

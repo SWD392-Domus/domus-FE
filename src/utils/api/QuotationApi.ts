@@ -85,17 +85,62 @@ export const quotationStaffApi = {
             }
         );
     },
-    getQuotationById: (id: string, token: string) => {
+    getMyQuotationPaging: (
+        searchField: string,
+        searchValue: string,
+        sortField: string,
+        descending: boolean,
+        pageSize: number,
+        pageIndex: number,
+        token: string
+    ) => {
         return get(
-            `/Quotations/${id}`,
+            `/Quotations/my-quotation/search?SearchField=${searchField}&SearchValue=${searchValue}&SortField=${sortField}&Descending=${descending}&PageSize=${pageSize}&PageIndex=${pageIndex}`,
             {},
             {
                 Authorization: token,
             }
         );
     },
-    getAllQuotations: () => {
-        return get(`/Quotations`);
+    getQuotationById: (id: string, token: string) => {
+        return get(
+            `/Quotations/${id}`,
+            {},
+            {
+                Authorization: `Bearer ${token}`,
+            }
+        );
+    },
+    getQuotationVersions: (id: string, token: string) => {
+        return get(
+            `/Quotations/${id}/revisions`,
+            {},
+            {
+                Authorization: `Bearer ${token}`,
+            }
+        );
+    },
+    getQuotationDetailByVersion: (
+        quotationId: string,
+        versionId: string,
+        token: string
+    ) => {
+        return get(
+            `/Quotations/${quotationId}/revisions/${versionId}`,
+            {},
+            {
+                Authorization: `Bearer ${token}`,
+            }
+        );
+    },
+    getAllQuotations: (token: string) => {
+        return get(
+            `/Quotations`,
+            {},
+            {
+                Authorization: `Bearer ${token}`,
+            }
+        );
     },
     editQuotation: (id: string, token: string, data: any) => {
         return put(
@@ -109,6 +154,21 @@ export const quotationStaffApi = {
         return post(
             `/Quotations/${id}/negotiations/messages`,
             data,
+            {},
+            { Authorization: `Bearer ${token}` }
+        );
+    },
+    getChangelog: (id: string, token: string) => {
+        return get(
+            `/Quotations/${id}/negotiations`,
+            {},
+            { Authorization: `Bearer ${token}` }
+        );
+    },
+    editQuotationStatus: (id: string, data: any, token: string) => {
+        return put(
+            `/Quotations/${id}/status`,
+            data, // Wrap data in double quotes to match the provided cURL request
             {},
             { Authorization: `Bearer ${token}` }
         );

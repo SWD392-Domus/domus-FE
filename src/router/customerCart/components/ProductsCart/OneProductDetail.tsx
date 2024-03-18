@@ -51,12 +51,12 @@ const OneProductDetail: React.FC<Props> = (props) => {
                             description={product?.description}
                         ></TooltipDes>
                         <div className="flex justify-between items-center">
-                            <h1 className="font-semibold">
+                            {/* <h1 className="font-semibold">
                                 {new Intl.NumberFormat("en-US", {
                                     style: "currency",
                                     currency: "VND",
-                                }).format(product?.displayPrice * 1000)}
-                            </h1>
+                                }).format(product?.displayPrice )}
+                            </h1> */}
                             <div className="flex justify-end items-center gap-4">
                                 <Button
                                     className="bg-neutral-400 hover:bg-black p-2 rounded-lg"

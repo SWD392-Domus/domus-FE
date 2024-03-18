@@ -16,13 +16,13 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { loginApi } from "@/utils/api/loginApi";
 import { toastError, toastSuccess } from "@/components/Toast";
-import { redirect, useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { devEnvGoogleAuth } from "../constants";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function RegisterForm({ className, ...props }: UserAuthFormProps) {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const handleGoogleLogin = () => {
         window.location.replace(devEnvGoogleAuth);
     };
@@ -69,7 +69,7 @@ export function RegisterForm({ className, ...props }: UserAuthFormProps) {
     });
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        const res = await loginApi.login(values.email, values.password);
+        const res = await loginApi.register(values.email, values.password);
         if (res.status !== 200) {
             toastError("Something Wrong");
         } else {
@@ -79,7 +79,7 @@ export function RegisterForm({ className, ...props }: UserAuthFormProps) {
                 console.log(data);
                 const token = data.data.accessToken;
                 localStorage.setItem("Token", token);
-                navigate("/home");
+                // navigate("/home");
             } else {
                 for (let mess of data.messages) {
                     toastError(mess.content);

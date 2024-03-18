@@ -13,7 +13,6 @@ import {
     DialogFooter,
     DialogHeader,
     DialogTitle,
-    DialogTrigger,
 } from "@/components/ui/Dialog";
 import { Input } from "@/components/ui/Input";
 import { Label } from "@/components/ui/Label";
@@ -29,7 +28,7 @@ import {
 import {
     CommandDialog,
     CommandEmpty,
-    CommandInput,
+    // CommandInput,
     CommandItem,
     CommandList,
 } from "@/components/ui/Command";
@@ -54,6 +53,8 @@ export function DataTable<TData, TValue>({
     const dispatch = useDispatch();
     const [selectedProduct, setSelectedProduct] =
         useState<ProductsProps | null>(null);
+    const [quantityInput, setQuantityInput] =
+        useState<number>(1);
     const [open, setOpen] = useState<boolean>();
     const [products, setProducts] = useState<ProductsProps[]>();
     const table = useReactTable({
@@ -74,7 +75,8 @@ export function DataTable<TData, TValue>({
         fetchData();
     }, []);
     const handleAddProduct = () => {
-        dispatch(actions.addProduct(selectedProduct as ProductsProps & void));
+        dispatch(actions.addProduct({ ...selectedProduct, quantity: quantityInput } as ProductsProps & void));
+        setQuantityInput(1);
         setSelectedProduct(null);
         setOpen(false);
     };
@@ -86,7 +88,7 @@ export function DataTable<TData, TValue>({
             <div className="flex space-x-5 justify-center mb-3">
                 <Button onClick={() => setOpen(true)}>Add Product</Button>
                 <CommandDialog open={open} onOpenChange={setOpen}>
-                    <CommandInput placeholder="Search For Products..." />
+                    {/* <CommandInput placeholder="Search For Products..." /> */}
                     <CommandList>
                         <CommandEmpty>No results found.</CommandEmpty>
                         {products &&
@@ -128,7 +130,7 @@ export function DataTable<TData, TValue>({
                             <Label>
                                 Input Quantity of Products add to the package
                             </Label>
-                            <Input type="number" value={1} readOnly />
+                            <Input type="number" value={quantityInput} onChange={(e) => setQuantityInput(parseInt(e.target.value))} min={1} />
                             <DialogFooter>
                                 <Button
                                     type="submit"
@@ -218,8 +220,7 @@ export function DataTable<TData, TValue>({
                                                     key={cell.id}
                                                     onClick={() =>
                                                         navigate(
-                                                            `${
-                                                                location.pathname
+                                                            `${location.pathname
                                                             }/${row.getValue(
                                                                 "id"
                                                             )}`

@@ -16,7 +16,7 @@ import {
     TableRow,
 } from "./table";
 import { SearchField } from "../Input/SearchField";
-import { PrintButton, CreateButton } from "../Button";
+import { CreateButton } from "../Button";
 import { ActionsDropdownMenu } from "../DropdownMenu/Actions";
 import { SortButton } from "../Button/SortButton";
 
@@ -51,7 +51,7 @@ export function DataTable<TData, TValue>({
                 <div className="my-auto px-2 h-8 border-2 border-zinc-500 bg-zinc-50 rounded pointer-events-none">
                     {table.getFilteredSelectedRowModel().rows.length} Selected
                 </div>
-                <PrintButton></PrintButton>
+                {/* <PrintButton></PrintButton> */}
                 <ActionsDropdownMenu
                     ids={table
                         .getSelectedRowModel()
@@ -88,26 +88,26 @@ export function DataTable<TData, TValue>({
                                                 {header.isPlaceholder
                                                     ? null
                                                     : flexRender(
-                                                          header.column
-                                                              .columnDef.header,
-                                                          header.getContext()
-                                                      )}
+                                                        header.column
+                                                            .columnDef.header,
+                                                        header.getContext()
+                                                    )}
                                                 {[
                                                     "id",
                                                     "expireAt",
-                                                    "totalPrice",
+                                                    // "totalPrice",
                                                     "status",
                                                 ].includes(headerId) && (
-                                                    <SortButton
-                                                        sortField={headerId}
-                                                        setSortField={
-                                                            setSortField
-                                                        }
-                                                        setDescending={
-                                                            setDescending
-                                                        }
-                                                    ></SortButton>
-                                                )}
+                                                        <SortButton
+                                                            sortField={headerId}
+                                                            setSortField={
+                                                                setSortField
+                                                            }
+                                                            setDescending={
+                                                                setDescending
+                                                            }
+                                                        ></SortButton>
+                                                    )}
                                             </div>
                                         </TableHead>
                                     );
@@ -146,11 +146,7 @@ export function DataTable<TData, TValue>({
                                                     key={cell.id}
                                                     onClick={() =>
                                                         navigate(
-                                                            `${
-                                                                location.pathname
-                                                            }/${row.getValue(
-                                                                "id"
-                                                            )}`
+                                                            `${location.pathname}/${(row.original as { id: string }).id}`
                                                         )
                                                     }
                                                     className="cursor-pointer"

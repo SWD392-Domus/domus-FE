@@ -24,6 +24,7 @@ import { useDispatch, useSelector } from "react-redux";
 import selector from "./slice/selector";
 import { actions } from "./slice";
 import { useNavigate, useLocation } from "react-router-dom"
+import HTMLReactParser from 'html-react-parser/lib/index';
 
 interface Props { }
 
@@ -32,8 +33,9 @@ const PackageDetails: React.FC<Props> = () => {
   const dispatch = useDispatch();
   const id: string = useSelector(selector.id);
   const name: string = useSelector(selector.name);
-  const estimatedPrice: number = useSelector(selector.estimatedPrice);
-  const discount: number = useSelector(selector.discount);
+  const description: string = useSelector(selector.description);
+  // const estimatedPrice: number = useSelector(selector.estimatedPrice);
+  // const discount: number = useSelector(selector.discount);
   const services: ServiceProps[] = useSelector(selector.services);
   const productDetails: ProductDetailProps[] = useSelector(selector.productDetails);
   const packageImages: PackageImageProps[] = useSelector(selector.packageImages);
@@ -47,6 +49,7 @@ const PackageDetails: React.FC<Props> = () => {
     if (packageId) {
       try {
         const response = await getPackageById(packageId);
+
         if (response) {
           dispatch(actions.setPackage(response))
           // console.log(response)
@@ -91,17 +94,17 @@ const PackageDetails: React.FC<Props> = () => {
               >
                 {name}
               </div>
-              <div className="font-semibold md:text-2xl flex flex-col">
+              {/* <div className="font-semibold md:text-2xl flex flex-col">
                 <span className="text-sm font-thin">Estimated price: </span>
                 {new Intl.NumberFormat("en-US", {
                   style: "currency",
                   currency: "VND",
                 }).format(estimatedPrice)}
-              </div>
-              <div className="font-semibold md:text-2xl flex flex-col">
+              </div> */}
+              {/* <div className="font-semibold md:text-2xl flex flex-col">
                 <span className="text-sm font-thin">Discount: </span>
                 {discount}%
-              </div>
+              </div> */}
               <div className="mt-2">
                 <DeleteButton id={id}></DeleteButton>
               </div>
@@ -117,10 +120,10 @@ const PackageDetails: React.FC<Props> = () => {
                         {services.map((service: ServiceProps) =>
                           <div className="flex flex-row justify-between">
                             <div className='font-semibold'>{service.name}</div>
-                            <div>{new Intl.NumberFormat("en-US", {
+                            {/* <div>{new Intl.NumberFormat("en-US", {
                               style: "currency",
                               currency: "VND",
-                            }).format(service.price)}</div>
+                            }).format(service.price)}</div> */}
                           </div>)}
                       </div>
                     </AccordionContent>
@@ -129,6 +132,16 @@ const PackageDetails: React.FC<Props> = () => {
               </div>
             </div>
           </div>
+          {description &&
+            <div className="w-[75%] mx-auto mb-10 border-2 py-7 px-10 rounded-2xl">
+              <div>
+                <p className="text-xl font-bold border-b-2 border-slate-400 w-fit mb-4">Description</p>
+              </div>
+              <div className='flex flex-col items-center justify-center gap-4'>
+                {HTMLReactParser(description)}
+              </div>
+            </div>
+          }
           <div className='flex justify-center items-center'>
             <div className="flex flex-col gap-8 justify-center items-center px-2 w-[80%] rounded-md">
               <div>
@@ -164,12 +177,17 @@ const PackageDetails: React.FC<Props> = () => {
                               )}
                             </p>
                           </CardDescription> */}
-                        <CardTitle>
+                        {/* <CardTitle>
                           <p className="text-2xl truncate">
                             {new Intl.NumberFormat("en-US", {
                               style: "currency",
                               currency: "VND",
-                            }).format(product.displayPrice * 1000)}
+                            }).format(product.displayPrice)}
+                          </p>
+                        </CardTitle> */}
+                        <CardTitle>
+                          <p className="truncate mt-2">
+                            Quantity: <span className='text-red-600'>{product.quantity}</span>
                           </p>
                         </CardTitle>
                       </CardContent>

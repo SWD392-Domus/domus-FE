@@ -43,10 +43,10 @@ const OneProductDetail: React.FC<Props> = (props) => {
                         <TooltipDes description={product?.description}></TooltipDes>
                         <div className="flex justify-between items-center">
                             <div>
-                                <h1 className="font-semibold">{new Intl.NumberFormat("en-US", {
+                                {/* <h1 className="font-semibold">{new Intl.NumberFormat("en-US", {
                                     style: "currency",
                                     currency: "VND",
-                                }).format(product?.displayPrice * 1000)}</h1>
+                                }).format(product?.displayPrice )}</h1> */}
                                 <h1 className="font-semibold">Quantity: <span className="text-red-600">0{props?.productIdQuan?.quantity}</span></h1>
                             </div>
                             <div className="flex justify-end items-center gap-4">

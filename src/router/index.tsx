@@ -3,7 +3,6 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import CustomerSettings from "./customerSettings";
 import CustomerCart from "./customerCart";
 import CustomerQuotations from "./customerQuotations";
-import CustomerQuotationDetail from "./customerQuotationDetail";
 import StaffProducts from "./staffProducts";
 import StaffPackages from "./staffPackages";
 import StaffQuotationNew from "./staffQuotationNew";
@@ -25,13 +24,30 @@ import ProductList from "./products";
 import PackageList from "./packages";
 import ProductDetails from "./productDetails";
 import PackageDetails from "./packageDetails";
-import CustomizePackage from "./customizePackage";
 import ProductDetailsStaff from "./staffProductDetail";
 import Login from "./login";
 import Auth from "./auth";
 import Staff from "./staff";
 import StaffProfile from "./profile";
 import CreateProduct from "./staffCreateProduct";
+import Error403Page from "./403";
+import QuotationDetail from "./customerQuotationDetail";
+import StaffContractList from "./staffContracts";
+import StaffArticleList from "./staffArticles";
+import StaffArticleDetail from "./staffArticleDetail";
+import StaffServiceList from "./staffServices";
+import AdminUsersList from "./adminUsersList";
+import StaffArticleDetailCreate from "./staffArticleDetailCreate";
+import StaffArticleDetailUpdate from "./staffArticleDetailUpdate";
+import StaffContractCreate from "./StaffContractCreate";
+import OTP from "./otp";
+import StaffContractDetail from "./StaffContractDetail";
+import Storage from "./storage";
+import CustomerContractDetail from "./customerContractDetail";
+import CreateUser from "./adminCreateUser";
+import UserDetails from "./adminUserDetails";
+import CustomerContract from "./customerContracts";
+import Notification from "./notifications";
 
 const RouterComponent: React.FC = () => {
     const publicRoute = [
@@ -100,16 +116,8 @@ const RouterComponent: React.FC = () => {
         },
         {
             index: true,
-            path: "customizepackage",
-            component: <CustomizePackage />,
-            exact: true,
-            restrict: true,
-        },
-
-        {
-            index: true,
-            path: "login",
-            component: <Login />,
+            path: "otp",
+            component: <OTP />,
             exact: true,
             restrict: true,
         },
@@ -122,15 +130,15 @@ const RouterComponent: React.FC = () => {
         },
         {
             index: true,
-            path: "customizepackage",
-            component: <CustomizePackage />,
+            path: "login",
+            component: <Login />,
             exact: true,
             restrict: true,
         },
         {
             index: true,
-            path: "login",
-            component: <Login />,
+            path: "403",
+            component: <Error403Page />,
             exact: true,
             restrict: true,
         },
@@ -152,6 +160,13 @@ const RouterComponent: React.FC = () => {
         },
         {
             index: true,
+            path: "customer/settings/contracts/:contractId",
+            component: <CustomerContractDetail />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
             path: "customer/settings/quotations",
             component: <CustomerQuotations />,
             exact: true,
@@ -159,8 +174,22 @@ const RouterComponent: React.FC = () => {
         },
         {
             index: true,
+            path: "customer/settings/contracts",
+            component: <CustomerContract />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
             path: "customer/settings/quotations/:quotationId",
-            component: <CustomerQuotationDetail />,
+            component: <QuotationDetail />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "notification",
+            component: <Notification />,
             exact: true,
             restrict: true,
         },
@@ -196,6 +225,13 @@ const RouterComponent: React.FC = () => {
         },
         {
             index: true,
+            path: "staff/services",
+            component: <StaffServiceList />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
             path: "staff/quotations/:quotationId",
             component: <StaffQuotationDetail />,
             exact: true,
@@ -203,8 +239,22 @@ const RouterComponent: React.FC = () => {
         },
         {
             index: true,
-            path: "staff/products",
-            component: <StaffProducts />,
+            path: "staff/quotations/:quotationId/versions",
+            component: <StaffQuotationDetail />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/articles/:articleId",
+            component: <StaffArticleDetail />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/quotations/:quotationId/versions/:versionId",
+            component: <StaffQuotationDetail />,
             exact: true,
             restrict: true,
         },
@@ -243,13 +293,13 @@ const RouterComponent: React.FC = () => {
             exact: true,
             restrict: true,
         },
-        // {
-        //   index: true,
-        //   path: "staff/products",
-        //   component: <StaffProducts />,
-        //   exact: true,
-        //   restrict: true,
-        // },
+        {
+            index: true,
+            path: "staff/products",
+            component: <StaffProducts />,
+            exact: true,
+            restrict: true,
+        },
         {
             index: true,
             path: "staff/products/:id",
@@ -263,7 +313,91 @@ const RouterComponent: React.FC = () => {
             component: <ProductDetailsStaff />,
             exact: true,
             restrict: true,
-        }
+        },
+        {
+            index: true,
+            path: "staff/contracts",
+            component: <StaffContractList />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/contract/new/:quotationId/version/:versionId",
+            component: <StaffContractCreate />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/contracts/:contractId",
+            component: <StaffContractDetail />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/contracts/:contractId/versions",
+            component: <StaffContractDetail />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/articles",
+            component: <StaffArticleList />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/users",
+            component: <AdminUsersList />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/articles/newArticle",
+            component: <StaffArticleDetailCreate />,
+            exact: true,
+            restrict: true,
+        },
+        // {
+        //     index: true,
+        //     path: "staff/articles/:articleId",
+        //     component: <StaffArticleDetail />,
+        //     exact: true,
+        //     restrict: true,
+        // },
+        {
+            index: true,
+            path: "staff/articles/:articleId/update",
+            component: <StaffArticleDetailUpdate />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/storage",
+            component: <Storage />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/users/:id",
+            component: <UserDetails />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/users/create",
+            component: <CreateUser />,
+            exact: true,
+            restrict: true,
+        },
     ];
     return (
         <BrowserRouter>
@@ -307,6 +441,7 @@ const RouterComponent: React.FC = () => {
                         ))}
                     </Route>
                 </Route>
+                {/* <Route path="/403" element={<Error403Page />} /> */}
                 {/* <Route element={<EmployeeRoute />}>
                     <Route element={<LayoutComponent />}>
                         {employeeRoute.map((route) => (
@@ -334,7 +469,7 @@ const RouterComponent: React.FC = () => {
                 {/* <Route path="/payment/result" element={<Payment />} />
 
                 <Route path="/404" element={<ErrorPage />} />
-                <Route path="/403" element={<Error403Page />} />
+                
                 <Route path="*" element={<ErrorPage />} /> */}
             </Routes>
         </BrowserRouter>

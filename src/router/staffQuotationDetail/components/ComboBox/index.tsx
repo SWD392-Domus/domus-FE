@@ -56,7 +56,7 @@ const handleSelectDetail = (
     setSelectedStatus: any
 ) => {
     setSelectedStatus({
-        productDetailId: detail.id,
+        id: detail.id,
         productName: product.productName + " Variant " + index + 1,
         price: detail.displayPrice,
         monetaryUnit: "VND",
@@ -65,7 +65,7 @@ const handleSelectDetail = (
         priceSum: new Intl.NumberFormat("en-US", {
             style: "currency",
             currency: "VND",
-        }).format(detail.displayPrice * 1000),
+        }).format(detail.displayPrice),
     });
 };
 interface Props {

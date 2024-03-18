@@ -22,6 +22,7 @@ module.exports = {
                 openSans: ["Open Sans"],
                 playfair: ["Playfair Display"],
                 notoSans: ["Noto Sans"],
+                dancingScirpt: ["Dancing Script"],
             },
             colors: {
                 border: "hsl(var(--border))",

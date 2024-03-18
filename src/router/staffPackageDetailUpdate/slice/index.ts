@@ -6,6 +6,7 @@ import { PackageImageProps } from "../types";
 export const initialState = {
   id: "",
   name: "",
+  description: "",
   estimatedPrice: 0,
   discount: 0,
   services: [],
@@ -27,6 +28,7 @@ const slice = createSlice({
     setPackage: (state: any, action: any) => {
       state.id = action.payload.id;
       state.name = action.payload.name;
+      state.description = action.payload.description;
       state.estimatedPrice = action.payload.estimatedPrice;
       state.discount = action.payload.discount;
       state.services = action.payload.services;
@@ -39,6 +41,7 @@ const slice = createSlice({
         id: state.id,
         name: state.name,
         estimatedPrice: state.estimatedPrice,
+        description: state.description,
         discount: state.discount,
         services: state.services,
         productDetails: state.productDetails,
@@ -47,12 +50,26 @@ const slice = createSlice({
       };
     },
     addProduct: (state: any, action: any | null) => {
+      for (let i = 0; i < state.productDetails.length; i++) {
+        const productDetail = state.productDetails[i];
+        if (productDetail.id == action.payload.details[0].id) {
+          productDetail.quantity += action.payload.quantity;
+          return;
+        }
+      }
       state.productDetails.push({
         ...action.payload.details[0],
         productName: action.payload.productName,
+        quantity: action.payload.quantity,
       });
     },
     addService: (state: any, action: any | null) => {
+      for (let i = 0; i < state.services.length; i++) {
+        const service = state.services[i];
+        if (service.id == action.payload.id) {
+          return;
+        }
+      }
       state.services.push(action.payload);
     },
     deleteProduct: (state: any, action: PayloadAction<string>) => {
@@ -101,7 +118,10 @@ const slice = createSlice({
         }
       });
     },
-    updatePackageImages: (state, action: PayloadAction<PackageImageProps[]>) => {
+    updatePackageImages: (
+      state,
+      action: PayloadAction<PackageImageProps[]>
+    ) => {
       state.packageImages = [...state.packageImages, ...action.payload];
     },
   },

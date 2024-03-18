@@ -36,7 +36,18 @@ export const columns: ColumnDef<QuotationsProps>[] = [
     {
         accessorKey: "id",
         header: "Id",
+        cell: ({ row }) => {
+            const id: string = row.getValue("id") as string;
+            return <h4> {id.slice(0, 3)}..</h4>;
+        },
     },
+    // {
+    //     accessorKey: "quotationId",
+    //     header: "Quotation",
+    //     cell: ({ row }) => {
+    //         return <h4> Quotation {row.index + 1}</h4>;
+    //     },
+    // },
     {
         accessorKey: "expireAt",
         header: "Expire At",
@@ -82,7 +93,7 @@ export const columns: ColumnDef<QuotationsProps>[] = [
                         <div className="flex items-center gap-1 ">
                             <Avatar>
                                 <AvatarImage src={customerAva} />
-                                <AvatarFallback>S</AvatarFallback>
+                                <AvatarFallback>C</AvatarFallback>
                             </Avatar>
                             <div className="text-black">{customerName}</div>
                         </div>
@@ -91,19 +102,19 @@ export const columns: ColumnDef<QuotationsProps>[] = [
             );
         },
     },
-    // {
-    //     accessorKey: "totalPrice",
-    //     header: () => <div className="text-left">Total Price</div>,
-    //     cell: ({ row }) => {
-    //         const totalPrice = parseFloat(row.getValue("totalPrice")) * 1000
-    //         const formatted = new Intl.NumberFormat("en-US", {
-    //             style: "currency",
-    //             currency: "VND",
-    //         }).format(totalPrice)
+    {
+        accessorKey: "totalPrice",
+        header: () => <div className="text-left">Total Price</div>,
+        cell: ({ row }) => {
+            const totalPrice = parseFloat(row.getValue("totalPrice"));
+            const formatted = new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "VND",
+            }).format(totalPrice);
 
-    //         return <div className="text-left font-medium">{formatted}</div>
-    //     },
-    // },
+            return <div className="text-left font-medium">{formatted}</div>;
+        },
+    },
     {
         accessorKey: "status",
         header: () => <div className="text-left">Status</div>,

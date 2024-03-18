@@ -1,11 +1,11 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import { Button } from "@/components/ui/Button/Button";
 import { Calendar } from "@/components/ui/Calendar";
-import { Card } from "@/components/ui/Card";
+// import { Card } from "@/components/ui/Card";
 import {
     Form,
     FormControl,
-    FormDescription,
+    // FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -16,7 +16,7 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/Popover";
-import { toast } from "@/components/ui/Toast/use-toast";
+// import { toast } from "@/components/ui/Toast/use-toast";
 
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -33,15 +33,16 @@ import { useForm } from "react-hook-form";
 
 import { z } from "zod";
 import UserList from "../UserList";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch,  } from "react-redux";
 import { actions } from "../../slice";
-import selector from "../../slice/selector";
+// import selector from "../../slice/selector";
 
 interface Props {
     expireAt: any;
     customer: any;
     isEdit: boolean;
     setEdit: any;
+    setUpdate: any;
 }
 const FormSchema = z.object({
     expireDate: z.date({
@@ -51,8 +52,9 @@ const FormSchema = z.object({
 const QuotationEdit: React.FC<Props> = ({
     expireAt,
     customer,
-    isEdit,
+    // isEdit,
     setEdit,
+    // setUpdate,
 }) => {
     const dispatch = useDispatch();
     const [open, setOpen] = React.useState(false);
