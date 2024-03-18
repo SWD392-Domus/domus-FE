@@ -10,7 +10,7 @@ const StaffRoute = () => {
     const { userRoles, loading } = useAuth();
     if (loading) {
         // Render a loading spinner or placeholder while authentication is being checked
-        return <Loading />;
+        return <Loading variant="dark" />;
     }
 
     if (userRoles === null) {

@@ -8,7 +8,7 @@ import {
 } from "@radix-ui/react-icons";
 
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import selector from "./slice/selector";
 import { actions } from "./slice";
@@ -57,7 +57,7 @@ const StaffQuotationNew: React.FC<Props> = () => {
     // const [isLoading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    const [isUpdate, setUpdate] = useState(false);
+    const [, setUpdate] = useState(false);
     const [isEditTable, setEditTable] = useState(false);
     const [isEditService, setEditService] = useState(false);
     const [isEdit, setEdit] = useState(false);
@@ -74,10 +74,10 @@ const StaffQuotationNew: React.FC<Props> = () => {
     const products: any[] = useSelector(selector.products);
     const negotiationLog: any = useSelector(selector.negotiationLog);
     const services: any = useSelector(selector.services);
-    const [updated, setUpdated] = useState(true);
+    const [updated,] = useState(true);
     const initalValues: CellValues = {};
-    const [originalPrice, setOriginalPrice] = useState(totalPrice);
-    const serviceInitialValues: CellValues = {};
+    const [originalPrice,] = useState(totalPrice);
+    // const serviceInitialValues: CellValues = {};
     const [cellValues, setCellValues] = useState<CellValues>(initalValues);
     const [serviceCellValues, setserviceCellValues] =
         useState<CellValues>(services);

@@ -19,12 +19,12 @@ import { toastError, toastSuccess } from "@/components/Toast";
 // import { useNavigate } from "react-router-dom";
 import { devEnvGoogleAuth } from "../constants";
 
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> { }
 
 export function RegisterForm({ className, ...props }: UserAuthFormProps) {
     // const navigate = useNavigate();
     const handleGoogleLogin = () => {
-        window.location.replace(devEnvGoogleAuth);
+        window.location.replace(devEnvGoogleAuth());
     };
     const formSchema = z
         .object({

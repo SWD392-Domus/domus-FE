@@ -52,7 +52,7 @@ type Status = {
 const handleSelectDetail = (
     detail: ProductDetails,
     product: Status,
-    index: number,
+    // index: number,
     setSelectedStatus: any
 ) => {
     setSelectedStatus({
@@ -158,7 +158,7 @@ function StatusList({
                                                             handleSelectDetail(
                                                                 detail,
                                                                 product,
-                                                                index,
+                                                                // index,
                                                                 setSelectedStatus
                                                             );
                                                             setOpen(false);

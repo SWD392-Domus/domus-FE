@@ -10,7 +10,8 @@ import {
     LayersIcon,
     FileIcon,
     CrumpledPaperIcon,
-    IdCardIcon
+    IdCardIcon,
+    DashboardIcon
 } from "@radix-ui/react-icons";
 import { IconProps } from "@radix-ui/react-icons/dist/types";
 
@@ -22,6 +23,12 @@ const components: {
     href: string;
     description: string;
 }[] = [
+        {
+            title: "Dashboard",
+            icon: DashboardIcon,
+            href: "/staff",
+            description: "Dashboard",
+        },
         {
             title: "Profile",
             icon: PersonIcon,
@@ -85,10 +92,13 @@ const components: {
     ];
 
 export default function NavigationMenuDemo() {
+    const handleLogout = () => {
+        localStorage.removeItem("Token");
+    };
     const location = useLocation();
     console.log(location);
     return (
-        <div className=" flex flex-col justify-between h-[95%] ">
+        <div className=" flex flex-col justify-between h-[95%] mt-3">
             <div className="flex-col">
                 {components.map((component) => (
                     <Link to={component.href}>
@@ -105,7 +115,11 @@ export default function NavigationMenuDemo() {
                 ))}
             </div>
             <div className=" flex items-center justify-center">
-                <Link to="/login">Log Out</Link>
+                <button
+                    onClick={handleLogout}
+                >
+                    <Link to="/login">Log Out</Link>
+                </button>
             </div>
         </div>
     );

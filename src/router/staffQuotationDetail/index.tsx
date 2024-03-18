@@ -82,7 +82,7 @@ const QuotationDetail: React.FC<Props> = () => {
     // const [isLoading, setLoading] = useState(false);
     const navigate = useNavigate();
     const [versions, setVersions] = useState<VersionType[]>([]);
-    const [isUpdate, setUpdate] = useState(false);
+    const [, setUpdate] = useState(false);
     const [isEditTable, setEditTable] = useState(false);
     const [isEditService, setEditService] = useState(false);
     const [isEdit, setEdit] = useState(false);
@@ -403,13 +403,13 @@ const QuotationDetail: React.FC<Props> = () => {
                                                                 new Date(
                                                                     versions[
                                                                         versions.length -
-                                                                            1
+                                                                        1
                                                                     ].createdAt
                                                                 ).toLocaleTimeString();
                                                             if (
                                                                 index ==
                                                                 versions.length -
-                                                                    1
+                                                                1
                                                             ) {
                                                                 name =
                                                                     "Current version " +
@@ -420,7 +420,7 @@ const QuotationDetail: React.FC<Props> = () => {
                                                                     new Date(
                                                                         versions[
                                                                             versions.length -
-                                                                                1
+                                                                            1
                                                                         ].createdAt
                                                                     ).toLocaleTimeString();
                                                             }

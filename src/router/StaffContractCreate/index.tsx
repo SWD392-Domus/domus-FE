@@ -568,7 +568,7 @@ const StaffContractCreate: React.FC<Props> = () => {
                     </Form>
                 </Card>
             )}
-            {!isUpdated && <Loading />}
+            {!isUpdated && <Loading variant="dark" />}
         </>
     );
 };

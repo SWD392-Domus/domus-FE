@@ -266,7 +266,7 @@ const QuotationDetail: React.FC<Props> = () => {
                     </div>
                 </div>
             )}
-            {!updated && <Loading />}
+            {!updated && <Loading variant="dark" />}
         </>
     );
 };
