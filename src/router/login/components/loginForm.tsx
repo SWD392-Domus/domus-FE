@@ -108,7 +108,7 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
                                         </FormLabel>
                                         <FormControl>
                                             <Input
-                                                placeholder="shadcn"
+                                                placeholder="Email..."
                                                 {...field}
                                                 className="text-white mb-4"
                                             />
@@ -128,7 +128,7 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
                                         </FormLabel>
                                         <FormControl>
                                             <Input
-                                                placeholder="shadcn"
+                                                placeholder="Password..."
                                                 type="password"
                                                 {...field}
                                                 className="text-white mb-4"

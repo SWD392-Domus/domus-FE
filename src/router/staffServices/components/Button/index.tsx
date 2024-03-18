@@ -86,7 +86,7 @@ export const CreateButton = () => {
                 <FormItem>
                   <FormLabel>Service Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="shadcn" {...field} />
+                    <Input placeholder="Name..." {...field} />
                   </FormControl>
                   <FormDescription>
                     This is your public display service name.
@@ -102,7 +102,7 @@ export const CreateButton = () => {
                 <FormItem>
                   <FormLabel>Price</FormLabel>
                   <FormControl>
-                    <Input placeholder="shadcn" {...field} />
+                    <Input placeholder="Price..." {...field} />
                   </FormControl>
                   <FormDescription>
                     This is your public display service price.
