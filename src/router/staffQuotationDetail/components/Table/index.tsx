@@ -87,8 +87,8 @@ export function EditDataTable<TData, TValue>({
                     currency: "VND",
                 }).format(
                     parseFloat(newCellValues[rowId].quantity as string) *
-                    parseFloat(newCellValues[rowId].price as string) *
-                    1000
+                        parseFloat(newCellValues[rowId].price as string) *
+                        1000
                 );
             }
         }
@@ -135,10 +135,10 @@ export function EditDataTable<TData, TValue>({
                                         {header.isPlaceholder
                                             ? null
                                             : flexRender(
-                                                header.column.columnDef
-                                                    .header,
-                                                header.getContext()
-                                            )}
+                                                  header.column.columnDef
+                                                      .header,
+                                                  header.getContext()
+                                              )}
                                     </TableHead>
                                 );
                             })}
@@ -176,10 +176,10 @@ export function EditDataTable<TData, TValue>({
                                                     />
                                                 </Button>
                                             ) : !(
-                                                cell.column.id == "action"
-                                            ) ? (
+                                                  cell.column.id == "action"
+                                              ) ? (
                                                 cell.column.id == "price" ||
-                                                    cell.column.id == "quantity" ? (
+                                                cell.column.id == "quantity" ? (
                                                     <Input
                                                         value={cellValue || ""}
                                                         type="number"
@@ -189,6 +189,9 @@ export function EditDataTable<TData, TValue>({
                                                                 cell.column.id,
                                                                 e.target.value
                                                             )
+                                                        }
+                                                        readOnly={
+                                                            !cellValues[row.id]
                                                         }
                                                     />
                                                 ) : (
@@ -203,7 +206,8 @@ export function EditDataTable<TData, TValue>({
                                                         }
                                                         readOnly={
                                                             cell.column.id ==
-                                                            "priceSum"
+                                                                "priceSum" ||
+                                                            !cellValues[row.id]
                                                         }
                                                     />
                                                 )

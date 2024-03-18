@@ -14,22 +14,21 @@ export const data: QuotationDetailInfo[] = Array.from(
     (_, i) => ({
         id: `${i + 1}`,
         productName: `Product ${i + 1}`,
-        price: i + 1,
+        price: (i + 1),
         monetaryUnit: "VND",
         quantity: i + 2,
         quantityType: "EA",
         priceSum: (i + 1) * (i + 2),
     })
 );
-export const column: ColumnDef<QuotationDetailInfo>[] = [
+export const editColums: ColumnDef<QuotationDetailInfo>[] = [
+    {
+        accessorKey: "action",
+        header: "Action",
+    },
     {
         accessorKey: "productName",
         header: "Product Name",
-        cell: ({ row }) => {
-            const value: string = row.getValue("productName");
-
-            return <div className="text-left font-medium">{value}</div>;
-        },
     },
     {
         accessorKey: "price",
@@ -62,19 +61,9 @@ export const column: ColumnDef<QuotationDetailInfo>[] = [
     {
         accessorKey: "priceSum",
         header: () => <div className="text-left">Total Price</div>,
-        cell: ({ row }) => {
-            const price: string = row.getValue("price");
-            const quantity: string = row.getValue("quantity");
-            return (
-                <div className="text-left font-medium">
-                    {new Intl.NumberFormat("en-US", {
-                        style: "currency",
-                        currency: "VND",
-                    }).format(
-                        Number.parseFloat(price) * Number.parseFloat(quantity)
-                    )}
-                </div>
-            );
-        },
+    },
+    {
+        accessorKey: "delete",
+        header: () => <div className="text-left">Delete</div>,
     },
 ];

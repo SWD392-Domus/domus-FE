@@ -21,6 +21,7 @@ import { TrashIcon } from "@radix-ui/react-icons";
 import { useDispatch } from "react-redux";
 import { actions } from "../../slice";
 import { ServiceComboBox } from "../ServiceComboBox";
+import { toast } from "@/components/ui/Toast/use-toast";
 export interface ProductDetails {
     images: {
         imageUrl: string;
@@ -100,6 +101,22 @@ export function EditTableService<TData, TValue>({
         columnId: string,
         value: Status | null
     ) => {
+        const existingProductIndex = Object.values(serviceCellValues).findIndex(
+            (cellValue: any) => {
+                console.log(cellValue);
+                return cellValue.id === value?.id;
+            }
+        );
+
+        if (existingProductIndex !== -1) {
+            // Product already exists, handle it here
+            toast({
+                variant: "destructive",
+                title: "Service already exist, please edit on the consistant table",
+                description: "Please Try again",
+            });
+            return; // or handle as per your requirement
+        }
         handleChange(rowId, columnId, value, true);
         setSelectedStatus(value); // Set the state in the parent component
     };

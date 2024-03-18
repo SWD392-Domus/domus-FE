@@ -52,13 +52,27 @@ const data = [
         total: Math.floor(Math.random() * 5000) + 1000,
     },
 ];
+export type columType = {
+    monthAsNumber: number;
+    monthAsString: string;
+    revenue: number;
+};
+export type Props = {
+    data: columType[];
+};
 
-export function Overview() {
+export const Overview: React.FC<Props> = (props) => {
+    const adjustColName = (data: columType[]) => {
+        const newData = data.map((item) => {
+            return { ...item, monthAsString: item.monthAsString.slice(0, 3) };
+        });
+        return newData;
+    };
     return (
         <ResponsiveContainer width="100%" height={350}>
-            <BarChart data={data}>
+            <BarChart data={adjustColName(props.data)}>
                 <XAxis
-                    dataKey="name"
+                    dataKey="monthAsString"
                     stroke="#888888"
                     fontSize={12}
                     tickLine={false}
@@ -72,7 +86,7 @@ export function Overview() {
                     tickFormatter={(value) => `$${value}`}
                 />
                 <Bar
-                    dataKey="total"
+                    dataKey="revenue"
                     fill="currentColor"
                     radius={[4, 4, 0, 0]}
                     className="fill-primary"
@@ -80,4 +94,4 @@ export function Overview() {
             </BarChart>
         </ResponsiveContainer>
     );
-}
+};

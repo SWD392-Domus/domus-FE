@@ -2,7 +2,7 @@ import Loading from "@/components/PublicComponents/Loading";
 import { toastError, toastSuccess } from "@/components/Toast";
 import { loginApi } from "@/utils/api/loginApi";
 import React, { useEffect } from "react";
-import { useNavigate,  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
     // define your props here
@@ -40,7 +40,7 @@ const Auth: React.FC<Props> = () => {
 
     return (
         <div>
-            <Loading />
+            <Loading variant="light" />
         </div>
     );
 };

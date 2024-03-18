@@ -4,6 +4,7 @@ export const quotationStaffApi = {
     createQuotation: (data: any, token: string) => {
         return post(`/Quotations`, data, {}, { Authorization: token });
     },
+
     deleteQuotation: (id: string, token: string) => {
         return remove(`/Quotations/${id}`, {}, {}, { Authorization: token });
     },

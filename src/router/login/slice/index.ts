@@ -3,14 +3,16 @@ import generateActions from "./generateActions";
 import { createSlice } from "@reduxjs/toolkit";
 
 export const initialState = {
-    id: "",
-    email: "",
-    userName: "",
-    fullName: "",
-    gender: "",
-    address: null,
-    phoneNumber: null,
-    profileImage: "",
+    user: {
+        id: "",
+        email: "",
+        userName: "",
+        fullName: "",
+        gender: "",
+        address: null,
+        phoneNumber: null,
+        profileImage: "",
+    },
 };
 
 export const name = "user";
@@ -31,14 +33,14 @@ const slice = createSlice({
                 phoneNumber,
                 profileImage,
             } = action.payload;
-            state.fullName = fullName;
-            state.id = id;
-            state.email = email;
-            state.userName = userName;
-            state.gender = gender;
-            state.address = address;
-            state.phoneNumber = phoneNumber;
-            state.profileImage = profileImage;
+            state.user.fullName = fullName;
+            state.user.id = id;
+            state.user.email = email;
+            state.user.userName = userName;
+            state.user.gender = gender;
+            state.user.address = address;
+            state.user.phoneNumber = phoneNumber;
+            state.user.profileImage = profileImage;
         },
     },
 });

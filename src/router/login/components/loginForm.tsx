@@ -21,17 +21,18 @@ import { loginApi } from "@/utils/api/loginApi";
 import { toastError, toastSuccess } from "@/components/Toast";
 import { useNavigate } from "react-router-dom";
 import { devEnvGoogleAuth } from "../constants";
-// import { useDispatch } from "react-redux";
+import { actions } from "../slice";
+import { useDispatch } from "react-redux";
 // import { actions } from "../slice";
 
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> { }
+interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function LoginForm({ className, ...props }: UserAuthFormProps) {
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     // const [userName, setUserName] = React.useState("");
     const navigate = useNavigate();
     const handleGoogleLogin = () => {
-        window.location.replace(devEnvGoogleAuth);
+        window.location.replace(devEnvGoogleAuth());
     };
     const formSchema = z.object({
         email: z.string().email({
@@ -76,7 +77,7 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
                 );
 
                 toastSuccess("Login Successfully");
-
+                dispatch(actions.setUser(res.data.data.userInfo));
                 const roles: string[] = res.data.data.token.roles;
                 if (roles.includes("Staff")) {
                     navigate("/staff");
@@ -89,7 +90,7 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
                 }
             }
         } catch (error) {
-            toastError("Login Error");
+            toastError("Login Error,please try again");
         }
     }
     return (

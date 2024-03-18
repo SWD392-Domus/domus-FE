@@ -116,7 +116,7 @@ const QuotationDetail: React.FC<Props> = () => {
         const sentProducts = products.map((product) => {
             const { price, monetaryUnit, quantity, quantityType } = product;
             return {
-                productDetailId: product.id,
+                id: product.id,
                 price: parseFloat(price),
                 monetaryUnit,
                 quantity: parseFloat(quantity),
@@ -138,44 +138,37 @@ const QuotationDetail: React.FC<Props> = () => {
             productdetails: sentProducts,
             services: sentServices,
         };
-        if (isUpdate) {
-            const token = localStorage.getItem("Token");
-            const res = await editQuotation(id, token as string, data);
-            if (res.status != 200) {
-                toast({
-                    variant: "destructive",
-                    title: "Uh oh! Something went wrong.",
-                    description: "Please Try again",
-                });
-            } else {
-                if (res.data.isSuccess) {
-                    toast({
-                        variant: "success",
-                        title: "Update Successfully",
-                        description: "",
-                    });
-                    if (totalPrice != originalPrice) {
-                        await pushNegotitaionService(id, token as string, {
-                            content: `${staff.email} have change the price from đ${originalPrice} to đ${totalPrice}`,
-                            isCustomerMessage: false,
-                        });
-                    }
 
-                    window.location.replace(`/staff/quotations/${id}`);
-                } else {
-                    toast({
-                        variant: "destructive",
-                        title: `${res.data.messages[0].content}`,
-                        description: "",
-                    });
-                }
-            }
-        } else {
+        const token = localStorage.getItem("Token");
+        const res = await editQuotation(id, token as string, data);
+        if (res.status != 200) {
             toast({
                 variant: "destructive",
-                title: `It seem you haven't done any change `,
-                description: "Try to edit something before update",
+                title: "Uh oh! Something went wrong.",
+                description: "Please Try again",
             });
+        } else {
+            if (res.data.isSuccess) {
+                toast({
+                    variant: "success",
+                    title: "Update Successfully",
+                    description: "",
+                });
+                if (totalPrice != originalPrice) {
+                    await pushNegotitaionService(id, token as string, {
+                        content: `${staff.email} have change the price from đ${originalPrice} to đ${totalPrice}`,
+                        isCustomerMessage: false,
+                    });
+                }
+
+                window.location.replace(`/staff/quotations/${id}`);
+            } else {
+                toast({
+                    variant: "destructive",
+                    title: `${res.data.messages[0].content}`,
+                    description: "",
+                });
+            }
         }
     };
     useEffect(() => {
@@ -743,7 +736,7 @@ const QuotationDetail: React.FC<Props> = () => {
                 </div>
             )}
 
-            {!updated && <Loading />}
+            {!updated && <Loading variant="dark" />}
         </>
     );
 };

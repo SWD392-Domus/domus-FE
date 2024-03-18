@@ -1,106 +1,269 @@
 import {
-  ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from "@tanstack/react-table"
+    ColumnDef,
+    flexRender,
+    getCoreRowModel,
+    useReactTable,
+} from "@tanstack/react-table";
 
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/Table/table"
-
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+} from "@/components/ui/Table/table";
+import { Input } from "../Input";
+import { useState } from "react";
 import { ComboBoxResponsive } from "../ComboBox";
-import { Input } from "../Input"
-// import { useEffect, useState } from "react"
-
-import { useDispatch, useSelector } from "react-redux";
-import { counterSelector } from "./slice/selector";
-import { increase } from "./slice";
-
+import { Button } from "@/components/ui/Button/Button";
+import { TrashIcon } from "@radix-ui/react-icons";
+import { useDispatch } from "react-redux";
+import { actions } from "../../slice";
+import { toast } from "@/components/ui/Toast/use-toast";
+export interface ProductDetails {
+    images: {
+        imageUrl: string;
+    }[];
+    attributes: {
+        name: string;
+        value: string;
+    }[];
+    displayPrice: number;
+}
+type Status = {
+    value: string;
+    label: string;
+    id?: string;
+    productName?: string;
+    description?: string;
+    details?: ProductDetails[];
+    price?: string;
+};
 interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+    columns: ColumnDef<TData, TValue>[];
+    data: TData[];
+    cellValues: CellValues;
+    setCellValues: React.Dispatch<React.SetStateAction<CellValues>>;
+}
+interface CellValues {
+    [key: string]: {
+        [key: string]: string;
+    };
 }
 
-export function DataTable<TData, TValue>({
-  columns,
-  data,
-}: DataTableProps<TData, TValue>) {
-  const table = useReactTable({
-    data,
+export function EditDataTable<TData, TValue>({
     columns,
-    getCoreRowModel: getCoreRowModel(),
-  })
-  // const [ammount, setAmmount] = useState<number>(0);
-  const { count } = useSelector(counterSelector);
-  const dispatch = useDispatch();
-  const handleAddProduct = () => {
-    dispatch(increase());
-  };
-  return (
-    <div className="rounded-md border">
-      <Table>
-        <TableHeader>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                return (
-                  <TableHead key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                  </TableHead>
-                )
-              })}
-            </TableRow>
-          ))}
-        </TableHeader>
-        <TableBody>
-          {Array.from({ length: count }).map((_, index) => (
-            <TableRow key={index} className="added-product-line">
-              <TableCell>
-                0
-              </TableCell>
-              <TableCell>
-                <ComboBoxResponsive></ComboBoxResponsive>
-              </TableCell>
-              <TableCell>
-                <Input></Input>
-              </TableCell>
-              <TableCell>
-                <ComboBoxResponsive></ComboBoxResponsive>
-              </TableCell>
-              <TableCell>
-                <Input></Input>
-              </TableCell>
-              <TableCell>
-                <ComboBoxResponsive></ComboBoxResponsive>
-              </TableCell>
-              <TableCell>
-                <div className="text-right font-medium">{new Intl.NumberFormat("en-US", {
-                  style: "currency",
-                  currency: "VND",
-                }).format(100000)}</div>
-              </TableCell>
-            </TableRow>
+    data,
+    cellValues,
+    setCellValues,
+}: DataTableProps<TData, TValue>) {
+    const dispatch = useDispatch();
 
-          ))}
-          <TableRow>
-            <TableCell></TableCell>
-            <TableCell>
-              <a className="text-blue-500 cursor-pointer hover:underline" onClick={handleAddProduct}>Add Product</a>
-            </TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </div >
-  )
+    const [selectedStatus, setSelectedStatus] = useState<Status | null>(null);
+
+    const handleChange = (
+        rowId: string,
+        columnId: string,
+        value: string | Status | null,
+        fromComboBox: boolean = false
+    ) => {
+        let newCellValues = {};
+        if (fromComboBox) {
+            newCellValues = {
+                ...cellValues,
+                [rowId]: value,
+            };
+        } else {
+            newCellValues = {
+                ...cellValues,
+                [rowId]: {
+                    ...(cellValues[rowId] || {}),
+                    [columnId]: fromComboBox ? value : value?.toString(),
+                },
+            };
+            if (columnId == "quantity" || "price") {
+                newCellValues[rowId].priceSum = new Intl.NumberFormat("en-US", {
+                    style: "currency",
+                    currency: "VND",
+                }).format(
+                    parseFloat(newCellValues[rowId].quantity as string) *
+                        parseFloat(newCellValues[rowId].price as string) *
+                        1000
+                );
+            }
+        }
+
+        setCellValues(newCellValues as CellValues);
+    };
+
+    const handleComboBoxChange = (
+        rowId: string,
+        columnId: string,
+        value: Status | null
+    ) => {
+        const existingProductIndex = Object.values(cellValues).findIndex(
+            (cellValue: any) => {
+                console.log(cellValue);
+                return cellValue.id === value?.id;
+            }
+        );
+
+        if (existingProductIndex !== -1) {
+            // Product already exists, handle it here
+            toast({
+                variant: "destructive",
+                title: "Product already exist, please edit on the consistant table",
+                description: "Please Try again",
+            });
+            return; // or handle as per your requirement
+        }
+
+        //handle here
+        handleChange(rowId, columnId, value, true);
+        setSelectedStatus(value); // Set the state in the parent component
+    };
+
+    const table = useReactTable({
+        data,
+        columns,
+        getCoreRowModel: getCoreRowModel(),
+    });
+    const handleDeleteProduct = (id: string) => {
+        dispatch(actions.deleteRow(id));
+        const updatedCellValues = { ...cellValues };
+        delete updatedCellValues[id];
+        const reindexedValues = {};
+        let newIndex = 0;
+        for (const key in updatedCellValues) {
+            reindexedValues[newIndex++] = updatedCellValues[key];
+        }
+
+        setCellValues(reindexedValues);
+    };
+
+    return (
+        <div className="rounded-md border">
+            <Table>
+                <TableHeader>
+                    {table.getHeaderGroups().map((headerGroup) => (
+                        <TableRow key={headerGroup.id}>
+                            {headerGroup.headers.map((header) => {
+                                return (
+                                    <TableHead key={header.id}>
+                                        {header.isPlaceholder
+                                            ? null
+                                            : flexRender(
+                                                  header.column.columnDef
+                                                      .header,
+                                                  header.getContext()
+                                              )}
+                                    </TableHead>
+                                );
+                            })}
+                        </TableRow>
+                    ))}
+                </TableHeader>
+                <TableBody>
+                    {table.getRowModel().rows?.length ? (
+                        table.getRowModel().rows.map((row) => (
+                            <TableRow
+                                key={row.id}
+                                data-state={row.getIsSelected() && "selected"}
+                            >
+                                {row.getVisibleCells().map((cell) => {
+                                    const cellValue =
+                                        cellValues[row.id] &&
+                                        cellValues[row.id][cell.column.id];
+
+                                    return (
+                                        <TableCell key={cell.id}>
+                                            {cell.column.id == "delete" ? (
+                                                <Button
+                                                    className="flex justify-center items-center cursor-pointer"
+                                                    variant={"ghost"}
+                                                    onClick={() =>
+                                                        handleDeleteProduct(
+                                                            row.id
+                                                        )
+                                                    }
+                                                >
+                                                    <TrashIcon
+                                                        color="red"
+                                                        width={20}
+                                                        height={20}
+                                                    />
+                                                </Button>
+                                            ) : !(
+                                                  cell.column.id == "action"
+                                              ) ? (
+                                                cell.column.id == "price" ||
+                                                cell.column.id == "quantity" ? (
+                                                    <Input
+                                                        value={cellValue || ""}
+                                                        type="number"
+                                                        onChange={(e) =>
+                                                            handleChange(
+                                                                row.id,
+                                                                cell.column.id,
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                        readOnly={
+                                                            !cellValues[row.id]
+                                                        }
+                                                    />
+                                                ) : (
+                                                    <Input
+                                                        value={cellValue || ""}
+                                                        onChange={(e) =>
+                                                            handleChange(
+                                                                row.id,
+                                                                cell.column.id,
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                        readOnly={
+                                                            cell.column.id ==
+                                                                "priceSum" ||
+                                                            !cellValues[row.id]
+                                                        }
+                                                    />
+                                                )
+                                            ) : (
+                                                <ComboBoxResponsive
+                                                    selectedStatus={
+                                                        selectedStatus as Status
+                                                    }
+                                                    setSelectedStatus={(
+                                                        value: Status | null
+                                                    ) =>
+                                                        handleComboBoxChange(
+                                                            row.id,
+                                                            cell.column.id,
+                                                            value
+                                                        )
+                                                    }
+                                                    value={cellValue}
+                                                />
+                                            )}
+                                        </TableCell>
+                                    );
+                                })}
+                            </TableRow>
+                        ))
+                    ) : (
+                        <TableRow>
+                            <TableCell
+                                colSpan={columns.length}
+                                className="h-24 text-center"
+                            >
+                                No results.
+                            </TableCell>
+                        </TableRow>
+                    )}
+                </TableBody>
+            </Table>
+        </div>
+    );
 }
