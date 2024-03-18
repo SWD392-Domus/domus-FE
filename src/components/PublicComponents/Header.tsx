@@ -10,10 +10,12 @@ import selector from "@/router/customerCart/slice/selector";
 import { actions } from "@/router/customerCart/slice";
 import { Link } from "react-router-dom";
 import Notification from "./Notification";
+import { useAuth } from "@/components/customHooks/useAuth";
 
 const iconClassname = "text-white text-2xl";
 
 const Header: React.FC = () => {
+    const { userRoles } = useAuth();
     const dispatch = useDispatch();
     const cartNumber: number = useSelector(selector.cartNumber);
     const [open, setOpen] = useState(false);
@@ -61,18 +63,20 @@ const Header: React.FC = () => {
                     </div>
 
                     <div className="flex gap-5 items-center">
-                        <Notification />
-                        <Link to="/customer/settings/cart">
-                            <div
-                                className="w-12 h-12 bg-yellowCustom flex justify-center items-center 
+                        {userRoles &&
+                            <Notification />}
+                        {userRoles &&
+                            <Link to="/customer/settings/cart">
+                                <div
+                                    className="w-12 h-12 bg-yellowCustom flex justify-center items-center 
           rounded-full cursor-pointer hover:opacity-80 relative"
-                            >
-                                <div className="bg-red-600 text-white w-6 h-6 rounded-full text-center items-center absolute -right-2 -top-2">
-                                    {cartNumber}
+                                >
+                                    <div className="bg-red-600 text-white w-6 h-6 rounded-full text-center items-center absolute -right-2 -top-2">
+                                        {cartNumber}
+                                    </div>
+                                    <FaCartShopping className="text-black" />
                                 </div>
-                                <FaCartShopping className="text-black" />
-                            </div>
-                        </Link>
+                            </Link>}
                         <motion.div
                             className="w-12 h-12 bg-yellowCustom flex flex-col group justify-center items-center cursor-pointer "
                             onClick={toggleMenu}
@@ -84,8 +88,8 @@ const Header: React.FC = () => {
                             <AnimatePresence>
                                 <div
                                     className={`${genericHamburgerLine} ${open
-                                            ? "rotate-45 translate-y-[7.1px] opacity-100"
-                                            : "opacity-100"
+                                        ? "rotate-45 translate-y-[7.1px] opacity-100"
+                                        : "opacity-100"
                                         }`}
                                 />
                                 <div
@@ -94,8 +98,8 @@ const Header: React.FC = () => {
                                 />
                                 <div
                                     className={`${genericHamburgerLine} ${open
-                                            ? "-rotate-45 -translate-y-[7.1px] opacity-100 "
-                                            : "opacity-100"
+                                        ? "-rotate-45 -translate-y-[7.1px] opacity-100 "
+                                        : "opacity-100"
                                         }`}
                                 />
                             </AnimatePresence>

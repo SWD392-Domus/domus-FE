@@ -21,7 +21,7 @@ export const serviceColums: ColumnDef<ServiceProps>[] = [
                     {new Intl.NumberFormat("en-US", {
                         style: "currency",
                         currency: "VND",
-                    }).format(Number.parseFloat(value) * 1000)}
+                    }).format(Number.parseFloat(value))}
                 </div>
             );
         },

@@ -6,15 +6,26 @@ import { Button } from "../ui/Button/Button";
 import { Link } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/Avatar";
 import { userApi } from "@/utils/api/userApi";
+import { useAuth } from "@/components/customHooks/useAuth";
 
 const navLinks = [
     { title: "Home", href: "/" },
     { title: "Blogs", href: "/article" },
     { title: "Products", href: "/products" },
     { title: "Our Current Packages", href: "/packages" },
-    { title: "Settings", href: "/customer/settings" },
-    { title: "Staff", href: "/staff" },
+    // { title: "Settings", href: "/customer/settings" },
+    // { title: "Staff", href: "/staff" },
 ];
+
+const customerSettingsLink = {
+    title: "Settings",
+    href: "/customer/settings",
+};
+
+const staffLink = {
+    title: "Staff",
+    href: "/staff",
+};
 
 const signinLinks = {
     title: "Sign In",
@@ -26,10 +37,10 @@ const logOutLinks = {
     href: "/login",
 };
 
-const signUpLinks = {
-    title: "Sign Up",
-    href: "/",
-};
+// const signUpLinks = {
+//     title: "Sign Up",
+//     href: "/",
+// };
 interface Props {
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -41,6 +52,7 @@ interface ProfileType {
     profileImage?: string;
 }
 const NavigationTab: React.FC<Props> = (props) => {
+    const { userRoles } = useAuth();
     const [profile, setProfile] = useState<ProfileType>();
     const [isLogin, SetLogin] = useState<boolean>();
     const [isRender, setRender] = useState<boolean>();
@@ -58,6 +70,7 @@ const NavigationTab: React.FC<Props> = (props) => {
                 setRender(true);
                 setProfile(res.data.data);
                 SetLogin(true);
+                console.log(res.data.data);
             }
         } else {
             SetLogin(false);
@@ -123,6 +136,46 @@ const NavigationTab: React.FC<Props> = (props) => {
                             </motion.ul>
                         </div>
                     ))}
+                    {isLogin && isRender && userRoles && userRoles.includes("Client") && (
+                        <div className="overflow-hidden">
+                            <motion.ul
+                                variants={menuLinksVars}
+                                className="list-disc h-[58px] ml-20"
+                            >
+                                <li
+                                    className="text-white inline-block max-md:text-3xl text-2xl 
+                        cursor-pointer font-openSans tracking-tighter font-bold hover:text-yellowCustom"
+                                >
+                                    <Link
+                                        to={customerSettingsLink.href}
+                                        onClick={handleCloseMenu}
+                                    >
+                                        {customerSettingsLink.title}
+                                    </Link>
+                                </li>
+                            </motion.ul>
+                        </div>
+                    )}
+                    {isLogin && isRender && userRoles && userRoles.includes("Staff") && (
+                        <div className="overflow-hidden">
+                            <motion.ul
+                                variants={menuLinksVars}
+                                className="list-disc h-[58px] ml-20"
+                            >
+                                <li
+                                    className="text-white inline-block max-md:text-3xl text-2xl 
+                        cursor-pointer font-openSans tracking-tighter font-bold hover:text-yellowCustom"
+                                >
+                                    <Link
+                                        to={staffLink.href}
+                                        onClick={handleCloseMenu}
+                                    >
+                                        {staffLink.title}
+                                    </Link>
+                                </li>
+                            </motion.ul>
+                        </div>
+                    )}
                     {!isLogin ? (
                         <motion.div
                             variants={menuLinksVars}
@@ -138,7 +191,7 @@ const NavigationTab: React.FC<Props> = (props) => {
                                     </p>
                                 </Link>
                             </Button>
-                            <Button size={"lg"} variant={"yellowCustom"}>
+                            {/* <Button size={"lg"} variant={"yellowCustom"}>
                                 <Link
                                     to={signUpLinks.href}
                                     onClick={handleCloseMenu}
@@ -147,7 +200,7 @@ const NavigationTab: React.FC<Props> = (props) => {
                                         {signUpLinks.title}
                                     </p>
                                 </Link>
-                            </Button>
+                            </Button> */}
                         </motion.div>
                     ) : (
                         <motion.div

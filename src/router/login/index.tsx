@@ -1,16 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { LoginContainer } from "./style";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { picture1 } from "@/assets/image/home";
 import { LoginForm } from "./components/loginForm";
 import { Tabs, TabsContent, TabsList } from "@/components/ui/Tabs";
 import { TabsTrigger } from "@radix-ui/react-tabs";
 import { RegisterForm } from "./components/RegisterForm";
+import { useNavigate } from "react-router-dom";
 interface Props {
     // define your props here
 }
 
 const Login: React.FC<Props> = () => {
+
+    const navigate = useNavigate();
+    const token = localStorage.getItem("Token");
+
+    useEffect(() => {
+        if (token) {
+            navigate("/home");
+        }
+    });
+
     return (
         <LoginContainer>
             <div className="container relative hidden h-[750px] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
@@ -64,7 +75,7 @@ const Login: React.FC<Props> = () => {
                                     </h1>
                                 </div>
                                 <LoginForm />
-                                <p className="px-8 text-center text-sm text-muted-foreground">
+                                {/* <p className="px-8 text-center text-sm text-muted-foreground">
                                     By clicking continue, you agree to our{" "}
                                     <Link
                                         to="/terms"
@@ -90,7 +101,7 @@ const Login: React.FC<Props> = () => {
                                         Signup
                                     </Link>
                                     .
-                                </p>
+                                </p> */}
                             </div>
                         </TabsContent>
                         <TabsContent value="password">
@@ -101,7 +112,7 @@ const Login: React.FC<Props> = () => {
                                     </h1>
                                 </div>
                                 <RegisterForm />
-                                <p className="px-8 text-center text-sm text-muted-foreground">
+                                {/* <p className="px-8 text-center text-sm text-muted-foreground">
                                     By clicking continue, you agree to our{" "}
                                     <Link
                                         to="/terms"
@@ -127,7 +138,7 @@ const Login: React.FC<Props> = () => {
                                         Signup
                                     </Link>
                                     .
-                                </p>
+                                </p> */}
                             </div>
                         </TabsContent>
                     </Tabs>

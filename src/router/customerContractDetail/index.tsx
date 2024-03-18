@@ -70,7 +70,7 @@ const CustomerContractDetail: React.FC<Props> = () => {
     // const [open, setOpen] = useState(false);
     const [products, setProducts] = useState<QuotationDetailInfo[]>([]);
     const [services, setServices] = useState<ServiceProps[]>([]);
-    const [totalPrice, ] = useState(0);
+    const [totalPrice,] = useState(0);
     const [selectedUser, setSelectedUser] = useState<User>();
     const [, setSelectedContractor] = useState<User>();
     const [signature, setSignature] = useState(null);
@@ -149,7 +149,7 @@ const CustomerContractDetail: React.FC<Props> = () => {
         return totalPrice;
     }
 
-    const onSubmit = () => {};
+    const onSubmit = () => { };
     return (
         <Card className="w-full flex flex-col justify-center items-center border mt-4">
             <h1 className="text-4xl font-medium">Contract Detail</h1>
@@ -186,7 +186,7 @@ const CustomerContractDetail: React.FC<Props> = () => {
                                 </FormLabel>
                                 <FormControl>
                                     <Input
-                                        placeholder="shadcn"
+                                        placeholder="Name..."
                                         {...field}
                                         className="text-black mb-4"
                                         readOnly
@@ -207,7 +207,7 @@ const CustomerContractDetail: React.FC<Props> = () => {
                                 </FormLabel>
                                 <FormControl>
                                     <Textarea
-                                        placeholder="shadcn"
+                                        placeholder="Description..."
                                         {...field}
                                         className="text-black mb-4"
                                         readOnly

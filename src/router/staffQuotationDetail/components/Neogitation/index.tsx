@@ -113,7 +113,7 @@ const Negotiation: React.FC<Props> = ({ staff, negotiationLog, customer }) => {
                                         <FormItem className="w-full">
                                             <FormControl>
                                                 <Textarea
-                                                    placeholder="shadcn"
+                                                    placeholder="Message..."
                                                     {...field}
                                                     className="text-black mb-4 w-full"
                                                 />

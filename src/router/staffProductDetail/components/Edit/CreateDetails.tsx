@@ -195,7 +195,7 @@ const CreateDetailsPopup: React.FC = () => {
               <FormItem>
                 <FormLabel>Price</FormLabel>
                 <FormControl>
-                  <Input type="number" placeholder="shadcn" {...field} />
+                  <Input type="number" placeholder="Price..." {...field} />
                 </FormControl>
                 <FormDescription>
                   This is your public display price.
@@ -211,7 +211,7 @@ const CreateDetailsPopup: React.FC = () => {
               <FormItem>
                 <FormLabel>Quantity</FormLabel>
                 <FormControl>
-                  <Input type="number" placeholder="shadcn" {...field} />
+                  <Input type="number" placeholder="..." {...field} />
                 </FormControl>
                 <FormDescription>
                   This is your public display quantity.

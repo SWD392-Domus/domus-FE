@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getServiceByIdService } from "../../service";
 import { toast } from "@/components/ui/Toast/use-toast";
 import {
+  DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
@@ -21,36 +22,33 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/Button/Button";
 import { editServiceService } from "../../service/editService";
-
-const formSchema = z.object({
-  name: z
-    .string()
-    .min(2, {
-      message: "Name is too short",
-    })
-    .max(50, {
-      message: "Name is too long",
-    }),
-  price: z.coerce.number().gte(1, "Price must be bigger than 0"),
-});
+import selector from "./slice/selector"
+import { actions } from "./slice"
+import { useDispatch, useSelector } from "react-redux";
 
 type Props = {
   id: string;
 };
-type ServiceProps = {
-  id: string;
-  name: string;
-  price: number;
-};
+// type ServiceProps = {
+//   id: string;
+//   name: string;
+//   price: number;
+// };
 const EditServices: React.FC<Props> = ({ id }) => {
-  const [service, setService] = useState<ServiceProps>();
+  const dispatch = useDispatch();
+  const name: string = useSelector(selector.name);
+  const price: number = useSelector(selector.price);
+  const [updated, setUpdated] = useState(false);
   async function getServiceDetails() {
     try {
       const res = await getServiceByIdService(id);
       const response = res.data;
-      console.log("response", response);
+      // console.log("response", response);
       if (response.isSuccess) {
-        setService(response.data);
+        dispatch(actions.setService(response.data));
+        form.setValue("name", response.data.name);
+        form.setValue("price", response.data.rproce);
+        setUpdated(true);
       }
     } catch (error) {
       toast({
@@ -60,28 +58,31 @@ const EditServices: React.FC<Props> = ({ id }) => {
       });
     }
   }
+
+  useEffect(() => {
+    getServiceDetails();
+  });
+
+  const formSchema = z.object({
+    name: z.string().nonempty({ message: "Name is required" }),
+    price: z.coerce.number().positive(),
+  });
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      price: 0 || service?.price,
+      name: name,
+      price: price,
     },
   });
-  useEffect(() => {
-    getServiceDetails();
-  }, []);
 
-  const formatted = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "VND",
-  }).format(service?.price || 0);
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
       const dataToSend = {
         ...data,
         monetaryUnit: "VND",
       };
-      const res = await editServiceService(id,dataToSend);
+      const res = await editServiceService(id, dataToSend);
       const respones = res.data;
       if (respones.isSuccess) {
         window.location.reload();
@@ -99,54 +100,58 @@ const EditServices: React.FC<Props> = ({ id }) => {
       });
     }
   };
+
   return (
-    <>
+    <DialogContent autoSave="false">
       <DialogHeader>
         <DialogTitle>Edit Service</DialogTitle>
         <DialogDescription>
           Make changes to your Service here. Click save when you're done.
         </DialogDescription>
-      </DialogHeader>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Service Name</FormLabel>
-                <FormControl>
-                <Input placeholder={service?.name || 'Name'} {...field} />
-                </FormControl>
-                <FormDescription>
-                  This is your public display service name.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="price"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Price</FormLabel>
-                <FormControl>
-                <Input placeholder={formatted || 'Price'} {...field} />
-                </FormControl>
-                <FormDescription>
-                  This is your public display service price.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <div className="flex justify-end">
-            <Button type="submit">Save</Button>
-          </div>
-        </form>
-      </Form>
-    </>
+      </DialogHeader >
+
+      {updated && (
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Service Name</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    This is your public display service name.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="price"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Price</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    This is your public display service price.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div className="flex justify-end">
+              <Button type="submit">Save</Button>
+            </div>
+          </form>
+        </Form>
+      )}
+    </DialogContent >
   );
 };
 

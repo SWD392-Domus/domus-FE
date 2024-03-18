@@ -141,7 +141,7 @@ const StaffContractDetail: React.FC<Props> = () => {
         return totalPrice;
     }
 
-    const onSubmit = () => {};
+    const onSubmit = () => { };
     return (
         <Card className="w-full flex flex-col justify-center items-center border mt-4">
             <h1 className="text-4xl font-medium">Contract Detail</h1>
@@ -178,7 +178,7 @@ const StaffContractDetail: React.FC<Props> = () => {
                                 </FormLabel>
                                 <FormControl>
                                     <Input
-                                        placeholder="shadcn"
+                                        placeholder="Name..."
                                         {...field}
                                         className="text-black mb-4"
                                     />
@@ -198,7 +198,7 @@ const StaffContractDetail: React.FC<Props> = () => {
                                 </FormLabel>
                                 <FormControl>
                                     <Textarea
-                                        placeholder="shadcn"
+                                        placeholder="Description..."
                                         {...field}
                                         className="text-black mb-4"
                                     />

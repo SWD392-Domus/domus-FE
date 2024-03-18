@@ -16,7 +16,7 @@ import {
   TableRow,
 } from "./table"
 import { SearchField } from "../Input/SearchField"
-import { PrintButton, CreateButton } from "../Button"
+import { CreateButton } from "../Button"
 import { ActionsDropdownMenu } from "../DropdownMenu/Actions"
 import { SortButton } from "../Button/SortButton"
 
@@ -51,7 +51,7 @@ export function DataTable<TData, TValue>({
         <div className="my-auto px-2 h-8 border-2 border-zinc-500 bg-zinc-50 rounded pointer-events-none">
           {table.getFilteredSelectedRowModel().rows.length} Selected
         </div>
-        //<PrintButton></PrintButton>
+        {/* <PrintButton></PrintButton> */}
         <ActionsDropdownMenu ids={table.getSelectedRowModel().rows.map(item => item.getValue('id'))}></ActionsDropdownMenu>
       </div>
 

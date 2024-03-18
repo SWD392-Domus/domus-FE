@@ -3,8 +3,8 @@ import {
     DropdownMenuContent,
     DropdownMenuTrigger,
     DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
+    // DropdownMenuLabel,
+    // DropdownMenuSeparator,
     // DropdownMenuCheckboxItem,
 } from "@/components/ui/Dropdown-menu"
 import {
@@ -22,8 +22,8 @@ import {
 } from "@radix-ui/react-icons"
 import { Button } from "@/components/ui/Button/Button"
 import { ConfirmDeleteManyButton } from "../Button/ConfirmDeleteManyButton";
-import { ViewButton } from "../Button/ViewButton";
-import { UpdateButton } from "../Button/UpdateButton";
+// import { ViewButton } from "../Button/ViewButton";
+// import { UpdateButton } from "../Button/UpdateButton";
 
 interface Props {
     // define your props here
@@ -45,14 +45,14 @@ export const ActionsDropdownMenu: React.FC<Props> = (props) => {
                         <div className="text-center px-2">Please Select Items!</div>
                         :
                         <>
-                            {props.ids.length == 1 &&
+                            {/* {props.ids.length == 1 &&
                                 <>
                                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
                                     <ViewButton id={props.ids[0]}></ViewButton>
                                     <DropdownMenuSeparator />
                                     <UpdateButton id={props.ids[0]}></UpdateButton>
                                 </>
-                            }
+                            } */}
                             <DropdownMenuItem>
                                 <DialogTrigger className="w-full text-left">Delete</DialogTrigger>
                             </DropdownMenuItem>

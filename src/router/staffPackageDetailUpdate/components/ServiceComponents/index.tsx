@@ -19,7 +19,7 @@ import {
 import {
     CommandDialog,
     CommandEmpty,
-    CommandInput,
+    // CommandInput,
     CommandItem,
     CommandList,
 } from "@/components/ui/Command";
@@ -60,7 +60,7 @@ export function DataTable<TData, TValue>({
     useEffect(() => {
         fetchData();
     }, []);
-    const handleAddProduct = (item: ServiceProps) => {
+    const handleAddService = (item: ServiceProps) => {
         dispatch(actions.addService(item as ServiceProps & void));
 
         setOpen(false);
@@ -71,7 +71,7 @@ export function DataTable<TData, TValue>({
             <div className="flex space-x-5 justify-center mb-3">
                 <Button onClick={() => setOpen(true)}>Add Sevice</Button>
                 <CommandDialog open={open} onOpenChange={setOpen}>
-                    <CommandInput placeholder="Search For Products..." />
+                    {/* <CommandInput placeholder="Search For Products..." /> */}
                     <CommandList>
                         <CommandEmpty>No results found.</CommandEmpty>
                         {services &&
@@ -79,7 +79,7 @@ export function DataTable<TData, TValue>({
                                 return (
                                     <CommandItem
                                         key={item.id}
-                                        onSelect={() => handleAddProduct(item)}
+                                        onSelect={() => handleAddService(item)}
                                     >
                                         <span className="text-md">
                                             {item.name}
@@ -158,8 +158,7 @@ export function DataTable<TData, TValue>({
                                                     key={cell.id}
                                                     onClick={() =>
                                                         navigate(
-                                                            `${
-                                                                location.pathname
+                                                            `${location.pathname
                                                             }/${row.getValue(
                                                                 "id"
                                                             )}`

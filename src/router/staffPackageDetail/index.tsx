@@ -185,6 +185,11 @@ const PackageDetails: React.FC<Props> = () => {
                             }).format(product.displayPrice)}
                           </p>
                         </CardTitle> */}
+                        <CardTitle>
+                          <p className="truncate mt-2">
+                            Quantity: <span className='text-red-600'>{product.quantity}</span>
+                          </p>
+                        </CardTitle>
                       </CardContent>
                       {/* <CardFooter className="">
                         <div

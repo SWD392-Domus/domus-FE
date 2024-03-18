@@ -203,7 +203,7 @@ const StaffContractCreate: React.FC<Props> = () => {
                                         </FormLabel>
                                         <FormControl>
                                             <Input
-                                                placeholder="shadcn"
+                                                placeholder="Name..."
                                                 {...field}
                                                 className="text-black mb-4"
                                             />
@@ -223,7 +223,7 @@ const StaffContractCreate: React.FC<Props> = () => {
                                         </FormLabel>
                                         <FormControl>
                                             <Textarea
-                                                placeholder="shadcn"
+                                                placeholder="Description..."
                                                 {...field}
                                                 className="text-black mb-4"
                                             />
@@ -456,7 +456,7 @@ const StaffContractCreate: React.FC<Props> = () => {
                                                 currency: "VND",
                                             }).format(
                                                 calculateTotalPrice(products) *
-                                                    1000
+                                                1000
                                             )}
                                         </h1>
                                     </div>
@@ -471,7 +471,7 @@ const StaffContractCreate: React.FC<Props> = () => {
                                                 currency: "VND",
                                             }).format(
                                                 calculateTotalPrice(services) *
-                                                    1000
+                                                1000
                                             )}
                                         </h1>
                                     </div>

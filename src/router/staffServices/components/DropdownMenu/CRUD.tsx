@@ -45,8 +45,7 @@ export const CRUDDropdownMenu: React.FC<Props> = (props) => {
           <Dialog>
             <DialogTrigger>View</DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
-              <ServiceDetails id={props.id}/>
-
+              <ServiceDetails id={props.id} />
             </DialogContent>
           </Dialog>
         </DropdownMenuItem>
@@ -54,9 +53,7 @@ export const CRUDDropdownMenu: React.FC<Props> = (props) => {
         <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
           <Dialog>
             <DialogTrigger>Edit</DialogTrigger>
-            <DialogContent>
-             <EditServices  id={props.id}/>
-            </DialogContent>
+            <EditServices id={props.id} />
           </Dialog>
         </DropdownMenuItem>
         {/* Delete */}

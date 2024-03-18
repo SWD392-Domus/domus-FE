@@ -46,6 +46,17 @@ export const columns: ColumnDef<ServicesProps>[] = [
     {
         accessorKey: "price",
         header: "Price",
+        cell: ({ row }) => {
+            const value: string = row.getValue("price");
+            return (
+                <div className="text-left font-medium">
+                    {new Intl.NumberFormat("en-US", {
+                        style: "currency",
+                        currency: "VND",
+                    }).format(Number.parseFloat(value))}
+                </div>
+            );
+        },
     },
     {
         accessorKey: "monetaryUnit",

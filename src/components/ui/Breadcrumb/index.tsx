@@ -3,41 +3,85 @@ import { Link, useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 function BreadCrumbHeader() {
-    const { quotationId, productId, packageId } = useParams();
+    const { quotationId, id, packageId, versionId, contractId, articleId } = useParams();
     const breadcrumbNameMap: Record<string, string> = {
         "/customer": "Customer",
         "/customer/settings": "Settings",
         "/customer/settings/quotations": "Quotations",
         "/customer/settings/quotations/:quotationId": `Quotation ${quotationId} `,
+        "/customer/settings/contracts": "Contracts",
+        "/customer/settings/contracts/:contractId": `Contract ${contractId} `,
+
         "/staff": "Staff",
-        "/staff/quotations": "Quotations",
-        "/staff/quotations/newQuotation": "New Quotation",
-        "/staff/quotations/:quotationId": `Quotation ${quotationId} `,
+
+        "/staff/profile": "Profile",
+
         "/staff/packages": `Packages`,
         "/staff/packages/newPackage": `New Package`,
         "/staff/packages/:packageId": `Package ${packageId} `,
+
         "/staff/products": "Products",
-        "/staff/contracts": "Contracts",
+
         "/staff/articles": "Articles",
+        "/staff/packages/:articleId": `Article ${articleId} `,
+
+        "/staff/services": "Services",
+
+        "/staff/users": "Users",
+
+        "/staff/quotations": "Quotations",
+        "/staff/quotations/newQuotation": "New Quotation",
+        "/staff/quotations/:quotationId": `Quotation ${quotationId?.slice(0, 3)}... `,
+        "/staff/quotations/:quotationId/versions": `Versions`,
+        "/staff/quotations/:quotationId/versions/:versionId": `Version ${versionId} `,
+
+        "/staff/contracts": "Contracts",
+        "/staff/contracts/newContract": "New Contract",
+        "/staff/contracts/:contractId": `Contract ${contractId} `,
     };
 
     if (quotationId !== undefined) {
         breadcrumbNameMap[
             `/customer/settings/quotations/${quotationId}`
-        ] = `Quotation ${quotationId} `;
+        ] = `Quotation ${quotationId?.slice(0, 3)}... `;
         breadcrumbNameMap[
             `/staff/quotations/${quotationId}`
-        ] = `Quotation ${quotationId} `;
+        ] = `Quotation ${quotationId?.slice(0, 3)}... `;
+        if (versionId !== undefined) {
+            breadcrumbNameMap[
+                `/staff/quotations/${quotationId}/versions`
+            ] = `Versions`;
+            breadcrumbNameMap[
+                `/staff/quotations/${quotationId}/versions/${versionId}`
+            ] = `Version ${versionId?.slice(0, 3)}... `;
+        }
     }
-    if (productId !== undefined) {
+
+    if (id !== undefined) {
         breadcrumbNameMap[
-            `/staff/products/${productId}`
-        ] = `Product ${productId} `;
+            `/staff/products/${id}`
+        ] = `Product ${id?.slice(0, 3)}... `;
+        breadcrumbNameMap[
+            `/staff/users/${id}`
+        ] = `User ${id?.slice(0, 3)}... `;
     }
     if (packageId !== undefined) {
         breadcrumbNameMap[
             `/staff/packages/${packageId}`
-        ] = `Package ${packageId} `;
+        ] = `Package ${packageId?.slice(0, 3)}... `;
+    }
+    if (articleId !== undefined) {
+        breadcrumbNameMap[
+            `/staff/articles/${articleId}`
+        ] = `Article ${articleId?.slice(0, 3)}... `;
+    }
+    if (contractId !== undefined) {
+        breadcrumbNameMap[
+            `/customer/settings/contracts/${contractId}`
+        ] = `Contract ${contractId?.slice(0, 3)}... `;
+        breadcrumbNameMap[
+            `/staff/contracts/${contractId}`
+        ] = `Contract ${contractId?.slice(0, 3)}... `;
     }
 
     const location = useLocation();

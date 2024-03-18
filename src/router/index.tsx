@@ -135,6 +135,13 @@ const RouterComponent: React.FC = () => {
             exact: true,
             restrict: true,
         },
+        {
+            index: true,
+            path: "403",
+            component: <Error403Page />,
+            exact: true,
+            restrict: true,
+        },
     ];
     const customerRoute = [
         {
@@ -176,13 +183,6 @@ const RouterComponent: React.FC = () => {
             index: true,
             path: "customer/settings/quotations/:quotationId",
             component: <QuotationDetail />,
-            exact: true,
-            restrict: true,
-        },
-        {
-            index: true,
-            path: "403",
-            component: <Error403Page />,
             exact: true,
             restrict: true,
         },
@@ -233,6 +233,13 @@ const RouterComponent: React.FC = () => {
         {
             index: true,
             path: "staff/quotations/:quotationId",
+            component: <StaffQuotationDetail />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/quotations/:quotationId/versions",
             component: <StaffQuotationDetail />,
             exact: true,
             restrict: true,
@@ -325,7 +332,13 @@ const RouterComponent: React.FC = () => {
             index: true,
             path: "staff/contracts/:contractId",
             component: <StaffContractDetail />,
-
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "staff/contracts/:contractId/versions",
+            component: <StaffContractDetail />,
             exact: true,
             restrict: true,
         },
