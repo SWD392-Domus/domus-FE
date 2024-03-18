@@ -80,10 +80,10 @@ export const Overview: React.FC<Props> = (props) => {
                 />
                 <YAxis
                     stroke="#888888"
-                    fontSize={12}
+                    fontSize={10.8}
                     tickLine={false}
                     axisLine={false}
-                    tickFormatter={(value) => `$${value}`}
+                    tickFormatter={(value) => `${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'VND' }).format(value)}`}
                 />
                 <Bar
                     dataKey="revenue"

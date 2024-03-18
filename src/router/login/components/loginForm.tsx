@@ -25,7 +25,7 @@ import { actions } from "../slice";
 import { useDispatch } from "react-redux";
 // import { actions } from "../slice";
 
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> { }
 
 export function LoginForm({ className, ...props }: UserAuthFormProps) {
     const dispatch = useDispatch();
@@ -79,7 +79,9 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
                 toastSuccess("Login Successfully");
                 dispatch(actions.setUser(res.data.data.userInfo));
                 const roles: string[] = res.data.data.token.roles;
-                if (roles.includes("Staff")) {
+                if (roles.includes("Admin")) {
+                    navigate("/admin");
+                } else if (roles.includes("Staff")) {
                     navigate("/staff");
                 } else {
                     navigate("/home");

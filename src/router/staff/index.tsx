@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 
-import { Search } from "./components/search";
-import { UserNav } from "./components/user-nav";
+// import { Search } from "./components/search";
+// import { UserNav } from "./components/user-nav";
 
 import { Tabs } from "@/components/ui/Tabs";
 import { TabsContent } from "@radix-ui/react-tabs";
 import {
     Card,
     CardContent,
-    CardDescription,
+    // CardDescription,
     CardHeader,
     CardTitle,
 } from "@/components/ui/Card";
 import { Overview } from "./components/overview";
-import { RecentSales } from "./components/recent-sales";
+// import { RecentSales } from "./components/recent-sales";
 import { dashboardApi } from "@/utils/api/dashboardApi";
 import Loading from "@/components/PublicComponents/Loading";
 import YearSelect from "./components/YearSelect";
@@ -22,7 +22,7 @@ interface Props {
     // define your props here
 }
 
-const Staff: React.FC<Props> = () => {
+const Dashboard: React.FC<Props> = () => {
     const [data, setData] = useState(null);
     const [totalRevenue, setTotalRevenue] = useState(0);
     const [newUser, setNewUser] = useState(0);
@@ -45,16 +45,16 @@ const Staff: React.FC<Props> = () => {
     return (
         <>
             <div className="hidden flex-col md:flex">
-                <div className="border-b">
+                {/* <div className="border-b">
                     <div className="flex h-16 items-center px-4">
                         <div className="ml-auto flex items-center space-x-4">
                             <Search />
                             <UserNav />
                         </div>
                     </div>
-                </div>
+                </div> */}
                 <div className="flex-1 space-y-4 p-8 pt-6">
-                    <div className="flex items-center justify-between space-y-2">
+                    <div className="flex items-center gap-x-56 space-y-2">
                         <h2 className="text-3xl font-bold tracking-tight">
                             Dashboard
                         </h2>
@@ -74,7 +74,7 @@ const Staff: React.FC<Props> = () => {
                                             <CardTitle className="text-sm font-medium">
                                                 Total Revenue
                                             </CardTitle>
-                                            <svg
+                                            {/* <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 24 24"
                                                 fill="none"
@@ -85,15 +85,15 @@ const Staff: React.FC<Props> = () => {
                                                 className="h-4 w-4 text-muted-foreground"
                                             >
                                                 <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                                            </svg>
+                                            </svg> */}
                                         </CardHeader>
                                         <CardContent>
                                             <div className="text-2xl font-bold">
-                                                {totalRevenue}
+                                                {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'VND' }).format(totalRevenue)}
                                             </div>
-                                            <p className="text-xs text-muted-foreground">
+                                            {/* <p className="text-xs text-muted-foreground">
                                                 +20.1% from last month
-                                            </p>
+                                            </p> */}
                                         </CardContent>
                                     </Card>
                                     <Card className="border">
@@ -121,68 +121,7 @@ const Staff: React.FC<Props> = () => {
                                                 {newUser}
                                             </div>
                                             <p className="text-xs text-muted-foreground">
-                                                +180.1% from last month
-                                            </p>
-                                        </CardContent>
-                                    </Card>
-                                    <Card className="border">
-                                        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                                            <CardTitle className="text-sm font-medium">
-                                                Sales
-                                            </CardTitle>
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth="2"
-                                                className="h-4 w-4 text-muted-foreground"
-                                            >
-                                                <rect
-                                                    width="20"
-                                                    height="14"
-                                                    x="2"
-                                                    y="5"
-                                                    rx="2"
-                                                />
-                                                <path d="M2 10h20" />
-                                            </svg>
-                                        </CardHeader>
-                                        <CardContent>
-                                            <div className="text-2xl font-bold">
-                                                +12,234
-                                            </div>
-                                            <p className="text-xs text-muted-foreground">
-                                                +19% from last month
-                                            </p>
-                                        </CardContent>
-                                    </Card>
-                                    <Card className="border">
-                                        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                                            <CardTitle className="text-sm font-medium">
-                                                Active Now
-                                            </CardTitle>
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                viewBox="0 0 24 24"
-                                                fill="none"
-                                                stroke="currentColor"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth="2"
-                                                className="h-4 w-4 text-muted-foreground"
-                                            >
-                                                <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-                                            </svg>
-                                        </CardHeader>
-                                        <CardContent>
-                                            <div className="text-2xl font-bold">
-                                                +573
-                                            </div>
-                                            <p className="text-xs text-muted-foreground">
-                                                +201 since last hour
+
                                             </p>
                                         </CardContent>
                                     </Card>
@@ -196,7 +135,7 @@ const Staff: React.FC<Props> = () => {
                                             <Overview data={data} />
                                         </CardContent>
                                     </Card>
-                                    <Card className="col-span-3 border">
+                                    {/* <Card className="col-span-3 border">
                                         <CardHeader>
                                             <CardTitle>Recent Sales</CardTitle>
                                             <CardDescription>
@@ -206,7 +145,7 @@ const Staff: React.FC<Props> = () => {
                                         <CardContent>
                                             <RecentSales />
                                         </CardContent>
-                                    </Card>
+                                    </Card> */}
                                 </div>
                             </TabsContent>
                         </Tabs>
@@ -219,4 +158,4 @@ const Staff: React.FC<Props> = () => {
     );
 };
 
-export default Staff;
+export default Dashboard;

@@ -7,6 +7,7 @@ function BreadCrumbHeader() {
     const breadcrumbNameMap: Record<string, string> = {
         "/customer": "Customer",
         "/customer/settings": "Settings",
+        "/customer/settings/profile": "Profile",
         "/customer/settings/quotations": "Quotations",
         "/customer/settings/quotations/:quotationId": `Quotation ${quotationId} `,
         "/customer/settings/contracts": "Contracts",
@@ -15,6 +16,14 @@ function BreadCrumbHeader() {
         "/staff": "Staff",
 
         "/staff/profile": "Profile",
+
+        "/admin/quotations": "Quotations",
+        "/admin/quotations/:quotationId": `Quotation ${quotationId} `,
+        "/admin/users": "Users",
+        "/admin/users/create": "Create User",
+        "/admin/users/:id": "Users",
+        "/admin/dashboard": "Dashboard",
+        "/admin": "Admin",
 
         "/staff/packages": `Packages`,
         "/staff/packages/newPackage": `New Package`,
@@ -26,8 +35,6 @@ function BreadCrumbHeader() {
         "/staff/packages/:articleId": `Article ${articleId} `,
 
         "/staff/services": "Services",
-
-        "/staff/users": "Users",
 
         "/staff/quotations": "Quotations",
         "/staff/quotations/newQuotation": "New Quotation",
@@ -47,6 +54,9 @@ function BreadCrumbHeader() {
         breadcrumbNameMap[
             `/staff/quotations/${quotationId}`
         ] = `Quotation ${quotationId?.slice(0, 3)}... `;
+        breadcrumbNameMap[
+            `/admin/quotations/${quotationId}`
+        ] = `Quotation ${quotationId?.slice(0, 3)}... `;
         if (versionId !== undefined) {
             breadcrumbNameMap[
                 `/staff/quotations/${quotationId}/versions`
@@ -62,7 +72,7 @@ function BreadCrumbHeader() {
             `/staff/products/${id}`
         ] = `Product ${id?.slice(0, 3)}... `;
         breadcrumbNameMap[
-            `/staff/users/${id}`
+            `/admin/users/${id}`
         ] = `User ${id?.slice(0, 3)}... `;
     }
     if (packageId !== undefined) {

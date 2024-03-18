@@ -29,21 +29,21 @@ export const areaInfo = [
         alt: "Bag",
         name: "Quotations",
         description:
-            "Quotations: keep track , negotiate on your requested Quotation",
+            "Quotations: keep track, negotiate on your requested Quotation",
     },
     {
         link: "contracts",
         src: Bill,
-        alt: "Bill",
+        alt: "Contracts",
         name: "Contracts",
-        description: "Follow ,Dowload and check your signed contract",
+        description: "Follow and check your signed contract",
     },
     {
-        link: "quotations2",
+        link: "profile",
         src: Address,
-        alt: "Address",
-        name: "Địa chỉ",
-        description: "Add, view and update your house address",
+        alt: "Account",
+        name: "Account",
+        description: "Add, view and update your acccount information",
     },
 ];
 

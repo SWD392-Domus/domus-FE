@@ -7,7 +7,9 @@ import StaffProducts from "./staffProducts";
 import StaffPackages from "./staffPackages";
 import StaffQuotationNew from "./staffQuotationNew";
 import StaffQuotations from "./staffQuotations";
+import AdminQuotations from "./adminQuotations";
 import StaffQuotationDetail from "./staffQuotationDetail";
+import AdminQuotationDetail from "./adminQuotationDetail";
 import StaffPackageDetail from "./staffPackageDetail";
 import StaffPackageDetailUpdate from "./staffPackageDetailUpdate";
 import StaffPackageDetailCreate from "./staffPackageDetailCreate";
@@ -19,7 +21,9 @@ import PublicLayout from "@/components/PublicComponents/PublicLayout";
 import CustomerRoute from "./CustomerRoute";
 import CustomerLayout from "@/components/CustomerComponents/CustomerLayout";
 import StaffRoute from "./StaffRoute";
+import AdminRoute from "./AdminRoute";
 import StaffLayout from "@/components/StaffComponents/StaffLayout";
+import AdminLayout from "@/components/AdminComponents/AdminLayout";
 import ProductList from "./products";
 import PackageList from "./packages";
 import ProductDetails from "./productDetails";
@@ -27,8 +31,8 @@ import PackageDetails from "./packageDetails";
 import ProductDetailsStaff from "./staffProductDetail";
 import Login from "./login";
 import Auth from "./auth";
-import Staff from "./staff";
-import StaffProfile from "./profile";
+import Dashboard from "./staff";
+import UserProfile from "./profile";
 import CreateProduct from "./staffCreateProduct";
 import Error403Page from "./403";
 import QuotationDetail from "./customerQuotationDetail";
@@ -42,7 +46,7 @@ import StaffArticleDetailUpdate from "./staffArticleDetailUpdate";
 import StaffContractCreate from "./StaffContractCreate";
 import OTP from "./otp";
 import StaffContractDetail from "./StaffContractDetail";
-import Storage from "./storage";
+// import Storage from "./storage";
 import CustomerContractDetail from "./customerContractDetail";
 import CreateUser from "./adminCreateUser";
 import UserDetails from "./adminUserDetails";
@@ -153,6 +157,20 @@ const RouterComponent: React.FC = () => {
         },
         {
             index: true,
+            path: "customer/settings/profile",
+            component: <UserProfile />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "customer",
+            component: <UserProfile />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
             path: "customer/settings/cart",
             component: <CustomerCart />,
             exact: true,
@@ -198,14 +216,7 @@ const RouterComponent: React.FC = () => {
         {
             index: true,
             path: "staff",
-            component: <Staff />,
-            exact: true,
-            restrict: true,
-        },
-        {
-            index: true,
-            path: "staff/profile",
-            component: <StaffProfile />,
+            component: <UserProfile />,
             exact: true,
             restrict: true,
         },
@@ -351,13 +362,6 @@ const RouterComponent: React.FC = () => {
         },
         {
             index: true,
-            path: "staff/users",
-            component: <AdminUsersList />,
-            exact: true,
-            restrict: true,
-        },
-        {
-            index: true,
             path: "staff/articles/newArticle",
             component: <StaffArticleDetailCreate />,
             exact: true,
@@ -377,24 +381,62 @@ const RouterComponent: React.FC = () => {
             exact: true,
             restrict: true,
         },
+        // {
+        //     index: true,
+        //     path: "staff/storage",
+        //     component: <Storage />,
+        //     exact: true,
+        //     restrict: true,
+        // },
+
+    ];
+    const adminRoute = [
         {
             index: true,
-            path: "staff/storage",
-            component: <Storage />,
+            path: "admin",
+            component: <UserProfile />,
             exact: true,
             restrict: true,
         },
         {
             index: true,
-            path: "staff/users/:id",
+            path: "admin/dashboard",
+            component: <Dashboard />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "admin/users/create",
+            component: <CreateUser />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "admin/users/:id",
             component: <UserDetails />,
             exact: true,
             restrict: true,
         },
         {
             index: true,
-            path: "staff/users/create",
-            component: <CreateUser />,
+            path: "admin/users",
+            component: <AdminUsersList />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "admin/quotations",
+            component: <AdminQuotations />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
+            path: "admin/quotations/:quotationId",
+            component: <AdminQuotationDetail />,
             exact: true,
             restrict: true,
         },
@@ -441,6 +483,18 @@ const RouterComponent: React.FC = () => {
                         ))}
                     </Route>
                 </Route>
+                <Route element={<AdminRoute />}>
+                    <Route element={<AdminLayout />}>
+                        {adminRoute.map((route) => (
+                            <Route
+                                index={route.index}
+                                key={route.path}
+                                path={route.path}
+                                element={route.component}
+                            />
+                        ))}
+                    </Route>
+                </Route>
                 {/* <Route path="/403" element={<Error403Page />} /> */}
                 {/* <Route element={<EmployeeRoute />}>
                     <Route element={<LayoutComponent />}>
@@ -454,18 +508,7 @@ const RouterComponent: React.FC = () => {
                         ))}
                     </Route>
                 </Route>
-                <Route element={<AdminRoute />}>
-                    <Route element={<LayoutComponent />}>
-                        {adminRoute.map((route) => (
-                            <Route
-                                index={route.index}
-                                key={route.path}
-                                path={route.path}
-                                element={route.component}
-                            />
-                        ))}
-                    </Route>
-                </Route> */}
+                */}
                 {/* <Route path="/payment/result" element={<Payment />} />
 
                 <Route path="/404" element={<ErrorPage />} />

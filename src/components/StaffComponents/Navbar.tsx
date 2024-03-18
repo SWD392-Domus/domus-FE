@@ -10,8 +10,8 @@ import {
     LayersIcon,
     FileIcon,
     CrumpledPaperIcon,
-    IdCardIcon,
-    DashboardIcon
+    // IdCardIcon,
+    // DashboardIcon
 } from "@radix-ui/react-icons";
 import { IconProps } from "@radix-ui/react-icons/dist/types";
 
@@ -24,15 +24,9 @@ const components: {
     description: string;
 }[] = [
         {
-            title: "Dashboard",
-            icon: DashboardIcon,
-            href: "/staff",
-            description: "Dashboard",
-        },
-        {
             title: "Profile",
             icon: PersonIcon,
-            href: "/staff/profile",
+            href: "/staff",
             description: "Profile",
         },
         {
@@ -71,24 +65,6 @@ const components: {
             href: "/staff/articles",
             description: "Article Management",
         },
-        {
-            title: "User",
-            icon: IdCardIcon,
-            href: "/staff/users",
-            description: "User Management",
-        },
-        // {
-        //     title: "Storage",
-        //     icon: LayersIcon,
-        //     href: "/staff/storage",
-        //     description: "Storage",
-        // },
-        // {
-        //     title: "Settings",
-        //     icon: GearIcon,
-        //     href: "/staff/settings",
-        //     description: "Settings",
-        // },
     ];
 
 export default function NavigationMenuDemo() {

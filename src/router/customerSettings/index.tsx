@@ -1,8 +1,12 @@
 import React from "react";
-import { EnvelopeClosedIcon, Pencil2Icon } from "@radix-ui/react-icons";
-import { areaInfo, userInfo, quoNum } from "./constants";
+// import { EnvelopeClosedIcon, Pencil2Icon } from "@radix-ui/react-icons";
+import {
+    areaInfo
+    // , userInfo
+    // , quoNum 
+} from "./constants";
 import { Link } from "react-router-dom";
-import { Avatar, AvatarImage } from "@/components/ui/Avatar";
+// import { Avatar, AvatarImage } from "@/components/ui/Avatar";
 
 interface Props {
     // define your props here
@@ -16,7 +20,7 @@ const customerSettings: React.FC<Props> = () => {
                 <div className="left-side basis-2/3 font-semibold">
                     <div className="bg-orange-100 mb-5 h-16 flex rounded">
                         <div className="my-auto ml-4">
-                            {quoNum} Quotations Need To Be Reviewed!
+                            Account Setting and Tracking Information
                         </div>
                     </div>
                     <div className="flex flex-wrap justify-between rounded">
@@ -43,7 +47,7 @@ const customerSettings: React.FC<Props> = () => {
                 </div>
                 <div className="right-side basis-1/3 flex flex-row justify-end">
                     <div className="w-60">
-                        <div className="ava-header flex flex-row mb-5">
+                        {/* <div className="ava-header flex flex-row mb-5">
                             <Avatar className="mr-4">
                                 <AvatarImage src={userInfo.avaLink} />
                             </Avatar>
@@ -73,7 +77,7 @@ const customerSettings: React.FC<Props> = () => {
                                 />
                                 Edit information
                             </Link>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

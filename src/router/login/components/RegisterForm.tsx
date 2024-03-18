@@ -154,7 +154,7 @@ export function RegisterForm({ className, ...props }: UserAuthFormProps) {
                                 )}
                             />
                             <Button variant={"yellowCustom"} type="submit">
-                                Sign In with Email
+                                Sign Up
                             </Button>
                         </div>
                     </div>

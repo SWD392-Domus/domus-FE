@@ -325,7 +325,7 @@ const QuotationDetail: React.FC<Props> = () => {
                             "
                             >
                                 <Avatar className="mr-2">
-                                    {/* <AvatarImage src={staff.profileImage} /> */}
+                                    <AvatarImage src={staff.profileImage} />
                                     <AvatarFallback>Staff</AvatarFallback>
                                 </Avatar>
 
