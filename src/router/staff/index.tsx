@@ -25,7 +25,7 @@ interface Props {
 const Dashboard: React.FC<Props> = () => {
     const [data, setData] = useState(null);
     const [totalRevenue, setTotalRevenue] = useState(0);
-    const [newUser, setNewUser] = useState(0);
+    const [, setNewUser] = useState(0);
     const [selectedYear, setSelectedYear] = useState("2024");
     useEffect(() => {
         const fetchData = async () => {
@@ -96,7 +96,7 @@ const Dashboard: React.FC<Props> = () => {
                                             </p> */}
                                         </CardContent>
                                     </Card>
-                                    <Card className="border">
+                                    {/* <Card className="border">
                                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                                             <CardTitle className="text-sm font-medium">
                                                 New Users
@@ -124,7 +124,7 @@ const Dashboard: React.FC<Props> = () => {
 
                                             </p>
                                         </CardContent>
-                                    </Card>
+                                    </Card> */}
                                 </div>
                                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
                                     <Card className="col-span-4 border">

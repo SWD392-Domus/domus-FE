@@ -1,9 +1,4 @@
 import React, { useEffect, useState } from "react";
-import {
-    DialogContent,
-    DialogFooter,
-    DialogClose,
-} from "@/components/ui/Dialog";
 import Slider from "./ImagesPackageSlider";
 import {
     Accordion,
@@ -22,6 +17,16 @@ import { ToastAction } from "@/components/ui/Toast/toast";
 import { useToast } from "@/components/ui/Toast/use-toast";
 import { createQuotation } from "@/router/customerCart/usecase/createQuotation.ts";
 import { useNavigate } from "react-router-dom";
+import {
+    Dialog,
+    DialogContent,
+    DialogFooter,
+    // DialogHeader,
+    DialogTrigger,
+    DialogClose,
+} from "@/components/ui/Dialog";
+import { PencilIcon } from "lucide-react";
+import ServiceList from "./components/ServiceList";
 
 interface Props { }
 
@@ -162,6 +167,21 @@ const PackageDetailPopUp: React.FC<Props> = () => {
                                                         </AccordionContent>
                                                     </AccordionItem>
                                                 </Accordion>
+                                                <Dialog>
+                                                    <DialogTrigger asChild>
+                                                        <Button
+                                                            className="my-auto bg-variant text-black h-9 border-2 border-zinc-500 bg-zinc-50 rounded hover:text-white pl-2"
+                                                            type="button"
+                                                        >
+                                                            <PencilIcon className="h-3.5 pr-2 my-auto"></PencilIcon>
+                                                            Services
+                                                        </Button>
+                                                    </DialogTrigger>
+                                                    <DialogContent className="sm:max-w-[700px]">
+                                                        <ServiceList data={packageB?.services} />
+                                                        <DialogFooter></DialogFooter>
+                                                    </DialogContent>
+                                                </Dialog>
                                             </div>
                                         </div>
                                     </div>

@@ -1,7 +1,14 @@
 import React from "react";
-import { ServiceProps } from "../types";
+// import { ServiceProps } from "../types";
 import { DataTable } from "./ServiceComponents";
 import { columns } from "./ServiceComponents/column";
+
+type ServiceProps = {
+    id: string;
+    name: string;
+    price: number;
+    monetaryUnit: string;
+};
 
 interface Props {
     data: ServiceProps[];
