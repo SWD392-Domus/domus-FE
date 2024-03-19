@@ -57,6 +57,11 @@ export const columns: ColumnDef<ContractsProps>[] = [
     {
         accessorKey: "signedAt",
         header: "Created At",
+        cell: ({ row }) => {
+            const signedAt = row.getValue("signedAt");
+            const date = signedAt ? new Date(signedAt as Date) : "None";
+            return <h4>{date.toLocaleString()}</h4>;
+        },
     },
     {
         accessorKey: "staffName",

@@ -51,6 +51,11 @@ export const columns: ColumnDef<QuotationsProps>[] = [
     {
         accessorKey: "expireAt",
         header: "Expire At",
+        cell: ({ row }) => {
+            const expireAt = row.getValue("expireAt");
+            const date = expireAt ? new Date(expireAt as Date) : "None";
+            return <h4>{date.toLocaleString()}</h4>;
+        },
     },
     {
         accessorKey: "staffName",
