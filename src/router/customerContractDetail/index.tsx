@@ -419,7 +419,7 @@ const CustomerContractDetail: React.FC<Props> = () => {
                                         style: "currency",
                                         currency: "VND",
                                     }).format(
-                                        calculateTotalPrice(products) * 1000
+                                        calculateTotalPrice(products)
                                     )}
                                 </h1>
                             </div>
@@ -431,7 +431,7 @@ const CustomerContractDetail: React.FC<Props> = () => {
                                         style: "currency",
                                         currency: "VND",
                                     }).format(
-                                        calculateTotalPrice(services) * 1000
+                                        calculateTotalPrice(services)
                                     )}
                                 </h1>
                             </div>
@@ -442,7 +442,7 @@ const CustomerContractDetail: React.FC<Props> = () => {
                                     {new Intl.NumberFormat("en-US", {
                                         style: "currency",
                                         currency: "VND",
-                                    }).format(totalPrice * 1000)}
+                                    }).format(totalPrice)}
                                 </h1>
                             </div>
                         </div>

@@ -80,7 +80,7 @@ export const Overview: React.FC<Props> = (props) => {
                 />
                 <YAxis
                     stroke="#888888"
-                    fontSize={10.8}
+                    fontSize={8.0}
                     tickLine={false}
                     axisLine={false}
                     tickFormatter={(value) => `${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'VND' }).format(value)}`}

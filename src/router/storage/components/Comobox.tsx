@@ -84,7 +84,7 @@ type ChooseDetailsProductsProps = {
 //         priceSum: new Intl.NumberFormat("en-US", {
 //             style: "currency",
 //             currency: "VND",
-//         }).format(detail.displayPrice * 1000),
+//         }).format(detail.displayPrice ),
 //     });
 // };
 
@@ -130,7 +130,7 @@ export function ComboBoxResponsive() {
         });
         console.log(importProduct);
         const res = await importStorage(importProduct);
-        if(res.data.isSuccess){
+        if (res.data.isSuccess) {
           toast({
             variant: "success",
             title: "Success",
