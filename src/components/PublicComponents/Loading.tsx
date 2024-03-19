@@ -1,6 +1,6 @@
 import React from "react";
 interface LoadingProps {
-    variant: "light" | "dark";
+    variant?: "light" | "dark";
 }
 const Loading: React.FC<LoadingProps> = ({ variant }) => {
     const fillClass =

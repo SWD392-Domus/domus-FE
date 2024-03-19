@@ -25,7 +25,7 @@ import { actions } from "../slice";
 import { useDispatch } from "react-redux";
 // import { actions } from "../slice";
 
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> { }
+interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function LoginForm({ className, ...props }: UserAuthFormProps) {
     const dispatch = useDispatch();
