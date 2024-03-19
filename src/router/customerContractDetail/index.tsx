@@ -4,7 +4,7 @@ import {
     Dialog,
     DialogContent,
     DialogDescription,
-    DialogFooter,
+    // DialogFooter,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
@@ -467,14 +467,14 @@ const CustomerContractDetail: React.FC<Props> = () => {
                                                 <SignatureComponents />
                                             </DialogDescription>
                                         </DialogHeader>
-                                        <DialogFooter>
+                                        {/* <DialogFooter>
                                             <Button className="bg-zinc-500">
                                                 Cancel
                                             </Button>
                                             <Button className="bg-black pl-2">
                                                 Confirm
                                             </Button>
-                                        </DialogFooter>
+                                        </DialogFooter> */}
                                     </DialogContent>
                                 </Dialog>
                             )}

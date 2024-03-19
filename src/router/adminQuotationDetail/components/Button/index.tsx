@@ -85,7 +85,7 @@ export const MakeContractButton = ({
     }
     return (
         <Dialog>
-            <DialogTrigger>
+            <DialogTrigger disabled={status != Quotationstatus.Negotiating}>
                 <TooltipProvider>
                     <Tooltip>
                         <TooltipTrigger>

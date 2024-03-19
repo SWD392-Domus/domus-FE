@@ -107,7 +107,7 @@ const QuotationEdit: React.FC<Props> = ({
                                                             className={cn(
                                                                 "w-[240px] pl-3 text-left font-normal",
                                                                 !field.value &&
-                                                                    "text-muted-foreground"
+                                                                "text-muted-foreground"
                                                             )}
                                                         >
                                                             {field.value ? (
@@ -137,9 +137,9 @@ const QuotationEdit: React.FC<Props> = ({
                                                         disabled={(date) =>
                                                             date > new Date() ||
                                                             date <
-                                                                new Date(
-                                                                    "1900-01-01"
-                                                                )
+                                                            new Date(
+                                                                "1900-01-01"
+                                                            )
                                                         }
                                                         initialFocus
                                                     />

@@ -60,7 +60,7 @@ export const MakeContractButton = ({
     };
     return (
         <Dialog>
-            <DialogTrigger>
+            <DialogTrigger disabled={status != Quotationstatus.confirmed}>
                 <TooltipProvider>
                     <Tooltip>
                         <TooltipTrigger>
