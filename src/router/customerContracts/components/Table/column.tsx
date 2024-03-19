@@ -56,7 +56,7 @@ export const columns: ColumnDef<ContractsProps>[] = [
     },
     {
         accessorKey: "signedAt",
-        header: "Signed At",
+        header: "Created At",
     },
     {
         accessorKey: "staffName",
