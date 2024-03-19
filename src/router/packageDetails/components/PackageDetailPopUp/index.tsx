@@ -23,7 +23,7 @@ import { useToast } from "@/components/ui/Toast/use-toast";
 import { createQuotation } from "@/router/customerCart/usecase/createQuotation.ts";
 import { useNavigate } from "react-router-dom";
 
-interface Props {}
+interface Props { }
 
 const PackageDetailPopUp: React.FC<Props> = () => {
     const [updated, setUpdated] = useState(false);
@@ -45,7 +45,7 @@ const PackageDetailPopUp: React.FC<Props> = () => {
             toast({
                 variant: "destructive",
                 title: "Fail to Request.",
-                description: "Add at least 4 products!",
+                description: "Add at least 4 different products!",
                 action: (
                     <ToastAction altText="Try again">Try again</ToastAction>
                 ),
@@ -292,7 +292,7 @@ const PackageDetailPopUp: React.FC<Props> = () => {
                             </DialogClose>
                         ) : (
                             <div className="text-red-800 font-semibold">
-                                Add at least 4 Products!
+                                Add at least 4 different products!
                             </div>
                         )}
                     </DialogFooter>

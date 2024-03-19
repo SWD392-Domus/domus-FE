@@ -122,7 +122,7 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
             toast({
                 variant: "destructive",
                 title: "Fail to Request.",
-                description: "Add at least 4 products!",
+                description: "Add at least 4 different products!",
                 action: (
                     <ToastAction altText="Try again">Try again</ToastAction>
                 ),
@@ -298,7 +298,7 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
                                         </Button>
                                     ) : (
                                         <div className="text-red-800 font-semibold">
-                                            Add at least 4 Products!
+                                            Add at least 4 different products!
                                         </div>
                                     )}
                                 </div>

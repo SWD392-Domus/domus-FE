@@ -70,7 +70,7 @@ const CustomerCart: React.FC = () => {
     } else {
       toast({
         variant: "destructive",
-        title: "Select at least 4 Products.",
+        title: "Select at least 4 different products.",
         description: "Failed to request.",
         action: (
           <ToastAction altText="Close">Close</ToastAction>
