@@ -67,8 +67,7 @@ export const column: ColumnDef<QuotationDetailInfo>[] = [
                         currency: "VND",
                     }).format(
                         Number.parseFloat(price) *
-                        Number.parseFloat(quantity) *
-                        1000
+                        Number.parseFloat(quantity)
                     )}
                 </div>
             );

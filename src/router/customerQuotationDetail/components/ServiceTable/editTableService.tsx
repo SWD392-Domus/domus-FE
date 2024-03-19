@@ -86,8 +86,7 @@ export function EditTableService<TData, TValue>({
                     currency: "VND",
                 }).format(
                     parseFloat(newCellValues[rowId].quantity as string) *
-                    parseFloat(newCellValues[rowId].price as string) *
-                    1000
+                    parseFloat(newCellValues[rowId].price as string)
                 );
             }
         }

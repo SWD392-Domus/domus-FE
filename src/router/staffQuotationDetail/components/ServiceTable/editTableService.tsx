@@ -86,8 +86,7 @@ export function EditTableService<TData, TValue>({
                     currency: "VND",
                 }).format(
                     parseFloat(newCellValues[rowId].quantity as string) *
-                        parseFloat(newCellValues[rowId].price as string) *
-                        1000
+                    parseFloat(newCellValues[rowId].price as string)
                 );
             }
         }
@@ -135,10 +134,10 @@ export function EditTableService<TData, TValue>({
                                         {header.isPlaceholder
                                             ? null
                                             : flexRender(
-                                                  header.column.columnDef
-                                                      .header,
-                                                  header.getContext()
-                                              )}
+                                                header.column.columnDef
+                                                    .header,
+                                                header.getContext()
+                                            )}
                                     </TableHead>
                                 );
                             })}
@@ -156,7 +155,7 @@ export function EditTableService<TData, TValue>({
                                     const cellValue =
                                         serviceCellValues[row.id] &&
                                         serviceCellValues[row.id][
-                                            cell.column.id
+                                        cell.column.id
                                         ];
 
                                     return (
@@ -178,8 +177,8 @@ export function EditTableService<TData, TValue>({
                                                     />
                                                 </Button>
                                             ) : !(
-                                                  cell.column.id == "action"
-                                              ) ? (
+                                                cell.column.id == "action"
+                                            ) ? (
                                                 cell.column.id == "price" ? (
                                                     <Input
                                                         type="number"
@@ -193,7 +192,7 @@ export function EditTableService<TData, TValue>({
                                                         }
                                                         readOnly={
                                                             !serviceCellValues[
-                                                                row.id
+                                                            row.id
                                                             ]
                                                         }
                                                     />
@@ -209,14 +208,14 @@ export function EditTableService<TData, TValue>({
                                                         }
                                                         readOnly={
                                                             cell.column.id ==
-                                                                "priceSum" ||
+                                                            "priceSum" ||
                                                             !serviceCellValues[
-                                                                row.id
+                                                            row.id
                                                             ]
                                                         }
                                                         className={
                                                             cell.column.id ==
-                                                            "name"
+                                                                "name"
                                                                 ? "w-full"
                                                                 : ""
                                                         }
