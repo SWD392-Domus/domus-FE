@@ -16,7 +16,7 @@ import {
     TableRow,
 } from "./table";
 import { SearchField } from "../Input/SearchField";
-import { CreateButton } from "../Button";
+// import { CreateButton } from "../Button";
 import { ActionsDropdownMenu } from "../DropdownMenu/Actions";
 import { SortButton } from "../Button/SortButton";
 
@@ -68,7 +68,7 @@ export function DataTable<TData, TValue>({
                 </div>
 
                 <div className="flex justify-end">
-                    <CreateButton></CreateButton>
+                    {/* <CreateButton></CreateButton> */}
                 </div>
             </div>
             <div className="rounded-md border mb-5">
@@ -88,26 +88,26 @@ export function DataTable<TData, TValue>({
                                                 {header.isPlaceholder
                                                     ? null
                                                     : flexRender(
-                                                          header.column
-                                                              .columnDef.header,
-                                                          header.getContext()
-                                                      )}
+                                                        header.column
+                                                            .columnDef.header,
+                                                        header.getContext()
+                                                    )}
                                                 {[
                                                     "id",
                                                     "expireAt",
                                                     // "totalPrice",
                                                     "status",
                                                 ].includes(headerId) && (
-                                                    <SortButton
-                                                        sortField={headerId}
-                                                        setSortField={
-                                                            setSortField
-                                                        }
-                                                        setDescending={
-                                                            setDescending
-                                                        }
-                                                    ></SortButton>
-                                                )}
+                                                        <SortButton
+                                                            sortField={headerId}
+                                                            setSortField={
+                                                                setSortField
+                                                            }
+                                                            setDescending={
+                                                                setDescending
+                                                            }
+                                                        ></SortButton>
+                                                    )}
                                             </div>
                                         </TableHead>
                                     );
@@ -146,14 +146,12 @@ export function DataTable<TData, TValue>({
                                                     key={cell.id}
                                                     onClick={() =>
                                                         navigate(
-                                                            `${
-                                                                location.pathname
-                                                            }/${
-                                                                (
-                                                                    row.original as {
-                                                                        id: string;
-                                                                    }
-                                                                ).id
+                                                            `${location.pathname
+                                                            }/${(
+                                                                row.original as {
+                                                                    id: string;
+                                                                }
+                                                            ).id
                                                             }`
                                                         )
                                                     }

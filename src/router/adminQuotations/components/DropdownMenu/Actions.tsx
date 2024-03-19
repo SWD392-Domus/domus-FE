@@ -22,7 +22,7 @@ import {
 } from "@radix-ui/react-icons"
 import { Button } from "@/components/ui/Button/Button"
 import { ConfirmDeleteManyButton } from "../Button/ConfirmDeleteManyButton";
-import { ViewButton } from "../Button/ViewButton";
+// import { ViewButton } from "../Button/ViewButton";
 import { UpdateButton } from "../Button/UpdateButton";
 
 interface Props {
@@ -48,7 +48,7 @@ export const ActionsDropdownMenu: React.FC<Props> = (props) => {
                             {props.ids.length == 1 &&
                                 <>
                                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                                    <ViewButton id={props.ids[0]}></ViewButton>
+                                    {/* <ViewButton id={props.ids[0]}></ViewButton> */}
                                     <DropdownMenuSeparator />
                                     <UpdateButton id={props.ids[0]}></UpdateButton>
                                 </>

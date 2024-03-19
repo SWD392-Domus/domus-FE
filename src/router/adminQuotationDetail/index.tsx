@@ -190,7 +190,7 @@ const AdminQuotationDetail: React.FC<Props> = () => {
                                         <div className="text-md">
                                             <div className="flex flex-row">
                                                 <div className="font-semibold mr-1">
-                                                    Exprie Date
+                                                    Expire Date
                                                 </div>
                                                 <p>
                                                     {new Date(

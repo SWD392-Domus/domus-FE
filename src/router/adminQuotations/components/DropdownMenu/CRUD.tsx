@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/Dialog";
 import { Button } from "@/components/ui/Button/Button";
 import { ConfirmDeleteButton } from "../Button/ConfirmDeleteButton";
-import { ViewButton } from "../Button/ViewButton";
+// import { ViewButton } from "../Button/ViewButton";
 import { UpdateButton } from "../Button/UpdateButton";
 
 interface Props {
@@ -39,7 +39,7 @@ export const CRUDDropdownMenu: React.FC<Props> = (props) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          <ViewButton id={props.id}></ViewButton>
+          {/* <ViewButton id={props.id}></ViewButton> */}
           <DropdownMenuSeparator />
           <UpdateButton id={props.id}></UpdateButton>
           <DropdownMenuItem>
