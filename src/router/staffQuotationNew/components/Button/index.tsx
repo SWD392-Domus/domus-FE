@@ -19,13 +19,13 @@ import {
 } from "@/components/ui/Tooltip";
 import { Quotationstatus } from "@/router/customerQuotationDetail/constants";
 import { CheckIcon, PencilIcon, SendIcon, XIcon } from "lucide-react";
-function onUpdate() {}
+function onUpdate() { }
 // function onMakeContract() {}
-function onDelete() {}
+function onDelete() { }
 
-function onCancle() {}
-function onCreateNew() {}
-function onSend() {}
+function onCancle() { }
+function onCreateNew() { }
+function onSend() { }
 
 export const UpdateButton = () => {
     return (
@@ -104,7 +104,7 @@ export const MakeContractButton = ({
                     <Button
                         onClick={() =>
                             navigate(
-                                `/staff/contract/new/${quotationId}/version/${versionId}`,
+                                `/staff/contracts/new/${quotationId}/version/${versionId}`,
                                 { replace: true }
                             )
                         }

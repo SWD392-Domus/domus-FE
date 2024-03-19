@@ -334,7 +334,7 @@ const RouterComponent: React.FC = () => {
         },
         {
             index: true,
-            path: "staff/contract/new/:quotationId/version/:versionId",
+            path: "staff/contracts/new/:quotationId/version/:versionId",
             component: <StaffContractCreate />,
             exact: true,
             restrict: true,
