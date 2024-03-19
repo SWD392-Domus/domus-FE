@@ -19,13 +19,13 @@ import { toast } from "@/components/ui/Toast/use-toast";
 import { useNavigate } from "react-router-dom";
 import { editStatusQuotation } from "../../usecase/editStatusQuotation";
 import { Quotationstatus } from "../../constants";
-function onUpdate() {}
+function onUpdate() { }
 
-function onDelete() {}
+function onDelete() { }
 
-function onCancle() {}
-function onCreateNew() {}
-function onSend() {}
+function onCancle() { }
+function onCreateNew() { }
+function onSend() { }
 
 export const UpdateButton = () => {
     return (
@@ -45,7 +45,7 @@ export const MakeContractButton = ({
     status: string;
 }) => {
     const getToolTipMessage = () => {
-        if (status == "Confirmed") {
+        if (status == "Accepted") {
             return "This Quotation have already been confirmed, please wait for the contract being sent to you";
         } else if (status == "Requested") {
             return "This Quotation have been sent, please wait for out staff to reply";
@@ -55,7 +55,7 @@ export const MakeContractButton = ({
     };
     const navigate = useNavigate(); // Initialize useHistory hook
     async function onMakeContract(id: string) {
-        const data = { status: "Confirmed" };
+        const data = { status: "Accepted" };
         try {
             const res = await editStatusQuotation(id, data);
             if (res.status == 200 && res.data.isSuccess) {

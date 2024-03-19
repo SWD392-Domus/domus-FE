@@ -70,6 +70,6 @@ export const negoList = [
 
 export const Quotationstatus = {
     Negotiating: "Negotiating",
-    confirmed: "Confirmed",
+    confirmed: "Accepted",
     request: "Request",
 };

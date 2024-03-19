@@ -15,7 +15,7 @@ const Auth: React.FC<Props> = () => {
         const code = urlParams.get("code") as string;
         const res = await loginApi.googleAuth(code);
         if (res.status != 200) {
-            toastError("Login Unccesfully, please try again");
+            toastError("Login Unsuccessfully, please try again");
             navigate("/login");
         } else {
             if (res.data.isSuccess) {
@@ -26,7 +26,7 @@ const Auth: React.FC<Props> = () => {
                 );
                 navigate("/home");
             } else {
-                toastError("Login Unccesfully, please try again");
+                toastError("Login Unsuccessfully, please try again");
                 navigate("/login");
             }
         }

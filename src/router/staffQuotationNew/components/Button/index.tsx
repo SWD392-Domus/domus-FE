@@ -50,7 +50,7 @@ export const MakeContractButton = ({
         versionId = versions[versions.length - 1].id;
     }
     const getToolTipMessage = () => {
-        if (status == "Confirmed") {
+        if (status == "Accepted") {
             return "This Quotation have already been confirmed, please wait for the contract being sent to you";
         } else if (status == "Requested") {
             return "This Quotation have been sent, please wait for out staff to reply";
