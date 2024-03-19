@@ -16,13 +16,11 @@ export const createProductSchema = z.object({
 });
 
 export const createDetailsSchema = z.object({
-    price: z
-      .string()
-      .refine(value => {
-        const parsed = parseFloat(value);
-        return !isNaN(parsed) && parsed >= 1 && parsed <= 1000000;
-      }, { message: "price must be a number between 1 and 1000000." }),
-
-  });
-
-  
+  price: z.string().refine(
+    (value) => {
+      const parsed = parseFloat(value);
+      return !isNaN(parsed) && parsed >= 1000 && parsed <= 1000000000;
+    },
+    { message: "Price must be a number between 1,000đ and 1,000,000,000đ." }
+  ),
+});
