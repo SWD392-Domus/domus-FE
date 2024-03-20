@@ -29,16 +29,16 @@ import { z } from "zod";
 import { DataTable } from "./components/ProductTable";
 import { column } from "./components/ProductTable/column";
 import { serviceColums } from "./components/ServiceTable/column";
-import {
-    Dialog,
-    DialogClose,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/Dialog";
+// import {
+//     Dialog,
+//     DialogClose,
+//     DialogContent,
+//     DialogDescription,
+//     DialogFooter,
+//     DialogHeader,
+//     DialogTitle,
+//     DialogTrigger,
+// } from "@/components/ui/Dialog";
 interface Props {
     // define your props here
 }
@@ -124,10 +124,10 @@ const StaffContractCreate: React.FC<Props> = () => {
         return totalPrice;
     }
     let status = "create";
-    const onSubmit = async () => {
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
         const data = {
-            name: form.getValues("contractName"),
-            description: form.getValues("description"),
+            name: values.contractName,
+            description: values.description,
             startDate: new Date().toISOString(),
             attachments: "",
             clientId: selectedUser?.id,
@@ -140,7 +140,7 @@ const StaffContractCreate: React.FC<Props> = () => {
             if (res.data.isSuccess) {
                 toast({
                     variant: "success",
-                    title: "Create Contract Sucessfully",
+                    title: "Create Contract Successfully",
                     description: "Please try again later.",
                 });
                 navigate("/staff/contracts", { replace: true });
@@ -154,7 +154,7 @@ const StaffContractCreate: React.FC<Props> = () => {
         } catch {
             toast({
                 variant: "destructive",
-                title: "Action Unsucessfully.",
+                title: "Action Unsuccessfully.",
                 description: "Something was wrong please try again later.",
             });
         }
@@ -510,13 +510,13 @@ const StaffContractCreate: React.FC<Props> = () => {
                         </div>
                     </div> */}
                             <div className="flex justify-center">
-                                <Dialog>
-                                    <DialogTrigger asChild>
-                                        <Button className="flex">
-                                            <PaperPlaneIcon className="mr-2" />
-                                            Send
-                                        </Button>
-                                    </DialogTrigger>
+                                {/* <Dialog>
+                                    <DialogTrigger asChild> */}
+                                <Button className="flex" type="submit">
+                                    <PaperPlaneIcon className="mr-2" />
+                                    Send
+                                </Button>
+                                {/* </DialogTrigger>
                                     <DialogContent className="sm:max-w-[800px]">
                                         <DialogHeader>
                                             <DialogTitle>
@@ -549,7 +549,7 @@ const StaffContractCreate: React.FC<Props> = () => {
                                             </DialogClose>
                                             <DialogClose asChild>
                                                 <Button
-                                                    onClick={onSubmit}
+                                                    // onSubmit={onSubmit}
                                                     type="submit"
                                                     className="bg-yellowCustom text-black hover:text-white"
                                                 >
@@ -558,7 +558,7 @@ const StaffContractCreate: React.FC<Props> = () => {
                                             </DialogClose>
                                         </DialogFooter>
                                     </DialogContent>
-                                </Dialog>
+                                </Dialog> */}
                             </div>
                         </form>
                     </Form>
