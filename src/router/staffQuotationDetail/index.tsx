@@ -65,6 +65,10 @@ import {
 import { getQuotationRevisions } from "./service/getQuotationRevisions";
 import { getQuotationDetailByVersionService } from "./service/getQuotationByVersionService";
 import Loading from "@/components/PublicComponents/Loading";
+import {
+    quotationCustomerApi,
+    quotationStaffApi,
+} from "@/utils/api/QuotationApi";
 interface Props {
     // define your props here
 }
@@ -296,8 +300,16 @@ const QuotationDetail: React.FC<Props> = () => {
         }
     };
     const handleDelete = async () => {
-        const res = await deleteQuotation(id);
-        if (res == 200) {
+        const token = localStorage.getItem("Token");
+        const res = await quotationStaffApi.editQuotationStatus(
+            id,
+            {
+                status: "Cancelled",
+            },
+            token as string
+        );
+
+        if (res.status == 200) {
             toast({
                 variant: "success",
                 title: "Cancel Quotation Successfully",

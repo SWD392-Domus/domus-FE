@@ -82,4 +82,7 @@ export const contractApi = {
             }
         );
     },
+    cancelContract: (id: string, token: string) => {
+        return get(`/Contract/cancel/${id}`, {}, { Authorization: token });
+    },
 };
