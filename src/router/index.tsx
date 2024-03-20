@@ -48,6 +48,7 @@ import CreateUser from "./adminCreateUser";
 import UserDetails from "./adminUserDetails";
 import CustomerContract from "./customerContracts";
 import Notification from "./notifications";
+import NotFound from "./404";
 
 const RouterComponent: React.FC = () => {
     const publicRoute = [
@@ -142,6 +143,13 @@ const RouterComponent: React.FC = () => {
             exact: true,
             restrict: true,
         },
+        {
+            index: true,
+            path: "404",
+            component: <NotFound />,
+            exact: true,
+            restrict: true,
+        }
     ];
     const customerRoute = [
         {
@@ -466,11 +474,11 @@ const RouterComponent: React.FC = () => {
                         ))}
                     </Route>
                 </Route> */}
-                {/* <Route path="/payment/result" element={<Payment />} />
+                {/* <Route path="/payment/result" element={<Payment />} />*/}
 
-                <Route path="/404" element={<ErrorPage />} />
+                <Route path="/404" element={<NotFound />} />
                 
-                <Route path="*" element={<ErrorPage />} /> */}
+                <Route path="*" element={<NotFound />} /> 
             </Routes>
         </BrowserRouter>
     );

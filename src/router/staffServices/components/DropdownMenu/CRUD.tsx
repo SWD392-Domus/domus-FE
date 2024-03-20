@@ -24,60 +24,65 @@ import { Button } from "@/components/ui/Button/Button";
 import { ConfirmDeleteButton } from "../Button/ConfirmDeleteButton";
 import ServiceDetails from "../ServiceDetails";
 import EditServices from "../ServiceDetails/EditServices";
+import { useState } from "react";
 
 interface Props {
   id: string;
 }
 
 export const CRUDDropdownMenu: React.FC<Props> = (props) => {
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger>
-        <Button variant="ghost" className="h-8 w-8 p-0">
-          <DotsHorizontalIcon className="h-4 w-4" />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        <DropdownMenuLabel>Action</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        {/* View */}
-        <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-          <Dialog>
-            <DialogTrigger>View</DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
-              <ServiceDetails id={props.id} />
-            </DialogContent>
-          </Dialog>
-        </DropdownMenuItem>
-        {/* Edit */}
-        <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-          <Dialog>
-            <DialogTrigger>Edit</DialogTrigger>
-            <EditServices id={props.id} />
-          </Dialog>
-        </DropdownMenuItem>
-        {/* Delete */}
+    <>
+      <DropdownMenu>
+        <DropdownMenuTrigger>
+          <Button variant="ghost" className="h-8 w-8 p-0">
+            <DotsHorizontalIcon className="h-4 w-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuLabel>Action</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          {/* View */}
+          <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+            <Dialog>
+              <DialogTrigger>View</DialogTrigger>
+              <DialogContent className="sm:max-w-[425px]">
+                <ServiceDetails id={props.id} />
+              </DialogContent>
+            </Dialog>
+          </DropdownMenuItem>
+          {/* Edit */}
+          <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+            <Dialog>
+              <DialogTrigger>Edit</DialogTrigger>
+              <EditServices id={props.id} />
+            </Dialog>
+          </DropdownMenuItem>
+          {/* Delete */}
 
-        <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-          <Dialog>
-            <DialogTrigger>Delete</DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
-              <DialogHeader>
-                <DialogTitle>Delete?</DialogTitle>
-                <DialogDescription>
-                  Are you really sure that you want to Delete? This action
-                  cannot be reverted!
-                </DialogDescription>
-              </DialogHeader>
-              <DialogFooter>
-                <DialogClose>
-                  <ConfirmDeleteButton id={props.id}></ConfirmDeleteButton>
-                </DialogClose>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+          <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+            <Dialog>
+              <DialogTrigger>Delete</DialogTrigger>
+              <DialogContent className="sm:max-w-[425px]">
+                <DialogHeader>
+                  <DialogTitle>Delete?</DialogTitle>
+                  <DialogDescription>
+                    Are you really sure that you want to Delete? This action
+                    cannot be reverted!
+                  </DialogDescription>
+                </DialogHeader>
+                <DialogFooter>
+                  <DialogClose>
+                    <ConfirmDeleteButton id={props.id}></ConfirmDeleteButton>
+                  </DialogClose>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </>
   );
 };
