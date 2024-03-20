@@ -142,7 +142,7 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
                                     </FormItem>
                                 )}
                             />
-                            <Button variant={"yellowCustom"} type="submit">
+                            <Button className="mt-5" variant={"yellowCustom"} type="submit">
                                 Sign In with Email
                             </Button>
                         </div>
