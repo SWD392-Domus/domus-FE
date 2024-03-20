@@ -22,7 +22,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { actions } from "../slice";
 
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> { }
 
 export function RegisterForm({ className, ...props }: UserAuthFormProps) {
     const dispatch = useDispatch();
@@ -80,9 +80,9 @@ export function RegisterForm({ className, ...props }: UserAuthFormProps) {
             const data = res.data;
             if (data.isSuccess) {
                 toastSuccess("Success");
-                navigate("/otp");
                 dispatch(actions.setId(data.data.id));
-                dispatch(actions.setEmail(values.email));
+                dispatch(actions.setEmail(values.email as never)); // Fix: Update the type of values.email
+                navigate("/otp");
                 // navigate("/home");
             } else {
                 for (let mess of data.messages) {
