@@ -14,8 +14,8 @@ const AdminQuotations: React.FC<Props> = () => {
     // const [loading, setLoading] = useState(true);
     const [searchField, setSearchField] = useState("id");
     const [searchValue, setSearchValue] = useState("");
-    const [sortField, setSortField] = useState("");
-    const [descending, setDescending] = useState(false);
+    const [sortField, setSortField] = useState("expireAt");
+    const [descending, setDescending] = useState(true);
     const [totalPages, setTotalPages] = useState(0);
     const [totalItems, setTotalItems] = useState(0);
     const [pageSize, setPageSize] = useState(5);

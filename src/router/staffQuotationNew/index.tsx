@@ -97,6 +97,8 @@ const StaffQuotationNew: React.FC<Props> = () => {
         fetchData();
     }, []);
     const handleUpdate = async () => {
+        // console.log("update");
+
         const sentProducts = products.map((product) => {
             const { price, monetaryUnit, quantity, quantityType } = product;
             return {
@@ -267,7 +269,7 @@ const StaffQuotationNew: React.FC<Props> = () => {
                                             <div className="text-md">
                                                 <div className="flex flex-row">
                                                     <div className="font-semibold mr-1">
-                                                        Exprie Date
+                                                        Expire Date
                                                     </div>
                                                     <p>
                                                         {new Date(

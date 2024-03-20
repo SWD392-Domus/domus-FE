@@ -59,7 +59,7 @@ const PackageDetailPopUp: React.FC<Props> = () => {
     const handleClick = async () => {
         console.log("packageB: ", packageB);
 
-        if (checkProductsValidate()) {
+        if (!checkProductsValidate()) {
             toast({
                 variant: "destructive",
                 title: "Fail to Request.",
@@ -97,9 +97,9 @@ const PackageDetailPopUp: React.FC<Props> = () => {
                             <ToastAction altText="Close">Close</ToastAction>
                         ),
                     });
-                    setTimeout(() => {
-                        navigate("/customer/settings/quotations");
-                    }, 2000);
+                    // setTimeout(() => {
+                    //     navigate("/customer/settings/quotations");
+                    // }, 2000);
                 } else {
                     toast({
                         variant: "destructive",

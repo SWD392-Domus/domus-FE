@@ -65,7 +65,7 @@ const Header: React.FC = () => {
                     <div className="flex gap-5 items-center">
                         {userRoles &&
                             <Notification />}
-                        {userRoles &&
+                        {/* {userRoles &&
                             <Link to="/customer/settings/cart">
                                 <div
                                     className="w-12 h-12 bg-yellowCustom flex justify-center items-center 
@@ -76,7 +76,7 @@ const Header: React.FC = () => {
                                     </div>
                                     <FaCartShopping className="text-black" />
                                 </div>
-                            </Link>}
+                            </Link>} */}
                         <motion.div
                             className="w-12 h-12 bg-yellowCustom flex flex-col group justify-center items-center cursor-pointer "
                             onClick={toggleMenu}

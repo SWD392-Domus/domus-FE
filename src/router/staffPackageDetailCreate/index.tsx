@@ -122,7 +122,7 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
     }
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        if (checkProductsValidate()) {
+        if (!checkProductsValidate()) {
             toast({
                 variant: "destructive",
                 title: "Fail to Request.",
