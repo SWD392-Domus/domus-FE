@@ -4,11 +4,11 @@ import { FaInstagram } from "react-icons/fa";
 import WebsiteName from "./WebsiteName";
 import NavigationTab from "./NavigationTab";
 import { AnimatePresence, motion } from "framer-motion";
-import { FaCartShopping } from "react-icons/fa6";
-import { useSelector, useDispatch } from "react-redux";
-import selector from "@/router/customerCart/slice/selector";
+// import { FaCartShopping } from "react-icons/fa6";
+import { useDispatch } from "react-redux";
+// import selector from "@/router/customerCart/slice/selector";
 import { actions } from "@/router/customerCart/slice";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import Notification from "./Notification";
 import { useAuth } from "@/components/customHooks/useAuth";
 
@@ -17,7 +17,7 @@ const iconClassname = "text-white text-2xl";
 const Header: React.FC = () => {
     const { userRoles } = useAuth();
     const dispatch = useDispatch();
-    const cartNumber: number = useSelector(selector.cartNumber);
+    // const cartNumber: number = useSelector(selector.cartNumber);
     const [open, setOpen] = useState(false);
     const genericHamburgerLine = `h-[3px] w-6 my-[2px] rounded-full bg-white transition ease transform duration-300`;
 
@@ -65,7 +65,7 @@ const Header: React.FC = () => {
                     <div className="flex gap-5 items-center">
                         {userRoles &&
                             <Notification />}
-                        {userRoles &&
+                        {/* {userRoles &&
                             <Link to="/customer/settings/cart">
                                 <div
                                     className="w-12 h-12 bg-yellowCustom flex justify-center items-center 
@@ -76,7 +76,7 @@ const Header: React.FC = () => {
                                     </div>
                                     <FaCartShopping className="text-black" />
                                 </div>
-                            </Link>}
+                            </Link>} */}
                         <motion.div
                             className="w-12 h-12 bg-yellowCustom flex flex-col group justify-center items-center cursor-pointer "
                             onClick={toggleMenu}

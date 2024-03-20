@@ -21,7 +21,6 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/Card";
-// import { FaDeleteLeft } from "react-icons/fa6";
 import React, { useEffect, useState } from "react";
 import { getPackageById } from "./usecase";
 import { useParams } from "react-router-dom";
@@ -60,8 +59,6 @@ const PackageDetails: React.FC<Props> = () => {
     const name: string = useSelector(selector.name);
     const description: string = useSelector(selector.description);
     const [uploadedImages, setUploadedImages] = useState<File[]>([]);
-    // const estimatedPrice: number = useSelector(selector.estimatedPrice);
-    // const discount: number = useSelector(selector.discount);
     const services: ServiceProps[] = useSelector(selector.services);
     const productDetails: ProductDetailProps[] = useSelector(
         selector.productDetails
@@ -78,14 +75,6 @@ const PackageDetails: React.FC<Props> = () => {
     }, [packageImagesRedux]);
     const [updated, setUpdated] = useState(false);
     const { toast } = useToast();
-    // const fileToDataUri = (file) =>
-    //     new Promise((resolve, reject) => {
-    //         const reader = new FileReader();
-    //         reader.onload = (event) => {
-    //             resolve(event.target.result);
-    //         };
-    //         reader.readAsDataURL(file);
-    //     });
 
     const handleAddImage = (event: React.ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files;
@@ -100,7 +89,6 @@ const PackageDetails: React.FC<Props> = () => {
                     height: 0,
                 };
             });
-            //   dispatch(actions.updatePackageImages(newImages));
             setPackageImages(newImages);
         }
     };
@@ -111,11 +99,9 @@ const PackageDetails: React.FC<Props> = () => {
                 const response = await getPackageById(packageId);
                 if (response) {
                     dispatch(actions.setPackage(response));
-                    // console.log(response)
                     dispatch(actions.getPackageInfo());
                     form.setValue("name", response.name);
                     form.setValue("description", response.description);
-                    // form.setValue("discount", response.discount);
                     setUpdated(true);
                 }
             } catch (error) {
@@ -123,11 +109,6 @@ const PackageDetails: React.FC<Props> = () => {
             }
         }
     }
-    //   const onChange = (file) => {
-    //     fileToDataUri(file).then((dataUri) => {
-    //       console.log(dataUri);
-    //     });
-    //   };
 
     useEffect(() => {
         fetchData();
@@ -136,14 +117,6 @@ const PackageDetails: React.FC<Props> = () => {
     const formSchema = z.object({
         name: z.string().nonempty({ message: "Name is required" }),
         description: z.string().nonempty({ message: "Description is required" }),
-        // discount: z
-        //     .number({
-        //         required_error: "Discount is required",
-        //         invalid_type_error:
-        //             "Discount must be a number between 0 and 100",
-        //     })
-        //     .lte(100)
-        //     .nonnegative(),
     });
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -151,11 +124,23 @@ const PackageDetails: React.FC<Props> = () => {
         defaultValues: {
             name: name,
             description: description,
-            // discount: discount,
         },
     });
+
+    const checkProductsValidate = () => {
+        let quantityValidate = 0;
+        for (let i = 0; i < productDetails.length; i++) {
+            const productDetail = productDetails[i];
+            quantityValidate += productDetail.quantity;
+        }
+        if (quantityValidate < 4) {
+            return false;
+        }
+        return true;
+    }
+
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        if (productDetails?.length < 4) {
+        if (!checkProductsValidate()) {
             toast({
                 variant: "destructive",
                 title: "Fail to Request.",
@@ -252,53 +237,7 @@ const PackageDetails: React.FC<Props> = () => {
                                         </FormItem>
                                     )}
                                 />
-                                {/* Package Name Input End*/}
-                                {/* Package Discount Input Start */}
-                                {/* <FormField
-                                    control={form.control}
-                                    name="discount"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel className="border-yellowCustom text-xl text-black mb-2">
-                                                Discount
-                                            </FormLabel>
-                                            <FormControl>
-                                                <Input
-                                                    // placeholder={discount}
-                                                    {...field}
-                                                    className="mb-4"
-                                                    type="number"
-                                                />
-                                            </FormControl>
 
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                /> */}
-                                {/* Package Discount Input End*/}
-                                {/* Package Name Input Start */}
-                                {/* <FormField
-                                    control={form.control}
-                                    name="pictures"
-                                    render={({ field }) => (
-                                        <FormItem>
-                                            <FormLabel className="border-yellowCustom text-xl text-black mb-2">
-                                                Package Images
-                                            </FormLabel>
-                                            <FormControl>
-                                                
-                                            </FormControl>
-
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                /> */}
-                                {/* <Input
-                  // placeholder={ }
-                  className="mb-4"
-                  type="file"
-                  onChange={(event) => onChange(event.target.files[0] || null)}
-                /> */}
                                 <div className="border-yellowCustom font-semibold text-xl text-black mt-2">Images</div>
                                 <Input
                                     className="mb-4"
@@ -332,18 +271,6 @@ const PackageDetails: React.FC<Props> = () => {
                                                                                 service.name
                                                                             }
                                                                         </div>
-                                                                        {/* <div>
-                                                                            {new Intl.NumberFormat(
-                                                                                "en-US",
-                                                                                {
-                                                                                    style: "currency",
-                                                                                    currency:
-                                                                                        "VND",
-                                                                                }
-                                                                            ).format(
-                                                                                service.price
-                                                                            )}
-                                                                        </div> */}
                                                                     </div>
                                                                 )
                                                             )}
@@ -369,7 +296,7 @@ const PackageDetails: React.FC<Props> = () => {
                                     </Dialog>
                                 </div>
                                 <div className="mt-2">
-                                    {productDetails?.length >= 4 ? (
+                                    {checkProductsValidate() ? (
                                         <Button
                                             variant={"yellowCustom"}
                                             className="cursor-pointer w-40"

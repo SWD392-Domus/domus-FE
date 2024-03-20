@@ -15,6 +15,7 @@ import { Avatar } from "@/components/ui/Avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
 import { actions } from "./slice"
 import { useDispatch } from "react-redux";
+import Loading from "@/components/PublicComponents/Loading";
 
 interface Props {
     // define your props here
@@ -71,7 +72,7 @@ const StatusList: React.FC<Props> = ({ open, setOpen }) => {
                 <CommandList>
                     <CommandEmpty>No results found.</CommandEmpty>
                     <CommandGroup>
-                        {staffs &&
+                        {staffs ?
                             staffs.map((staff) => (
                                 <CommandItem
                                     key={staff.id}
@@ -91,7 +92,7 @@ const StatusList: React.FC<Props> = ({ open, setOpen }) => {
                                     </Avatar>
                                     {staff?.userName}
                                 </CommandItem>
-                            ))}
+                            )) : <div className="h-40 flex flex-col justify-center items-center"><Loading variant="dark" /></div>}
                     </CommandGroup>
                 </CommandList>
             </Command>

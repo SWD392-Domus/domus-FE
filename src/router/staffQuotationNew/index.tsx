@@ -97,6 +97,8 @@ const StaffQuotationNew: React.FC<Props> = () => {
         fetchData();
     }, []);
     const handleUpdate = async () => {
+        // console.log("update");
+
         const sentProducts = products.map((product) => {
             const { price, monetaryUnit, quantity, quantityType } = product;
             return {

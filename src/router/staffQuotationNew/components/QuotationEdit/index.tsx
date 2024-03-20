@@ -75,7 +75,7 @@ const QuotationEdit: React.FC<Props> = ({
         } else {
             toast({
                 variant: "destructive",
-                title: `Cancel Quotation Unsuccessfully`,
+                title: `Customer is not selected.`,
                 description: "There is something wrong, Please try again",
             });
         }
@@ -135,11 +135,7 @@ const QuotationEdit: React.FC<Props> = ({
                                                             field.onChange
                                                         }
                                                         disabled={(date) =>
-                                                            date > new Date() ||
-                                                            date <
-                                                            new Date(
-                                                                "1900-01-01"
-                                                            )
+                                                            date < new Date()
                                                         }
                                                         initialFocus
                                                     />

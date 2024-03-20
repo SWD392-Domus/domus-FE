@@ -43,10 +43,23 @@ const PackageDetailPopUp: React.FC<Props> = () => {
     }, []);
     const { toast } = useToast();
     const navigate = useNavigate();
+
+    const checkProductsValidate = () => {
+        let quantityValidate = 0;
+        for (let i = 0; i < packageB?.productDetails?.length; i++) {
+            const productDetail = packageB?.productDetails[i];
+            quantityValidate += productDetail.quantity;
+        }
+        if (quantityValidate < 4) {
+            return false;
+        }
+        return true;
+    }
+
     const handleClick = async () => {
         console.log("packageB: ", packageB);
 
-        if (packageB?.productDetails?.length < 4) {
+        if (!checkProductsValidate()) {
             toast({
                 variant: "destructive",
                 title: "Fail to Request.",
@@ -58,13 +71,11 @@ const PackageDetailPopUp: React.FC<Props> = () => {
         } else {
             try {
                 const res = await createQuotation({
-                    // expireAt: "2024-09-24T06:54:12.762Z",
                     packageId: packageB.id,
                     services: packageB.services.map((ser: any) => {
                         return {
                             serviceId: ser.id,
                             price: ser.price,
-                            // price: 0,
                         };
                     }),
                     productDetails: packageB.productDetails.map(
@@ -73,7 +84,6 @@ const PackageDetailPopUp: React.FC<Props> = () => {
                                 id: productDetail.id,
                                 quantity: productDetail.quantity,
                                 price: productDetail.displayPrice,
-                                // price: 0,
                             };
                         }
                     ),
@@ -87,7 +97,6 @@ const PackageDetailPopUp: React.FC<Props> = () => {
                             <ToastAction altText="Close">Close</ToastAction>
                         ),
                     });
-                    // localStorage.removeItem("cart");
                     setTimeout(() => {
                         navigate("/customer/settings/quotations");
                     }, 2000);
@@ -211,7 +220,7 @@ const PackageDetailPopUp: React.FC<Props> = () => {
                                         // value={cellValue}
                                         ></ComboBoxResponsive>
                                     </div>
-                                    <div className="h-[450px] w-[600px] overflow-scroll pr-5 flex flex-col gap-4 items-center pb-5">
+                                    <div className="h-[450px] w-[600px] overflow-scroll pr-5 flex flex-col items-center">
                                         {packageB?.productDetails?.map(
                                             (productDetail: any) => (
                                                 <div className="flex gap-5 items-center">
@@ -228,7 +237,7 @@ const PackageDetailPopUp: React.FC<Props> = () => {
                                                             }
                                                         />
                                                     </div>
-                                                    <div className="w-[400px] flex flex-col justify-between">
+                                                    <div className="w-[380px] flex flex-col justify-between">
                                                         <h1 className="font-semibold text-lg">
                                                             {
                                                                 productDetail?.productName
@@ -304,7 +313,7 @@ const PackageDetailPopUp: React.FC<Props> = () => {
                         </div>
                     </>
                     <DialogFooter>
-                        {packageB?.productDetails?.length >= 4 ? (
+                        {checkProductsValidate() ? (
                             <DialogClose>
                                 <Button onClick={handleClick}>
                                     Request Quotation
