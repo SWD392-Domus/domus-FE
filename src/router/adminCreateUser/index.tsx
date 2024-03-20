@@ -77,7 +77,6 @@ const createUserSchema = z.object({
 });
 
 type Gender = "Male" | "Female" | "Others" | "";
-type Role = "Client" | "Staff";
 const CreateUser: React.FC = () => {
   const [uploadedImage, setUploadedImage] = useState<Image | null>(null);
   const [gender, setGender] = useState<Gender>("");
