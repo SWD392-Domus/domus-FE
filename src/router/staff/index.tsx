@@ -1,32 +1,64 @@
 import React, { useEffect, useState } from "react";
-
-// import { Search } from "./components/search";
-// import { UserNav } from "./components/user-nav";
-
 import { Tabs } from "@/components/ui/Tabs";
 import { TabsContent } from "@radix-ui/react-tabs";
 import {
-    Card,
-    CardContent,
-    // CardDescription,
-    CardHeader,
-    CardTitle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/Card";
 import { Overview } from "./components/overview";
-// import { RecentSales } from "./components/recent-sales";
+import { RecentSales } from "./components/recent-sales";
 import { dashboardApi } from "@/utils/api/dashboardApi";
 import Loading from "@/components/PublicComponents/Loading";
 import YearSelect from "./components/YearSelect";
+import { getContractsPaging } from "./usecase/getContractsPaging";
 
 interface Props {
-    // define your props here
+  // define your props here
 }
-
 const Dashboard: React.FC<Props> = () => {
+    const [contracts, setContracts] = useState<any[]>([]);
+    // const [loading, setLoading] = useState(true);
+    const [searchField,] = useState("status");
+    const [searchValue,] = useState("signed");
+    const [sortField,] = useState("signedAt");
+    const [descending,] = useState(true);
+    const [, setTotalPages] = useState(0);
+    const [, setTotalItems] = useState(0);
+    const [pageSize,] = useState(5);
+    const [pageIndex,] = useState(1);
+
     const [data, setData] = useState(null);
     const [totalRevenue, setTotalRevenue] = useState(0);
-    const [, setNewUser] = useState(0);
+    const [newUser, setNewUser] = useState(0);
     const [selectedYear, setSelectedYear] = useState("2024");
+    async function getContractsService(
+        searchField: string,
+        searchValue: string,
+        sortField: string,
+        descending: boolean,
+        pageSize: number,
+        pageIndex: number
+    ) {
+        const res = await getContractsPaging(
+            searchField,
+            searchValue,
+            sortField,
+            descending,
+            pageSize,
+            pageIndex
+        );
+        if (res) {
+            // setLoading(false);
+            setContracts(res.contractsItems);
+            setTotalPages(res.lastPage);
+            setTotalItems(res.total);
+        }
+        console.log(res?.contractsItems);
+
+    }
     useEffect(() => {
         const fetchData = async () => {
             setData(null);
@@ -41,6 +73,14 @@ const Dashboard: React.FC<Props> = () => {
             setData(res.data.data.revenueByMonths);
         };
         fetchData();
+        getContractsService(
+            searchField,
+            searchValue,
+            sortField,
+            descending,
+            pageSize,
+            pageIndex
+        );
     }, [selectedYear]);
     return (
         <>
@@ -54,7 +94,7 @@ const Dashboard: React.FC<Props> = () => {
                     </div>
                 </div> */}
                 <div className="flex-1 space-y-4 p-8 pt-6">
-                    <div className="flex items-center gap-x-56 space-y-2">
+                    <div className="flex items-center gap-x-7 space-y-2">
                         <h2 className="text-3xl font-bold tracking-tight">
                             Dashboard
                         </h2>
@@ -68,8 +108,8 @@ const Dashboard: React.FC<Props> = () => {
                     {data && (
                         <Tabs defaultValue="overview" className="space-y-4">
                             <TabsContent value="overview" className="space-y-4">
-                                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                                    <Card className="border">
+                                <div className="flex gap-[400px]">
+                                    <Card className="border w-64">
                                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                                             <CardTitle className="text-sm font-medium">
                                                 Total Revenue
@@ -96,10 +136,10 @@ const Dashboard: React.FC<Props> = () => {
                                             </p> */}
                                         </CardContent>
                                     </Card>
-                                    {/* <Card className="border">
+                                    <Card className="border w-64">
                                         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                                             <CardTitle className="text-sm font-medium">
-                                                New Users
+                                                Total Users
                                             </CardTitle>
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -124,7 +164,7 @@ const Dashboard: React.FC<Props> = () => {
 
                                             </p>
                                         </CardContent>
-                                    </Card> */}
+                                    </Card>
                                 </div>
                                 <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
                                     <Card className="col-span-4 border">
@@ -135,24 +175,23 @@ const Dashboard: React.FC<Props> = () => {
                                             <Overview data={data} />
                                         </CardContent>
                                     </Card>
-                                    {/* <Card className="col-span-3 border">
+                                    <Card className="col-span-3 border">
                                         <CardHeader>
-                                            <CardTitle>Recent Sales</CardTitle>
+                                            <CardTitle>Recent Contracts</CardTitle>
                                             <CardDescription>
-                                                You made 265 sales this month.
+                                                The Recent Signed {pageSize} Contracts
                                             </CardDescription>
                                         </CardHeader>
                                         <CardContent>
-                                            <RecentSales />
+                                            <RecentSales contracts={contracts} />
                                         </CardContent>
-                                    </Card> */}
+                                    </Card>
                                 </div>
                             </TabsContent>
                         </Tabs>
                     )}
                 </div>
             </div>
-
             {!data && <Loading variant="dark" />}
         </>
     );

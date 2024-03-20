@@ -22,8 +22,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/Button/Button";
 import { editServiceService } from "../../service/editService";
-import selector from "./slice/selector"
-import { actions } from "./slice"
+import selector from "./slice/selector";
+import { actions } from "./slice";
 import { useDispatch, useSelector } from "react-redux";
 
 type Props = {
@@ -36,9 +36,8 @@ type Props = {
 // };
 const EditServices: React.FC<Props> = ({ id }) => {
   const dispatch = useDispatch();
-  const name: string = useSelector(selector.name);
-  const price: number = useSelector(selector.price);
-  const [updated, setUpdated] = useState(false);
+  // const name: string = useSelector(selector.name);
+  // const price: number = useSelector(selector.price);
   async function getServiceDetails() {
     try {
       const res = await getServiceByIdService(id);
@@ -47,8 +46,7 @@ const EditServices: React.FC<Props> = ({ id }) => {
       if (response.isSuccess) {
         dispatch(actions.setService(response.data));
         form.setValue("name", response.data.name);
-        form.setValue("price", response.data.rproce);
-        setUpdated(true);
+        form.setValue("price", response.data.price);
       }
     } catch (error) {
       toast({
@@ -61,7 +59,7 @@ const EditServices: React.FC<Props> = ({ id }) => {
 
   useEffect(() => {
     getServiceDetails();
-  });
+  }, []);
 
   const formSchema = z.object({
     name: z.string().nonempty({ message: "Name is required" }),
@@ -71,8 +69,8 @@ const EditServices: React.FC<Props> = ({ id }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: name,
-      price: price,
+      name: "",
+      price: 0,
     },
   });
 
@@ -102,56 +100,58 @@ const EditServices: React.FC<Props> = ({ id }) => {
   };
 
   return (
-    <DialogContent autoSave="false">
-      <DialogHeader>
-        <DialogTitle>Edit Service</DialogTitle>
-        <DialogDescription>
-          Make changes to your Service here. Click save when you're done.
-        </DialogDescription>
-      </DialogHeader >
-
-      {updated && (
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Service Name</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormDescription>
-                    This is your public display service name.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="price"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Price</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormDescription>
-                    This is your public display service price.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <div className="flex justify-end">
-              <Button type="submit">Save</Button>
-            </div>
-          </form>
-        </Form>
-      )}
-    </DialogContent >
+    <>
+        <DialogContent autoSave="false">
+          <DialogHeader>
+            <DialogTitle>Edit Service</DialogTitle>
+            <DialogDescription>
+              Make changes to your Service here. Click save when you're done.
+            </DialogDescription>
+          </DialogHeader>
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-8"
+              >
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Service Name</FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormDescription>
+                        This is your public display service name.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="price"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Price</FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormDescription>
+                        This is your public display service price.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <div className="flex justify-end">
+                  <Button type="submit">Save</Button>
+                </div>
+              </form>
+            </Form>
+        </DialogContent>
+    </>
   );
 };
 
