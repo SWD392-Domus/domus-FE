@@ -10,7 +10,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/Avatar";
 import { Button } from "../ui/Button/Button";
 import { notificationApi } from "@/utils/api/notificationApi";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface Props {
     // define your props here
@@ -89,15 +89,18 @@ const Notification: React.FC<Props> = () => {
                                 className="h-[80px] flex justify-between p-2 items-center"
                                 key={item.sentAt}
                             >
-                                <Avatar className="mr-2">
-                                    <AvatarImage src={item.image} />
-                                    <AvatarFallback>
-                                        {item.recipientId}
-                                    </AvatarFallback>
-                                </Avatar>
-                                <h1 className="font-medium ">
-                                    {shortenedContent}
-                                </h1>
+                                <Link to={item.redirectString}>
+                                    {" "}
+                                    <Avatar className="mr-2">
+                                        <AvatarImage src={item.image} />
+                                        <AvatarFallback>
+                                            {item.recipientId}
+                                        </AvatarFallback>
+                                    </Avatar>
+                                    <h1 className="font-medium ">
+                                        {shortenedContent}
+                                    </h1>
+                                </Link>
                             </DropdownMenuItem>
                         );
                     })}

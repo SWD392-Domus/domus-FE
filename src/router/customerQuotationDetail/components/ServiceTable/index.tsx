@@ -17,11 +17,13 @@ import {
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
     data: TData[];
+    status: string;
 }
 
 export function DataTable<TData, TValue>({
     columns,
     data,
+    status,
 }: DataTableProps<TData, TValue>) {
     const table = useReactTable({
         data,
@@ -58,14 +60,32 @@ export function DataTable<TData, TValue>({
                                 key={row.id}
                                 data-state={row.getIsSelected() && "selected"}
                             >
-                                {row.getVisibleCells().map((cell) => (
-                                    <TableCell key={cell.id}>
-                                        {flexRender(
-                                            cell.column.columnDef.cell,
-                                            cell.getContext()
-                                        )}
-                                    </TableCell>
-                                ))}
+                                {row.getVisibleCells().map((cell) => {
+                                    console.log(cell.column.id);
+                                    if (
+                                        (cell.column.id == "price" ||
+                                            cell.column.id == "priceSum") &&
+                                        status == "Requested"
+                                    ) {
+                                        return (
+                                            <TableCell
+                                                key={cell.id}
+                                                className="font-medium"
+                                            >
+                                                Unknow
+                                            </TableCell>
+                                        );
+                                    } else {
+                                        return (
+                                            <TableCell key={cell.id}>
+                                                {flexRender(
+                                                    cell.column.columnDef.cell,
+                                                    cell.getContext()
+                                                )}
+                                            </TableCell>
+                                        );
+                                    }
+                                })}
                             </TableRow>
                         ))
                     ) : (

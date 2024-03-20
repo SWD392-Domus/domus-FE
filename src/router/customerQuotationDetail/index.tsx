@@ -363,6 +363,7 @@ const QuotationDetail: React.FC<Props> = () => {
                                     <DataTable
                                         columns={column}
                                         data={products as any}
+                                        status={status}
                                     />
                                 </div>
                             </div>
@@ -374,6 +375,7 @@ const QuotationDetail: React.FC<Props> = () => {
                                     <DataTable
                                         columns={serviceColums}
                                         data={services as any}
+                                        status={status}
                                     />
                                     <div className="p-2 flex flex-row justify-between font-semibold border-b-2 border-zinc-100 mt-2">
                                         <div className="total-price-title">
