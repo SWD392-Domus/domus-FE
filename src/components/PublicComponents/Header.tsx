@@ -4,11 +4,11 @@ import { FaInstagram } from "react-icons/fa";
 import WebsiteName from "./WebsiteName";
 import NavigationTab from "./NavigationTab";
 import { AnimatePresence, motion } from "framer-motion";
-import { FaCartShopping } from "react-icons/fa6";
-import { useSelector, useDispatch } from "react-redux";
-import selector from "@/router/customerCart/slice/selector";
+// import { FaCartShopping } from "react-icons/fa6";
+import { useDispatch } from "react-redux";
+// import selector from "@/router/customerCart/slice/selector";
 import { actions } from "@/router/customerCart/slice";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import Notification from "./Notification";
 import { useAuth } from "@/components/customHooks/useAuth";
 
@@ -17,7 +17,7 @@ const iconClassname = "text-white text-2xl";
 const Header: React.FC = () => {
     const { userRoles } = useAuth();
     const dispatch = useDispatch();
-    const cartNumber: number = useSelector(selector.cartNumber);
+    // const cartNumber: number = useSelector(selector.cartNumber);
     const [open, setOpen] = useState(false);
     const genericHamburgerLine = `h-[3px] w-6 my-[2px] rounded-full bg-white transition ease transform duration-300`;
 

@@ -97,9 +97,9 @@ const PackageDetailPopUp: React.FC<Props> = () => {
                             <ToastAction altText="Close">Close</ToastAction>
                         ),
                     });
-                    // setTimeout(() => {
-                    //     navigate("/customer/settings/quotations");
-                    // }, 2000);
+                    setTimeout(() => {
+                        navigate("/customer/settings/quotations");
+                    }, 2000);
                 } else {
                     toast({
                         variant: "destructive",
