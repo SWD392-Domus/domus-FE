@@ -10,7 +10,8 @@ import {
     LayersIcon,
     FileIcon,
     CrumpledPaperIcon,
-    IdCardIcon
+    // IdCardIcon,
+    // DashboardIcon
 } from "@radix-ui/react-icons";
 import { IconProps } from "@radix-ui/react-icons/dist/types";
 
@@ -25,7 +26,7 @@ const components: {
         {
             title: "Profile",
             icon: PersonIcon,
-            href: "/staff/profile",
+            href: "/staff",
             description: "Profile",
         },
         {
@@ -64,31 +65,16 @@ const components: {
             href: "/staff/articles",
             description: "Article Management",
         },
-        {
-            title: "User",
-            icon: IdCardIcon,
-            href: "/staff/users",
-            description: "User Management",
-        },
-        // {
-        //     title: "Storage",
-        //     icon: LayersIcon,
-        //     href: "/staff/storage",
-        //     description: "Storage",
-        // },
-        // {
-        //     title: "Settings",
-        //     icon: GearIcon,
-        //     href: "/staff/settings",
-        //     description: "Settings",
-        // },
     ];
 
 export default function NavigationMenuDemo() {
+    const handleLogout = () => {
+        localStorage.removeItem("Token");
+    };
     const location = useLocation();
     console.log(location);
     return (
-        <div className=" flex flex-col justify-between h-[95%] ">
+        <div className=" flex flex-col justify-between h-[95%] mt-3">
             <div className="flex-col">
                 {components.map((component) => (
                     <Link to={component.href}>
@@ -105,7 +91,11 @@ export default function NavigationMenuDemo() {
                 ))}
             </div>
             <div className=" flex items-center justify-center">
-                <Link to="/login">Log Out</Link>
+                <button
+                    onClick={handleLogout}
+                >
+                    <Link to="/login">Log Out</Link>
+                </button>
             </div>
         </div>
     );

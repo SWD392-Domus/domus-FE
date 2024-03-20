@@ -50,6 +50,28 @@ const slice = createSlice({
       action.payload.quantity = 1;
       state.packageB.productDetails.push(action.payload);
     },
+    addService: (state: any, action: PayloadAction<any>) => {
+      for (let i = 0; i < state.packageB.services.length; i++) {
+        const service = state.packageB.services[i];
+        if (service.id == action.payload.id) {
+          return;
+        }
+      }
+      state.packageB.services.push(action.payload);
+    },
+    deleteService: (state: any, action: PayloadAction<string>) => {
+      state.packageB.services = state.packageB.services.filter(
+        (service: any) => service.id != action.payload
+      );
+    },
+    deleteManyService: (state: any, action: PayloadAction<string[]>) => {
+      for (let i = 0; i < action.payload.length; i++) {
+        const actionPayloadId = action.payload[i];
+        state.packageB.services = state.packageB.services.filter(
+          (service: any) => service.id != actionPayloadId
+        );
+      }
+    },
   },
 });
 

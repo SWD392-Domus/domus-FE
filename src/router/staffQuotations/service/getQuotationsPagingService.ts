@@ -9,7 +9,7 @@ export const getQuotationsPagingService = async (
   pageIndex: number,
   token: string
 ) => {
-  return quotationStaffApi.getQuotationsPaging(
+  return quotationStaffApi.getMyQuotationPaging(
     searchField,
     searchValue,
     sortField,

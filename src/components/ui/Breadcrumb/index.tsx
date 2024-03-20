@@ -7,37 +7,47 @@ function BreadCrumbHeader() {
     const breadcrumbNameMap: Record<string, string> = {
         "/customer": "Customer",
         "/customer/settings": "Settings",
+        "/customer/settings/profile": "Profile",
         "/customer/settings/quotations": "Quotations",
-        "/customer/settings/quotations/:quotationId": `Quotation ${quotationId} `,
+        "/customer/settings/quotations/:quotationId": `Quotation ${quotationId?.slice(0, 3)}...} `,
         "/customer/settings/contracts": "Contracts",
-        "/customer/settings/contracts/:contractId": `Contract ${contractId} `,
+        "/customer/settings/contracts/:contractId": `Contract ${contractId?.slice(0, 3)}...} `,
 
         "/staff": "Staff",
 
         "/staff/profile": "Profile",
 
+        "/admin/quotations": "Quotations",
+        "/admin/quotations/:quotationId": `Quotation ${quotationId?.slice(0, 3)}...} `,
+        "/admin/users": "Users",
+        "/admin/users/create": "Create User",
+        "/admin/users/:id": "Users",
+        "/admin/dashboard": "Dashboard",
+        "/admin": "Admin",
+
         "/staff/packages": `Packages`,
         "/staff/packages/newPackage": `New Package`,
-        "/staff/packages/:packageId": `Package ${packageId} `,
+        "/staff/packages/:packageId": `Package ${packageId?.slice(0, 3)}...} `,
 
         "/staff/products": "Products",
 
         "/staff/articles": "Articles",
-        "/staff/packages/:articleId": `Article ${articleId} `,
+        "/staff/packages/:articleId": `Article ${articleId?.slice(0, 3)}...} `,
 
         "/staff/services": "Services",
-
-        "/staff/users": "Users",
 
         "/staff/quotations": "Quotations",
         "/staff/quotations/newQuotation": "New Quotation",
         "/staff/quotations/:quotationId": `Quotation ${quotationId?.slice(0, 3)}... `,
         "/staff/quotations/:quotationId/versions": `Versions`,
-        "/staff/quotations/:quotationId/versions/:versionId": `Version ${versionId} `,
+        "/staff/quotations/:quotationId/versions/:versionId": `Version ${versionId?.slice(0, 3)}...} `,
 
+        "/staff/contracts/:contractId": `Contract ${contractId?.slice(0, 3)}...} `,
         "/staff/contracts": "Contracts",
-        "/staff/contracts/newContract": "New Contract",
-        "/staff/contracts/:contractId": `Contract ${contractId} `,
+        "/staff/contracts/new": "New Contract",
+        "/staff/contracts/new/:quotationId": `Quotation ${quotationId?.slice(0, 3)}...}`,
+        "/staff/contracts/new/:quotationId/version": "Version",
+        "/staff/contracts/new/:quotationId/version/:versionId": `Version ${versionId?.slice(0, 3)}...} `,
     };
 
     if (quotationId !== undefined) {
@@ -47,12 +57,21 @@ function BreadCrumbHeader() {
         breadcrumbNameMap[
             `/staff/quotations/${quotationId}`
         ] = `Quotation ${quotationId?.slice(0, 3)}... `;
+        breadcrumbNameMap[
+            `/admin/quotations/${quotationId}`
+        ] = `Quotation ${quotationId?.slice(0, 3)}... `;
+        breadcrumbNameMap[
+            `/staff/contracts/new/${quotationId}`
+        ] = `Quotation ${quotationId?.slice(0, 3)}... `;
         if (versionId !== undefined) {
             breadcrumbNameMap[
                 `/staff/quotations/${quotationId}/versions`
             ] = `Versions`;
             breadcrumbNameMap[
                 `/staff/quotations/${quotationId}/versions/${versionId}`
+            ] = `Version ${versionId?.slice(0, 3)}... `;
+            breadcrumbNameMap[
+                `/staff/contracts/new/${quotationId}/version/${versionId}`
             ] = `Version ${versionId?.slice(0, 3)}... `;
         }
     }
@@ -62,7 +81,7 @@ function BreadCrumbHeader() {
             `/staff/products/${id}`
         ] = `Product ${id?.slice(0, 3)}... `;
         breadcrumbNameMap[
-            `/staff/users/${id}`
+            `/admin/users/${id}`
         ] = `User ${id?.slice(0, 3)}... `;
     }
     if (packageId !== undefined) {

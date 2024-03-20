@@ -157,7 +157,7 @@ const ProductDetails: React.FC = () => {
       const cartNumber: any = JSON.parse(localStorage.getItem("cart") as string)
         .productDetails
         ? JSON.parse(localStorage.getItem("cart") as string).productDetails
-            .length
+          .length
         : 0;
       dispatch(actionsCart.setCartNumber(cartNumber));
       navigate("/customer/settings/cart");
@@ -229,10 +229,10 @@ const ProductDetails: React.FC = () => {
                   <ToggleGroup
                     type="single"
                     variant="outline"
-                    // onValueChange={(e) => {
-                    // dispatch(actions.hideValueBasedOnIds({ ids: e, name: field.name }));
-                    // console.log(e);
-                    // }}
+                  // onValueChange={(e) => {
+                  // dispatch(actions.hideValueBasedOnIds({ ids: e, name: field.name }));
+                  // console.log(e);
+                  // }}
                   >
                     {field.values.map((value) => (
                       <ToggleGroupItem
@@ -320,7 +320,7 @@ const ProductDetails: React.FC = () => {
                     </div> */}
         </div>
       ) : (
-        <Loading />
+        <Loading variant="dark" />
       )}
     </div>
   );

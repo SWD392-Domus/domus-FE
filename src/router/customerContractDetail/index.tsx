@@ -4,7 +4,7 @@ import {
     Dialog,
     DialogContent,
     DialogDescription,
-    DialogFooter,
+    // DialogFooter,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
@@ -419,7 +419,7 @@ const CustomerContractDetail: React.FC<Props> = () => {
                                         style: "currency",
                                         currency: "VND",
                                     }).format(
-                                        calculateTotalPrice(products) * 1000
+                                        calculateTotalPrice(products)
                                     )}
                                 </h1>
                             </div>
@@ -431,7 +431,7 @@ const CustomerContractDetail: React.FC<Props> = () => {
                                         style: "currency",
                                         currency: "VND",
                                     }).format(
-                                        calculateTotalPrice(services) * 1000
+                                        calculateTotalPrice(services)
                                     )}
                                 </h1>
                             </div>
@@ -442,7 +442,7 @@ const CustomerContractDetail: React.FC<Props> = () => {
                                     {new Intl.NumberFormat("en-US", {
                                         style: "currency",
                                         currency: "VND",
-                                    }).format(totalPrice * 1000)}
+                                    }).format(totalPrice)}
                                 </h1>
                             </div>
                         </div>
@@ -467,14 +467,14 @@ const CustomerContractDetail: React.FC<Props> = () => {
                                                 <SignatureComponents />
                                             </DialogDescription>
                                         </DialogHeader>
-                                        <DialogFooter>
+                                        {/* <DialogFooter>
                                             <Button className="bg-zinc-500">
                                                 Cancel
                                             </Button>
                                             <Button className="bg-black pl-2">
                                                 Confirm
                                             </Button>
-                                        </DialogFooter>
+                                        </DialogFooter> */}
                                     </DialogContent>
                                 </Dialog>
                             )}

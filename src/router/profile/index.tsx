@@ -1,6 +1,9 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/Avatar";
 import { Button } from "@/components/ui/Button/Button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+import {
+    Card
+    // , CardContent, CardHeader, CardTitle 
+} from "@/components/ui/Card";
 import {
     Form,
     FormControl,
@@ -39,7 +42,7 @@ interface Image {
     imageUrl: string | null;
     isUpload: boolean;
 }
-const StaffProfile: React.FC<Props> = () => {
+const UserProfile: React.FC<Props> = () => {
     async function onSubmit(values: z.infer<typeof formSchema>) {
         const formData = new FormData();
         formData.append("FullName", values.fullName);
@@ -183,8 +186,8 @@ const StaffProfile: React.FC<Props> = () => {
                     <Button type="submit">Edit</Button>
                 </Card>
                 <Card className="w-[68%] flex flex-col items-start justify-start h-[90%] border p-10">
-                    <Label className="mb-4">Staff Information</Label>
-                    <div className="grid gap-3 md:grid-cols-3 lg:grid-cols-3 w-full">
+                    {/* <Label className="mb-4">Staff Information</Label>
+                     <div className="grid gap-3 md:grid-cols-3 lg:grid-cols-3 w-full">
                         <Card>
                             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                                 <CardTitle className="text-sm font-medium">
@@ -272,7 +275,7 @@ const StaffProfile: React.FC<Props> = () => {
                                 </p>
                             </CardContent>
                         </Card>
-                    </div>
+                    </div> */}
                     <Label className="mb-4">Personal Information</Label>
 
                     <FormField
@@ -431,4 +434,4 @@ const StaffProfile: React.FC<Props> = () => {
     );
 };
 
-export default StaffProfile;
+export default UserProfile;

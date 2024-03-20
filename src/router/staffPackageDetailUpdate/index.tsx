@@ -155,40 +155,51 @@ const PackageDetails: React.FC<Props> = () => {
         },
     });
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        const formData = new FormData();
-        uploadedImages.forEach((image) => {
-            formData.append("Images", image);
-        });
-        formData.append("Name", values.name);
-        // formData.append("Discount", values.discount.toString());
-        formData.append("Description", values.description);
-        services.map((item) => {
-            return formData.append("ServiceIds", item.id);
-        });
-        productDetails.map((item) => {
-            for (let i = 0; i < item.quantity; i++) {
-                formData.append("ProductDetailIds", item.id);
-            }
-        });
-
-        const res = await updatePackage(id, formData);
-        if (res === 200) {
-            toast({
-                variant: "success",
-                title: "Update Successfully.",
-                description: "A package was updated.",
-                action: <ToastAction altText="Close">Close</ToastAction>,
-            });
-            navigate(`/staff/packages/${packageId}`)
-        } else {
+        if (productDetails?.length < 4) {
             toast({
                 variant: "destructive",
-                title: "Fail to Update.",
-                description: "There was a problem with your request.",
+                title: "Fail to Request.",
+                description: "Add at least 4 different products!",
                 action: (
                     <ToastAction altText="Try again">Try again</ToastAction>
                 ),
             });
+        } else {
+            const formData = new FormData();
+            uploadedImages.forEach((image) => {
+                formData.append("Images", image);
+            });
+            formData.append("Name", values.name);
+            // formData.append("Discount", values.discount.toString());
+            formData.append("Description", values.description);
+            services.map((item) => {
+                return formData.append("ServiceIds", item.id);
+            });
+            productDetails.map((item) => {
+                for (let i = 0; i < item.quantity; i++) {
+                    formData.append("ProductDetailIds", item.id);
+                }
+            });
+
+            const res = await updatePackage(id, formData);
+            if (res === 200) {
+                toast({
+                    variant: "success",
+                    title: "Update Successfully.",
+                    description: "A package was updated.",
+                    action: <ToastAction altText="Close">Close</ToastAction>,
+                });
+                navigate(`/staff/packages/${packageId}`)
+            } else {
+                toast({
+                    variant: "destructive",
+                    title: "Fail to Update.",
+                    description: "There was a problem with your request.",
+                    action: (
+                        <ToastAction altText="Try again">Try again</ToastAction>
+                    ),
+                });
+            }
         }
     }
 
@@ -358,13 +369,19 @@ const PackageDetails: React.FC<Props> = () => {
                                     </Dialog>
                                 </div>
                                 <div className="mt-2">
-                                    <Button
-                                        variant={"yellowCustom"}
-                                        className="cursor-pointer w-40"
-                                        type="submit"
-                                    >
-                                        Save
-                                    </Button>
+                                    {productDetails?.length >= 4 ? (
+                                        <Button
+                                            variant={"yellowCustom"}
+                                            className="cursor-pointer w-40"
+                                            type="submit"
+                                        >
+                                            Save
+                                        </Button>
+                                    ) : (
+                                        <div className="text-red-800 font-semibold">
+                                            Add at least 4 different products!
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </div>

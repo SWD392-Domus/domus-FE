@@ -82,7 +82,7 @@ const QuotationDetail: React.FC<Props> = () => {
     // const [isLoading, setLoading] = useState(false);
     const navigate = useNavigate();
     const [versions, setVersions] = useState<VersionType[]>([]);
-    const [isUpdate, setUpdate] = useState(false);
+    const [, setUpdate] = useState(false);
     const [isEditTable, setEditTable] = useState(false);
     const [isEditService, setEditService] = useState(false);
     const [isEdit, setEdit] = useState(false);
@@ -116,7 +116,7 @@ const QuotationDetail: React.FC<Props> = () => {
         const sentProducts = products.map((product) => {
             const { price, monetaryUnit, quantity, quantityType } = product;
             return {
-                productDetailId: product.id,
+                id: product.id,
                 price: parseFloat(price),
                 monetaryUnit,
                 quantity: parseFloat(quantity),
@@ -138,44 +138,37 @@ const QuotationDetail: React.FC<Props> = () => {
             productdetails: sentProducts,
             services: sentServices,
         };
-        if (isUpdate) {
-            const token = localStorage.getItem("Token");
-            const res = await editQuotation(id, token as string, data);
-            if (res.status != 200) {
-                toast({
-                    variant: "destructive",
-                    title: "Uh oh! Something went wrong.",
-                    description: "Please Try again",
-                });
-            } else {
-                if (res.data.isSuccess) {
-                    toast({
-                        variant: "success",
-                        title: "Update Successfully",
-                        description: "",
-                    });
-                    if (totalPrice != originalPrice) {
-                        await pushNegotitaionService(id, token as string, {
-                            content: `${staff.email} have change the price from đ${originalPrice} to đ${totalPrice}`,
-                            isCustomerMessage: false,
-                        });
-                    }
 
-                    window.location.replace(`/staff/quotations/${id}`);
-                } else {
-                    toast({
-                        variant: "destructive",
-                        title: `${res.data.messages[0].content}`,
-                        description: "",
-                    });
-                }
-            }
-        } else {
+        const token = localStorage.getItem("Token");
+        const res = await editQuotation(id, token as string, data);
+        if (res.status != 200) {
             toast({
                 variant: "destructive",
-                title: `It seem you haven't done any change `,
-                description: "Try to edit something before update",
+                title: "Uh oh! Something went wrong.",
+                description: "Please Try again",
             });
+        } else {
+            if (res.data.isSuccess) {
+                toast({
+                    variant: "success",
+                    title: "Update Successfully",
+                    description: "",
+                });
+                if (totalPrice != originalPrice) {
+                    await pushNegotitaionService(id, token as string, {
+                        content: `${staff.email} have change the price from đ${originalPrice} to đ${totalPrice}`,
+                        isCustomerMessage: false,
+                    });
+                }
+
+                window.location.replace(`/staff/quotations/${id}`);
+            } else {
+                toast({
+                    variant: "destructive",
+                    title: `${res.data.messages[0].content}`,
+                    description: "",
+                });
+            }
         }
     };
     useEffect(() => {
@@ -332,7 +325,7 @@ const QuotationDetail: React.FC<Props> = () => {
                             "
                             >
                                 <Avatar className="mr-2">
-                                    {/* <AvatarImage src={staff.profileImage} /> */}
+                                    <AvatarImage src={staff.profileImage} />
                                     <AvatarFallback>Staff</AvatarFallback>
                                 </Avatar>
 
@@ -410,13 +403,13 @@ const QuotationDetail: React.FC<Props> = () => {
                                                                 new Date(
                                                                     versions[
                                                                         versions.length -
-                                                                            1
+                                                                        1
                                                                     ].createdAt
                                                                 ).toLocaleTimeString();
                                                             if (
                                                                 index ==
                                                                 versions.length -
-                                                                    1
+                                                                1
                                                             ) {
                                                                 name =
                                                                     "Current version " +
@@ -427,7 +420,7 @@ const QuotationDetail: React.FC<Props> = () => {
                                                                     new Date(
                                                                         versions[
                                                                             versions.length -
-                                                                                1
+                                                                            1
                                                                         ].createdAt
                                                                     ).toLocaleTimeString();
                                                             }
@@ -743,7 +736,7 @@ const QuotationDetail: React.FC<Props> = () => {
                 </div>
             )}
 
-            {!updated && <Loading />}
+            {!updated && <Loading variant="dark" />}
         </>
     );
 };

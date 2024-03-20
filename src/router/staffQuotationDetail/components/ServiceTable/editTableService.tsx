@@ -86,8 +86,7 @@ export function EditTableService<TData, TValue>({
                     currency: "VND",
                 }).format(
                     parseFloat(newCellValues[rowId].quantity as string) *
-                    parseFloat(newCellValues[rowId].price as string) *
-                    1000
+                    parseFloat(newCellValues[rowId].price as string)
                 );
             }
         }
@@ -180,25 +179,48 @@ export function EditTableService<TData, TValue>({
                                             ) : !(
                                                 cell.column.id == "action"
                                             ) ? (
-                                                <Input
-                                                    value={cellValue || ""}
-                                                    onChange={(e) =>
-                                                        handleChange(
-                                                            row.id,
-                                                            cell.column.id,
-                                                            e.target.value
-                                                        )
-                                                    }
-                                                    readOnly={
-                                                        cell.column.id ==
-                                                        "priceSum"
-                                                    }
-                                                    className={
-                                                        cell.column.id == "name"
-                                                            ? "w-full"
-                                                            : ""
-                                                    }
-                                                />
+                                                cell.column.id == "price" ? (
+                                                    <Input
+                                                        type="number"
+                                                        value={cellValue || ""}
+                                                        onChange={(e) =>
+                                                            handleChange(
+                                                                row.id,
+                                                                cell.column.id,
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                        readOnly={
+                                                            !serviceCellValues[
+                                                            row.id
+                                                            ]
+                                                        }
+                                                    />
+                                                ) : (
+                                                    <Input
+                                                        value={cellValue || ""}
+                                                        onChange={(e) =>
+                                                            handleChange(
+                                                                row.id,
+                                                                cell.column.id,
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                        readOnly={
+                                                            cell.column.id ==
+                                                            "priceSum" ||
+                                                            !serviceCellValues[
+                                                            row.id
+                                                            ]
+                                                        }
+                                                        className={
+                                                            cell.column.id ==
+                                                                "name"
+                                                                ? "w-full"
+                                                                : ""
+                                                        }
+                                                    />
+                                                )
                                             ) : (
                                                 <ServiceComboBox
                                                     selectedStatus={

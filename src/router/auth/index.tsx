@@ -2,7 +2,7 @@ import Loading from "@/components/PublicComponents/Loading";
 import { toastError, toastSuccess } from "@/components/Toast";
 import { loginApi } from "@/utils/api/loginApi";
 import React, { useEffect } from "react";
-import { useNavigate,  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
     // define your props here
@@ -15,7 +15,7 @@ const Auth: React.FC<Props> = () => {
         const code = urlParams.get("code") as string;
         const res = await loginApi.googleAuth(code);
         if (res.status != 200) {
-            toastError("Login Unccesfully, please try again");
+            toastError("Login Unsuccessfully, please try again");
             navigate("/login");
         } else {
             if (res.data.isSuccess) {
@@ -26,7 +26,7 @@ const Auth: React.FC<Props> = () => {
                 );
                 navigate("/home");
             } else {
-                toastError("Login Unccesfully, please try again");
+                toastError("Login Unsuccessfully, please try again");
                 navigate("/login");
             }
         }
@@ -40,7 +40,7 @@ const Auth: React.FC<Props> = () => {
 
     return (
         <div>
-            <Loading />
+            <Loading variant="light" />
         </div>
     );
 };

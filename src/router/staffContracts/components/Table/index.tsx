@@ -16,7 +16,7 @@ import {
     TableRow,
 } from "./table";
 import { SearchField } from "../Input/SearchField";
-import { CreateButton } from "../Button";
+// import { CreateButton } from "../Button";
 import { ActionsDropdownMenu } from "../DropdownMenu/Actions";
 import { SortButton } from "../Button/SortButton";
 
@@ -68,7 +68,7 @@ export function DataTable<TData, TValue>({
                 </div>
 
                 <div className="flex justify-end">
-                    <CreateButton></CreateButton>
+                    {/* <CreateButton></CreateButton> */}
                 </div>
             </div>
             <div className="rounded-md border mb-5">

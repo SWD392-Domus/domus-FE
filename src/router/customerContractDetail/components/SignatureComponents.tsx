@@ -79,6 +79,7 @@ const SignatureComponents: React.FC<Props> = () => {
                     title: `Sign Contract Sucessfully`,
                     description: "",
                 });
+                setTimeout(() => { window.location.reload(); }, 1500);
             } else {
                 toast({
                     variant: "destructive",

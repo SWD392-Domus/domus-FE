@@ -15,7 +15,7 @@ function onPrint() {
 
 export const CreateButton = () => {
     return (
-        <Link to="/staff/users/create">
+        <Link to="/admin/users/create">
             <Button className="">
                 <PlusCircledIcon className="my-auto mr-2" />
                 User

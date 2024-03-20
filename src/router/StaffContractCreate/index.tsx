@@ -482,7 +482,7 @@ const StaffContractCreate: React.FC<Props> = () => {
                                             {new Intl.NumberFormat("en-US", {
                                                 style: "currency",
                                                 currency: "VND",
-                                            }).format(totalPrice * 1000)}
+                                            }).format(totalPrice)}
                                         </h1>
                                     </div>
                                 </div>
@@ -568,7 +568,7 @@ const StaffContractCreate: React.FC<Props> = () => {
                     </Form>
                 </Card>
             )}
-            {!isUpdated && <Loading />}
+            {!isUpdated && <Loading variant="dark" />}
         </>
     );
 };
