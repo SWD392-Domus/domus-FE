@@ -19,7 +19,7 @@ const YearSelect: React.FC<Props> = (props) => {
             onValueChange={(value) => props.setSelectedYear(value)}
             defaultValue={"2024"}
         >
-            <SelectTrigger className="w-[180px]" value={props.selectedYear}>
+            <SelectTrigger className="w-[80px]" value={props.selectedYear}>
                 <SelectValue placeholder="Select year" />
             </SelectTrigger>
             <SelectContent>
