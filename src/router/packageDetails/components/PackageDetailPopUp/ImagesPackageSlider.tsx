@@ -43,7 +43,7 @@ const Slider: React.FC<Props> = (
                             <SwiperSlide
                                 className="flex justify-center items-center"
                             >
-                                <img className="object-contain h-96" src={p} alt="" />
+                                <img className="object-contain h-[20rem]" src={p} alt="" />
                             </SwiperSlide>
                         );
                     })}

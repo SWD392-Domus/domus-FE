@@ -30,18 +30,16 @@ export const getContractsPaging = async (
         contractor: { userName: string; profileImage: string };
         status: number;
         signature: string;
+        quotationRevision: { totalPrice: string };
       }) => ({
         id: item?.id,
         name: item?.name,
         signedAt: item?.signedAt,
-        // staffAva: item?.staff?.profileImage,
-        // staffName: item?.staff?.userName,
         staffName: item?.contractor,
-        // customerAva: item?.customer?.profileImage,
-        // customerName: item?.customer?.userName,
         customerName: item?.client,
         status: item?.status,
         signature: item?.signature,
+        totalPrice: item?.quotationRevision?.totalPrice,
       })
     );
     const lastPage = contractsData?.lastPage;

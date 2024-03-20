@@ -99,14 +99,6 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
     const formSchema = z.object({
         name: z.string().nonempty({ message: "Name is required" }),
         description: z.string().nonempty({ message: "Description is required" }),
-        // discount: z
-        //     .number({
-        //         required_error: "Discount is required",
-        //         invalid_type_error:
-        //             "Discount must be a number between 0 and 100",
-        //     })
-        //     .lte(100)
-        //     .nonnegative(),
     });
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -114,11 +106,23 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
         defaultValues: {
             name: name,
             description: description,
-            // discount: discount,
         },
     });
+
+    const checkProductsValidate = () => {
+        let quantityValidate = 0;
+        for (let i = 0; i < productDetails.length; i++) {
+            const productDetail = productDetails[i];
+            quantityValidate += productDetail.quantity;
+        }
+        if (quantityValidate < 4) {
+            return false;
+        }
+        return true;
+    }
+
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        if (productDetails?.length < 4) {
+        if (checkProductsValidate()) {
             toast({
                 variant: "destructive",
                 title: "Fail to Request.",
@@ -288,7 +292,7 @@ const StaffPackageDetailCreate: React.FC<Props> = () => {
                                     </Dialog>
                                 </div>
                                 <div className="mt-2">
-                                    {productDetails?.length >= 4 ? (
+                                    {checkProductsValidate() ? (
                                         <Button
                                             variant={"yellowCustom"}
                                             className="cursor-pointer w-40"

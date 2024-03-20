@@ -114,6 +114,19 @@ export const columns: ColumnDef<ContractsProps>[] = [
         },
     },
     {
+        accessorKey: "totalPrice",
+        header: () => <div className="text-left">Total Price</div>,
+        cell: ({ row }) => {
+            const totalPrice = parseFloat(row.getValue("totalPrice"));
+            const formatted = new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "VND",
+            }).format(totalPrice);
+
+            return <div className="text-left font-medium">{formatted}</div>;
+        },
+    },
+    {
         accessorKey: "status",
         header: () => <div className="text-left">Status</div>,
         cell: ({ row }) => {
