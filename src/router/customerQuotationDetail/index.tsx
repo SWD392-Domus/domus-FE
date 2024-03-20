@@ -66,6 +66,7 @@ const QuotationDetail: React.FC<Props> = () => {
     const [updated, setUpdated] = useState(false);
     const initalValues: CellValues = {};
     const serviceInitialValues: CellValues = {};
+    const [render, setRender] = useState(1);
     const navigate = useNavigate();
     const [versions, setVersions] = useState<VersionType[]>([]);
     useEffect(() => {
@@ -134,7 +135,7 @@ const QuotationDetail: React.FC<Props> = () => {
         return () => {
             isMounted = false;
         };
-    }, [quotationId]);
+    }, [quotationId, render, versionId]);
 
     return (
         <>
@@ -287,7 +288,7 @@ const QuotationDetail: React.FC<Props> = () => {
                                             <div className="text-md">
                                                 <div className="flex flex-row">
                                                     <div className="font-semibold mr-1">
-                                                        Exprie Date
+                                                        Expire Date
                                                     </div>
                                                     <p>
                                                         {new Date(
@@ -395,7 +396,14 @@ const QuotationDetail: React.FC<Props> = () => {
                                     ></MakeContractButton>
                                 )}
 
-                                {!versionId && <DeleteButton></DeleteButton>}
+                                {!versionId &&
+                                    status != "Accepted" &&
+                                    status != "Cancelled" && (
+                                        <DeleteButton
+                                            id={id}
+                                            setRender={setRender}
+                                        ></DeleteButton>
+                                    )}
                             </div>
                         </div>
                         <Negotiation

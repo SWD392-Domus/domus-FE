@@ -42,6 +42,12 @@ const slice = createSlice({
             state.user.phoneNumber = phoneNumber;
             state.user.profileImage = profileImage;
         },
+        setId: (state: any, action: any) => {
+            state.user.id = action.payload;
+        },
+        setEmail: (state: any, action: any) => {
+            state.user.email = action.payload as string;
+        },
     },
 });
 

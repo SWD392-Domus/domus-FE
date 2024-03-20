@@ -13,4 +13,12 @@ export const loginApi = {
     googleAuth: (code: string) => {
         return post(GooogleAuth, getGoogleAuthRequest(code));
     },
+    confirmOtp: (id: string, otp: string, token: string) => {
+        return post(
+            `/Auth/confirm-otp`,
+            { id: id, otp: otp },
+            {},
+            { Authorization: token }
+        );
+    },
 };

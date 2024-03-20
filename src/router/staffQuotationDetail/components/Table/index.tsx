@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/Button/Button";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { useDispatch } from "react-redux";
 import { actions } from "../../slice";
+import { toastError } from "@/components/Toast";
 export interface ProductDetails {
     images: {
         imageUrl: string;
@@ -87,7 +88,7 @@ export function EditDataTable<TData, TValue>({
                     currency: "VND",
                 }).format(
                     parseFloat(newCellValues[rowId].quantity as string) *
-                    parseFloat(newCellValues[rowId].price as string)
+                        parseFloat(newCellValues[rowId].price as string)
                 );
             }
         }
@@ -134,10 +135,10 @@ export function EditDataTable<TData, TValue>({
                                         {header.isPlaceholder
                                             ? null
                                             : flexRender(
-                                                header.column.columnDef
-                                                    .header,
-                                                header.getContext()
-                                            )}
+                                                  header.column.columnDef
+                                                      .header,
+                                                  header.getContext()
+                                              )}
                                     </TableHead>
                                 );
                             })}
@@ -175,20 +176,117 @@ export function EditDataTable<TData, TValue>({
                                                     />
                                                 </Button>
                                             ) : !(
-                                                cell.column.id == "action"
-                                            ) ? (
-                                                cell.column.id == "price" ||
-                                                    cell.column.id == "quantity" ? (
+                                                  cell.column.id == "action"
+                                              ) ? (
+                                                cell.column.id == "price" ? (
                                                     <Input
                                                         value={cellValue || ""}
                                                         type="number"
-                                                        onChange={(e) =>
-                                                            handleChange(
-                                                                row.id,
-                                                                cell.column.id,
-                                                                e.target.value
-                                                            )
+                                                        min="0"
+                                                        max="999999999999"
+                                                        onChange={(e) => {
+                                                            let newValue =
+                                                                parseInt(
+                                                                    e.target
+                                                                        .value
+                                                                );
+                                                            // Check if the entered value is within the range [0, 999]
+                                                            if (
+                                                                (newValue >=
+                                                                    1 &&
+                                                                    newValue <=
+                                                                        999999999999) ||
+                                                                e.target
+                                                                    .value == ""
+                                                            ) {
+                                                                handleChange(
+                                                                    row.id,
+                                                                    cell.column
+                                                                        .id,
+                                                                    e.target
+                                                                        .value
+                                                                );
+                                                            } else if (
+                                                                newValue < 0
+                                                            ) {
+                                                                handleChange(
+                                                                    row.id,
+                                                                    cell.column
+                                                                        .id,
+                                                                    "0"
+                                                                ); // Set to 0 if smaller than 0
+                                                                toastError(
+                                                                    "This must be greater then 0"
+                                                                );
+                                                            } else {
+                                                                handleChange(
+                                                                    row.id,
+                                                                    cell.column
+                                                                        .id,
+                                                                    "999999999999"
+                                                                ); // Set to 999 if larger than 999
+                                                                toastError(
+                                                                    "This  field must be greater then less then or equal đ999,999,999,999"
+                                                                );
+                                                            }
+                                                        }}
+                                                        readOnly={
+                                                            !cellValues[row.id]
                                                         }
+                                                    />
+                                                ) : cell.column.id ==
+                                                  "quantity" ? (
+                                                    <Input
+                                                        value={cellValue || ""}
+                                                        type="number"
+                                                        min="0"
+                                                        max="999"
+                                                        onChange={(e) => {
+                                                            let newValue =
+                                                                parseInt(
+                                                                    e.target
+                                                                        .value
+                                                                );
+                                                            // Check if the entered value is within the range [0, 999]
+                                                            if (
+                                                                (newValue >=
+                                                                    1 &&
+                                                                    newValue <=
+                                                                        999) ||
+                                                                e.target
+                                                                    .value == ""
+                                                            ) {
+                                                                handleChange(
+                                                                    row.id,
+                                                                    cell.column
+                                                                        .id,
+                                                                    e.target
+                                                                        .value
+                                                                );
+                                                            } else if (
+                                                                newValue < 0
+                                                            ) {
+                                                                handleChange(
+                                                                    row.id,
+                                                                    cell.column
+                                                                        .id,
+                                                                    "1"
+                                                                ); // Set to 0 if smaller than 0
+                                                                toastError(
+                                                                    "This must be greater then 0"
+                                                                );
+                                                            } else {
+                                                                handleChange(
+                                                                    row.id,
+                                                                    cell.column
+                                                                        .id,
+                                                                    "999"
+                                                                ); // Set to 999 if larger than 999
+                                                                toastError(
+                                                                    "This  field must be greater then less then 999"
+                                                                );
+                                                            }
+                                                        }}
                                                         readOnly={
                                                             !cellValues[row.id]
                                                         }
@@ -205,7 +303,7 @@ export function EditDataTable<TData, TValue>({
                                                         }
                                                         readOnly={
                                                             cell.column.id ==
-                                                            "priceSum" ||
+                                                                "priceSum" ||
                                                             !cellValues[row.id]
                                                         }
                                                     />

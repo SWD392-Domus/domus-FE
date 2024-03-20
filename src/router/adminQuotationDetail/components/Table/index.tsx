@@ -87,7 +87,7 @@ export function EditDataTable<TData, TValue>({
                     currency: "VND",
                 }).format(
                     parseFloat(newCellValues[rowId].quantity as string) *
-                    parseFloat(newCellValues[rowId].price as string)
+                        parseFloat(newCellValues[rowId].price as string)
                 );
             }
         }
@@ -126,10 +126,10 @@ export function EditDataTable<TData, TValue>({
                                         {header.isPlaceholder
                                             ? null
                                             : flexRender(
-                                                header.column.columnDef
-                                                    .header,
-                                                header.getContext()
-                                            )}
+                                                  header.column.columnDef
+                                                      .header,
+                                                  header.getContext()
+                                              )}
                                     </TableHead>
                                 );
                             })}
@@ -167,13 +167,15 @@ export function EditDataTable<TData, TValue>({
                                                     />
                                                 </Button>
                                             ) : !(
-                                                cell.column.id == "action"
-                                            ) ? (
+                                                  cell.column.id == "action"
+                                              ) ? (
                                                 cell.column.id == "price" ||
-                                                    cell.column.id == "quantity" ? (
+                                                cell.column.id == "quantity" ? (
                                                     <Input
                                                         value={cellValue || ""}
                                                         type="number"
+                                                        min="0"
+                                                        max="999"
                                                         onChange={(e) =>
                                                             handleChange(
                                                                 row.id,

@@ -125,13 +125,16 @@ const QuotationDetail: React.FC<Props> = () => {
                 quantityType,
             };
         });
+        let productSize = 0;
+        sentProducts.map((item) => {
+            productSize += item.quantity;
+        });
         const sentServices = services.map((service: any) => {
             return {
                 serviceId: service.serviceId,
                 price: parseFloat(service.price),
             };
         });
-
         const data = {
             customerId: customer.id,
             staffId: staff.id,
@@ -142,39 +145,49 @@ const QuotationDetail: React.FC<Props> = () => {
         };
 
         const token = localStorage.getItem("Token");
-        const res = await editQuotation(id, token as string, data);
-        if (res.status != 200) {
+
+        if (productSize < 4) {
             toast({
                 variant: "destructive",
-                title: "Uh oh! Something went wrong.",
-                description: "Please Try again",
+                title: `Products must be at least 4 items`,
+                description: "",
             });
+            return;
         } else {
-            if (res.data.isSuccess) {
-                toast({
-                    variant: "success",
-                    title: "Update Successfully",
-                    description: "",
-                });
-                if (totalPrice != originalPrice) {
-                    await pushNegotitaionService(id, token as string, {
-                        content: `${staff.email} have change the price from đ${originalPrice} to đ${totalPrice}`,
-                        isCustomerMessage: false,
-                    });
-                } else if (status == "Requested") {
-                    await pushNegotitaionService(id, token as string, {
-                        content: `Hi,I will be your main saler for this quotation,These are the prices as you request,feel free to negotia through this chat`,
-                        isCustomerMessage: false,
-                    });
-                }
-
-                window.location.replace(`/staff/quotations/${id}`);
-            } else {
+            const res = await editQuotation(id, token as string, data);
+            if (res.status != 200) {
                 toast({
                     variant: "destructive",
-                    title: `${res.data.messages[0].content}`,
-                    description: "",
+                    title: "Uh oh! Something went wrong.",
+                    description: "Please Try again",
                 });
+            } else {
+                if (res.data.isSuccess) {
+                    toast({
+                        variant: "success",
+                        title: "Update Successfully",
+                        description: "",
+                    });
+                    if (totalPrice != originalPrice) {
+                        await pushNegotitaionService(id, token as string, {
+                            content: `${staff.email} have change the price from đ${originalPrice} to đ${totalPrice}`,
+                            isCustomerMessage: false,
+                        });
+                    } else if (status == "Requested") {
+                        await pushNegotitaionService(id, token as string, {
+                            content: `Hi,I will be your main saler for this quotation,These are the prices as you request,feel free to negotia through this chat`,
+                            isCustomerMessage: false,
+                        });
+                    }
+
+                    window.location.replace(`/staff/quotations/${id}`);
+                } else {
+                    toast({
+                        variant: "destructive",
+                        title: `${res.data.messages[0].content}`,
+                        description: "",
+                    });
+                }
             }
         }
     };
@@ -475,7 +488,7 @@ const QuotationDetail: React.FC<Props> = () => {
                                             <div className="text-md">
                                                 <div className="flex flex-row">
                                                     <div className="font-semibold mr-1">
-                                                        Exprie Date
+                                                        Expire Date
                                                     </div>
                                                     <p>
                                                         {new Date(
@@ -677,6 +690,7 @@ const QuotationDetail: React.FC<Props> = () => {
                                         <Button
                                             variant="outline"
                                             className="border-black flex items-center"
+                                            disabled={status == "Accepted"}
                                         >
                                             <TrashIcon
                                                 className=" my-auto"
@@ -693,9 +707,9 @@ const QuotationDetail: React.FC<Props> = () => {
                                             </AlertDialogTitle>
                                             <AlertDialogDescription>
                                                 This action cannot be undone.
-                                                This will permanently delete
-                                                your account and remove your
-                                                data from our servers.
+                                                This will mean that you cancel
+                                                the quotation and no action will
+                                                be done after this cancelation
                                             </AlertDialogDescription>
                                         </AlertDialogHeader>
                                         <AlertDialogFooter>

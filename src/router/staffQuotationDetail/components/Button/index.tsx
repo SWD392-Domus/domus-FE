@@ -106,12 +106,12 @@ export const MakeContractButton = ({
         versionId = versions[versions.length - 1].id;
     }
     const getToolTipMessage = () => {
-        if (status == "Accepted") {
-            return "This Quotation have already been confirmed, please wait for the contract being sent to you";
+        if (status == "Negotiating") {
+            return "This Quotation need to be confirmed first";
         } else if (status == "Requested") {
-            return "This Quotation have been sent, please wait for out staff to reply";
+            return "This Quotation have just been request";
         } else {
-            return "Click for confirming the quotation";
+            return "Click for making  contract based on this quotation";
         }
     };
     return (

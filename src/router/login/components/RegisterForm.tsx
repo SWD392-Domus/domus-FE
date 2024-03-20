@@ -18,11 +18,15 @@ import { loginApi } from "@/utils/api/loginApi";
 import { toastError, toastSuccess } from "@/components/Toast";
 // import { useNavigate } from "react-router-dom";
 import { devEnvGoogleAuth } from "../constants";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { actions } from "../slice";
 
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> { }
+interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function RegisterForm({ className, ...props }: UserAuthFormProps) {
-    // const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const handleGoogleLogin = () => {
         window.location.replace(devEnvGoogleAuth());
     };
@@ -76,9 +80,9 @@ export function RegisterForm({ className, ...props }: UserAuthFormProps) {
             const data = res.data;
             if (data.isSuccess) {
                 toastSuccess("Success");
-                console.log(data);
-                const token = data.data.accessToken;
-                localStorage.setItem("Token", token);
+                navigate("/otp");
+                dispatch(actions.setId(data.data.id));
+                dispatch(actions.setEmail(values.email));
                 // navigate("/home");
             } else {
                 for (let mess of data.messages) {

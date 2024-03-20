@@ -21,6 +21,7 @@ import { TrashIcon } from "@radix-ui/react-icons";
 import { useDispatch } from "react-redux";
 import { actions } from "../../slice";
 import { ServiceComboBox } from "../ServiceComboBox";
+import { toastError } from "@/components/Toast";
 export interface ProductDetails {
     images: {
         imageUrl: string;
@@ -86,7 +87,7 @@ export function EditTableService<TData, TValue>({
                     currency: "VND",
                 }).format(
                     parseFloat(newCellValues[rowId].quantity as string) *
-                    parseFloat(newCellValues[rowId].price as string)
+                        parseFloat(newCellValues[rowId].price as string)
                 );
             }
         }
@@ -134,10 +135,10 @@ export function EditTableService<TData, TValue>({
                                         {header.isPlaceholder
                                             ? null
                                             : flexRender(
-                                                header.column.columnDef
-                                                    .header,
-                                                header.getContext()
-                                            )}
+                                                  header.column.columnDef
+                                                      .header,
+                                                  header.getContext()
+                                              )}
                                     </TableHead>
                                 );
                             })}
@@ -155,7 +156,7 @@ export function EditTableService<TData, TValue>({
                                     const cellValue =
                                         serviceCellValues[row.id] &&
                                         serviceCellValues[row.id][
-                                        cell.column.id
+                                            cell.column.id
                                         ];
 
                                     return (
@@ -177,22 +178,63 @@ export function EditTableService<TData, TValue>({
                                                     />
                                                 </Button>
                                             ) : !(
-                                                cell.column.id == "action"
-                                            ) ? (
+                                                  cell.column.id == "action"
+                                              ) ? (
                                                 cell.column.id == "price" ? (
                                                     <Input
-                                                        type="number"
                                                         value={cellValue || ""}
-                                                        onChange={(e) =>
-                                                            handleChange(
-                                                                row.id,
-                                                                cell.column.id,
-                                                                e.target.value
-                                                            )
-                                                        }
+                                                        type="number"
+                                                        min="0"
+                                                        max="999999999999"
+                                                        onChange={(e) => {
+                                                            let newValue =
+                                                                parseInt(
+                                                                    e.target
+                                                                        .value
+                                                                );
+                                                            // Check if the entered value is within the range [0, 999]
+                                                            if (
+                                                                (newValue >=
+                                                                    1 &&
+                                                                    newValue <=
+                                                                        999999999999) ||
+                                                                e.target
+                                                                    .value == ""
+                                                            ) {
+                                                                handleChange(
+                                                                    row.id,
+                                                                    cell.column
+                                                                        .id,
+                                                                    e.target
+                                                                        .value
+                                                                );
+                                                            } else if (
+                                                                newValue < 0
+                                                            ) {
+                                                                handleChange(
+                                                                    row.id,
+                                                                    cell.column
+                                                                        .id,
+                                                                    "0"
+                                                                ); // Set to 0 if smaller than 0
+                                                                toastError(
+                                                                    "This must be greater then 0"
+                                                                );
+                                                            } else {
+                                                                handleChange(
+                                                                    row.id,
+                                                                    cell.column
+                                                                        .id,
+                                                                    "999999999999"
+                                                                ); // Set to 999 if larger than 999
+                                                                toastError(
+                                                                    "This  field must be greater then less then or equal đ999,999,999,999"
+                                                                );
+                                                            }
+                                                        }}
                                                         readOnly={
                                                             !serviceCellValues[
-                                                            row.id
+                                                                row.id
                                                             ]
                                                         }
                                                     />
@@ -208,14 +250,14 @@ export function EditTableService<TData, TValue>({
                                                         }
                                                         readOnly={
                                                             cell.column.id ==
-                                                            "priceSum" ||
+                                                                "priceSum" ||
                                                             !serviceCellValues[
-                                                            row.id
+                                                                row.id
                                                             ]
                                                         }
                                                         className={
                                                             cell.column.id ==
-                                                                "name"
+                                                            "name"
                                                                 ? "w-full"
                                                                 : ""
                                                         }

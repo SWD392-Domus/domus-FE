@@ -7,6 +7,7 @@ import {
     DialogTitle,
     DialogTrigger,
     DialogFooter,
+    DialogClose,
 } from "@/components/ui/Dialog";
 import { Button } from "@/components/ui/Button/Button";
 import { Input } from "@/components/ui/Input";
@@ -105,7 +106,9 @@ const ChangeAvatar: React.FC<Props> = ({ uploadedImage, setUploadedImage }) => {
                     )}
 
                     <DialogFooter>
-                        <Button type="submit">Save</Button>
+                        <DialogClose asChild>
+                            <Button type="submit">Save</Button>
+                        </DialogClose>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>

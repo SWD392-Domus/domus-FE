@@ -1,21 +1,47 @@
 import React, { useRef, useState } from "react";
+import { useSelector } from "react-redux";
+import userSelector from "../login/slice/selector";
+import { loginApi } from "@/utils/api/loginApi";
+import { toastError, toastSuccess } from "@/components/Toast";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
     // define your props here
 }
 
 const OTP: React.FC<Props> = () => {
+    const navigate = useNavigate();
+    const user: any = useSelector(userSelector.user);
     const inputRefs = useRef<(HTMLInputElement | null)[]>(Array(4).fill(null));
     const [otp, setOTP] = useState<string>("");
 
-    const handleInputChange = (index: number, value: string) => {
+    const handleInputChange = async (index: number, value: string) => {
         const newOTP =
             otp.substring(0, index) + value + otp.substring(index + 1);
         setOTP(newOTP);
-
+        console.log(newOTP);
         if (index === inputRefs.current.length - 1) {
+            console.log("sent");
+            console.log(newOTP);
+            const token = localStorage.getItem("Token");
             // Submit the OTP string if it reaches the end
-            console.log("Submitting OTP:", newOTP);
+            const res = await loginApi.confirmOtp(
+                user.id,
+                newOTP,
+                token as string
+            );
+            if (res.status == 200) {
+                if (res.data.isSuccess) {
+                    toastSuccess("OTP Confirm Sucessfully");
+                    const token = res.data.data.token.token.accessToken;
+                    localStorage.setItem("Token", token);
+                    navigate("/");
+                } else {
+                    toastError(res.data.messages[0].content);
+                }
+            } else {
+                toastError("OTP Confirm success fully");
+            }
             // You can call your submit function here
         } else if (value.length === 1) {
             inputRefs.current[index + 1]?.focus();
@@ -31,10 +57,12 @@ const OTP: React.FC<Props> = () => {
                             <p>Email Verification</p>
                         </div>
                         <div className="flex flex-row text-sm font-medium text-gray-400">
-                            <p>
-                                We have sent a code to your email
-                                ba**@dipainhouse.com
-                            </p>
+                            {user.email && (
+                                <p>
+                                    We have sent a code to your email{" "}
+                                    {user.email}
+                                </p>
+                            )}
                         </div>
                     </div>
 

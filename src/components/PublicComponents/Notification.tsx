@@ -55,8 +55,8 @@ const Notification: React.FC<Props> = () => {
         const token = `Bearer ${localStorage.getItem("Token")}`;
         if (token) {
             try {
-                const res = await notificationApi.getNotification(token);
-                setNotifications(res.data.data);
+                const res = await notificationApi.getNotification(token, 5);
+                setNotifications(res.data.data.items);
             } catch (error) {
                 // Handle error
                 console.error("Error fetching notifications:", error);
@@ -73,10 +73,6 @@ const Notification: React.FC<Props> = () => {
                         height={30}
                         className="text-yellowCustom"
                     />
-
-                    <div className="bg-yellowCustom text-black w-6 h-6 rounded-full text-center items-center absolute -right-1 -top-1">
-                        {0}
-                    </div>
                 </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-[350px]   text-black border-none">

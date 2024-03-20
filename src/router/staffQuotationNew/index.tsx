@@ -74,9 +74,9 @@ const StaffQuotationNew: React.FC<Props> = () => {
     const products: any[] = useSelector(selector.products);
     const negotiationLog: any = useSelector(selector.negotiationLog);
     const services: any = useSelector(selector.services);
-    const [updated,] = useState(true);
+    const [updated] = useState(true);
     const initalValues: CellValues = {};
-    const [originalPrice,] = useState(totalPrice);
+    const [originalPrice] = useState(totalPrice);
     // const serviceInitialValues: CellValues = {};
     const [cellValues, setCellValues] = useState<CellValues>(initalValues);
     const [serviceCellValues, setserviceCellValues] =
@@ -267,7 +267,7 @@ const StaffQuotationNew: React.FC<Props> = () => {
                                             <div className="text-md">
                                                 <div className="flex flex-row">
                                                     <div className="font-semibold mr-1">
-                                                        Exprie Date
+                                                        Expire Date
                                                     </div>
                                                     <p>
                                                         {new Date(
