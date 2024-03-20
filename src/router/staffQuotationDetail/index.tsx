@@ -51,7 +51,7 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/AlertDialog";
-import { deleteQuotation } from "../staffQuotations/usecase";
+// import { deleteQuotation } from "../staffQuotations/usecase";
 
 import {
     Select,
@@ -66,7 +66,7 @@ import { getQuotationRevisions } from "./service/getQuotationRevisions";
 import { getQuotationDetailByVersionService } from "./service/getQuotationByVersionService";
 import Loading from "@/components/PublicComponents/Loading";
 import {
-    quotationCustomerApi,
+    // quotationCustomerApi,
     quotationStaffApi,
 } from "@/utils/api/QuotationApi";
 interface Props {
@@ -446,13 +446,13 @@ const QuotationDetail: React.FC<Props> = () => {
                                                                 new Date(
                                                                     versions[
                                                                         versions.length -
-                                                                            1
+                                                                        1
                                                                     ].createdAt
                                                                 ).toLocaleTimeString();
                                                             if (
                                                                 index ==
                                                                 versions.length -
-                                                                    1
+                                                                1
                                                             ) {
                                                                 name =
                                                                     "Current version " +
@@ -463,7 +463,7 @@ const QuotationDetail: React.FC<Props> = () => {
                                                                     new Date(
                                                                         versions[
                                                                             versions.length -
-                                                                                1
+                                                                            1
                                                                         ].createdAt
                                                                     ).toLocaleTimeString();
                                                             }

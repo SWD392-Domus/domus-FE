@@ -9,6 +9,7 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
+    DialogClose
 } from "@/components/ui/Dialog";
 import { Card } from "@/components/ui/Card";
 import {
@@ -52,7 +53,8 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { getContractDetail } from "./usecase/getContractDetail";
 import { toast } from "@/components/ui/Toast/use-toast";
 import SignatureComponents from "./components/SignatureComponents";
-const handleCancel = () => {};
+import { contractApi } from "@/utils/api/contractApi";
+
 type User = {
     id: string;
     email: string;
@@ -65,7 +67,37 @@ type User = {
 };
 
 const CustomerContractDetail: React.FC<Props> = () => {
+    const { contractId } = useParams();
+
     // const [open, setOpen] = useState(false);
+    const handleCancel = async () => {
+        const token = `Bearer ${localStorage.getItem("Token")}`;
+        const res = await contractApi.cancelContract(
+            contractId as string,
+            token
+        );
+        if (res.status == 200) {
+            if (res.data.isSuccess) {
+                toast({
+                    variant: "success",
+                    title: "Cancel Contract successfully",
+                });
+                setTimeout(() => { window.location.reload(); }, 1500);
+            } else {
+                toast({
+                    variant: "destructive",
+                    title: res.data.messages[0].content,
+                    description: "There was a problem with your request.",
+                });
+            }
+        } else {
+            toast({
+                variant: "destructive",
+                title: "Cancel contract unsuccessfully",
+                description: "There was a problem with your request.",
+            });
+        }
+    };
     const [products, setProducts] = useState<QuotationDetailInfo[]>([]);
     const [services, setServices] = useState<ServiceProps[]>([]);
 
@@ -74,7 +106,6 @@ const CustomerContractDetail: React.FC<Props> = () => {
     const [signature, setSignature] = useState(null);
     const [fullName, setFullname] = useState(null);
     const [status, setStatus] = useState("");
-    const { contractId } = useParams();
     const [render, setRender] = useState(1);
     useEffect(() => {
         // const fetchData = async () => {
@@ -151,7 +182,7 @@ const CustomerContractDetail: React.FC<Props> = () => {
         return totalPrice;
     }
 
-    const onSubmit = () => {};
+    const onSubmit = () => { };
     return (
         <Card className="w-full flex flex-col justify-center items-center border mt-4">
             <h1 className="text-4xl font-medium">Contract Detail</h1>
@@ -442,43 +473,49 @@ const CustomerContractDetail: React.FC<Props> = () => {
                                         currency: "VND",
                                     }).format(
                                         calculateTotalPrice(products) +
-                                            calculateTotalPrice(services)
+                                        calculateTotalPrice(services)
                                     )}
                                 </h1>
                             </div>
                         </div>
                     </div>
                     <div className="w-full flex justify-between items-center">
-                        <Dialog>
-                            <DialogTrigger asChild>
-                                <Button className="bg-variant text-black h-9 border-2 border-zinc-500 bg-zinc-50 rounded hover:text-white pl-2">
-                                    Cancel
-                                </Button>
-                            </DialogTrigger>
-                            <DialogContent className="sm:max-w-[425px]">
-                                <DialogHeader>
-                                    <DialogTitle>
-                                        Cancel Confirmation?
-                                    </DialogTitle>
-                                    <DialogDescription>
-                                        Are you really sure that you want to
-                                        cancel this contract? This action cannot
-                                        be reverted!
-                                    </DialogDescription>
-                                </DialogHeader>
-                                <DialogFooter>
-                                    <Button className="bg-zinc-500">
-                                        Exit
-                                    </Button>
-                                    <Button
-                                        onClick={handleCancel}
-                                        className="bg-red-600"
-                                    >
-                                        Cancel
-                                    </Button>
-                                </DialogFooter>
-                            </DialogContent>
-                        </Dialog>
+                        <div>
+                            {status == "0" &&
+                                <Dialog>
+                                    <DialogTrigger disabled={status != "0"} asChild>
+                                        <Button disabled={status != "0"} className="bg-variant text-black h-9 border-2 border-zinc-500 bg-zinc-50 rounded hover:text-white px-2">
+                                            Cancel
+                                        </Button>
+                                    </DialogTrigger>
+                                    <DialogContent className="sm:max-w-[425px]">
+                                        <DialogHeader>
+                                            <DialogTitle>
+                                                Cancel Confirmation?
+                                            </DialogTitle>
+                                            <DialogDescription>
+                                                Are you really sure that you want to
+                                                cancel this contract? This action cannot
+                                                be reverted!
+                                            </DialogDescription>
+                                        </DialogHeader>
+                                        <DialogFooter>
+                                            <DialogClose>
+                                                <Button className="bg-zinc-500">
+                                                    Exit
+                                                </Button>
+                                            </DialogClose>
+                                            <Button
+                                                onClick={handleCancel}
+                                                className="bg-red-600"
+                                            >
+                                                Cancel
+                                            </Button>
+                                        </DialogFooter>
+                                    </DialogContent>
+                                </Dialog>
+                            }
+                        </div>
                         <div className="flex flex-col items-center">
                             <h1 className="text-2xl">Signature</h1>
 
