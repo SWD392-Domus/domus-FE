@@ -59,10 +59,10 @@ const UserDetails: React.FC<Props> = () => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       const formData = new FormData();
-      formData.append("FullName", values.fullName);
+      formData.append("FullName", values.fullName || "");
       formData.append("Gender", sex);
-      formData.append("Address", values.address);
-      formData.append("PhoneNumber", values.phoneNumber);
+      formData.append("Address", values.address|| "");
+      formData.append("PhoneNumber", values.phoneNumber || "");
       if (uploadedImage?.isUpload) {
         formData.append("ProfileImage", uploadedImage.file as any);
       }
@@ -89,14 +89,25 @@ const UserDetails: React.FC<Props> = () => {
       toastError("Fail to fetch Information");
     } else {
       if (res.data.isSuccess) {
-        const { fullName, address, phoneNumber, email, profileImage, role } =
+        const { fullName, address, phoneNumber, email, profileImage, gender , role } =
           res.data.data;
         form.setValue("fullName", fullName);
         form.setValue("address", address);
         form.setValue("phoneNumber", phoneNumber);
         form.setValue("email", email);
-        // setUser(res.data.data);
-        setRole(role);
+        setSex(gender);
+        let roleToRender ="";
+        for (const item of role) {
+            if (item === "Admin") {
+                roleToRender = "Admin";
+                break; // Exit the loop since Admin is found
+            } else if (item === "Staff" && roleToRender !== "Admin") {
+                roleToRender = "Staff";
+            } else if (item === "Client" && roleToRender !== "Admin" && roleToRender !== "Staff") {
+                roleToRender = "Client";
+            }
+        }
+        if(roleToRender) setRole(roleToRender);
         setUploadedImage({
           file: null,
           imageUrl: profileImage,
@@ -114,22 +125,19 @@ const UserDetails: React.FC<Props> = () => {
   const [role, setRole] = useState("");
 
   const formSchema = z.object({
-    fullName: z.string().nonempty({
-      message: "Name is required.",
-    }),
+    fullName: z.string().nullable(),
     email: z.string().email({
       message: "Invalid email format.",
-    }),
+    }).nullable(),
     phoneNumber: z
       .string()
       .min(10)
-      .max(15)
+      .max(12)
       .regex(/^\+?\d+$/, {
         message: "Invalid phone number format.",
-      }),
-    address: z.string().nonempty({
-      message: "Address is required.",
-    }),
+      })
+      .nullable(),
+    address: z.string().nullable(),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -211,6 +219,7 @@ const UserDetails: React.FC<Props> = () => {
                     <Input
                       placeholder="shadcn@gmail.com"
                       {...field}
+                      value={field.value || ''} // Ensure value is not null
                       className="text-black mb-4"
                     />
                   </FormControl>
@@ -226,11 +235,15 @@ const UserDetails: React.FC<Props> = () => {
                   Sex
                 </Label>
                 <Select value={sex} onValueChange={setSex}>
-                  <SelectTrigger className="w-full">
+                <SelectTrigger className="w-full">
+                  {sex ? (
+                    <SelectValue placeholder={sex} aria-label={sex} />
+                  ) : (
                     <SelectValue
                       placeholder="Select your sex"
                       aria-label={sex}
                     />
+                  )}
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
@@ -275,6 +288,7 @@ const UserDetails: React.FC<Props> = () => {
                     <Input
                       placeholder="0838631706"
                       {...field}
+                      value={field.value || ''}
                       className="text-black mb-4"
                     />
                   </FormControl>
@@ -295,6 +309,7 @@ const UserDetails: React.FC<Props> = () => {
                     <Input
                       placeholder="shadcn@gmail.com"
                       {...field}
+                      value={field.value || ''}
                       className="text-black mb-4"
                     />
                   </FormControl>
@@ -315,6 +330,7 @@ const UserDetails: React.FC<Props> = () => {
                     <Input
                       placeholder="20A Le Lai"
                       {...field}
+                      value={field.value || ''}
                       className="text-black mb-4"
                     />
                   </FormControl>
