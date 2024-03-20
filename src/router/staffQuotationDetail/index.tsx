@@ -14,11 +14,12 @@ import {
     // UpdateButton,
     // DeleteButton,
     MakeContractButton,
+    UpdateButton,
 } from "./components/Button";
 
 import React, { useEffect, useState } from "react";
 import { getQuotationById } from "./usecase";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import selector from "./slice/selector";
 import { actions } from "./slice";
@@ -35,7 +36,6 @@ import { ProductDetailProps, ServiceProps } from "./types";
 import { Badge } from "@/components/ui/Badge";
 import QuotationEdit from "./components/QuotationEdit";
 import { editQuotation } from "./usecase/editQuotation";
-import { PencilIcon } from "lucide-react";
 import { toast } from "@/components/ui/Toast/use-toast";
 import { pushNegotitaionService } from "./service";
 import Negotiation from "./components/Neogitation";
@@ -101,8 +101,10 @@ const QuotationDetail: React.FC<Props> = () => {
     const [updated, setUpdated] = useState(false);
     const initalValues: CellValues = {};
     const [originalPrice, setOriginalPrice] = useState(totalPrice);
+    const [set, setSet] = useState<any>(null);
     const serviceInitialValues: CellValues = {};
     const [cellValues, setCellValues] = useState<CellValues>(initalValues);
+
     const [serviceCellValues, setserviceCellValues] =
         useState<CellValues>(services);
 
@@ -159,6 +161,11 @@ const QuotationDetail: React.FC<Props> = () => {
                         content: `${staff.email} have change the price from đ${originalPrice} to đ${totalPrice}`,
                         isCustomerMessage: false,
                     });
+                } else if (status == "Requested") {
+                    await pushNegotitaionService(id, token as string, {
+                        content: `Hi,I will be your main saler for this quotation,These are the prices as you request,feel free to negotia through this chat`,
+                        isCustomerMessage: false,
+                    });
                 }
 
                 window.location.replace(`/staff/quotations/${id}`);
@@ -192,6 +199,7 @@ const QuotationDetail: React.FC<Props> = () => {
                     if (response) {
                         dispatch(actions.setQuotation(response));
                         setOriginalPrice(response.totalPrice);
+                        setSet(response.package);
                         dispatch(actions.getQuotationInfo());
                         setUpdated(true);
                         // setLoading(false);
@@ -344,19 +352,23 @@ const QuotationDetail: React.FC<Props> = () => {
                                         <div className="my-7 text-2xl font-semibold w-full">
                                             Quotation #{id.slice(0, 3)}
                                         </div>
-                                        <div>
-                                            Last Update:{" "}
-                                            {new Date(
-                                                versions[
-                                                    versions.length - 1
-                                                ].createdAt
-                                            ).toLocaleDateString()}{" "}
-                                            {new Date(
-                                                versions[
-                                                    versions.length - 1
-                                                ].createdAt
-                                            ).toLocaleTimeString()}
-                                        </div>
+                                        {versions &&
+                                            versions[versions.length - 1]
+                                                .createdAt && (
+                                                <div>
+                                                    Last Update:{" "}
+                                                    {new Date(
+                                                        versions[
+                                                            versions.length - 1
+                                                        ].createdAt
+                                                    ).toLocaleDateString()}{" "}
+                                                    {new Date(
+                                                        versions[
+                                                            versions.length - 1
+                                                        ].createdAt
+                                                    ).toLocaleTimeString()}
+                                                </div>
+                                            )}
                                     </div>
                                     {versions && (
                                         <Select
@@ -403,13 +415,13 @@ const QuotationDetail: React.FC<Props> = () => {
                                                                 new Date(
                                                                     versions[
                                                                         versions.length -
-                                                                        1
+                                                                            1
                                                                     ].createdAt
                                                                 ).toLocaleTimeString();
                                                             if (
                                                                 index ==
                                                                 versions.length -
-                                                                1
+                                                                    1
                                                             ) {
                                                                 name =
                                                                     "Current version " +
@@ -420,7 +432,7 @@ const QuotationDetail: React.FC<Props> = () => {
                                                                     new Date(
                                                                         versions[
                                                                             versions.length -
-                                                                            1
+                                                                                1
                                                                         ].createdAt
                                                                     ).toLocaleTimeString();
                                                             }
@@ -443,7 +455,17 @@ const QuotationDetail: React.FC<Props> = () => {
                                         </Select>
                                     )}
                                 </div>
-
+                                {set && (
+                                    <div className="w-full m-4 font-medium text-l flex">
+                                        <h1>Modfied from package :</h1>{" "}
+                                        <Link
+                                            to={"/staff/packages/" + set.id}
+                                            className="text-black underline"
+                                        >
+                                            {set.name}
+                                        </Link>
+                                    </div>
+                                )}
                                 {!isEdit ? (
                                     <div className="flex flex-row flex-wrap w-full">
                                         <div className="left-side-3 basis-1/3 ">
@@ -646,41 +668,10 @@ const QuotationDetail: React.FC<Props> = () => {
                                 </div>
                             </div>
                             <div className="action-buttons mb-2 flex flex-row justify-center space-x-2">
-                                <AlertDialog>
-                                    <AlertDialogTrigger asChild>
-                                        <Button
-                                            variant="outline"
-                                            className="border-black"
-                                        >
-                                            <PencilIcon className="h-3.5 pr-2 my-auto"></PencilIcon>
-                                            Update
-                                        </Button>
-                                    </AlertDialogTrigger>
-                                    <AlertDialogContent>
-                                        <AlertDialogHeader>
-                                            <AlertDialogTitle>
-                                                Are you absolutely sure
-                                            </AlertDialogTitle>
-                                            <AlertDialogDescription>
-                                                This action cannot be undone.
-                                                This will permanently delete
-                                                your account and remove your
-                                                data from our servers.
-                                            </AlertDialogDescription>
-                                        </AlertDialogHeader>
-                                        <AlertDialogFooter>
-                                            <AlertDialogCancel>
-                                                Cancel
-                                            </AlertDialogCancel>
-                                            <AlertDialogAction
-                                                onClick={handleUpdate}
-                                            >
-                                                Continue
-                                            </AlertDialogAction>
-                                        </AlertDialogFooter>
-                                    </AlertDialogContent>
-                                </AlertDialog>
-
+                                <UpdateButton
+                                    handleUpdate={handleUpdate}
+                                    status={status}
+                                />
                                 <AlertDialog>
                                     <AlertDialogTrigger asChild>
                                         <Button

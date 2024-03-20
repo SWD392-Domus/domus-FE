@@ -6,6 +6,7 @@ import React, { useRef, useState, ChangeEvent } from "react";
 
 interface Props {
     // define your props here
+    setRender: any;
 }
 function base64ToBlob(base64String: string, contentType: string): Blob {
     const byteCharacters = atob(base64String);
@@ -26,7 +27,7 @@ function blobToFile(blob: Blob, fileName: string): File {
 import SignatureCanvas from "react-signature-canvas";
 import { signContract } from "../usecase/signContract";
 import { useParams } from "react-router-dom";
-const SignatureComponents: React.FC<Props> = () => {
+const SignatureComponents: React.FC<Props> = (props) => {
     const { contractId } = useParams();
     const [fullName, setFullName] = useState("");
     const signatureRef = useRef<SignatureCanvas>(null);
@@ -79,7 +80,7 @@ const SignatureComponents: React.FC<Props> = () => {
                     title: `Sign Contract Sucessfully`,
                     description: "",
                 });
-                setTimeout(() => { window.location.reload(); }, 1500);
+                props.setRender(2);
             } else {
                 toast({
                     variant: "destructive",

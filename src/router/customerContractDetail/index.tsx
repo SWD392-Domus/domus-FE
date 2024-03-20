@@ -46,9 +46,7 @@ interface Props {
 
 // import UserList from "./components/UserList";
 import { useParams } from "react-router-dom";
-import {
-    ServiceProps,
-} from "../staffQuotationDetail/types";
+import { ServiceProps } from "../staffQuotationDetail/types";
 import { QuotationDetailInfo } from "../staffQuotationDetail/slice";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { getContractDetail } from "./usecase/getContractDetail";
@@ -70,14 +68,14 @@ const CustomerContractDetail: React.FC<Props> = () => {
     // const [open, setOpen] = useState(false);
     const [products, setProducts] = useState<QuotationDetailInfo[]>([]);
     const [services, setServices] = useState<ServiceProps[]>([]);
-    const [totalPrice,] = useState(0);
+
     const [selectedUser, setSelectedUser] = useState<User>();
     const [, setSelectedContractor] = useState<User>();
     const [signature, setSignature] = useState(null);
     const [fullName, setFullname] = useState(null);
     const [status, setStatus] = useState("");
     const { contractId } = useParams();
-
+    const [render, setRender] = useState(1);
     useEffect(() => {
         // const fetchData = async () => {
         //     const res = await getQuotationById(quotationId as string);
@@ -121,7 +119,7 @@ const CustomerContractDetail: React.FC<Props> = () => {
             }
         };
         fetchContract();
-    }, []);
+    }, [render]);
 
     const formSchema = z.object({
         contractName: z.string().nonempty({
@@ -143,13 +141,17 @@ const CustomerContractDetail: React.FC<Props> = () => {
         let totalPrice = 0;
 
         for (let i = 0; i < items.length; i++) {
-            totalPrice += items[i].price;
+            if (items[i].quantity) {
+                totalPrice += items[i].price * items[i].quantity;
+            } else {
+                totalPrice += items[i].price;
+            }
         }
 
         return totalPrice;
     }
 
-    const onSubmit = () => { };
+    const onSubmit = () => {};
     return (
         <Card className="w-full flex flex-col justify-center items-center border mt-4">
             <h1 className="text-4xl font-medium">Contract Detail</h1>
@@ -418,9 +420,7 @@ const CustomerContractDetail: React.FC<Props> = () => {
                                     {new Intl.NumberFormat("en-US", {
                                         style: "currency",
                                         currency: "VND",
-                                    }).format(
-                                        calculateTotalPrice(products)
-                                    )}
+                                    }).format(calculateTotalPrice(products))}
                                 </h1>
                             </div>
 
@@ -430,9 +430,7 @@ const CustomerContractDetail: React.FC<Props> = () => {
                                     {new Intl.NumberFormat("en-US", {
                                         style: "currency",
                                         currency: "VND",
-                                    }).format(
-                                        calculateTotalPrice(services)
-                                    )}
+                                    }).format(calculateTotalPrice(services))}
                                 </h1>
                             </div>
                             <div className="w-full h-[1px] bg-slate-400"></div>
@@ -442,7 +440,10 @@ const CustomerContractDetail: React.FC<Props> = () => {
                                     {new Intl.NumberFormat("en-US", {
                                         style: "currency",
                                         currency: "VND",
-                                    }).format(totalPrice)}
+                                    }).format(
+                                        calculateTotalPrice(products) +
+                                            calculateTotalPrice(services)
+                                    )}
                                 </h1>
                             </div>
                         </div>
@@ -464,7 +465,9 @@ const CustomerContractDetail: React.FC<Props> = () => {
                                                 Sign Contract
                                             </DialogTitle>
                                             <DialogDescription>
-                                                <SignatureComponents />
+                                                <SignatureComponents
+                                                    setRender={setRender}
+                                                />
                                             </DialogDescription>
                                         </DialogHeader>
                                         {/* <DialogFooter>

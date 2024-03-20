@@ -36,11 +36,12 @@ import { searchPackages } from "./usecases";
 // ];
 
 const PackageList: React.FC = () => {
-    const [packages, setPackages] = useState<any>([]);
+    const [packages, setPackages] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [totalPages, setTotalPages] = useState(0);
     const [totalItems, setTotalItems] = useState(0);
     const [searchValue, setSearchValue] = useState("");
+
     const PackageCard = React.lazy(
         () => import("@/router/packages/components/PackageCard")
     );
@@ -61,7 +62,6 @@ const PackageList: React.FC = () => {
             setTotalPages(packagesData.lastPage);
             setTotalItems(packagesData.total);
             console.log(packagesData);
-
         }
     }
     useEffect(() => {
@@ -108,18 +108,20 @@ const PackageList: React.FC = () => {
                             <div className="grid grid-cols-1 gap-4 pt-8 md:grid-cols-3 md:py-2 lg:grid-cols-4 lg:py-4 lg:px-10">
                                 {loading
                                     ? Array(pageSize)
-                                        .fill(null)
-                                        .map((_, index) => (
-                                            <PackageSkeleton key={index} />
-                                        ))
+                                          .fill(null)
+                                          .map((_, index) => (
+                                              <PackageSkeleton key={index} />
+                                          ))
                                     : packages?.map((packageOne: any) => (
-                                        <React.Suspense
-                                            key={packageOne.id}
-                                            fallback={<PackageSkeleton />}
-                                        >
-                                            <PackageCard packageA={packageOne} />
-                                        </React.Suspense>
-                                    ))}
+                                          <React.Suspense
+                                              key={packageOne.id}
+                                              fallback={<PackageSkeleton />}
+                                          >
+                                              <PackageCard
+                                                  packageA={packageOne}
+                                              />
+                                          </React.Suspense>
+                                      ))}
                             </div>
                             <div className="py-20 w-full flex justify-center items-center border-gray-200">
                                 <PackagesPagination

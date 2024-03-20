@@ -31,6 +31,7 @@ import { column } from "./components/ProductTable/column";
 import { serviceColums } from "./components/ServiceTable/column";
 import {
     Dialog,
+    DialogClose,
     DialogContent,
     DialogDescription,
     DialogFooter,
@@ -45,9 +46,7 @@ interface Props {
 import UserList from "./components/UserList";
 import { useNavigate, useParams } from "react-router-dom";
 import { getQuotationById } from "./usecase/getQuotationById";
-import {
-    ServiceProps,
-} from "../staffQuotationDetail/types";
+import { ServiceProps } from "../staffQuotationDetail/types";
 import { QuotationDetailInfo } from "../staffQuotationDetail/slice";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/Tabs";
 import { createContract } from "./usecase/createContract";
@@ -71,10 +70,11 @@ const StaffContractCreate: React.FC<Props> = () => {
     const [isUpdated, SetUpdated] = useState(false);
     const [products, setProducts] = useState<QuotationDetailInfo[]>([]);
     const [services, setServices] = useState<ServiceProps[]>([]);
-    const [totalPrice, setTotalPrice] = useState(0);
+
     const [selectedUser, setSelectedUser] = useState<User>();
     const [contracter, setContracter] = useState<User>();
     const { quotationId, versionId } = useParams();
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -88,20 +88,12 @@ const StaffContractCreate: React.FC<Props> = () => {
             setServices(res.data.data.services);
             setSelectedUser(res.data.data.customer);
             setContracter(res.data.data.staff);
-            setTotalPrice(res.data.data.totalPrice);
+
             SetUpdated(true);
         };
         fetchData();
     }, []);
-    // const clearSignature = () => {
-    //     signatureRef.current.clear();
-    // };
 
-    // const saveSignature = () => {
-    //     const signatureData = signatureRef.current.toDataURL();
-    //     // You can save or process the signature data here
-    //     console.log(signatureData);
-    // };
     const formSchema = z.object({
         contractName: z.string().nonempty({
             message: "Contract Name is Required",
@@ -122,7 +114,11 @@ const StaffContractCreate: React.FC<Props> = () => {
         let totalPrice = 0;
 
         for (let i = 0; i < items.length; i++) {
-            totalPrice += items[i].price;
+            if (items[i].quantity) {
+                totalPrice += items[i].price * items[i].quantity;
+            } else {
+                totalPrice += items[i].price;
+            }
         }
 
         return totalPrice;
@@ -455,8 +451,7 @@ const StaffContractCreate: React.FC<Props> = () => {
                                                 style: "currency",
                                                 currency: "VND",
                                             }).format(
-                                                calculateTotalPrice(products) *
-                                                1000
+                                                calculateTotalPrice(products)
                                             )}
                                         </h1>
                                     </div>
@@ -470,8 +465,7 @@ const StaffContractCreate: React.FC<Props> = () => {
                                                 style: "currency",
                                                 currency: "VND",
                                             }).format(
-                                                calculateTotalPrice(services) *
-                                                1000
+                                                calculateTotalPrice(services)
                                             )}
                                         </h1>
                                     </div>
@@ -482,20 +476,17 @@ const StaffContractCreate: React.FC<Props> = () => {
                                             {new Intl.NumberFormat("en-US", {
                                                 style: "currency",
                                                 currency: "VND",
-                                            }).format(totalPrice)}
+                                            }).format(
+                                                calculateTotalPrice(products) +
+                                                    calculateTotalPrice(
+                                                        services
+                                                    )
+                                            )}
                                         </h1>
                                     </div>
                                 </div>
                             </div>
-                            <div className="w-full flex justify-end">
-                                <div className="flex flex-col items-center">
-                                    <h1 className="text-2xl">Signature</h1>
-                                    <img src="https://signaturely.com/wp-content/uploads/2020/04/unreadable-letters-signaturely.svg" />
-                                    <h1 className="font-dancingScirpt text-2xl">
-                                        Nguyen Duc Bao
-                                    </h1>
-                                </div>
-                            </div>
+                            <div className="w-full flex justify-end"></div>
                             {/* <div className="flex flex-col items-center">
                         <SignatureCanvas
                             ref={signatureRef}
@@ -551,15 +542,20 @@ const StaffContractCreate: React.FC<Props> = () => {
                                             </DialogDescription>
                                         </DialogHeader>
                                         <DialogFooter>
-                                            <Button className="bg-zinc-500">
-                                                Cancel
-                                            </Button>
-                                            <Button
-                                                onClick={onSubmit}
-                                                className="bg-yellowCustom text-black hover:text-white"
-                                            >
-                                                Confirm
-                                            </Button>
+                                            <DialogClose asChild>
+                                                <Button className="bg-zinc-500">
+                                                    Cancel
+                                                </Button>
+                                            </DialogClose>
+                                            <DialogClose asChild>
+                                                <Button
+                                                    onClick={onSubmit}
+                                                    type="submit"
+                                                    className="bg-yellowCustom text-black hover:text-white"
+                                                >
+                                                    Confirm
+                                                </Button>
+                                            </DialogClose>
                                         </DialogFooter>
                                     </DialogContent>
                                 </Dialog>

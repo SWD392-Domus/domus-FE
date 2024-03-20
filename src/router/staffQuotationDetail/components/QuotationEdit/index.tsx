@@ -33,7 +33,7 @@ import { useForm } from "react-hook-form";
 
 import { z } from "zod";
 import UserList from "../UserList";
-import { useDispatch,  } from "react-redux";
+import { useDispatch } from "react-redux";
 import { actions } from "../../slice";
 // import selector from "../../slice/selector";
 
@@ -126,11 +126,7 @@ const QuotationEdit: React.FC<Props> = ({
                                                             field.onChange
                                                         }
                                                         disabled={(date) =>
-                                                            date > new Date() ||
-                                                            date <
-                                                                new Date(
-                                                                    "1900-01-01"
-                                                                )
+                                                            date < new Date()
                                                         }
                                                         initialFocus
                                                     />

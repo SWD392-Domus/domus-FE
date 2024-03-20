@@ -206,6 +206,13 @@ const RouterComponent: React.FC = () => {
         },
         {
             index: true,
+            path: "customer/settings/quotations/:quotationId/versions/:versionId",
+            component: <QuotationDetail />,
+            exact: true,
+            restrict: true,
+        },
+        {
+            index: true,
             path: "notification",
             component: <Notification />,
             exact: true,
@@ -388,7 +395,6 @@ const RouterComponent: React.FC = () => {
         //     exact: true,
         //     restrict: true,
         // },
-
     ];
     const adminRoute = [
         {

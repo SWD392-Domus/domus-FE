@@ -24,17 +24,46 @@ export type NotificationType = {
     status: number;
 };
 
+const useTokenChangeEffect = (callback: () => void) => {
+    useEffect(() => {
+        const handleStorageChange = () => {
+            callback();
+        };
+
+        window.addEventListener("storage", handleStorageChange);
+
+        return () => {
+            window.removeEventListener("storage", handleStorageChange);
+        };
+    }, [callback]);
+};
+
 const Notification: React.FC<Props> = () => {
     const navigate = useNavigate();
-    const [notifcations, setNotifications] = useState<NotificationType[]>([]);
+    const [notifications, setNotifications] = useState<NotificationType[]>([]);
+
+    // Call fetchData whenever token changes
+    useTokenChangeEffect(() => {
+        fetchData();
+    });
+
     useEffect(() => {
-        const fetchData = async () => {
-            const token = `Bearer ${localStorage.getItem("Token")}`;
-            const res = await notificationApi.getNotification(token);
-            setNotifications(res.data.data);
-        };
         fetchData();
     }, []);
+
+    const fetchData = async () => {
+        const token = `Bearer ${localStorage.getItem("Token")}`;
+        if (token) {
+            try {
+                const res = await notificationApi.getNotification(token);
+                setNotifications(res.data.data);
+            } catch (error) {
+                // Handle error
+                console.error("Error fetching notifications:", error);
+            }
+        }
+    };
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -52,10 +81,8 @@ const Notification: React.FC<Props> = () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-[350px]   text-black border-none">
                 <DropdownMenuGroup>
-                    {notifcations.map((item) => {
-                        // Define the maximum length of content you want to display
-                        const maxLength = 60; // Adjust the value as per your preference
-                        // Shorten the content and add "..." if it exceeds maxLength
+                    {notifications.map((item) => {
+                        const maxLength = 60;
                         const shortenedContent =
                             item.content.length > maxLength
                                 ? `${item.content.slice(0, maxLength)}...`

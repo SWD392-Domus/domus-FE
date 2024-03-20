@@ -36,8 +36,11 @@ const PackageCard: React.FC<Package> = ({ packageA }) => {
                 </CardHeader>
                 <CardContent className="">
                     <CardTitle className="">
-                        <h2 className="truncate">{packageName}</h2>
+                        <h2 className="">{packageName}</h2>
                     </CardTitle>
+                    <h4 className="font-medium text-md text-slate-400 my-2">
+                        Request to see Price
+                    </h4>
                     {/* <CardDescription className="pb-2 pt-1 shrink">
             <p className="truncate">
               {packageDescription ? (

@@ -24,7 +24,9 @@ const ArticleItem: React.FC<ItemProps> = (props) => {
             <StyledLink to={`/article/${props.item.id}`}>
                 <ThumbnailContainer>
                     <Thumbnail src={domusLogo} />
-                    <CategoryCard>{props.item.articleCategory.name}</CategoryCard>
+                    <CategoryCard>
+                        {props.item.articleCategory.name}
+                    </CategoryCard>
                 </ThumbnailContainer>
                 <TitleContainer>
                     <ArticleTitle>{props.item.title}</ArticleTitle>

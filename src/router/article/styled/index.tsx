@@ -32,7 +32,7 @@ export const GridContainer = styled.div`
 export const Item = styled(motion.div)`
     width: 80%;
     background-color: ${(props) => props.theme.colors.background};
-    height: 400px;
+    height: 300px;
     margin: 10px;
     display: flex;
     justify-content: space-between;

@@ -34,7 +34,6 @@ interface Props {
     // define your props here
 }
 
-import UserList from "./components/UserList";
 import { useParams } from "react-router-dom";
 // import { getQuotationById } from "./usecase/getQuotationById";
 import {
@@ -59,10 +58,10 @@ type User = {
 
 const StaffContractDetail: React.FC<Props> = () => {
     // const signatureRef = useRef(null);
-    const [open, setOpen] = useState(false);
+
     const [products, setProducts] = useState<QuotationDetailInfo[]>([]);
     const [services, setServices] = useState<ServiceProps[]>([]);
-    const [totalPrice, setTotalPrice] = useState(0);
+
     const [selectedUser, setSelectedUser] = useState<User>();
     // const [selectedContractor, setSelectedContractor] = useState<User>();
     const [signature, setSignature] = useState(null);
@@ -101,7 +100,7 @@ const StaffContractDetail: React.FC<Props> = () => {
                 setProducts(quotationRevision.productDetailQuotationRevisions);
                 setServices(serviceQuotations);
                 setStatus(`${status}`);
-                setTotalPrice(quotationRevision.totalPrice);
+
                 setSignature(signature);
                 setFullName(fullName);
             } else {
@@ -135,13 +134,17 @@ const StaffContractDetail: React.FC<Props> = () => {
         let totalPrice = 0;
 
         for (let i = 0; i < items.length; i++) {
-            totalPrice += items[i].price;
+            if (items[i].quantity) {
+                totalPrice += items[i].price * items[i].quantity;
+            } else {
+                totalPrice += items[i].price;
+            }
         }
 
         return totalPrice;
     }
 
-    const onSubmit = () => { };
+    const onSubmit = () => {};
     return (
         <Card className="w-full flex flex-col justify-center items-center border mt-4">
             <h1 className="text-4xl font-medium">Contract Detail</h1>
@@ -181,6 +184,7 @@ const StaffContractDetail: React.FC<Props> = () => {
                                         placeholder="Name..."
                                         {...field}
                                         className="text-black mb-4"
+                                        readOnly
                                     />
                                 </FormControl>
 
@@ -201,6 +205,7 @@ const StaffContractDetail: React.FC<Props> = () => {
                                         placeholder="Description..."
                                         {...field}
                                         className="text-black mb-4"
+                                        readOnly
                                     />
                                 </FormControl>
 
@@ -218,16 +223,7 @@ const StaffContractDetail: React.FC<Props> = () => {
                         </div>
                     </div>
                     <div className="flex w-full justify-between mt-0">
-                        <UserList
-                            open={open}
-                            setOpen={setOpen}
-                            setSelectedUser={setSelectedUser}
-                            selectedUser={selectedUser as User}
-                        />
-                        <Card
-                            className="w-[48%] border h-[200px] flex justify-center items-center hover:bg-slate-100 hover:text-black cursor-pointer"
-                            onClick={() => setOpen(true)}
-                        >
+                        <Card className="w-[48%] border h-[200px] flex justify-center items-center hover:bg-slate-100 hover:text-black cursor-pointer">
                             {!selectedUser ? (
                                 <PlusIcon width={100} height={100} />
                             ) : (
@@ -417,9 +413,7 @@ const StaffContractDetail: React.FC<Props> = () => {
                                     {new Intl.NumberFormat("en-US", {
                                         style: "currency",
                                         currency: "VND",
-                                    }).format(
-                                        calculateTotalPrice(products)
-                                    )}
+                                    }).format(calculateTotalPrice(products))}
                                 </h1>
                             </div>
 
@@ -429,9 +423,7 @@ const StaffContractDetail: React.FC<Props> = () => {
                                     {new Intl.NumberFormat("en-US", {
                                         style: "currency",
                                         currency: "VND",
-                                    }).format(
-                                        calculateTotalPrice(services)
-                                    )}
+                                    }).format(calculateTotalPrice(services))}
                                 </h1>
                             </div>
                             <div className="w-full h-[1px] bg-slate-400"></div>
@@ -441,7 +433,10 @@ const StaffContractDetail: React.FC<Props> = () => {
                                     {new Intl.NumberFormat("en-US", {
                                         style: "currency",
                                         currency: "VND",
-                                    }).format(totalPrice)}
+                                    }).format(
+                                        calculateTotalPrice(services) +
+                                            calculateTotalPrice(products)
+                                    )}
                                 </h1>
                             </div>
                         </div>

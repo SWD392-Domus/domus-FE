@@ -34,7 +34,8 @@ const Notification: React.FC<Props> = () => {
                 {notifcations.map((item) => {
                     return (
                         <Link
-                            to={item.redirectString}
+                            replace
+                            to={"/" + item.redirectString}
                             key={item.sentAt}
                             className="h-[80px] w-[80%] flex justify-between hover:bg-slate-100 rounded cursor-pointer items-center"
                         >

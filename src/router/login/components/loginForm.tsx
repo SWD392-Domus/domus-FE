@@ -70,21 +70,24 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
         try {
             const res = await loginApi.login(values.email, values.password);
             if (res.status === 200) {
-                console.log(res.data.data.token.token.accessToken);
-                localStorage.setItem(
-                    "Token",
-                    res.data.data.token.token.accessToken
-                );
+                if (res.data.data) {
+                    localStorage.setItem(
+                        "Token",
+                        res.data.data.token.token.accessToken
+                    );
 
-                toastSuccess("Login Successfully");
-                dispatch(actions.setUser(res.data.data.userInfo));
-                const roles: string[] = res.data.data.token.roles;
-                if (roles.includes("Admin")) {
-                    navigate("/admin");
-                } else if (roles.includes("Staff")) {
-                    navigate("/staff");
+                    toastSuccess("Login Successfully");
+                    dispatch(actions.setUser(res.data.data.userInfo));
+                    const roles: string[] = res.data.data.token.roles;
+                    if (roles.includes("Admin")) {
+                        navigate("/admin");
+                    } else if (roles.includes("Staff")) {
+                        navigate("/staff");
+                    } else {
+                        navigate("/home");
+                    }
                 } else {
-                    navigate("/home");
+                    toastError(res.data.messages[0].content);
                 }
             } else {
                 for (const mess of res.data.messages) {
@@ -92,6 +95,7 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
                 }
             }
         } catch (error) {
+            console.log(error);
             toastError("Login Error,please try again");
         }
     }
