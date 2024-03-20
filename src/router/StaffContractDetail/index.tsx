@@ -144,7 +144,7 @@ const StaffContractDetail: React.FC<Props> = () => {
         return totalPrice;
     }
 
-    const onSubmit = () => {};
+    const onSubmit = () => { };
     return (
         <Card className="w-full flex flex-col justify-center items-center border mt-4">
             <h1 className="text-4xl font-medium">Contract Detail</h1>
@@ -284,7 +284,7 @@ const StaffContractDetail: React.FC<Props> = () => {
                                         height={20}
                                         className="mr-2"
                                     />{" "}
-                                    domus-coop@gmail.com
+                                    domus@gmail.com
                                 </div>
                                 <div className="text-md flex items-center mb-2">
                                     <MobileIcon
@@ -435,7 +435,7 @@ const StaffContractDetail: React.FC<Props> = () => {
                                         currency: "VND",
                                     }).format(
                                         calculateTotalPrice(services) +
-                                            calculateTotalPrice(products)
+                                        calculateTotalPrice(products)
                                     )}
                                 </h1>
                             </div>

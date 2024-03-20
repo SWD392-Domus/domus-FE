@@ -314,7 +314,7 @@ const StaffContractCreate: React.FC<Props> = () => {
                                                 height={20}
                                                 className="mr-2"
                                             />{" "}
-                                            domus-coop@gmail.com
+                                            domus@gmail.com
                                         </div>
                                         <div className="text-md flex items-center mb-2">
                                             <MobileIcon
@@ -478,9 +478,9 @@ const StaffContractCreate: React.FC<Props> = () => {
                                                 currency: "VND",
                                             }).format(
                                                 calculateTotalPrice(products) +
-                                                    calculateTotalPrice(
-                                                        services
-                                                    )
+                                                calculateTotalPrice(
+                                                    services
+                                                )
                                             )}
                                         </h1>
                                     </div>
