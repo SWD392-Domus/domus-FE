@@ -153,6 +153,12 @@ const QuotationDetail: React.FC<Props> = () => {
                 description: "",
             });
             return;
+        } else if (isEdit || isEditService || isEditTable) {
+            toast({
+                variant: "destructive",
+                title: `Please Save before edit`,
+                description: "",
+            });
         } else {
             const res = await editQuotation(id, token as string, data);
             if (res.status != 200) {

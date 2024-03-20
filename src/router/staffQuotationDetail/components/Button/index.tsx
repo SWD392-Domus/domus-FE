@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/Button/Button";
 import {
     Dialog,
+    DialogClose,
     DialogContent,
     DialogDescription,
     DialogFooter,
@@ -79,15 +80,19 @@ export const UpdateButton = (props: any) => {
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter>
-                    <Button onClick={onCancle} className="bg-zinc-500">
-                        Cancel
-                    </Button>
-                    <Button
-                        onClick={props.handleUpdate}
-                        className="bg-black pl-2"
-                    >
-                        Confirm
-                    </Button>
+                    <DialogClose>
+                        <Button onClick={onCancle} className="bg-zinc-500">
+                            Cancel
+                        </Button>
+                    </DialogClose>
+                    <DialogClose>
+                        <Button
+                            onClick={props.handleUpdate}
+                            className="bg-black pl-2"
+                        >
+                            Confirm
+                        </Button>
+                    </DialogClose>
                 </DialogFooter>
             </DialogContent>
         </Dialog>
