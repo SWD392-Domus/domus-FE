@@ -80,10 +80,16 @@ export const columns: ColumnDef<QuotationsProps>[] = [
         header: () => <div className="text-left">Total Price</div>,
         cell: ({ row }) => {
             const totalPrice = parseFloat(row.getValue("totalPrice"));
-            const formatted = new Intl.NumberFormat("en-US", {
+            var formatted = new Intl.NumberFormat("en-US", {
                 style: "currency",
                 currency: "VND",
             }).format(totalPrice);
+            const value: string = (
+                row.getValue("status") as string
+            ).toUpperCase();
+            if(value === "REQUESTED"){
+                formatted = "Unknown";
+            }
 
             return <div className="text-left font-medium">{formatted}</div>;
         },

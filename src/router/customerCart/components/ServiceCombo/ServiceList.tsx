@@ -10,7 +10,7 @@ interface Props {
 const ServiceList: React.FC<Props> = (props) => {
     return (
         <div className="flex flex-col w-full mb-2 mt-2">
-            <DataTable columns={columns} data={props.data} />;
+            <DataTable columns={columns} data={props.data} />
         </div>
     );
 };
