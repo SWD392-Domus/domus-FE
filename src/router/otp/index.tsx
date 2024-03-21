@@ -67,7 +67,7 @@ const OTP: React.FC<Props> = () => {
                     </div>
 
                     <div>
-                        <form action="" method="post">
+                        <form>
                             <div className="flex flex-col space-y-16">
                                 <div className="flex flex-row items-center justify-between mx-auto w-full max-w-xs">
                                     {Array.from({ length: 4 }, (_, index) => (
@@ -92,11 +92,11 @@ const OTP: React.FC<Props> = () => {
                                 </div>
 
                                 <div className="flex flex-col space-y-5">
-                                    <div>
-                                        <button className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-yellowCustom border-none text-black text-xl shadow-sm font-medium">
+                                    {/* <div>
+                                        <Button className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-yellowCustom border-none text-black text-xl shadow-sm font-medium">
                                             Verify Account
-                                        </button>
-                                    </div>
+                                        </Button>
+                                    </div> */}
 
                                     <div className="flex flex-row items-center justify-center text-center text-md font-medium space-x-1 text-gray-500">
                                         <p>Didn't recieve code?</p>{" "}
