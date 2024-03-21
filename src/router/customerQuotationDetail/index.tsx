@@ -382,10 +382,15 @@ const QuotationDetail: React.FC<Props> = () => {
                                             Total Price
                                         </div>
                                         <div className="total-price-amount">
-                                            {new Intl.NumberFormat("en-US", {
-                                                style: "currency",
-                                                currency: "VND",
-                                            }).format(totalPrice)}
+                                            {status != "Requested"
+                                                ? new Intl.NumberFormat(
+                                                      "en-US",
+                                                      {
+                                                          style: "currency",
+                                                          currency: "VND",
+                                                      }
+                                                  ).format(totalPrice)
+                                                : "Unknown"}
                                         </div>
                                     </div>
                                 </div>
@@ -416,7 +421,7 @@ const QuotationDetail: React.FC<Props> = () => {
                     </div>
                 </div>
             )}
-            {!updated && <Loading variant="dark" />}
+            {!updated && <Loading variant="light" />}
         </>
     );
 };
