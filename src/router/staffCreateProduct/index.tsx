@@ -60,7 +60,10 @@ const CreateProduct: React.FC = () => {
   useEffect(() => {
     const makeApiCall = async () => {
       if (product) {
-        const res = await createProducts(product);
+        const productSend = {
+          ...product
+        }
+        const res = await createProducts(productSend);
         console.log(res); // Log the response to see its structure and properties
         if (res && res.isSuccess) {
           const id = res.data.id;

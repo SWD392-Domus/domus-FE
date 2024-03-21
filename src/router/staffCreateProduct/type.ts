@@ -11,6 +11,7 @@ export interface ProductDetailsPropsForCreate{
     "displayPrice":number;
     "monetaryUnit": string,
     "attributes"?: AttributesPropsForCreate[];
+    quantity: number;
 }
 
 export interface AttributesPropsForCreate{

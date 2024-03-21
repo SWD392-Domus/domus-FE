@@ -58,6 +58,7 @@ const CreatePopup: React.FC<DetailsProps> = ({ addDetail }) => {
       displayPrice: Number(values.price),
       attributes: attributes,
       monetaryUnit: "VND",
+      quantity: 10
     });
   };
   const handleAddAttribute = (values: z.infer<typeof formSchema>) => {
